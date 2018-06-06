@@ -1,0 +1,59 @@
+1，表格级别照片/录像命名规则：
+		人员ID-表格实例ID-检查项实例ID-照片生成时间戳
+	String tablephotoPath = Environment.getDataDirectory().getPath()+ Config.packagePath + 
+		Config.tablephotoPath+ "/"+ task.getUserid()+"/" + task.getTaskid()+"/";
+		
+1-1，表格级别照片/录像命名规则：
+		人员ID-表格实例ID-检查项实例ID-照片生成时间戳
+	String tablephotoPath = Environment.getDataDirectory().getPath()+ Config.packagePath + 
+		Config.tablephotoPath+ "/"+ task.getUserid()+"/" + task.getTaskid()+"/";
+				
+2，任务级别照片/录像命名规则：
+		人员ID-任务ID-照片生成时间戳
+	String rwphotoPath = Environment.getDataDirectory().getPath()+ Config.packagePath + 
+		Config.rwphotoPath+ "/"+ orientApplication.getApplication().loginUser.getUserId +"/" + 
+		orientApplication.getApplication().rw.getrwId+"/";
+		
+3，表格HTML存放的位置
+	String filePath = Environment.getDataDirectory().getPath() + Config.packagePath
+				+ Config.htmlPath+ "/"+ task.getUserid()+"/" + task.getTaskid();
+
+4，表格签署照片存档的位置
+	String signphotoPath = Environment.getDataDirectory().getPath() + Config.packagePath
+				+ Config.signphotoPath+ "/"+ task.getUserid()+"/" + task.getTaskid();
+				
+				
+5，表格操作项照片存档的位置
+	String opphotoPath = Environment.getDataDirectory().getPath() + Config.packagePath
+				+ Config.opphotoPath+ "/"+ task.getUserid()+"/" + task.getTaskid()+"/"+opid;
+
+
+
+pathBuilder.append(context.getExternalFilesDir(null).getAbsolutePath());
+pathBuilder.append(File.separator);
+//添加文件总目录
+pathBuilder.append(context.getString(R.string.Files));
+pathBuilder.append(File.separator);
+//添加当然文件类别的路径
+pathBuilder.append(rootPath);
+pathBuilder.append(File.separator);
+
+/mnt/sdcard/Android/data/com.example.navigationdrawertest/files/Files/test/
+
+缩略图
+/mnt/sdcard/Android/data/com.example.navigationdrawertest/files/Files/test/Thumbnail
+拍照图片
+/mnt/sdcard/Android/data/com.example.navigationdrawertest/files/Files/test/Image
+视频录制
+/mnt/sdcard/Android/data/com.example.navigationdrawertest/files/Files/test/Video
+
+
+表格图片后缀
+用户ID/任务ID/表格ID/operationId（图片命名：用户+任务名+表格名称）
+任务图片后缀
+用户ID/任务ID/（图片命名：用户+任务名）
+
+最新的拍照录像地址
+/mnt/sdcard/Android/data/com.example.navigationdrawertest/filesFiles/
+/mnt/sdcard/Android/data/com.example.navigationdrawertest/filesFiles/346/101/174/
+userid/rwid/taskid/opid

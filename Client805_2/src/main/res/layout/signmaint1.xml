@@ -1,0 +1,177 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#1d8ae7">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/table_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/logo"
+            android:text="表名"
+            android:textColor="@color/White"
+            android:textSize="@dimen/titleI"/>
+
+        <ImageView
+            android:id="@+id/sign_close"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@+id/back"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/close"
+            android:textColor="@color/White"/>
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_new"
+            android:layout_marginRight="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/lin_title_readheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView
+                android:id="@+id/title_horsv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <TableLayout
+                    android:id="@+id/signtable_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:stretchColumns="*" >
+                </TableLayout>
+
+            </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/table_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lin_title_readheader"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView
+                    android:id="@+id/parent_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="50dp" >
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TableLayout
+                                android:id="@+id/signtable_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#dedcd2"
+                                android:stretchColumns="*" >
+                            </TableLayout>
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+
+                <com.example.navigationdrawertest.CustomUI.NoScrollListview
+                    android:id="@+id/sign_mylistview_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/list_default_round"
+                    android:cacheColorHint="#00000000"
+                    android:gravity="center"
+                    android:padding="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/lin_signname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/signtable_scroll"
+                    android:layout_marginTop="20dp" >
+
+                    <ListView
+                        android:id="@+id/sign_mylistview_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:cacheColorHint="#00000000"
+                        android:divider="@drawable/item_v_line"
+                        android:dividerHeight="1sp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sign_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp">
+
+                    <Button
+                        android:id="@+id/sign_proview"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/preview"/>
+                    <Button
+                        android:id="@+id/sign_next"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/next"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

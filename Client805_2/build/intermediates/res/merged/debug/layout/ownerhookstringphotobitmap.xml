@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal" >
+    
+    <CheckBox 
+		 android:id="@+id/ownerhookstringphotobitmap_check" 
+		 style="@style/custom_checkbox" 
+		 android:layout_width="35dp" 
+		 android:layout_height="wrap_content"
+		 android:checked="false" />
+    
+    <EditText 
+        android:id="@+id/ownerhookstringphotobitmap_edittext"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/please_input"
+	    android:layout_weight="1"
+	    android:lines="2"
+	    android:textColor="#000000"
+	    android:textSize="14sp" />
+    
+    <Button 
+        android:id="@+id/ownerhookstringphotobitmap_photo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/mybutton2"  
+        android:layout_marginLeft="5dp"
+        />
+    
+    <ImageView 
+        android:id="@+id/ownerhookstringphotobitmap_bitmap"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="5dp"
+        />
+
+</LinearLayout>

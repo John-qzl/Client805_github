@@ -1,0 +1,86 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <com.example.navigationdrawertest.CustomUI.NoScrollListview
+            android:id="@+id/read_mylistview_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_default_round"
+            android:cacheColorHint="#00000000"
+            android:gravity="center"
+            android:padding="10dp" />
+
+        <HorizontalScrollView
+            android:id="@+id/readtable_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="1200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/read_mylistview_1"
+            android:background="@android:color/white" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TableLayout
+                    android:id="@+id/readtable_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="55dp"
+                    android:background="@color/Black"
+                    android:gravity="center"
+                    android:stretchColumns="*" >
+                </TableLayout>
+
+                <com.example.navigationdrawertest.CustomUI.MyScrollView
+                    android:id="@+id/parent_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="50dp" >
+
+                    <TableLayout
+                        android:id="@+id/readtable_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#dedcd2"
+                        android:stretchColumns="*" >
+                    </TableLayout>
+                </com.example.navigationdrawertest.CustomUI.MyScrollView>
+
+                <TableLayout
+                    android:id="@+id/table_headertest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="55dp"
+                    android:background="@color/Black"
+                    android:gravity="center"
+                    android:stretchColumns="*" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/readtable_scroll"
+            android:layout_marginTop="20dp" >
+
+            <com.example.navigationdrawertest.CustomUI.NoScrollListview
+                android:id="@+id/read_mylistview_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="#00000000"
+                android:divider="@drawable/item_v_line"
+                android:dividerHeight="1sp" />
+        </LinearLayout>
+        
+    </RelativeLayout>
+</ScrollView>

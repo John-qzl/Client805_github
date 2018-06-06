@@ -1,0 +1,91 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#1d8ae7" >
+
+            <ImageView
+                android:id="@+id/leftmenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/menu_new"
+                android:background="@drawable/menu_select"/>
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/logo"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/leftmenu"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_toRightOf="@+id/logo"
+                android:gravity="center"
+                android:text="805数据包"
+                android:textColor="@color/White"
+                android:textSize="@dimen/titleI"
+                android:layout_marginLeft="8dp"/>
+
+            <ImageView
+                android:id="@+id/data_syn"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/data_syn"
+                android:layout_toLeftOf="@+id/media"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:id="@+id/media"
+                android:layout_width="110dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/media_new"
+                android:layout_toLeftOf="@+id/quit"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:id="@+id/quit"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/back_new"
+                android:layout_marginRight="15dp"/>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title_bar"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/left_listview"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_marginTop="48dp"
+        android:background="#28313c" >
+    </ListView>
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="docactivity">多媒体资料</string>
+    <string name="app_name">805数据包</string>
+    <string name="action_search">搜索</string>
+    <string name="action_refresh">数据同步</string>
+    <string name="action_share">分享</string>
+    <string name="action_photo">拍照</string>
+    <string name="look_photo">查看相册</string>
+    
+    <string name="desc_list_item_icon">Item Icon</string>
+    
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="action_fanhui">返回</string>
+    <string name="action_exit">退出</string>
+    <string name="action_plus">功能</string>
+    <string name="action_album">多媒体资料</string>
+    <string name="action_collection">我的收藏</string>
+    <string name="action_card">我的银行卡</string>
+    <string name="action_settings">设置</string>
+    <string name="action_feed">意见反馈</string>
+    <string name="plus_group_chat">发起群聊</string>
+    <string name="plus_add_friend">添加朋友</string>
+    <string name="plus_video_chat">视频聊天</string>
+    <string name="plus_scan">扫一扫</string>
+    <string name="plus_take_photo">拍照分享</string>
+    <string name="action_save">保存</string>
+    
+    <string name="setting">设置</string>
+    <string name="exit">退出</string>
+    <string name="listsyncmessage">同步上传下载信息一览表</string>
+    
+    <!-- 代码中String -->
+    <string name="tree_item_sign">签署</string>
+    <string name="tree_item_check">检 查</string>
+    <string name="tree_item_look">查 看</string>
+    <string name="write_sign">签名</string>
+    <string name="write_signname">签署人：</string>
+    
+    <!-- dialog -->
+    <string name="default_progressbar">Default Progressbar:</string>
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading......</string>
+    
+    
+    <!-- 存储文件文件夹 -->
+    <string name="Files">Files</string>
+    <!-- 图像文件夹 -->
+    <string name="Image">Image</string>
+    <!-- 缩略图文件夹 -->
+    <string name="Thumbnail">Thumbnail</string>
+    <!-- 视频文件夹 -->
+    <string name="Video">Video</string>
+    <string name="album_enter_select">选择</string>
+    <string name="api_cancel">取消</string>
+    <string name="album_photo_select_tip">项</string>
+    <string name="album_phoot_select_all">全选</string>
+    <string name="album_phoot_unselect_all">取消全选</string>
+    <string name="album_title">我的相册</string>
+    <string name="pgcommon_share">分享</string>
+    <string name="common_cut">移动</string>
+    <string name="common_delete">删除</string>
+    <string name="common_edit">编辑</string>
+    <string name="album_message">图片&amp;视频</string>
+    
+    
+    <string name="please_input">请输入</string>
+    <string name="title_alert">ip端口设置</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    
+    
+</resources>

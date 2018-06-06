@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal" >
+
+    <TextView 
+        android:id="@+id/button_signname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/content"
+        android:text="@string/write_signname"
+        android:layout_marginLeft="10dp"/>
+    
+    <Button  
+		android:id="@+id/button_sign"
+		android:layout_width="80dp"
+		android:layout_height="30dp"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp"
+		android:layout_gravity="center"
+		android:background="@drawable/sign_new"
+		android:focusable="false"
+		android:textSize="22dp"
+		android:textColor="@color/White"/>
+    
+ 	<ImageButton
+		android:id="@+id/signimage"
+		android:layout_width="180dp"
+		android:layout_height="80dp"
+		android:layout_marginLeft="20dp"
+		android:layout_gravity="center"
+		android:background="#d5d5d5"
+		android:scaleType="fitXY"/>
+ 	
+ 	<TextView
+ 	    android:id="@+id/signtime"
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="match_parent"
+ 	    android:gravity="center"
+ 	    android:textColor="@color/Black"
+        android:textSize="@dimen/content"
+        android:layout_marginLeft="20dp" />
+ 	
+</LinearLayout>

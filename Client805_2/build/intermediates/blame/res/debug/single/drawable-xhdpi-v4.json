@@ -1,0 +1,406 @@
+[
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/blankspace.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/blankspace.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/curcle.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/curcle.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_checkbox_part.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_checkbox_part.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/sign_normal.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/sign_normal.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_shezhi.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_shezhi.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_clear_disabled.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_clear_disabled.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/upload_normal.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/upload_normal.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/drawer_shadow.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/drawer_shadow.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_jpg.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_jpg.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_password.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_password.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/theme1.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/theme1.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_ab_back_holo_dark.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_ab_back_holo_dark.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/bg2.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/bg2.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_mp31.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_mp31.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_plusminus_reduce_black.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_plusminus_reduce_black.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/deletedata.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/deletedata.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_doc.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_doc.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/yishangchuan_normal.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/yishangchuan_normal.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/blacktiao.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/blacktiao.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_action_refresh.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_bkmain.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_bkmain.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/condition.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/condition.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_username.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_username.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/menu_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/menu_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/preview.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/preview.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/logo_title.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/logo_title.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/takephoto.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/takephoto.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_cab_done_holo_dark.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_cab_done_holo_dark.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/logo.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/logo.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/bg3.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/bg3.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_drawer.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_drawer.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_txt.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_txt.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_checkbox_none.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_checkbox_none.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/btn_back.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/btn_back.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/schedule_icon_delete_statue.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/schedule_icon_delete_statue.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_head_default.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_head_default.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/faci_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/faci_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/kb.jpg",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/kb.jpg"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_go.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_go.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/bg_monitor.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/bg_monitor.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_commit_search_api_holo_dark.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_commit_search_api_holo_dark.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/jiancha_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/jiancha_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_clear_search_api_disabled_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_clear_search_api_disabled_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_moreoverflow_normal_holo_dark.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_menu_moreoverflow_normal_holo_dark.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_moreoverflow_normal_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_menu_moreoverflow_normal_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_cab_done_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_cab_done_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_commit_search_api_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_commit_search_api_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/media_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/media_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/sign_hui.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/sign_hui.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_doc1.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_doc1.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_action_search.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_action_search.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/data_syn.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/data_syn.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/upload_hui.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/upload_hui.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_action_share.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_action_share.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_voice_search_api_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_voice_search_api_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_search.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_search.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_mp3.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_mp3.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/check_normal.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/check_normal.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/yishangchuan_hui.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/yishangchuan_hui.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/delete_data.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/delete_data.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_search_api_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_search_api_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/setting_cancel.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/setting_cancel.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/setting_dialog_bg.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/setting_dialog_bg.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_clear_search_api_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_clear_search_api_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/bg.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/bg.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/setting_input_bg.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/setting_input_bg.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/setting_ok.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/setting_ok.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/name.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/name.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_share_holo_dark.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_menu_share_holo_dark.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/setting.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/setting.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/close.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/close.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_clear_normal.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_clear_normal.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_dwg.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_dwg.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/faci_hui.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/faci_hui.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/shezhi.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/shezhi.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_go_search_api_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_go_search_api_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/sign_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/sign_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_voice_search.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_voice_search.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/sign_bg_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/sign_bg_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_checkbox_all.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_checkbox_all.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_txt1.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_txt1.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_delete.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_delete.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/albumphoto.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/albumphoto.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/check_hui.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/check_hui.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/all_hui.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/all_hui.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/back_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/back_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/signname_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/signname_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/iconfont_dwg1.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/iconfont_dwg1.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/all_normal.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/all_normal.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_ab_back_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_ab_back_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_login.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_login.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_share_holo_light.png",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-xhdpi/abc_ic_menu_share_holo_light.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/chakan_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/chakan_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_exit.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_exit.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/ic_bk.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/ic_bk.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/delete_new.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/delete_new.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/next.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/next.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/password.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/password.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/icon_plusminus_add_black.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/icon_plusminus_add_black.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/bg1.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/bg1.png"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-xhdpi-v4/bg4.png",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-xhdpi/bg4.png"
+    }
+]

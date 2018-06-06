@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:background="@drawable/ic_bkmain"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="48dp"
+		android:orientation="horizontal">
+
+		<ImageView
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:layout_gravity="center_vertical"
+			android:src="@drawable/logo"
+			android:layout_marginLeft="15dp"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center_vertical"
+			android:layout_marginLeft="10dp"
+			android:textColor="#33b5e5"
+			android:text="@string/listsyncmessage"
+			android:textSize="@dimen/titleII"/>
+	</LinearLayout>
+
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="#33b5e5"/>
+
+	<HorizontalScrollView
+	    android:id="@+id/listhorizontal"
+ 		android:layout_height="match_parent" 
+ 		android:layout_width="match_parent"
+ 		android:scrollbars="none">  
+	 <ListView android:id="@+id/listsyncmessage"
+      	android:layout_width="match_parent"
+     	 android:layout_height="match_parent"
+     	 android:layout_weight="1"
+     	 android:drawSelectorOnTop="false"/>
+ </HorizontalScrollView>
+</LinearLayout>

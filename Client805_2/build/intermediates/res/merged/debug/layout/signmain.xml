@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/theme1" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/signtitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/docBac" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="查看表单"
+                android:textColor="#070709"
+                android:textSize="26dp" />
+
+            <Button
+                android:id="@+id/signback"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="返回"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <!--
+     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fadingEdge="vertical"
+    android:scrollbars="vertical" >
+        -->
+
+        <LinearLayout
+            android:id="@+id/signbody"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/signtitle"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/Black"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp" >
+
+                <ListView
+                    android:id="@+id/sign_mylistview_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/list_default_round"
+                    android:cacheColorHint="#00000000"
+                    android:gravity="center" />
+
+                <ScrollView
+                    android:id="@+id/sign_table"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:fadingEdge="vertical"
+                    android:scrollbars="vertical" >
+
+                    <HorizontalScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp" >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20sp"
+                            android:background="@drawable/list_default_round"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:id="@+id/sign_linearlayout_head"
+                                android:layout_width="fill_parent"
+                                android:layout_height="35dp"
+                                android:background="#6DD9FC"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal" >
+                            </LinearLayout>
+
+                            <ListView
+                                android:id="@+id/sign_mylistview_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="1000dp"
+                                android:cacheColorHint="#00000000"
+                                android:divider="@drawable/item_v_line"
+                                android:dividerHeight="1sp" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/sign_mylistview_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signbody"
+            android:cacheColorHint="#00000000"
+            android:divider="@drawable/item_v_line"
+            android:dividerHeight="1sp" />
+    </RelativeLayout>
+
+</ScrollView>

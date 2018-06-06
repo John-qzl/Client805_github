@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg4"
+    android:orientation="vertical" >
+    <LinearLayout 
+        android:layout_width="600dp"
+    	android:layout_height="80dp"
+    	android:layout_marginTop="200dp"
+        android:layout_marginLeft="650dp"
+    	android:orientation="horizontal">
+	    <ImageView 
+	        android:id="@+id/usernameimg"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:background="#00FFFFFF"
+	        android:src="@drawable/ic_username"/>
+	    <EditText
+	        android:id="@+id/username" 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="600dp"
+    	android:layout_height="80dp"
+    	android:layout_marginTop="10dp"
+        android:layout_marginLeft="650dp"
+    	android:orientation="horizontal">
+	    <ImageView
+	        android:id="@+id/passwordimg" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:background="#00FFFFFF"
+	        android:src="@drawable/ic_password"/>
+	    <EditText
+	        android:id="@+id/password" 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:inputType="textPassword"
+	        android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="600dp"
+    	android:layout_height="80dp"
+    	android:layout_marginTop="50dp"
+        android:layout_marginLeft="650dp"
+    	android:orientation="horizontal">
+	    <ImageButton 
+	        android:id="@+id/loginButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="100dp"
+	        android:src="@drawable/ic_login" />
+	    <ImageButton
+	        android:id="@+id/eixtButton" 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="150dp"
+	        android:src="@drawable/ic_exit" />
+    </LinearLayout>
+
+</LinearLayout>

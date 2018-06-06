@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="8dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/txt_tree_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="1" />
+        
+        <TextView
+            android:id="@+id/txt_tree_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/img_tree_left"
+            android:text="TextView"
+            android:textSize="@dimen/content" />
+        
+        <Button  
+            android:id="@+id/check_button"  
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/read_button"
+            android:layout_alignParentLeft="false"
+            android:layout_centerVertical="true"
+            android:background="@drawable/jiancha_new"
+            android:focusable="false" />
+        
+        <Button  
+            android:id="@+id/read_button"  
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/chakan_new"
+            android:focusable="false"/>
+            
+        <!-- android:layout_toLeftOf="@+id/delete_button" -->
+        
+        <ImageView
+            android:id="@+id/img_tree_left"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/txt_tree_width"
+            android:src="@drawable/icon_plusminus_add_black" />
+
+    </RelativeLayout>
+
+</LinearLayout>

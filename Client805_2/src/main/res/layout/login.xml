@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg1"
+    android:orientation="vertical"
+    android:visibility="visible" 
+    android:screenOrientation="landscape">
+
+    <LinearLayout
+        android:id="@+id/toplinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3" >
+
+        <ImageView
+            android:id="@+id/usernameimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginTop="300dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="450dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:alpha="0.8"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_username" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="300dp"
+            android:layout_height="50dip"
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="300dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="150dp"
+            android:layout_weight="6"
+            android:background="@drawable/edittextsharp"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordlinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3" >
+
+        <ImageView
+            android:id="@+id/passwordimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="650dp"
+            android:layout_marginTop="70dip"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:src="@drawable/ic_password" />
+
+        <requestFocus />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="300dp"
+            android:layout_height="50dip"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="80dp"
+            android:layout_weight="5"
+            android:background="@drawable/edittextsharp"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonlinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="2.5"
+        android:baselineAligned="false" >
+
+        <ImageButton
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="650dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:alpha="0.8"
+            android:background="#00000000"
+            android:padding="1dp"
+            android:src="@drawable/ic_login" />
+
+        <ImageButton
+            android:id="@+id/eixtButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="850dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:alpha="0.8"
+            android:background="#00FFFFFF"
+            android:baselineAlignBottom="false"
+            android:cropToPadding="true"
+            android:fitsSystemWindows="true"
+            android:layerType="none"
+            android:scaleX="1"
+            android:src="@drawable/ic_exit" />
+    </LinearLayout>
+
+</LinearLayout>

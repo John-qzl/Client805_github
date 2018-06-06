@@ -1,0 +1,4 @@
+#Mon Jun 04 19:51:11 CST 2018
+base.0=/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9
+renamed.0=classes.dex
+file.0=/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex

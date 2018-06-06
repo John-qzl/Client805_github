@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg4"
+    android:orientation="vertical" >
+
+    <LinearLayout 
+        android:layout_width="400dp"
+    	android:layout_height="80dp"
+    	android:layout_marginTop="150dp"
+        android:layout_marginLeft="80dp"
+    	android:orientation="horizontal"
+		android:gravity="center_vertical">
+	    <ImageView 
+	        android:id="@+id/usernameimg"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:background="#00FFFFFF"
+	        android:src="@drawable/ic_username"/>
+	    <EditText
+	        android:id="@+id/username" 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="400dp"
+    	android:layout_height="80dp"
+    	android:layout_marginTop="10dp"
+        android:layout_marginLeft="80dp"
+    	android:orientation="horizontal"
+		android:gravity="center_vertical">
+	    <ImageView
+	        android:id="@+id/passwordimg" 
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:background="#00FFFFFF"
+	        android:src="@drawable/ic_password"/>
+	    <EditText
+	        android:id="@+id/password" 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:inputType="textPassword"
+	        android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="80dp"
+    	android:layout_marginTop="20dp"
+        android:layout_marginLeft="90dp"
+    	android:orientation="horizontal"
+		android:gravity="center_vertical">
+	    <Button  
+            android:id="@+id/loginButton"  
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_yellow"  
+            android:text="登 录"  
+            android:textSize="28sp"
+            android:focusable="false"
+            android:textColor="@color/White" />  
+         <Button  
+            android:id="@+id/eixtButton"  
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_yellow"  
+            android:text="退 出"  
+            android:textSize="28sp"
+            android:focusable="false"
+            android:textColor="@color/White" />  
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+		android:layout_marginRight="80dp"
+        android:orientation="horizontal">
+        
+        <ImageButton 
+	        android:id="@+id/deletedata"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:background="@drawable/deletedata"/>
+	    <ImageButton 
+	        android:id="@+id/shezhi"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_marginLeft="50dp"
+	        android:src="@drawable/shezhi"
+	         />
+        
+    </LinearLayout>
+    
+
+</LinearLayout>
+

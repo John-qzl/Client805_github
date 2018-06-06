@@ -1,0 +1,450 @@
+[
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/bitmapdialog.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/bitmapdialog.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_atom_edttxt_view.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_atom_edttxt_view.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/checktable2.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/checktable2.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/checkmain.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/checkmain.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/item_album_grid.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/item_album_grid.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/list_item_photo.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/list_item_photo.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/photo_priviewrwpicactivity.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/photo_priviewrwpicactivity.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/write_pad.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/write_pad.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/test.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/test.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/camera_header_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/camera_header_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item_init_upload.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item_init_upload.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/listsyncmessage.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/listsyncmessage.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/write_main.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/write_main.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/signmaintest.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/signmaintest.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookstringphoto.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookstringphoto.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item_init.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item_init.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/doclist.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/doclist.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_list_view_ui.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_list_view_ui.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/album_item_bottom_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/album_item_bottom_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/checktable1.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/checktable1.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/albumitem.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/albumitem.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_head_stop.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_head_stop.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/photograph_layout_1.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/photograph_layout_1.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookstring.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookstring.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/checkconditionitem.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/checkconditionitem.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/login_new.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/login_new.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_tab.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_tab.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item_last.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item_last.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/fragment_whats_hot.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/fragment_whats_hot.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/activity_main1.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/activity_main1.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/item_experiment.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/item_experiment.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/root_main.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/root_main.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_atom_head_text_view.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_atom_head_text_view.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/login.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/login.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/dialog_normal_layout.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/dialog_normal_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookphoto.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookphoto.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/activity_photo.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/activity_photo.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerstringphoto.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerstringphoto.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/item_grid_image.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/item_grid_image.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item_upload.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item_upload.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/readmain2.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/readmain2.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/login1.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/login1.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_decor_include.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_decor_include.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_customel_list_item.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_customel_list_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_activity_main.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_activity_main.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_atom_text_view.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_atom_text_view.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item_sign.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item_sign.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/write_dlg_view.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/write_dlg_view.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookstringbitmap.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookstringbitmap.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_main.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_main.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/table_atom_line_v_view.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/table_atom_line_v_view.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/photo_select.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/photo_select.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/checksignitem.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/checksignitem.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookphotobitmap.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookphotobitmap.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_tabbar.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_tabbar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/fragment_photos.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/fragment_photos.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/dialog_take_photo.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/dialog_take_photo.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/tree_item_init_sign.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/tree_item_init_sign.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/fragment_pages.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/fragment_pages.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/readmain.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/readmain.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/signmain.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/signmain.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_include.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_activity_chooser_view_include.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerstringbitmap.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerstringbitmap.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_mode_close_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/activity_scroll_stop.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/activity_scroll_stop.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/album_item_header_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/album_item_header_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/fragment_home.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/gridview_item.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/gridview_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/dialog_layout.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/dialog_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/login2.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/login2.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/page_item_image.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/page_item_image.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/activity_album.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/activity_album.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookbitmap.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookbitmap.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/album_bottom_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/album_bottom_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/album_header_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/album_header_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/drawer_list_item.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/drawer_list_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/camera.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/camera.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/fragment_community.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/fragment_community.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/cameracontainer.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/cameracontainer.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/signmaint1.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/signmaint1.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_decor_overlay.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_decor_overlay.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/alert_dialog.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/alert_dialog.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/readmain1.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/readmain1.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/camera_bottom_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/camera_bottom_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerstringphotobitmap.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerstringphotobitmap.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhook.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhook.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/album.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/album.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/write_item.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/write_item.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/photo_graph.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/photo_graph.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/item_album_pager.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/item_album_pager.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/ownerhookstringphotobitmap.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/ownerhookstringphotobitmap.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/write_black.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/write_black.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/setting_dialog_layout.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/setting_dialog_layout.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/video_bottom_bar.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/video_bottom_bar.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/abc_action_bar_home.xml",
+        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/layout/abc_action_bar_home.xml"
+    },
+    {
+        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/layout/fragment_find_people.xml",
+        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/layout/fragment_find_people.xml"
+    }
+]

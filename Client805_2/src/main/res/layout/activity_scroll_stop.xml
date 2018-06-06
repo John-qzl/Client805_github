@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_launcher1" />
+
+
+
+
+    <com.example.navigationdrawertest.CustomUI.MyScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iamge"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
+                android:background="@drawable/ic_launcher1"
+                android:scaleType="centerCrop" />
+
+            <include
+                android:id="@+id/buy"
+                layout="@layout/table_head_stop" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/background_tab"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:scaleType="centerCrop"
+                android:background="#d61b1b"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:background="@drawable/ic_launcher1"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+    </com.example.navigationdrawertest.CustomUI.MyScrollView>
+
+</LinearLayout>
