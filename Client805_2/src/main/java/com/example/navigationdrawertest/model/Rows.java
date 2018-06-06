@@ -7,9 +7,9 @@ import org.litepal.crud.DataSupport;
  */
 
 public class Rows extends DataSupport{
-    private String rowsid;
-    private String taskid;
-    private String rowsnumber;
+    private String rowsid; //rowsid
+    private String taskid; //taskid
+    private String rowsnumber; //rows中的行数
 
     public String getRowsid() {
         return rowsid;
