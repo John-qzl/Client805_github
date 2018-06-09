@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.navigationdrawertest.R;
@@ -157,6 +158,9 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         mActivity.tv_save.setOnClickListener(this);
         mActivity.mSurfaceView.setOnClickListener(this);
         mActivity.mButton.setOnClickListener(this);
+        mActivity.mSmall.setOnClickListener(this);
+        mActivity.mBig.setOnClickListener(this);
+
     }
 
     @Override
@@ -169,6 +173,8 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         mActivity.view = mActivity.findViewById(view);
         mActivity.mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.mSurfaceView);
         mActivity.mButton = (ImageView) mActivity.findViewById(R.id.myButton);
+        mActivity.mSmall = (TextView) mActivity.findViewById(R.id.camera_small);
+        mActivity.mBig = (TextView) mActivity.findViewById(R.id.camera_big);
     }
 
     @Override
@@ -256,6 +262,12 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
                     mActivity.view.setVisibility(View.VISIBLE);
                     takePicture();
                 }
+                break;
+            case R.id.camera_big:
+                mActivity.setZoom();
+                break;
+            case R.id.camera_small:
+                mActivity.setSmallZoom();
                 break;
         }
     }

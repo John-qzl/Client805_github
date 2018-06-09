@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.Trace;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.navigationdrawertest.R;
@@ -44,6 +46,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private HandlerThread mHandlerThread;
     private Handler mHandlerJpeg;
     public String path;
+    public TextView mSmall, mBig;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             }
         });
 
+
     }
 
     public void surfaceCreated(SurfaceHolder surfaceholder) {
@@ -91,7 +96,17 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
     public void surfaceChanged(SurfaceHolder surfaceholder, int format, int w, int h) {
         /* 相机初始化 */
-        initCamera();
+        mCamera.autoFocus(new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean success, Camera camera) {
+                if (success) {
+                    initCamera();
+                    mCamera.cancelAutoFocus();
+                }
+            }
+        });
+
+
     }
 
     public void surfaceDestroyed(SurfaceHolder surfaceholder) {
@@ -175,6 +190,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         public void onAutoFocus(boolean focused, Camera camera) {
 			/* 对到焦点拍照 */
             if (focused) {
+//                setZoom();
             }
         }
     }
@@ -184,6 +200,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         if (mCamera != null) {
 
             Camera.Parameters parameters = mCamera.getParameters();
+
+            //变焦
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
+//            mCamera.setParameters(parameters);
 
             List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
 
@@ -217,6 +237,75 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public boolean isSupportZoom()
+    {
+        boolean isSuppport = true;
+        if (mCamera.getParameters().isSmoothZoomSupported())
+        {
+            isSuppport = false;
+        }
+        return isSuppport;
+    }
+
+    public void setZoom() {
+        boolean mIsSupportZoom = isSupportZoom();
+        if (mIsSupportZoom)
+        {
+            try
+            {
+                Camera.Parameters params = mCamera.getParameters();
+                final int MAX = params.getMaxZoom();
+                if (MAX == 0) {
+                    return;
+                }
+                int zoomValue = params.getZoom();
+//                Trace.Log("-----------------MAX:"+MAX+"   params : "+zoomValue);
+                zoomValue += 5;
+                params.setZoom(zoomValue);
+                mCamera.setParameters(params);
+//                Trace.Log("Is support Zoom " + params.isZoomSupported());
+            }
+            catch (Exception e)
+            {
+//                Trace.Log("--------exception zoom");
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+//            Trace.Log("--------the phone not support zoom");
+        }
+    }
+    public void setSmallZoom() {
+        boolean mIsSupportZoom = isSupportZoom();
+        if (mIsSupportZoom)
+        {
+            try
+            {
+                Camera.Parameters params = mCamera.getParameters();
+                final int MIN = params.getMinExposureCompensation();
+                if (MIN == 0) {
+                    return;
+                }
+                int zoomValue = params.getZoom();
+//                Trace.Log("-----------------MAX:"+MAX+"   params : "+zoomValue);
+                zoomValue -= 5;
+                params.setZoom(zoomValue);
+                mCamera.setParameters(params);
+//                Trace.Log("Is support Zoom " + params.isZoomSupported());
+            }
+            catch (Exception e)
+            {
+//                Trace.Log("--------exception zoom");
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+//            Trace.Log("--------the phone not support zoom");
         }
     }
 
