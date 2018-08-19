@@ -730,7 +730,7 @@ public class SyncWorkThread extends Thread {
 		Rows rows = new Rows();
 		// int cellCount = 0;
 		//taskcells.getLength()为rows的数量
-		task.setRownum(taskcells.getLength() + "");
+		task.setRownum(taskcells.item(0).getChildNodes().getLength() + "");
 		task.setTablesize(taskcells.getLength() + "");
 		rows.setTaskid(task.getTaskid());
 

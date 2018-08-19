@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 import com.example.navigationdrawertest.model.Cell;
 import com.example.navigationdrawertest.model.Operation;
 import com.example.navigationdrawertest.model.Row;
+import com.example.navigationdrawertest.model.Rows;
 import com.example.navigationdrawertest.model.Scene;
 import com.example.navigationdrawertest.model.Signature;
 import com.example.navigationdrawertest.model.Task;
@@ -80,6 +81,10 @@ public class ConverXML {
 			Element rowsElement = doc.createElement(Row.TAG_Rows);				//Rows标签
 			taskElement.appendChild(rowsElement);
 			int rownum = Integer.parseInt(task.getRownum());							//行数
+
+			//乔志理 修改rows number
+			List<Rows> rowsList = DataSupport.where().find(Rows.class);
+
 			for(int i=0; i<rownum; i++){
 				Row row = new Row();
 				row.setRowId(i+1+"");
