@@ -91,7 +91,8 @@ public class ConverXML {
 			taskElement.appendChild(rowsElement);
 
 			//乔志理 修改rows number  修复在老版本上已采集数据，还没上传服务器的情况下，数据只传一行的问题
-			int rownum1 = Integer.parseInt(task.getRownum());							//行数
+			//rowsnum1是task中的简单表检查项行数，rowsnum2是当前表的实际行数
+			int rownum1 = Integer.parseInt(task.getRownum());
 			int rownum2 = getrowsnumber();
 			int rownum3;
 			if (rownum1 == rownum2) {
