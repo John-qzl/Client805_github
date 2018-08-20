@@ -2,6 +2,7 @@ package com.example.navigationdrawertest.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,6 +18,8 @@ import org.litepal.crud.DataSupport;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.example.navigationdrawertest.application.OrientApplication;
+import com.example.navigationdrawertest.data.AerospaceDB;
 import com.example.navigationdrawertest.model.Cell;
 import com.example.navigationdrawertest.model.Operation;
 import com.example.navigationdrawertest.model.Row;
@@ -31,13 +34,19 @@ import com.example.navigationdrawertest.model.Task;
  * XML转换工具类
  */
 public class ConverXML {
-	
+	private static AerospaceDB aerospacedb;
+	private static int rowCount = 0;			//行数
+	private static int cellCount = 0;				//列数
+	private static List<Cell> cellList;				//本表格所有的CELL集合
+	public static long task_id;
+	private static List<Cell> headMap = new ArrayList<Cell>();			//head的Cell集合
 	
 	public static String ConverTaskToXml(Task task)
 	{
 		DocumentBuilderFactory docBuilderFactory = null;
 		DocumentBuilder docBuilder = null;
 		Document doc = null;
+		task_id = Long.parseLong(task.getTaskid());
 		try {
 			docBuilderFactory = DocumentBuilderFactory.newInstance();
 			docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -80,12 +89,18 @@ public class ConverXML {
 			
 			Element rowsElement = doc.createElement(Row.TAG_Rows);				//Rows标签
 			taskElement.appendChild(rowsElement);
-			int rownum = Integer.parseInt(task.getRownum());							//行数
 
-			//乔志理 修改rows number
-			List<Rows> rowsList = DataSupport.where().find(Rows.class);
+			//乔志理 修改rows number  修复在老版本上已采集数据，还没上传服务器的情况下，数据只传一行的问题
+			int rownum1 = Integer.parseInt(task.getRownum());							//行数
+			int rownum2 = getrowsnumber();
+			int rownum3;
+			if (rownum1 == rownum2) {
+				rownum3 = rownum1;
+			} else {
+				rownum3 = rownum2;
+			}
 
-			for(int i=0; i<rownum; i++){
+			for(int i=0; i<rownum3; i++){
 				Row row = new Row();
 				row.setRowId(i+1+"");
 				Element rowElement = doc.createElement(Row.TAG_Row);			//Row标签
@@ -128,6 +143,20 @@ public class ConverXML {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private static int getrowsnumber() {
+		cellList = loadCellAdapter(task_id, OrientApplication.getApplication().loginUser.getUserid(), 1);
+		headMap = DataSupport.where("horizontalorder=? and taskid=? and rowsid=?", "1", task_id + "", "1").order("verticalorder asc").find(Cell.class);
+		cellCount = headMap.size();
+		rowCount = cellList.size()/cellCount;
+		return rowCount;
+	}
+	//加载Table数据
+	private static List<Cell> loadCellAdapter(long taskid, String userid, int pagetype){
+		aerospacedb = new AerospaceDB();
+		List<Cell> cellList = aerospacedb.loadTableAdapter(taskid, userid, pagetype);
+		return cellList;
 	}
 	
 	
