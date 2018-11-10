@@ -201,10 +201,10 @@ public class SignAdapter extends ArrayAdapter<Signature> {
 			}
 		}
 		if (sumcount == finishcount) { // 全部签署完成
-			task.setLocation("3");
+			task.setLocation(3);
 			task.update(task.getId());
 		} else if (sumcount > finishcount && finishcount > 0) { // 签署了一部分
-			task.setLocation("2");
+			task.setLocation(2);
 			task.update(task.getId());
 		} else {
 

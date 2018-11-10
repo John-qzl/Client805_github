@@ -160,11 +160,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
                     boolean isChecked) {  
                 if(isChecked) {  	//任务完成
                 	currentTask.setEndTime(DateUtil.getCurrentDate());
-                	currentTask.setLocation("2");
+                	currentTask.setLocation(2);
                 	currentTask.save();
                 }else {					//任务没有完成
                 	currentTask.setEndTime("");
-                	currentTask.setLocation("1");
+                	currentTask.setLocation(1);
                 	currentTask.save();
                 }  
             }  

@@ -158,11 +158,11 @@ public class CheckActivity extends BaseActivity implements OnItemClickListener {
 //            			task_id+"").find(Task.class).get(0);
                 if(isChecked) {  	//任务完成
                 	task.setEndTime(DateUtil.getCurrentDate());
-                	task.setLocation("2");
+                	task.setLocation(2);
                 	task.save();
                 }else {					//任务没有完成
                 	task.setEndTime("");
-                	task.setLocation("1");
+                	task.setLocation(1);
                 	task.save();
                 }  
             }  

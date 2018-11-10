@@ -18,7 +18,7 @@ public class Task extends DataSupport{
 	private String remark;
 	private String path;
 	private String version;
-	private String location;				//1,2,3,4（位置）
+	private int location;				//1,2,3,4（位置）
 	private String taskpic;				//表格照片（暂时不提示），就是在表格实例中的照片，随着表格实例而来的
 	private String tablesize;			//是否拆分表格
 
@@ -185,10 +185,10 @@ public class Task extends DataSupport{
 	public void setVersion(String version) {
 		this.version = version;
 	}
-	public String getLocation() {
+	public int getLocation() {
 		return location;
 	}
-	public void setLocation(String location) {
+	public void setLocation(int location) {
 		this.location = location;
 	}
 	public List<Scene> getConditions() {

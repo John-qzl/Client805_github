@@ -917,9 +917,9 @@ public class SyncWorkThread extends Thread {
 
 	private Task readTask(Element root, Task task, String state, Map<String, String> map) {
 		if (state.equals("finish")) { // 已完成状态
-			task.setLocation("4");
+			task.setLocation(4);
 		} else { // 未完成状态
-			task.setLocation("1");
+			task.setLocation(1);
 		}
 		task.setTaskid(root.getAttribute("tableinstanceId"));
 		Log.i("表格ID", root.getAttribute("tableinstanceId"));
@@ -1453,7 +1453,7 @@ public class SyncWorkThread extends Thread {
 									break;
 								} else if (Integer.parseInt(serverVersion1) == Integer
 										.parseInt(clientVersion1)
-										&& clientTask.getLocation().equals("4")) {
+										&& clientTask.getLocation() == 4) {
 									deleteTaskList.add(clientTask);
 									break;
 								} else {
@@ -1671,7 +1671,7 @@ public class SyncWorkThread extends Thread {
 				
 				String uploadResponseContent = EntityUtils.toString(response.getEntity(), "utf-8");
 				if(uploadResponseContent.equals("true")){
-					task.setLocation("4");
+					task.setLocation(4);
 					task.save();
 					Log.i("location", task.getTaskname() + "上传成功！");
 				}else{
@@ -2174,7 +2174,12 @@ public class SyncWorkThread extends Thread {
 //			invertXMLtoTask(taskXMLContent, "finish");
 
 			Task downloadtask = invertXMLtoTask(taskXMLContent, "finish");
-			downloadHtml(downloadtask);
+			if (downloadtask != null) {
+				downloadHtml(downloadtask);
+				downloadopphoto(downloadtask);
+				updateInformation("下载", downloadtask.getTaskname()
+						+ "---检查项照片成功");
+			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 			return false;
