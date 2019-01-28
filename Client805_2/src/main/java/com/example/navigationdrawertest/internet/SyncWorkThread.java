@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,7 @@ import android.util.Log;
 import com.example.navigationdrawertest.CustomUI.CellTypeEnum;
 import com.example.navigationdrawertest.CustomUI.CellTypeEnum1;
 import com.example.navigationdrawertest.adapter.SignAdapter1;
+import com.example.navigationdrawertest.application.MyApplication;
 import com.example.navigationdrawertest.application.OrientApplication;
 import com.example.navigationdrawertest.data.AerospaceDB;
 import com.example.navigationdrawertest.model.Cell;
@@ -117,6 +120,10 @@ public class SyncWorkThread extends Thread {
 		boolean flag = uploadTable();
 		if(!flag){				//错误信息
 
+		}
+		//上传已完成状态的数据
+		if (OrientApplication.getApplication().getFlag() == 1) {
+			uploadDoneTable();
 		}
 
 		// 5,下载已完成表格清单
@@ -1737,6 +1744,116 @@ public class SyncWorkThread extends Thread {
 		return true;
 	}
 
+	// 管理员操作，上传已完成表单实例及其相关的检查项照片数据
+	private boolean uploadDoneTable() {
+		String userid = OrientApplication.getApplication().loginUser
+				.getUserid();
+		// String rwid = OrientApplication.getApplication().rw.getRwid();
+		String location = "4";
+		try {
+			// 确定表格实例三要素：人员-任务-位置
+			List<Task> taskList = DataSupport.where("location = ?", location).find(Task.class);
+			for (int i = 0; i < taskList.size(); i++) {
+				Task task = taskList.get(i);
+				HttpClient client = HttpClientHelper.getOrientHttpClient();
+				HttpPost postmethod = new HttpPost(HttpClientHelper.getURL());
+				// 上传三步骤
+				// 1，上传表格实例数据
+				// 2，上传表格实例中存在的照片
+				// 3，上传表格实例生成的HTML网页
+				// 上传步骤一
+				if (task == null) {
+					errorMessage = "检查表格Id号为：'" + task.getTaskid() + "'值为NULL。";
+					return false;
+				}
+				String taskxml = ConverXML.ConverTaskToXml(task);
+
+				// 上传步骤三
+				String taskHtml = CommonUtil.ConverHtmlToString(task);
+				if ("".equals(taskHtml)) {
+					errorMessage = "检查表格Id号为：'" + task.getTaskid()
+							+ "'上传失败！(读取本地html出错)";
+					return false;
+				}
+				// 上传步骤四
+				if(!uploadSignPhoto(task.getTaskid())){
+					Log.i("photo", task.getTaskid()+"签署照片");
+					return false;
+				}
+				// 上传步骤五
+				if (!uploadOpPhoto(task)) // 先执行上传相片
+				{
+					syncList.add(task.getTaskid() + "---失败，检查项照片");
+					Log.i("photo", task.getTaskid()+"检查项照片");
+//					return false;
+				}
+
+				String script = "<script type=\"text/javascript\">	function showImage(imageFile,type){ 		if(window.showImageObj==undefined || window.showImageObj==null)		{			window.browser(imageFile,type);		}		else		{			window.showImageObj.clickOnAndroid(imageFile,type);		} 	}</script>";
+				String html = taskHtml.contains("<body>") ? (script + taskHtml
+						.split("<body>")[1].split("</body>")[0]) : taskHtml;
+				Log.i("html", task.getTaskname() + "OK");
+
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+						3);
+				nameValuePairs.add(new BasicNameValuePair("operationType",
+						"uploadtask")); // 上传表格实例的内容和表格实例的HTML
+				nameValuePairs.add(new BasicNameValuePair("tableInstanId", task
+						.getTaskid()));
+				nameValuePairs.add(new BasicNameValuePair("taskContent",
+						taskxml));
+				nameValuePairs.add(new BasicNameValuePair("htmlContent", html));
+				postmethod.setEntity(new UrlEncodedFormEntity(nameValuePairs,
+						"utf-8"));
+				Log.i("setEntity", task.getTaskname() + "OK");
+				postmethod.setHeader("Content-Type",
+						"application/x-www-form-urlencoded; charset=utf-8");
+				Log.i("setHeader", task.getTaskname() + "OK");
+				HttpResponse response;
+				errorMessage = "上传:\"" + task.getTaskname()
+						+ "\"的html和xml文件出错！（网络有误）";
+				response = client.execute(postmethod);
+				Log.i("execute", task.getTaskname() + "OK");
+				int code = response.getStatusLine().getStatusCode();
+				Log.i("response", task.getTaskname() + code + "OK");
+				if (code != 200) {
+					errorMessage = "上传:\"" + task.getTaskname()
+							+ "\"的html和xml文件出错！（" + code + "错误）";
+					return false; // 错误
+				}
+
+
+				String uploadResponseContent = EntityUtils.toString(response.getEntity(), "utf-8");
+				if(uploadResponseContent.equals("true")){
+					task.setLocation(4);
+					task.save();
+					Log.i("location", task.getTaskname() + "上传成功！");
+				}else{
+					updateInformation("上传表格失败", "表格ID为："+task
+							.getTaskid()+"的表格上传失败！");
+				}
+				OrientApplication.getApplication().setFlag(0);
+
+
+			}
+		} catch (UnsupportedEncodingException e) {
+
+			e.printStackTrace();
+			return false;
+		} catch (ClientProtocolException e) {
+			Log.i("ClientProtocolException", e.toString());
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			Log.i("IOException", e.toString());
+			e.printStackTrace();
+			return false;
+		} catch (Exception e) {
+			Log.i("Exception", e.toString());
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * 上传操作项级别照片
 	 * 
@@ -1769,6 +1886,9 @@ public class SyncWorkThread extends Thread {
 		// 2,先传照片
 		if (presultList.size() > 0) {
 			try {
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");// HH:mm:ss
+				Date date = new Date(System.currentTimeMillis());
+				String uniqueNum = simpleDateFormat.format(date);
 				// 表格级别照片命名规则
 				for (int i = 0; i < presultList.size(); i++) {
 					String photopath = presultList.get(i);
@@ -1797,7 +1917,7 @@ public class SyncWorkThread extends Thread {
 							+ "/dp/datasync/sync.do?operationType=uploadopphoto&username="
 							+ username + "&userid=" + userid + "&photoName="
 							+ phName + "&tableInstanId=" + tableId
-							+ "&operationId=" + opId;
+							+ "&operationId=" + opId + "&describe=" + uniqueNum;
 					HttpPost postmethod = new HttpPost(str);
 
 					File file = new File(photopath);
@@ -2050,20 +2170,20 @@ public class SyncWorkThread extends Thread {
 			// OrientApplication.getApplication().loginUser.getUserid()).find(Task.class);
 			// 1-1，获取服务端的数量
 			if (rev.equalsIgnoreCase("")) { // 同步时，该用户没有任何可下载的已完成表格
-
-				List<Task> deleteTask = aerospacedb
-						.getUploadTables(OrientApplication.getApplication().loginUser
-						.getUserid());
-				for (Task task : deleteTask) {
-					String deleteint = task.getTaskid();
-
-					DataSupport.deleteAll(Task.class, "taskid = ?", deleteint);
-					DataSupport.deleteAll(Signature.class, "taskid = ?", deleteint);
-					DataSupport.deleteAll(Cell.class, "taskid = ?", deleteint);
-					DataSupport.deleteAll(Operation.class, "taskid = ?", deleteint);
-					DataSupport.deleteAll(Scene.class, "taskid = ?", deleteint);
-					DataSupport.deleteAll(Rw.class, "tableinstanceid = ?", deleteint);
-				}
+				//	乔志理注销   显示已上传栏目表单
+//				List<Task> deleteTask = aerospacedb
+//						.getUploadTables(OrientApplication.getApplication().loginUser
+//						.getUserid());
+//				for (Task task : deleteTask) {
+//					String deleteint = task.getTaskid();
+//
+//					DataSupport.deleteAll(Task.class, "taskid = ?", deleteint);
+//					DataSupport.deleteAll(Signature.class, "taskid = ?", deleteint);
+//					DataSupport.deleteAll(Cell.class, "taskid = ?", deleteint);
+//					DataSupport.deleteAll(Operation.class, "taskid = ?", deleteint);
+//					DataSupport.deleteAll(Scene.class, "taskid = ?", deleteint);
+//					DataSupport.deleteAll(Rw.class, "tableinstanceid = ?", deleteint);
+//				}
 			} else {
 				// 2,获取本地location为1,2,3的table
 				List<Task> tableList = new ArrayList<Task>();
@@ -2292,8 +2412,12 @@ public class SyncWorkThread extends Thread {
 				.getUserid();
 		if (photoNameList.size() != 0) {
 
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");// HH:mm:ss
+			Date date = new Date(System.currentTimeMillis());
+			String uniqueNum = simpleDateFormat.format(date);
 			try {
 				updateInformation("上传", tableId + "的表格签署照片！");
+
 				// 表格级别照片命名规则
 				for (int i = 0; i < photoNameList.size(); i++) {
 					String phName = photoNameList.get(i);
@@ -2309,7 +2433,7 @@ public class SyncWorkThread extends Thread {
 							+ OrientApplication.getApplication().setting.PortAdress
 							+ "/dp/datasync/sync.do?operationType=uploadsignphoto&username="
 							+ username + "&userid=" + userid + "&resultId="
-							+ resultId + "&tableInstanId=" + tableId;
+							+ resultId + "&tableInstanId=" + tableId + "&describe=" + uniqueNum;
 					HttpPost postmethod = new HttpPost(str);
 
 					File file = new File(photopath);
@@ -2347,7 +2471,7 @@ public class SyncWorkThread extends Thread {
 		return true;
 	}
 
-	public List<String> GetFiles(String Path, String Extension) // 搜索目录，扩展名，是否进入子文件夹
+	public static List<String> GetFiles(String Path, String Extension) // 搜索目录，扩展名，是否进入子文件夹
 	{
 		List<String> lstFile = new ArrayList<String>(); // 结果 List
 		File[] files = new File(Path).listFiles();

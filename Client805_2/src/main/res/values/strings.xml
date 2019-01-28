@@ -5,6 +5,7 @@
     <string name="app_name">805数据包</string>
     <string name="action_search">搜索</string>
     <string name="action_refresh">数据同步</string>
+    <string name="action_refresh_done">已完成数据同步</string>
     <string name="action_share">分享</string>
     <string name="action_photo">拍照</string>
     <string name="look_photo">查看相册</string>

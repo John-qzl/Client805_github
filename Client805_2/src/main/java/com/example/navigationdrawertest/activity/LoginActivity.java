@@ -1,7 +1,11 @@
 package com.example.navigationdrawertest.activity;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +14,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.message.BufferedHeader;
+import org.apache.http.util.EncodingUtils;
 import org.litepal.crud.DataSupport;
 
 import android.Manifest;
@@ -26,6 +32,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
@@ -50,6 +57,7 @@ import android.widget.Toast;
 import com.example.navigationdrawertest.MainActivity;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.CustomUI.CustomDialog;
+import com.example.navigationdrawertest.application.MyApplication;
 import com.example.navigationdrawertest.application.OrientApplication;
 import com.example.navigationdrawertest.internet.SyncWorkThread;
 import com.example.navigationdrawertest.login.Login;
@@ -315,8 +323,7 @@ public class LoginActivity extends BaseActivity{
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_new);
-		
-		
+
 		loginBtn = (Button) findViewById(R.id.loginButton);
 		exitBtn = (Button) findViewById(R.id.eixtButton);
 		deletedataBtn = (ImageButton) findViewById(R.id.deletedata);
@@ -325,6 +332,9 @@ public class LoginActivity extends BaseActivity{
 		password = (EditText) findViewById(R.id.password);
 		shezhiBtn = (ImageButton) findViewById(R.id.shezhi);
 		context = this;
+		if (OrientApplication.getApplication().getWarn() != 1) {
+			warnInfo();
+		}
 
 		if (Build.VERSION.SDK_INT >= 23) {
 			int REQUEST_CODE_CONTACT = 101;
@@ -359,9 +369,6 @@ public class LoginActivity extends BaseActivity{
     	    }else{
     	    	OrientApplication.getApplication().setting.PortAdress = cfg.port;
     	    }
-//			OrientApplication.getApplication().setting.IPAdress = cfg.ip;
-////			OrientApplication.getApplication().setting.port = Integer.valueOf(cfg.port);
-//			OrientApplication.getApplication().setting.PortAdress = cfg.port;
 		}
 		OrientApplication.getApplication().addActivity(
 				String.valueOf(R.layout.login), this);
@@ -570,7 +577,7 @@ public class LoginActivity extends BaseActivity{
 		}  
 		return  super.onKeyDown(keyCode, event);     
 	} 
-	
+
 	private void exitApplication()
 	{
 		AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
@@ -582,6 +589,7 @@ public class LoginActivity extends BaseActivity{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 //				LoginActivity.this.finish();
+				OrientApplication.getApplication().setWarn(0);
 				ActivityCollector.finishAll();
 			}
 		});
@@ -593,6 +601,60 @@ public class LoginActivity extends BaseActivity{
 		});
 		dialog.show();
 	}
-	
-	
+
+	/**
+	 * @Description: 首次打开应用展示提示信息
+	 * @author qiaozhili
+	 * @date 2019/1/28 9:05
+	 * @param
+	 * @return
+	 */
+	private void warnInfo() {
+		String file = "warn.txt";
+		AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+		dialog.setIcon(R.drawable.logo_title).setTitle("重要提示！");
+		dialog.setMessage(loadFromSDFile(file));
+		dialog.setCancelable(false);
+		dialog.setNegativeButton("知道了", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				OrientApplication.getApplication().setWarn(1);
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
+	}
+
+	/**
+	 * @Description: 读取SD卡上指定路径文件信息
+	 * @author qiaozhili
+	 * @date 2019/1/28 9:03
+	 * @param
+	 * @return
+	 */
+
+	private String loadFromSDFile(String fname) {
+		fname = "/" + fname;
+		String result = null;
+		String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "805" + File.separator + "files" + fname;
+		try {
+
+			File f = new File(path);
+			InputStreamReader isr = new InputStreamReader(new FileInputStream(f), "GB2312");
+			BufferedReader br = new BufferedReader(isr);
+			String str = "";
+			String mimeTypeLine = null ;
+			while ((mimeTypeLine = br.readLine()) != null) {
+				str = str + mimeTypeLine+"\r\n";
+				result = str;
+			}
+			isr.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(LoginActivity.this, "没有找到指定文件", Toast.LENGTH_SHORT).show();
+		}
+		return result;
+	}
+
+
 }

@@ -142,4 +142,13 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/info_bg"-->
+        <!--android:gravity="center"-->
+        <!--android:text="123123123123"-->
+        <!--android:textColor="@color/red_btn_bg_color"-->
+        <!--android:textSize="48dp"/>-->
+
 </LinearLayout>

@@ -15,7 +15,8 @@
     <color name="Black">#000000</color>
     <color name="gray">#DBDBDB</color>
     <color name="cream">#EBEBFC</color>
-    
+    <color name="info_bg">#d8000000</color>
+
     <!-- dialog框颜色 -->
     <color name="float_transparent">#00000000</color>
     <color name="sweet_dialog_bg_color">#FFFFFF</color>

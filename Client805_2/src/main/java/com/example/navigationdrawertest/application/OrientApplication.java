@@ -22,6 +22,24 @@ public class OrientApplication extends Application {
 	public List<String> uploadDownloadList = new ArrayList<String>();		//保存同步时上传下载信息
 	public RwRelation rw = null;                                            //用于保存当前任务页面的信息
 	public int pageflage;
+	private int flag;
+	public int warn;
+
+	public int getWarn() {
+		return warn;
+	}
+
+	public void setWarn(int warn) {
+		this.warn = warn;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 
 	public int getPageflage() {
 		return pageflage;
@@ -67,5 +85,4 @@ public class OrientApplication extends Application {
 	{
 		return this.currentActivity;
 	}
-	
 }

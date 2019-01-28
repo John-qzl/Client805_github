@@ -128,7 +128,7 @@ public class WritePadDialog extends Dialog {
 			paint.setStyle(Paint.Style.STROKE);
 			paint.setColor(Color.BLACK);					
 			path = new Path();
-			cachebBitmap = Bitmap.createBitmap(p.width, (int)(p.height*0.8), Config.ARGB_8888);			
+			cachebBitmap = Bitmap.createBitmap(p.width, (int)(p.height*1), Config.ARGB_8888);
 			cacheCanvas = new Canvas(cachebBitmap);
 			cacheCanvas.drawColor(Color.WHITE);
 		}
