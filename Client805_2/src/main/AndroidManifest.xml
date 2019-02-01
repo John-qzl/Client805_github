@@ -139,6 +139,11 @@
             android:screenOrientation="landscape"/>
         <activity android:name="com.example.navigationdrawertest.activity.MainActivity1"
             android:screenOrientation="landscape"/>
+
+        <activity android:name=".camera.PickBigImagesActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".camera.PickOrTakeImageActivity"
+            android:screenOrientation="landscape"/>
         
         <receiver android:name="com.example.navigationdrawertest.Broadcast.BootBroadcastReceiver"> 
 			<intent-filter> 
