@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.os.Trace;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -46,7 +47,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     private HandlerThread mHandlerThread;
     private Handler mHandlerJpeg;
     public String path;
-    public TextView mSmall, mBig;
+    public ImageView mSmall, mBig;
 
 
     @Override
@@ -127,6 +128,14 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             }
             mCamera = null;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            return  true;
+        }
+        return  super.onKeyDown(keyCode, event);
     }
 
     @Override

@@ -173,8 +173,8 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         mActivity.view = mActivity.findViewById(view);
         mActivity.mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.mSurfaceView);
         mActivity.mButton = (ImageView) mActivity.findViewById(R.id.myButton);
-        mActivity.mSmall = (TextView) mActivity.findViewById(R.id.camera_small);
-        mActivity.mBig = (TextView) mActivity.findViewById(R.id.camera_big);
+        mActivity.mSmall = (ImageView) mActivity.findViewById(R.id.camera_small);
+        mActivity.mBig = (ImageView) mActivity.findViewById(R.id.camera_big);
     }
 
     @Override

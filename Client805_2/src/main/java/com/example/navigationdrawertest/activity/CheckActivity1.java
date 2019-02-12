@@ -196,6 +196,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	@Override
 	protected void onResume() {
 		super.onResume();
+//		initContentUI();
 	}
 
 	private void initUI(){
@@ -1660,6 +1661,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				intent2.setClass(CheckActivity1.this, CameraActivity.class);
 				intent2.putExtra("path", path);
 				startActivity(intent2);
+				dialog.dismiss();
             }
         });
         btn_look_over.setOnClickListener(new View.OnClickListener() {
@@ -1669,6 +1671,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
                 Intent intent = new Intent(CheckActivity1.this, AlbumActivity.class);
                 intent.putExtra("path", path);
                 startActivity(intent);
+				dialog.dismiss();
             }
         });
 	}
