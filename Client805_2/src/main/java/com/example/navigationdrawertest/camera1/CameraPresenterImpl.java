@@ -75,13 +75,13 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
                     }
 
                     //获取时间,这里用时间作为照片的名字
-                    String photoName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
+                    final String photoName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss",
                             Locale.CHINA).format(new Date(System.currentTimeMillis()))
                             + Setting.PHOTO_NAME_SUFFIX;
 
                     mActivity.bitmaps.add(bm);
                     mActivity.photoname.add(photoName);
-
+                    final Bitmap bm1 = bm;
                     mActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -89,6 +89,7 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
                             adapter.notifyDataSetChanged();
                             mActivity.tv_save.setEnabled(true);
                             mActivity.tv_save.setTextColor(Color.WHITE);
+                            savePictureNow(mActivity.path, bm1, photoName);//时时保存照片
                         }
                     });
 
@@ -280,6 +281,13 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         }
     }
 
+    /**
+     * @Description: 保存照片
+     * @author qiaozhili
+     * @date 2019/2/13 14:21
+     * @param
+     * @return
+     */
     private boolean saveBitemap(String dirStr) {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Toast.makeText(mActivity, "sd卡异常！", Toast.LENGTH_SHORT).show();
@@ -312,6 +320,37 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
             }
         }
         return true;
+    }
+/**
+ * @Description: 时时保存照片
+ * @author qiaozhili
+ * @date 2019/2/13 14:19
+ * @param
+ * @return
+ */
+    private void savePictureNow(String dirStr, Bitmap bitmap, String phName) {
+        try {
+            File dir = new File(dirStr);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            Bitmap waterBitmap = BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.kb);
+
+            Bitmap watermarkBitmap = ImageUtil.createWaterMaskCenter(bitmap, waterBitmap);
+            Bitmap textBitmap = ImageUtil.drawTextToRightBottom(mActivity, watermarkBitmap, phName, 16, Color.RED, 0, 0);
+
+
+            File file1 = new File(dir.getAbsolutePath(), phName);
+            FileOutputStream out = new FileOutputStream(file1);
+            textBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

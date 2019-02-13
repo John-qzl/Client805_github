@@ -40,10 +40,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * 创建时间：2016/10/8
- * 创建者：Young
- * 功能描述：1.查看照片的缩略图;2.提供删除照片;3.点击缩略图跳转到详图页面（PhotoActivity页面）
- * 其他：
+ * Created by qiaozhili on 2019/2/12 15:26.
  */
 public class AlbumActivity extends BaseActivity {
 
@@ -53,35 +50,35 @@ public class AlbumActivity extends BaseActivity {
     private ArrayList<String> mPhotos = new ArrayList<String>();
     private ArrayList<String> mPhotosnew = new ArrayList<String>();
     private ProgressDialog prodlg;
-	private final static int MAXIMGNUMBER = 10;
-	private PictureListAdapter adapter;
+    private final static int MAXIMGNUMBER = 10;
+    private PictureListAdapter adapter;
     private RecyclerView mRecyclerView;
     private Button mAddPhoto;
     private ImageView mBack;
-    
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(msg.what == 1) {
-            	prodlg.dismiss();
-//                adapter.notifyDataSetChanged();
+            if (msg.what == 1) {
+                prodlg.dismiss();
+                adapter.notifyDataSetChanged();
             }
         }
     };
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	// TODO Auto-generated method stub
-    	super.onCreate(savedInstanceState);
-    	setContentView(R.layout.activity_album);
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_album);
         getActionBar().hide();
-		EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
         path = getIntent().getStringExtra("path");
-    	initUI();
-    	initData();
+        initUI();
+        initData();
     }
-    
-    private void initUI(){
+
+    private void initUI() {
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
         mBack = (ImageView) findViewById(R.id.iv_go_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -108,9 +105,9 @@ public class AlbumActivity extends BaseActivity {
         });
 
     }
-    
-    private void initData(){
-    	mPhotos = FileOperation.getAlbumByPath(path, "jpg");
+
+    private void initData() {
+        mPhotos = FileOperation.getAlbumByPath(path, "jpg");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter = new PictureListAdapter(this, R.layout.image_list_item, mPhotos);
@@ -182,105 +179,91 @@ public class AlbumActivity extends BaseActivity {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                if (mPhotos.size() < MAXIMGNUMBER && position == mPhotos.size() - 1) {
-//                    int surplus_pics = MAXIMGNUMBER - mPhotos.size() + 1;//mPhotos没有变
-//                    Intent intent = new Intent(AlbumActivity.this, PickOrTakeImageActivity.class);
-//                    intent.putExtra("pic_max", surplus_pics);
-//                    startActivity(intent);
-//                } else {
                 Intent intent = new Intent(AlbumActivity.this, PhotoActivity.class);
                 intent.putStringArrayListExtra("photos", mPhotos);
                 intent.putExtra("position", position);
                 startActivity(intent);
-//                }
             }
         });
-//        mGridView.setOnItemLongClickListener(new OnItemLongClickListener() {
-//        	@Override
-//        	public boolean onItemLongClick(AdapterView<?> parent, View view, final int position,
-//        			long id) {
-//        		new SweetAlertDialog(AlbumActivity.this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("确定删除?")
-//                .setContentText("是否确定删除本张照片？")
-//                .setCancelText("否")
-//                .setConfirmText("是，删除！")
-//                .showCancelButton(true)
-//                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                    	sDialog.dismiss();
-//                    }
-//                })
-//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                    	prodlg = ProgressDialog.show(AlbumActivity.this, "删除", "正在删除照片");
-//            			prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
-//            			new Thread(new Runnable() {
-//            				@Override
-//            				public void run() {
-//            					FileOperation.deleteFile(mPhotos.get(position));
-//            					mPhotos.remove(position);
-//            					Message message = new Message();
-//            					message.what = 1;
-//            					mHandler.sendMessage(message);
-//            				}
-//            			}).start();
-//            			sDialog.dismiss();
-//                    }
-//                })
-//                .show();
-//        		return true;
-//        	}
-//        });
+        adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
+                new SweetAlertDialog(AlbumActivity.this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("确定删除?")
+                        .setContentText("是否确定删除本张照片？")
+                        .setCancelText("否")
+                        .setConfirmText("是，删除！")
+                        .showCancelButton(true)
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                            }
+                        })
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                prodlg = ProgressDialog.show(AlbumActivity.this, "删除", "正在删除照片");
+                                prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FileOperation.deleteFile(mPhotos.get(position));
+                                        mPhotos.remove(position);
+                                        Message message = new Message();
+                                        message.what = 1;
+                                        mHandler.sendMessage(message);
+                                    }
+                                }).start();
+                                sDialog.dismiss();
+                            }
+                        })
+                        .show();
+                return true;
+            }
+        });
     }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		EventBus.getDefault().unregister(this);
-	}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mPhotos = FileOperation.getAlbumByPath(path, "jpg");
         adapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-	public void onEvent(PicPathEvent event) {
+    public void onEvent(PicPathEvent event) {
         mPhotosnew.remove(null);
         mPhotosnew.addAll(event.getPathList());
-//		if (mPhotosnew.size() < MAXIMGNUMBER) {
-//            mPhotosnew.add(null);
-//		}
 
         for (int i = 0; i < mPhotosnew.size(); i++) {
-//            File path1 = new File(path);
-//            if (!path1.exists()) {
-//                path1.mkdirs();
-//            }
             copyFile(mPhotosnew.get(i), path, getPhotoName(mPhotosnew.get(i)));
             mPhotos.add(mPhotosnew.get(i));
             System.out.print(mPhotosnew.get(i));
         }
         mPhotosnew.clear();
-		event.getPathList().clear();
-		adapter.notifyDataSetChanged();
-	}
+        event.getPathList().clear();
+        adapter.notifyDataSetChanged();
+    }
 
 
     /**
-     *  复制单个文件
+     * 复制单个文件  （可考虑添加复制进度条）
+     *
      * @param oldPath 原文件路径 如：c:/fqf.txt String
      * @param newPath 复制后路径 如：f:/fqf.txt
-     */ public static void copyFile(String oldPath, String newPath, String photoName) {
+     */
+    public static void copyFile(String oldPath, String newPath, String photoName) {
         try {
             int bytesum = 0;
             int byteread = 0;
             File oldfile = new File(oldPath);
-            File newfile= new File(newPath);
+            File newfile = new File(newPath);
             if (!newfile.exists()) {
                 newfile.mkdir();
             }
@@ -290,7 +273,8 @@ public class AlbumActivity extends BaseActivity {
                 InputStream inStream = new FileInputStream(oldPath);//读入原文件
                 FileOutputStream fs = new FileOutputStream(newfile1);
                 byte[] buffer = new byte[1444];
-                int length; int value = 0 ;
+                int length;
+                int value = 0;
                 while ((byteread = inStream.read(buffer)) != -1) {
                     bytesum += byteread;//字节数 文件大小
                     value++; //计数
@@ -298,22 +282,29 @@ public class AlbumActivity extends BaseActivity {
                     fs.write(buffer, 0, byteread);
                     Message msg = new Message(); //创建一个msg对象
                     msg.what = 110;
-                    msg.arg1 = value ; //当前的value
+                    msg.arg1 = value; //当前的value
 //                    handler.sendMessage(msg);
 //                    Thread.sleep(10);//每隔10ms发送一消息，也就是说每隔10ms value就自增一次，将这个value发送给主线程处理
                 }
                 inStream.close();
             }
         } catch (Exception e) {
-            System.out.println("复制单个文件操作出错"); e.printStackTrace();
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
         }
     }
 
-    //获取图片名称
+    /**
+     * @Description: 获取图片名称
+     * @author qiaozhili
+     * @date 2019/2/12 15:28
+     * @param
+     * @return
+     */
     private String getPhotoName(String uri) {
-        String temp[] = uri.replaceAll("\\\\","/").split("/");
+        String temp[] = uri.replaceAll("\\\\", "/").split("/");
         String fileName = "";
-        if(temp.length > 1){
+        if (temp.length > 1) {
             fileName = temp[temp.length - 1];
             System.out.println(fileName);
         }

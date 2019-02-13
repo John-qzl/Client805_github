@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
@@ -615,6 +616,13 @@ public class LoginActivity extends BaseActivity{
 		dialog.setIcon(R.drawable.logo_title).setTitle("重要提示！");
 		dialog.setMessage(loadFromSDFile(file));
 		dialog.setCancelable(false);
+		dialog.setPositiveButton("时间设置", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				startActivity(new Intent(Settings.ACTION_DATE_SETTINGS));
+				dialog.dismiss();
+			}
+		});
 		dialog.setNegativeButton("知道了", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
