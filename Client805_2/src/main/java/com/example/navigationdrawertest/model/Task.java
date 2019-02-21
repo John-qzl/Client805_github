@@ -27,6 +27,7 @@ public class Task extends DataSupport{
 	private String rwname;
 	private String postname;				//所属试验队名称
 	private String postinstanceid;		//所属试验队ID
+	private String nodeLeaderId; 		//所属节点负责人ID
 //	private String userid;				//用户id
 //	private String username;			//用户名
 	private Post post;
@@ -121,6 +122,15 @@ public class Task extends DataSupport{
 //	public void setUsername(String username) {
 //		this.username = username;
 //	}
+
+	public String getNodeLeaderId() {
+		return nodeLeaderId;
+	}
+
+	public void setNodeLeaderId(String nodeLeaderId) {
+		this.nodeLeaderId = nodeLeaderId;
+	}
+
 	public String getPostinstanceid() {
 		return postinstanceid;
 	}

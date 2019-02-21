@@ -126,11 +126,19 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(msg.what == 1) {
-            	prodlg.dismiss();
-            	EventBus.getDefault().post(new LocationEvent("ok"));  	
-    	    	finish();  
-            }
+			switch (msg.what) {
+				case 1:
+					prodlg.dismiss();
+					EventBus.getDefault().post(new LocationEvent("ok"));
+					finish();
+					break;
+				case 2:
+//					initParam();
+//					initContentUI();
+					break;
+				default:
+					break;
+			}
         }
     };
 	
@@ -143,7 +151,6 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		EventBus.getDefault().register(this);
 
 		context = this;
-//		setTitle("aaaa");
 		initUI(); 						// 初始化UI控件
 		initParam();				 	// 初始化必要的全局参数
 
@@ -196,6 +203,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Message message = new Message();
+		message.what = 2;
+		mHandler.sendMessage(message);
+//		initParam();
 //		initContentUI();
 	}
 

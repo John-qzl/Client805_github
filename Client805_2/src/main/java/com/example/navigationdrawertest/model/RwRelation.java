@@ -15,7 +15,16 @@ public class RwRelation extends DataSupport{
 	private String userid;
 	private String username;
 	private String productid; 		//产品ID
-	
+	private String nodeId;          //节点ID
+
+	public String getNodeId() {
+		return nodeId;
+	}
+
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+
 	public int getId() {
 		return id;
 	}

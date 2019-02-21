@@ -30,6 +30,7 @@ public class OrientApplication extends Application {
 	private int flag;
 	public int warn;
 	private static OrientApplication instance;
+	public boolean isCommander;
 
 	@Override
 	public void onCreate() {
@@ -62,6 +63,14 @@ public class OrientApplication extends Application {
 
 		// Initialize ImageLoader with configuration.
 		com.nostra13.universalimageloader.core.ImageLoader.getInstance().init(config.build());
+	}
+
+	public boolean isCommander() {
+		return isCommander;
+	}
+
+	public void setCommander(boolean commander) {
+		isCommander = commander;
 	}
 
 	public int getWarn() {

@@ -258,6 +258,19 @@ public class SyncWorkThread extends Thread {
 			task.setInitStatue("finish");
 			task.update(task.getId());
 		}
+
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 判断当前登录人员是否为节点负责人
+	 * @author qiaozhili
+	 * @date 2019/2/19 8:56
+	 */
+	private void isCommander() {
+		String userId = OrientApplication.getApplication().loginUser.getUserid();
+//		List<String> commanderIds = DataSupport.find()
 	}
 
 	public boolean downMmc(Mmc mmc) {
@@ -618,6 +631,11 @@ public class SyncWorkThread extends Thread {
 		if(!xmlContent.equals("")){
 			String[] pro = xmlContent.split("\\?");
 			for (int i = 0; i < pro.length; i++) {
+				int startLocation = pro[i].lastIndexOf(",") + 2;
+				int endLocation = pro[i].lastIndexOf("#");
+				String str = pro[i].substring(startLocation,
+						endLocation);
+				String str1 = str.substring(0, str.length());
 				String proId = pro[i].split("\\,")[0];
 				String proName = pro[i].split("\\,")[1];
 				String productId = pro[i].split("\\,")[2];
@@ -627,6 +645,11 @@ public class SyncWorkThread extends Thread {
 				proRe.setProductid(productId);
 				proRe.setUserid(user.getUserid());
 				proRe.setUsername(user.getUsername());
+				if (!str1.equals("")) {
+					proRe.setNodeId(str1);
+				} else {
+					proRe.setNodeId("");
+				}
 				syncList.add(proRe.getRwid() + "---RwRelation表保存成功");
 				proRe.save();
 			}
@@ -938,6 +961,7 @@ public class SyncWorkThread extends Thread {
 		task.setRwname(root.getAttribute("rwname"));
 		task.setPostname(root.getAttribute("postname"));
 		task.setPostinstanceid(root.getAttribute("postinstanceid"));
+		task.setNodeLeaderId(root.getAttribute("nodeLeaderId"));
 		// task.setUserid(OrientApplication.getApplication().loginUser.getUserid());
 		// task.setUsername(OrientApplication.getApplication().loginUser.getUsername());
 		task.setStartTime(root.getAttribute("starttime"));
@@ -1577,6 +1601,7 @@ public class SyncWorkThread extends Thread {
 				user.setPassword(userElement.getAttribute("password"));
 				user.setDisplayname(userElement.getAttribute("displayname"));
 				user.setTtidandname(userElement.getAttribute("ttidandname"));
+				user.setCommanderId(userElement.getAttribute("commanderId"));
 				// user.setLiangzong(userElement.getAttribute("liangzong"));
 				// user.setPostsString(userElement.getAttribute("post"));
 				// if(user.save()){

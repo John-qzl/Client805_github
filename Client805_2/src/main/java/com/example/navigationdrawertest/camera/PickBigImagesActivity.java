@@ -59,6 +59,7 @@ public class PickBigImagesActivity extends FragmentActivity implements ViewPager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look_big_image);
+        getActionBar().hide();
         allimages = PhotoParams.PhotoUtils.allimages;
         initFindView();
         initData();

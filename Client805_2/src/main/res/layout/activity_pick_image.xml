@@ -12,11 +12,11 @@
 
         <ImageView
             android:id="@+id/iv_left"
-            android:layout_width="45dp"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/arrows_right"
-            android:scaleType="fitXY"/>
+            android:src="@drawable/back_02"
+            android:scaleType="centerInside"/>
         <TextView
             android:id="@+id/tv_center"
             android:layout_width="wrap_content"

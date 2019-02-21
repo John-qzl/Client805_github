@@ -24,9 +24,18 @@ public class User extends DataSupport{
 	}
 	//	private String liangzong;
 	private String postsString;			//存储的是该用户所有岗位的ID
-//	private String rwids;
+	//	private String rwids;
 //	private String rwnames;
-	
+	private String commanderId;   //所负责节点id
+
+	public String getCommanderId() {
+		return commanderId;
+	}
+
+	public void setCommanderId(String commanderId) {
+		this.commanderId = commanderId;
+	}
+
 	public List<Post> posts;
 	/**
 	 * 非数据库声明字段	

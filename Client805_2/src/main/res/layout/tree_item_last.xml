@@ -30,6 +30,20 @@
             android:layout_toRightOf="@+id/fragmentupload_img_tree_left"
             android:text="TextView"
             android:textSize="@dimen/content" />
+        <Button
+            android:id="@+id/fragmentupload_back_button"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentLeft="false"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/fragmentupload_look_button"
+            android:background="@color/red_btn_bg_color"
+            android:focusable="false"
+            android:text="回退"
+            android:textColor="@color/White"
+            android:visibility="gone"/>
 
        <Button  
             android:id="@+id/fragmentupload_look_deletebutton"  

@@ -230,16 +230,22 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
     /**
      * Diplaying fragment view for selected nav drawer list item
      * */
-    private void selectItem(final int position) {
+    public void selectItem(final int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
-        if(projectList.size() > 0){
+        OrientApplication.getApplication().setCommander(false);
+        if(projectList.size() > 0 && projectList != null){
             RwRelation proEntity = projectList.get(position);
             if(proEntity != null){
                 OrientApplication.getApplication().rw = proEntity;
                 Log.i("项目名称", proEntity.getRwname());
             }
             localPosition = position;
+            //判断用户是否为节点负责人
+//            String nodeIds = proEntity.getNodeId();
+//            if (nodeIds != null) {
+//                isCommander(nodeIds);
+//            }
             fragment = new HomeFragment(proEntity);
         }
 
@@ -391,6 +397,7 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
     protected void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
+        OrientApplication.getApplication().setCommander(false);
         ActivityCollector.finishAll();
     }
 
@@ -692,4 +699,39 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
         }
         return true;
     }
+
+    /**
+     * @Description: 判断用户是否为该节点的负责人
+     * @author qiaozhili
+     * @date 2019/2/19 16:44
+     * @param
+     * @return
+     */
+//    private void isCommander(String nodeIds) {
+//        String userId = OrientApplication.getApplication().loginUser.getUserid();
+//        List<User> userList = DataSupport.where("userid=?",userId ).find(User.class);
+//        if (!nodeIds.equals("")) {
+//            String[] strNodeId = nodeIds.split("\\、");
+//            for (int i = 0; i < strNodeId.length; i++) {
+//                String nodeID = strNodeId[i];
+//                if (userList.size() > 0) {
+//                    String commanderId = userList.get(0).getCommanderId();
+//                    if (!commanderId.equals("")) {
+//                        String[] strCommanderId = commanderId.split("\\,");
+//                        for (int j = 0; j < strCommanderId.length; j++) {
+//                            if (nodeID.equals(strCommanderId[j])) {
+//                                OrientApplication.getApplication().setCommander(true);
+//                            }
+//                        }
+//                    } else {
+//                        OrientApplication.getApplication().setCommander(false);
+//                    }
+//                } else {
+//                    OrientApplication.getApplication().setCommander(false);
+//                }
+//            }
+//        } else {
+//            OrientApplication.getApplication().setCommander(false);
+//        }
+//    }
 }
