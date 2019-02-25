@@ -1131,6 +1131,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 				+ File.separator;
 		Intent intent = new Intent(ReadActivity1.this, AlbumActivity.class);
         intent.putExtra("path", path);
+		intent.putExtra("checkType", "read");
         startActivity(intent);
 	}
 

@@ -55,6 +55,7 @@ public class AlbumActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private Button mAddPhoto;
     private ImageView mBack;
+    private String mCheck = "";
 
     private Handler mHandler = new Handler() {
         @Override
@@ -74,6 +75,7 @@ public class AlbumActivity extends BaseActivity {
         getActionBar().hide();
         EventBus.getDefault().register(this);
         path = getIntent().getStringExtra("path");
+        mCheck = getIntent().getStringExtra("checkType");
         initUI();
         initData();
     }
@@ -88,6 +90,11 @@ public class AlbumActivity extends BaseActivity {
             }
         });
         mAddPhoto = (Button) findViewById(R.id.bt_add_photo);
+        if (mCheck.equals("check")) {
+            mAddPhoto.setVisibility(View.VISIBLE);
+        } else {
+            mAddPhoto.setVisibility(View.INVISIBLE);
+        }
         mAddPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

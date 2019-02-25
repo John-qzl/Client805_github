@@ -1681,6 +1681,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
                 dialog.cancel();
                 Intent intent = new Intent(CheckActivity1.this, AlbumActivity.class);
                 intent.putExtra("path", path);
+                intent.putExtra("checkType", "check");
                 startActivity(intent);
 				dialog.dismiss();
             }

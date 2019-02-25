@@ -39,7 +39,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="添加图片"
-            android:textColor="@color/White"/>
+            android:textColor="@color/White"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

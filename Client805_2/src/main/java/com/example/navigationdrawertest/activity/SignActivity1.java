@@ -1577,6 +1577,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 				+ File.separator;
 		Intent intent = new Intent(SignActivity1.this, AlbumActivity.class);
         intent.putExtra("path", path);
+		intent.putExtra("checkType", "sign");
         startActivity(intent);
 	}
 
