@@ -11,7 +11,25 @@ public class Mmc extends DataSupport{
 	private String displaypath_Name;			//展示路径
 	private String rw_Id;								//任务ID
 	private String type;
-	
+	private String taskId;
+	private String taskName;
+
+	public String getTaskName() {
+		return taskName;
+	}
+
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
+	}
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
 	public int getId() {
 		return id;
 	}

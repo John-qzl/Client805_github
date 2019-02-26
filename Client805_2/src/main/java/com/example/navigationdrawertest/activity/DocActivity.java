@@ -96,7 +96,8 @@ public class DocActivity extends BaseActivity{
 	 * 0层节点：product
 	 * 1层节点：project
 	 * 2层节点：path
-	 * 3层节点：多媒体资料
+	 * 3层节点：task  qzl添加
+	 * 4层节点多媒体资料
 	 */
 	public void initData(){
 //		String userId = OrientApplication.getApplication().loginUser.getUserid();							//登录用户ID
@@ -123,26 +124,48 @@ public class DocActivity extends BaseActivity{
 						if(mmcList.size() > 0){
 							//3-1,遍历所有的多媒体数据，找出不重复的path路径
 							List<String> mmcPathList = new ArrayList<String>();
+							List<Mmc> mmcTaskList = new ArrayList<Mmc>();
+							List<String> mmcTaskList1 = new ArrayList<String>();
 							for(Mmc mmc : mmcList){
 								String path = mmc.getDisplaypath_Name();
 								String mmcGw = mmc.getGw_Id();
+								String task = mmc.getTaskId();
 								if(!mmcPathList.contains(path) && ArrUtil.useList(gwArr, mmcGw)){
 									mmcPathList.add(path);
+								}
+								if (!mmcTaskList1.contains(task)) {
+									mmcTaskList1.add(task);
+									mmcTaskList.add(mmc);
 								}
 							}
 							for(int i=0; i<mmcPathList.size(); i++){
 								TreeNode pathNode = new DepartmentNode(Long.valueOf(i), mmcPathList.get(i), "0", rwNode, 3);
-								//4,找到该path下所有的mmc记录
-								List<Mmc> mmcList1 = DataSupport.where("displaypath_Name = ? and rw_Id = ?",
-										mmcPathList.get(i), rw.getRwid()).find(Mmc.class);
-								for(Mmc mmc : mmcList1){
-									if(ArrUtil.useList(gwArr, mmc.getGw_Id())){
-										TreeNode mmcNode = new UserNode(Long.valueOf(mmc.getMmc_Id()), mmc.getMmc_Name(), pathNode, 4);
-//										TreeNode mmcNode = new UserNode(Long.valueOf(mmc.getMmc_Id()), mmc.getMmc_Name(), "1",  pathNode, 4);
-										pathNode.add(mmcNode);
+								//4 qzl添加 将同一task的mmc进行归类
+								for (int j = 0; j < mmcTaskList1.size(); j++) {
+									TreeNode taskNode = new DepartmentNode(Long.valueOf(j), mmcTaskList.get(j).getTaskName(), "0", pathNode, 4);
+									//5找到该task下所有的mmc记录
+									List<Mmc> mmcList1 = DataSupport.where("taskId = ? and rw_Id = ?",
+											mmcTaskList1.get(j), rw.getRwid()).find(Mmc.class);
+									for(Mmc mmc : mmcList1){
+										if(ArrUtil.useList(gwArr, mmc.getGw_Id())){
+											TreeNode mmcNode = new UserNode(Long.valueOf(mmc.getMmc_Id()), mmc.getMmc_Name(), taskNode, 5);
+											taskNode.add(mmcNode);
+										}
 									}
+									pathNode.add(taskNode);
 								}
 								rwNode.add(pathNode);
+//								//5（原4）,找到该path下所有的mmc记录
+//								List<Mmc> mmcList1 = DataSupport.where("displaypath_Name = ? and rw_Id = ?",
+//										mmcPathList.get(i), rw.getRwid()).find(Mmc.class);
+//								for(Mmc mmc : mmcList1){
+//									if(ArrUtil.useList(gwArr, mmc.getGw_Id())){
+//										TreeNode mmcNode = new UserNode(Long.valueOf(mmc.getMmc_Id()), mmc.getMmc_Name(), pathNode, 4);
+////										TreeNode mmcNode = new UserNode(Long.valueOf(mmc.getMmc_Id()), mmc.getMmc_Name(), "1",  pathNode, 4);
+//										pathNode.add(mmcNode);
+//									}
+//								}
+//								rwNode.add(pathNode);
 							}
 						}
 						productNode.add(rwNode);

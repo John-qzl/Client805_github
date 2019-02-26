@@ -418,6 +418,10 @@ public class SyncWorkThread extends Thread {
 						.getAttribute("rwId"));
 				String type = CommonTools.null2String(userElement
 						.getAttribute("type"));
+				String task_Id = CommonTools.null2String(userElement
+						.getAttribute("taskId"));
+				String task_Name = CommonTools.null2String(userElement
+						.getAttribute("taskName"));
 
 				Mmc mmc = new Mmc();
 				mmc.setMmc_Id(mmc_Id);
@@ -426,6 +430,8 @@ public class SyncWorkThread extends Thread {
 				mmc.setDisplaypath_Name(displaypath_Name);
 				mmc.setGw_Id(gw_Id);
 				mmc.setType(type);
+				mmc.setTaskId(task_Id);
+				mmc.setTaskName(task_Name);
 				newmmcList.add(mmc);
 			}
 			// List<String> addList = new ArrayList<String>();
