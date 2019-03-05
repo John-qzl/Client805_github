@@ -960,6 +960,7 @@ public class SyncWorkThread extends Thread {
 		task.setTaskid(root.getAttribute("tableinstanceId"));
 		Log.i("表格ID", root.getAttribute("tableinstanceId"));
 		task.setPath(root.getAttribute("path"));
+		task.setPathId(root.getAttribute("pathId"));
 		task.setVersion(root.getAttribute("version"));
 		task.setRemark(root.getAttribute("remark"));
 		task.setTaskname(root.getAttribute("name"));
@@ -1413,6 +1414,7 @@ public class SyncWorkThread extends Thread {
 					tempTable.setTaskid(ServerTableString[i].split(",")[0]);
 					tempTable.setVersion(ServerTableString[i].split(",")[1]);
 					tempTable.setPath(ServerTableString[i].split(",")[2]);
+					tempTable.setPathId(ServerTableString[i].split(",")[3]);
 					UnfinishList.add(tempTable);
 				}
 			}

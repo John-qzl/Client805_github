@@ -14,7 +14,7 @@ public class User extends DataSupport{
 	private String password;
 	private String displayname;
 	//2016-3-15 13:56:34
-	private String ttidandname;			//试验队的ID和NAME（id,name;id,name）
+	private String ttidandname;			//工作队的ID和NAME（id,name;id,name）
 	
 	public String getTtidandname() {
 		return ttidandname;

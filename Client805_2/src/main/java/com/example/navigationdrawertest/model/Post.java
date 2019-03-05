@@ -14,6 +14,25 @@ public class Post extends DataSupport{
 	private String postname;
 	private String postinstanceid;
 	private String path;
+	private String pathId;
+	private String userId;
+
+	public String getPathId() {
+		return pathId;
+	}
+
+	public void setPathId(String pathId) {
+		this.pathId = pathId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public String getPostinstanceid() {
 		return postinstanceid;
 	}

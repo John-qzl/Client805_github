@@ -1,17 +1,24 @@
 package com.example.navigationdrawertest.fragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.jsoup.nodes.Document;
 import org.litepal.crud.DataSupport;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -27,6 +34,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,6 +45,8 @@ import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.SweetAlert.SweetAlertDialog;
 import com.example.navigationdrawertest.activity.CheckActivity;
 import com.example.navigationdrawertest.activity.CheckActivity1;
+import com.example.navigationdrawertest.activity.LoginActivity;
+import com.example.navigationdrawertest.activity.MainActivity1;
 import com.example.navigationdrawertest.activity.ReadActivity;
 import com.example.navigationdrawertest.activity.ReadActivity1;
 import com.example.navigationdrawertest.activity.SignActivity;
@@ -46,6 +56,7 @@ import com.example.navigationdrawertest.application.OrientApplication;
 import com.example.navigationdrawertest.model.Cell;
 import com.example.navigationdrawertest.model.Operation;
 import com.example.navigationdrawertest.model.Post;
+import com.example.navigationdrawertest.model.Rows;
 import com.example.navigationdrawertest.model.Rw;
 import com.example.navigationdrawertest.model.RwRelation;
 import com.example.navigationdrawertest.model.Scene;
@@ -56,6 +67,9 @@ import com.example.navigationdrawertest.tree.DepartmentNode;
 import com.example.navigationdrawertest.tree.TreeHelper;
 import com.example.navigationdrawertest.tree.TreeNode;
 import com.example.navigationdrawertest.tree.UserNode;
+import com.example.navigationdrawertest.utils.Config;
+import com.example.navigationdrawertest.utils.FileOperation;
+import com.example.navigationdrawertest.utils.HtmlHelper;
 import com.example.navigationdrawertest.utils.NodeButtonEnum;
 
 import de.greenrobot.event.EventBus;
@@ -78,11 +92,13 @@ public class FragmentCheck extends Fragment {
 	private NodeButtonEnum buttontype;
 	private RwRelation proEntity;				//传递过来的项目树节点
 	private static User user;
+	private ProgressDialog prodlg;
+	private AlertDialog.Builder dialog;
 	
 	public FragmentCheck(RwRelation proEntity){
 		this.proEntity = proEntity;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -149,9 +165,9 @@ public class FragmentCheck extends Fragment {
 					String postpath_str;
 					Post post = new Post();
 					if(j == 0){
-						postid_str = taskList_rw.get(0).getPostinstanceid();
+						postid_str = taskList_rw.get(0).getPathId();
 						postpath_str = taskList_rw.get(0).getPath();
-						post.setPostinstanceid(postid_str);
+						post.setPathId(postid_str);
 						post.setPath(postpath_str);
 						postList.add(post);
 					}else{
@@ -162,7 +178,7 @@ public class FragmentCheck extends Fragment {
 							}
 						}
 						if(isPostList == true){
-							post.setPostinstanceid(taskList_rw.get(j).getPostinstanceid());
+							post.setPathId(taskList_rw.get(j).getPathId());
 							post.setPath(taskList_rw.get(j).getPath());
 							postList.add(post);
 						}
@@ -171,8 +187,7 @@ public class FragmentCheck extends Fragment {
 				
 				//4,获取所有表格ID---表格名称
 				for(int k=0; k<postList.size(); k++){
-					TreeNode node = new DepartmentNode(Long.valueOf(postList.get(k).getPostinstanceid()),
-						postList.get(k).getPath(),  "0", rootNode, 1);
+					TreeNode node = new DepartmentNode(Long.valueOf(postList.get(k).getPathId()), postList.get(k).getPath(),  "0", rootNode, 1);
 					rootNode.add(node);
 					List<Task> tasknodeList = new ArrayList<Task>();
 					for(Task task : taskList_rw){
@@ -249,15 +264,39 @@ public class FragmentCheck extends Fragment {
 		}
 	};
 	
-	public static Handler mHandler =new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-        	switch (msg.what) {  
-            case 0:  
-                break;
-            }
-        }
-    };
+//	public static Handler mHandler =new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//        	switch (msg.what) {
+//            case 0:
+//                break;
+//            }
+//        }
+//    };
+
+
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			prodlg.dismiss();
+			if(msg.what == 1) {
+				dialog = new AlertDialog.Builder(getActivity());
+				dialog.setIcon(R.drawable.logo_title).setTitle(R.string.app_name);
+				dialog.setMessage("复制完成，点击确定重新加载！");
+				dialog.setCancelable(false);
+				dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						Intent intent1 = new Intent(getActivity(), MainActivity1.class);
+						startActivity(intent1);
+
+					}
+				});
+				dialog.show();
+			}
+		}
+	};
 
 	private void showSweetAlertDialog(long clicktaskid, NodeButtonEnum nodebutton) {
 
@@ -303,15 +342,12 @@ public class FragmentCheck extends Fragment {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			int layer = nodeList.get(position).getLayer();
+			Long pathId = nodeList.get(position).getId();
+			final List<Task> taskList = DataSupport.where("pathId = ? and location=?", String.valueOf(pathId), "1").find(Task.class);
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
-				if(layer != 2){
-					convertView = inflater.inflate(R.layout.tree_item_init, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-				}else{
+				if(layer == 2){
 					convertView = inflater.inflate(R.layout.tree_item, null);
 					holder.tv_name = (TextView) convertView.findViewById(R.id.txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.txt_tree_width);
@@ -324,7 +360,7 @@ public class FragmentCheck extends Fragment {
 							// TODO Auto-generated method stub
 							clicktaskid = nodeList.get(position).getId();
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.CHECKBUTTON);
-						} 
+						}
 					});
 					holder.read_button.setOnClickListener(new OnClickListener(){
 						@Override
@@ -334,20 +370,37 @@ public class FragmentCheck extends Fragment {
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
 						}
 					});
+
+				} else if (layer == 1) {
+					convertView = inflater.inflate(R.layout.tree_item_init_copy, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+					holder.copy_button = (Button) convertView.findViewById(R.id.copy_button);
+					if (taskList.size() > 0) {
+						if (taskList.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())
+								&& taskList.get(0).getIsBrother() != 1) {
+							holder.copy_button.setVisibility(View.VISIBLE);
+						}
+					}
+					holder.copy_button.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							warnInfo(taskList);
+						}
+					});
+				} else {
+					convertView = inflater.inflate(R.layout.tree_item_init, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 				}
 				convertView.setTag(holder);
 			}
 			else {
-
-
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
-				if(layer != 2){
-					convertView = inflater.inflate(R.layout.tree_item_init, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-				}else{
+				if(layer == 2){
 					convertView = inflater.inflate(R.layout.tree_item, null);
 					holder.tv_name = (TextView) convertView.findViewById(R.id.txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.txt_tree_width);
@@ -371,6 +424,29 @@ public class FragmentCheck extends Fragment {
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
 						}
 					});
+				} else if (layer == 1) {
+					convertView = inflater.inflate(R.layout.tree_item_init_copy, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+					holder.copy_button = (Button) convertView.findViewById(R.id.copy_button);
+					if (taskList.size() > 0) {
+						if (taskList.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())
+								&& taskList.get(0).getIsBrother() != 1) {
+							holder.copy_button.setVisibility(View.VISIBLE);
+						}
+					}
+					holder.copy_button.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							warnInfo(taskList);
+						}
+					});
+				} else {
+					convertView = inflater.inflate(R.layout.tree_item_init, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 				}
 				convertView.setTag(holder);
 			}
@@ -398,6 +474,7 @@ public class FragmentCheck extends Fragment {
 			public Button check_button;
 			public Button read_button;
 			public Button delete_button;
+			public Button copy_button;
 		}
 	}
 
@@ -411,5 +488,324 @@ public class FragmentCheck extends Fragment {
 //		Toast.makeText(this, locationEvent, Toast.LENGTH_SHORT).show();
 			
 	}
+
+	public void warnInfo(final List<Task> taskList) {
+		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+		dialog.setIcon(R.drawable.logo_title).setTitle("是否进行表单复制！");
+		dialog.setMessage("此操作只允许管理员执行，请谨慎操作！");
+		dialog.setCancelable(false);
+		dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				String nodeName = getNodeName(taskList);
+
+			}
+		});
+		dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
+	}
+
+	/**
+	 * @Description: 自定义节点名称
+	 * @author qiaozhili
+	 * @date 2019/3/4 11:39
+	 * @param
+	 * @return
+	 */
+	public String getNodeName(final List<Task> taskList) {
+		LayoutInflater factory = LayoutInflater.from(getActivity());//提示框
+		final View view = factory.inflate(R.layout.editbox_layout, null);//这里必须是final的
+		final EditText edit=(EditText)view.findViewById(R.id.editText);//获得输入框对象
+		final String[] nodeName = {""};
+		new AlertDialog.Builder(getActivity())
+				.setTitle("请输入新节点名称！")//提示框标题
+				.setView(view)
+				.setPositiveButton("确定",//提示框的两个按钮
+						new android.content.DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+												int which) {
+								Message message = new Message();
+								prodlg = ProgressDialog.show(context, "警告", "正在复制，请稍侯...");
+								nodeName[0] = String.valueOf(edit.getText());
+								for (Task task : taskList) {
+									copyTask(task, nodeName[0]);
+								}
+								message.what = 1;
+								mHandler.sendMessage(message);
+							}
+						})
+				.setNegativeButton("取消", null).create().show();
+		return nodeName[0];
+	}
+
+	/**
+	 * @Description: 复制节点及task
+	 * @author qiaozhili
+	 * @date 2019/3/4 10:56
+	 * @param
+	 * @return
+	 */
+	public void copyTask(Task task, String nodeName) {
+		Task taskNew = new Task();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+		String timeString = formatter.format(curDate);
+		long timeL = Long.parseLong(getTime(timeString));
+		String taskIdNew = "";
+		if (!task.getTaskid().equals("")) {
+			long taskIdL = Long.parseLong(task.getTaskid());
+			String taskIdN = String.valueOf(taskIdL + timeL);
+			taskNew.setTaskid(taskIdN);
+			taskIdNew = taskIdN;
+		} else {
+			taskNew.setTaskid("");
+		}
+		if (!task.getPathId().equals("")) {
+			long PathIdL = Long.parseLong(task.getPathId());
+			String pathIdN = String.valueOf(PathIdL + timeL);
+			taskNew.setPathId(pathIdN);
+		} else {
+			taskNew.setPathId("");
+		}
+		taskNew.setPath(nodeName);
+		taskNew.setTaskname(task.getTaskname());
+		taskNew.setRemark(task.getRemark());
+		taskNew.setVersion(task.getVersion());
+		taskNew.setLocation(task.getLocation());
+		taskNew.setTaskpic(task.getTaskpic());
+		taskNew.setTablesize(task.getTablesize());
+		taskNew.setRwid(task.getRwid());
+		taskNew.setRwname(task.getRwname());
+		taskNew.setPost(task.getPost());
+		taskNew.setPostinstanceid(task.getPostinstanceid());
+		taskNew.setPostname(task.getPostname());
+		taskNew.setNodeLeaderId(task.getNodeLeaderId());
+		taskNew.setLinenum(task.getLinenum());
+		taskNew.setRownum(task.getRownum());
+		taskNew.setStartTime(task.getStartTime());
+		taskNew.setEndTime(task.getEndTime());
+		taskNew.setIsfinish(task.getIsfinish());
+		taskNew.setIsfirstfinish(task.getIsfirstfinish());
+		taskNew.setInitStatue(task.getInitStatue());
+		taskNew.setConditions(task.getConditions());
+		taskNew.setSigns(task.getSigns());
+		taskNew.setCells(task.getCells());
+		taskNew.setRownummap(task.getRownummap());
+		taskNew.setIsBrother(1);
+		taskNew.save();
+		if (!taskIdNew.equals("")) {
+			copyCondition(task, taskIdNew, timeL);
+			copySignature(task, taskIdNew, timeL);
+			copyRows(task, taskIdNew, timeL);
+			copyCells(task, taskIdNew, timeL);
+			copyHtml(task, task.getPostname(), taskIdNew, timeL);
+		} else {
+			Toast.makeText(getActivity(), "数据有误，请检查数据", Toast.LENGTH_LONG);
+		}
+
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 复制conditions
+	 * @author qiaozhili
+	 * @date 2019/3/4 14:44
+	 */
+	public void copyCondition(Task task, String taskIdN, long timeL) {
+		List<Scene> conditionList = DataSupport.where("taskid=?", task.getTaskid()).find(Scene.class);
+		for (Scene scne : conditionList) {
+			Scene scneNew = new Scene();
+			if (!scne.getConditionid().equals("")) {
+				long conditionIdL = Long.parseLong(scne.getConditionid());
+				String conditionIdN = String.valueOf(conditionIdL + timeL);
+				scneNew.setConditionid(conditionIdN);
+			} else {
+				scneNew.setConditionid("");
+			}
+			scneNew.setTaskid(taskIdN);
+			scneNew.setConditionname(scne.getConditionname());
+			scneNew.setSceneorder(scne.getSceneorder());
+			scneNew.setScenevalue(scne.getScenevalue());
+			scneNew.setmTTID(scne.getmTTID());
+			scneNew.save();
+		}
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 复制signs Signature
+	 * @author qiaozhili
+	 * @date 2019/3/4 14:45
+	 */
+	public void copySignature(Task task, String taskIdN, long timeL) {
+		List<Signature> signatureList = DataSupport.where("taskid=?", task.getTaskid()).find(Signature.class);
+		for (Signature signature : signatureList) {
+			Signature signstureNew = new Signature();
+			if (!signature.getSignid().equals("")) {
+				long signIdL = Long.parseLong(signature.getSignid());
+				String signIdN = String.valueOf(signIdL + timeL);
+				signstureNew.setSignid(signIdN);
+			} else {
+				signstureNew.setSignid("");
+			}
+			signstureNew.setTaskid(taskIdN);
+			signstureNew.setSignname(signature.getSignname());
+			signstureNew.setSignorder(signature.getSignorder());
+			signstureNew.setTime(signature.getTime());
+			signstureNew.setRemark(signature.getRemark());
+			signstureNew.setSignvalue(signature.getSignvalue());
+			signstureNew.setmTTId(signature.getmTTId());
+			signstureNew.setSignTime(signature.getSignTime());
+			signstureNew.setIsFinish(signature.getIsFinish());
+			signstureNew.setBitmappath(signature.getBitmappath());
+			signstureNew.save();
+		}
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 复制Rows
+	 * @author qiaozhili
+	 * @date 2019/3/4 14:47
+	 */
+	public void copyRows(Task task, String taskIdN, long timeL) {
+		List<Rows> rowsList = DataSupport.where("taskid=?", task.getTaskid()).find(Rows.class);
+		for (Rows rows : rowsList) {
+			Rows rowsNew = new Rows();
+			rowsNew.setTaskid(taskIdN);
+			rowsNew.setRowsid(rows.getRowsid());
+			rowsNew.setRowsnumber(rows.getRowsnumber());
+		}
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 复制Cells
+	 * @author qiaozhili
+	 * @date 2019/3/4 15:24
+	 */
+	public void copyCells(Task task, String taskIdN, long timeL) {
+		List<Cell> cellList = DataSupport.where("taskid=?", task.getTaskid()).find(Cell.class);
+		for (Cell cell : cellList) {
+			Cell cellNew = new Cell();
+			String cellIdNew = "";
+//			if (!cell.getCellid().equals("")) {
+//				long cellIdL = Long.parseLong(cell.getCellid());
+//				String cellIdN = String.valueOf(cellIdL + timeL);
+//				cellNew.setCellid(cellIdN);
+//				cellIdNew = cellIdN;
+//			} else {
+//				cellNew.setCellid("");
+//			}
+			cellNew.setCellid(cell.getCellid());
+			cellNew.setTaskid(taskIdN);
+			cellNew.setRowname(cell.getRowname());
+			cellNew.setHorizontalorder(cell.getHorizontalorder());
+			cellNew.setVerticalorder(cell.getVerticalorder());
+			cellNew.setType(cell.getType());
+			cellNew.setTextvalue(cell.getTextvalue());
+			cellNew.setColumnid(cell.getColumnid());
+			cellNew.setTablesize(cell.getTablesize());
+			cellNew.setRowsid(cell.getRowsid());
+			cellNew.setmTTID(cell.getmTTID());
+			cellNew.setIshook(cell.getIshook());
+			cellNew.setOpvalue(cell.getOpvalue());
+			cellNew.setCelltype(cell.getCelltype());
+			cellNew.save();
+
+			copyOperetion(task, taskIdN, cellIdNew, cell.getCellid());
+			if (!cell.getCellid().equals("")) {
+			} else {
+				Toast.makeText(getActivity(), "数据有误，请检查数据！", Toast.LENGTH_LONG);
+			}
+		}
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 复制Operetion
+	 * @author qiaozhili
+	 * @date 2019/3/4 15:25
+	 */
+	public void copyOperetion(Task task, String taskIdN, String cellIdN, String cellIdOld) {
+		List<Operation> operationList = DataSupport.where("cellid=? and taskid=?", cellIdOld, task.getTaskid()).find(Operation.class);
+		for (Operation operation : operationList) {
+			Operation operationNew = new Operation();
+			operationNew.setTaskid(taskIdN);
+			operationNew.setCellid(cellIdOld);
+			operationNew.setOperationid(cellIdOld);
+			operationNew.setRealcellid(cellIdOld);
+			operationNew.setType(operation.getType());
+			operationNew.setOpvalue(operation.getOpvalue());
+			operationNew.setRemark(operation.getRemark());
+			operationNew.setIsfinished(operation.getIsfinished());
+			operationNew.setTextvalue(operation.getTextvalue());
+			operationNew.setmTTID(operation.getmTTID());
+			operationNew.setOperationtype(operation.getOperationtype());
+			operationNew.setIldd(operation.getIldd());
+			operationNew.setIildd(operation.getIildd());
+			operationNew.setTighten(operation.getTighten());
+			operationNew.setErr(operation.getErr());
+			operationNew.setLastaction(operation.getLastaction());
+			operationNew.setIsmedia(operation.getIsmedia());
+			operationNew.setSketchmap(operation.getSketchmap());
+			operationNew.setTime(operation.getTime());
+			operationNew.save();
+		}
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 复制HTMl
+	 * @author qiaozhili
+	 * @date 2019/3/4 17:49
+	 */
+	public void copyHtml(Task task, String postName, String taskIdN, long timeL) {
+		Document htmlDoc = HtmlHelper.getHtmlDoc(task);
+		String fileAbsPath = Environment.getDataDirectory().getPath() + Config.packagePath
+				+ Config.htmlPath+ "/"+ postName+"/" + taskIdN;
+		boolean bWriteOK = HtmlHelper.writeTaskHtml(fileAbsPath, htmlDoc.toString());
+		if (bWriteOK) {
+			Toast.makeText(getActivity(), taskIdN + ":HTML复制成功", Toast.LENGTH_LONG);
+		} else {
+			Toast.makeText(getActivity(), taskIdN + ":HTML复制失败", Toast.LENGTH_LONG);
+		}
+	}
+
+	/**
+	 * @Description: 获取当前时间毫秒
+	 * @author qiaozhili
+	 * @date 2019/3/4 11:10
+	 * @param
+	 * @return
+	 */
+	public static String getTime(String timeString){
+
+		String timeStamp = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+		Date d;
+		try{
+			d = sdf.parse(timeString);
+			long l = d.getTime();
+			timeStamp = String.valueOf(l);
+		} catch(ParseException e){
+			e.printStackTrace();
+		}
+		return timeStamp;
+	}
+
 	
 }

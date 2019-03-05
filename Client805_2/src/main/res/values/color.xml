@@ -60,7 +60,10 @@
 
 
     <color name="actionbar">#1d8ae7</color>
-    <color name="buttonBg">#97a6d4</color>
+    <color name="buttonBg">#1562c4</color>
+    <color name="buttonBg1">#1d8ae7</color>
+    <color name="status_back">#f9f350</color>
+    <color name="bt_copy">#fa0408</color>
 
 
 </resources>

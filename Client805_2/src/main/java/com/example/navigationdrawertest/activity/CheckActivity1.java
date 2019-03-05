@@ -330,8 +330,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		headMap = DataSupport.where("horizontalorder=? and taskid=? and rowsid=?", "1", task_id+"", String.valueOf(pagetype)).order("verticalorder asc").find(Cell.class);
 		if(headMap.size() > 8){
 			avewdith = 250;
-		}else{
-			avewdith = width/headMap.size();
+		} else if (headMap.size() != 0) {
+			avewdith = width / headMap.size();
+		} else {
+			Toast.makeText(CheckActivity1.this, "数据有误，请检查数据！", Toast.LENGTH_LONG);
 		}
 		cellCount = headMap.size();
 		rowCount = cellList.size()/cellCount;

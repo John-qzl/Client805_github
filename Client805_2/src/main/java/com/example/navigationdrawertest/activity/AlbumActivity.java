@@ -27,6 +27,7 @@ import com.example.navigationdrawertest.adapter.AlbumAdapter;
 import com.example.navigationdrawertest.adapter.PictureListAdapter;
 import com.example.navigationdrawertest.camera.PicPathEvent;
 import com.example.navigationdrawertest.camera.PickOrTakeImageActivity;
+import com.example.navigationdrawertest.camera.PickOrTakeVideoActivity;
 import com.example.navigationdrawertest.utils.FileOperation;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +54,7 @@ public class AlbumActivity extends BaseActivity {
     private final static int MAXIMGNUMBER = 10;
     private PictureListAdapter adapter;
     private RecyclerView mRecyclerView;
-    private Button mAddPhoto;
+    private Button mAddPhoto, mAddVideo;
     private ImageView mBack;
     private String mCheck = "";
 
@@ -90,10 +91,13 @@ public class AlbumActivity extends BaseActivity {
             }
         });
         mAddPhoto = (Button) findViewById(R.id.bt_add_photo);
+        mAddVideo = (Button) findViewById(R.id.bt_add_video);
         if (mCheck.equals("check")) {
             mAddPhoto.setVisibility(View.VISIBLE);
+            mAddVideo.setVisibility(View.VISIBLE);
         } else {
             mAddPhoto.setVisibility(View.INVISIBLE);
+            mAddVideo.setVisibility(View.INVISIBLE);
         }
         mAddPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +109,21 @@ public class AlbumActivity extends BaseActivity {
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(AlbumActivity.this, PickOrTakeImageActivity.class);
+                    intent.putExtra("pic_max", 10);
+                    startActivity(intent);
+                }
+            }
+        });
+        mAddVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mPhotos != null) {
+                    int surplus_pics = MAXIMGNUMBER - mPhotos.size() + 1;//mPhotos没有变
+                    Intent intent = new Intent(AlbumActivity.this, PickOrTakeVideoActivity.class);
+                    intent.putExtra("pic_max", surplus_pics);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(AlbumActivity.this, PickOrTakeVideoActivity.class);
                     intent.putExtra("pic_max", 10);
                     startActivity(intent);
                 }

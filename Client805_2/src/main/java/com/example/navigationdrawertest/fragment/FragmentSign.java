@@ -6,6 +6,7 @@ import java.util.List;
 import org.litepal.crud.DataSupport;
 
 import com.example.navigationdrawertest.R;
+import com.example.navigationdrawertest.activity.MainActivity1;
 import com.example.navigationdrawertest.activity.SignActivity1;
 import com.example.navigationdrawertest.adapter.Event.LocationEvent;
 import com.example.navigationdrawertest.application.OrientApplication;
@@ -31,6 +32,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -293,6 +295,8 @@ public class FragmentSign extends Fragment {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 			int layer = nodeList.get(position).getLayer();
+			Long taskid = nodeList.get(position).getId();
+			final List<Task> task = DataSupport.where("taskid = ?", String.valueOf(taskid)).find(Task.class);
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
@@ -346,6 +350,18 @@ public class FragmentSign extends Fragment {
 								alertDialog.show(); 
 						}
 					});
+					holder.sign_back = (Button) convertView.findViewById(R.id.fragmentsign_back_button);
+					if (task.size() > 0) {
+						if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
+							holder.sign_back.setVisibility(View.VISIBLE);
+						}
+						holder.sign_back.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								warnInfo(task.get(0));
+							}
+						});
+					}
 				}
 				convertView.setTag(holder);
 			}
@@ -375,6 +391,18 @@ public class FragmentSign extends Fragment {
 //							CheckActivity.actionStart(getActivity(), clicktaskid); 
 						}
 					});
+					holder.sign_back = (Button) convertView.findViewById(R.id.fragmentsign_back_button);
+					if (task.size() > 0) {
+						if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
+							holder.sign_back.setVisibility(View.VISIBLE);
+						}
+						holder.sign_back.setOnClickListener(new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								warnInfo(task.get(0));
+							}
+						});
+					}
 
 				}
 				convertView.setTag(holder);
@@ -398,6 +426,7 @@ public class FragmentSign extends Fragment {
 			//查看，检查，签署按钮
 			public Button sign_button;
 			public Button sign_delete;
+			public Button sign_back;
 		}
 	}
 	
@@ -406,5 +435,36 @@ public class FragmentSign extends Fragment {
 			loadData();
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	public void setLocation(Task task) {
+		task.setLocation(1);
+		task.update(task.getId());
+		adapter.notifyDataSetChanged();
+//		getActivity().finish();
+		Intent intent1 = new Intent(getActivity(), MainActivity1.class);
+		startActivity(intent1);
+	}
+
+	public void warnInfo(final Task task) {
+		String file = "warn.txt";
+		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+		dialog.setIcon(R.drawable.logo_title).setTitle("是否进行状态回退！");
+		dialog.setMessage("此操作只允许管理员执行，请谨慎操作！");
+		dialog.setCancelable(false);
+		dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				setLocation(task);
+				dialog.dismiss();
+			}
+		});
+		dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
 }

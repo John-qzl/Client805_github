@@ -39,7 +39,7 @@
             android:layout_alignParentLeft="false"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/fragmentupload_look_button"
-            android:background="@color/red_btn_bg_color"
+            android:background="@drawable/status_back_shape"
             android:focusable="false"
             android:text="回退"
             android:textColor="@color/White"

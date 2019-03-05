@@ -32,15 +32,30 @@
             android:visibility="visible"/>
 
         <Button
+            android:id="@+id/bt_add_video"
+            android:layout_width="75dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bt_add_photo"
+            android:layout_marginRight="15dp"
+            android:text="添加视频"
+            android:textSize="15dp"
+            android:textColor="@color/White"
+            android:background="@drawable/btn_selectimg"
+            android:visibility="visible"/>
+
+        <Button
             android:id="@+id/bt_add_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="75dp"
+            android:layout_height="27dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="添加图片"
+            android:textSize="15dp"
             android:textColor="@color/White"
-            android:visibility="gone"/>
+            android:background="@drawable/btn_selectimg"
+            android:visibility="visible"/>
 
     </RelativeLayout>
 

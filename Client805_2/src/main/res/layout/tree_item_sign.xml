@@ -45,6 +45,20 @@
             android:textColor="@color/White"
             android:focusable="false"
             android:textSize="20sp" /> -->
+        <Button
+            android:id="@+id/fragmentsign_back_button"
+            android:layout_width="85dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentLeft="false"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/fragmentsign_sign_button"
+            android:background="@drawable/status_back_shape"
+            android:focusable="false"
+            android:text="回退"
+            android:textColor="@color/White"
+            android:visibility="gone"/>
         
         <Button  
             android:id="@+id/fragmentsign_sign_button"  

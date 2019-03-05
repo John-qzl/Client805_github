@@ -16,18 +16,19 @@ public class Task extends DataSupport{
 	private String taskid;				//每个检查表的ID
 	private String taskname;			//每个检查表的名称
 	private String remark;
-	private String path;
+	private String path;				//所属实验节点名称
+	private String pathId;				//所属实验节点ID
 	private String version;
 	private int location;				//1,2,3,4（位置）
 	private String taskpic;				//表格照片（暂时不提示），就是在表格实例中的照片，随着表格实例而来的
 	private String tablesize;			//是否拆分表格
 
 
-	private String rwid;
-	private String rwname;
-	private String postname;				//所属试验队名称
-	private String postinstanceid;		//所属试验队ID
-	private String nodeLeaderId; 		//所属节点负责人ID
+	private String rwid;					//发次ID
+	private String rwname;					//发次名称
+	private String postname;				//所属工作队队名称
+	private String postinstanceid;			//所属工作队ID
+	private String nodeLeaderId; 			//所属节点负责人ID
 //	private String userid;				//用户id
 //	private String username;			//用户名
 	private Post post;
@@ -49,6 +50,15 @@ public class Task extends DataSupport{
 	private List<Cell> cells;
 
 	private Map<String, String> rownummap;
+	private int IsBrother;		//是否为复制的表单，1为复制
+
+	public int getIsBrother() {
+		return IsBrother;
+	}
+
+	public void setIsBrother(int isBrother) {
+		IsBrother = isBrother;
+	}
 
 	public Map<String, String> getRownummap() {
 		return rownummap;
@@ -189,6 +199,15 @@ public class Task extends DataSupport{
 	public void setPath(String path) {
 		this.path = path;
 	}
+
+	public String getPathId() {
+		return pathId;
+	}
+
+	public void setPathId(String pathId) {
+		this.pathId = pathId;
+	}
+
 	public String getVersion() {
 		return version;
 	}

@@ -9,7 +9,7 @@ public class Cell extends DataSupport{
 	private int id;
 	private String cellid;
 	private String rowname;		
-	private String horizontalorder;			//水平order（row中的id）
+	private String horizontalorder;			//水平order（row中的id），行的ID
 	private String verticalorder;				//垂直order（cell中的order）
 	private String type;							//是否是检查项（true/false）
 	private String textvalue;					//显示内容

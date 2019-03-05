@@ -10,12 +10,12 @@ import org.litepal.crud.DataSupport;
  */
 public class RwRelation extends DataSupport{
 	private int id;
-	private String rwid;
-	private String rwname;
+	private String rwid;			//发次ID
+	private String rwname;			//发次名称
 	private String userid;
 	private String username;
-	private String productid; 		//产品ID
-	private String nodeId;          //节点ID
+	private String productid; 		//型号ID，也就是父节点ID
+	private String nodeId;          //节点ID，也就是子节点ID
 
 	public String getNodeId() {
 		return nodeId;

@@ -286,7 +286,7 @@ public class DocActivity extends BaseActivity{
 			viewholder.tv_width.setText("");
 			int[] leftIds = {R.drawable.icon_plusminus_add_black, R.drawable.icon_plusminus_reduce_black, R.drawable.icon_head_default};
 			int[] fourType = {R.drawable.iconfont_doc, R.drawable.iconfont_dwg, R.drawable.iconfont_mp3, R.drawable.iconfont_txt, R.drawable.iconfont_jpg};
-			if(layer == 4){
+			if(layer == 5){
 				viewholder.delete.setVisibility(View.VISIBLE);
 				String name = nodeList.get(position).getName();
 				if(name.contains(".doc") || name.contains(".DOC") || name.contains(".docx") || name.contains(".DOCX") || name.contains(".xls") || name.contains(".XLS")
