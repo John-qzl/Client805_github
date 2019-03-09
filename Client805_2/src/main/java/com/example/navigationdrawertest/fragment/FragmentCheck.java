@@ -557,10 +557,16 @@ public class FragmentCheck extends Fragment {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
 		String timeString = formatter.format(curDate);
-		long timeL = Long.parseLong(getTime(timeString));
+		long timeL = 0;
 		String taskIdNew = "";
+		String currentSecond = getTime(timeString);
+		long taskIdL = Long.parseLong(task.getTaskid());
+		long PathIdL = Long.parseLong(task.getPathId());
+		if (task.getTaskid().length() > currentSecond.length()) {
+			int size = task.getTaskid().length() - currentSecond.length();
+			timeL = (long) (Long.parseLong(currentSecond) * Math.pow(10,size));
+		}
 		if (!task.getTaskid().equals("")) {
-			long taskIdL = Long.parseLong(task.getTaskid());
 			String taskIdN = String.valueOf(taskIdL + timeL);
 			taskNew.setTaskid(taskIdN);
 			taskIdNew = taskIdN;
@@ -568,7 +574,6 @@ public class FragmentCheck extends Fragment {
 			taskNew.setTaskid("");
 		}
 		if (!task.getPathId().equals("")) {
-			long PathIdL = Long.parseLong(task.getPathId());
 			String pathIdN = String.valueOf(PathIdL + timeL);
 			taskNew.setPathId(pathIdN);
 		} else {
@@ -599,6 +604,7 @@ public class FragmentCheck extends Fragment {
 		taskNew.setCells(task.getCells());
 		taskNew.setRownummap(task.getRownummap());
 		taskNew.setIsBrother(1);
+		taskNew.setBroTaskId(task.getTaskid());
 		taskNew.save();
 		if (!taskIdNew.equals("")) {
 			copyCondition(task, taskIdNew, timeL);
@@ -795,7 +801,7 @@ public class FragmentCheck extends Fragment {
 	public static String getTime(String timeString){
 
 		String timeStamp = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss");
 		Date d;
 		try{
 			d = sdf.parse(timeString);

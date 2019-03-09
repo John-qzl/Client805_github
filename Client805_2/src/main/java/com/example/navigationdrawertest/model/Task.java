@@ -51,6 +51,15 @@ public class Task extends DataSupport{
 
 	private Map<String, String> rownummap;
 	private int IsBrother;		//是否为复制的表单，1为复制
+	private String broTaskId;			//复制于哪张表的ID
+
+	public String getBroTaskId() {
+		return broTaskId;
+	}
+
+	public void setBroTaskId(String broTaskId) {
+		this.broTaskId = broTaskId;
+	}
 
 	public int getIsBrother() {
 		return IsBrother;

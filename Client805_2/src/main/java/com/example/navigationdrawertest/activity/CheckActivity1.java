@@ -2,7 +2,9 @@ package com.example.navigationdrawertest.activity;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.nodes.Document;
@@ -10,13 +12,14 @@ import org.litepal.crud.DataSupport;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -32,6 +35,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -40,6 +45,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TableLayout;
@@ -54,7 +61,6 @@ import com.example.navigationdrawertest.CustomUI.ObservableScrollView;
 import com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.adapter.ConditionAdapter1;
-import com.example.navigationdrawertest.adapter.Event;
 import com.example.navigationdrawertest.adapter.Event.LocationEvent;
 import com.example.navigationdrawertest.application.OrientApplication;
 import com.example.navigationdrawertest.camera1.CameraActivity;
@@ -111,11 +117,16 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 	private LinearLayout mSumit;
 	private RelativeLayout mBottom;
-	private Button mProview, mNext;
+	private Button mProview, mNext, mRefresh, mConfirmBtn, mCancelBtn;
 	private ImageView mClose;
 	private int rowsnum;
 	private int pagetype;
 
+	private ListView mTitlels;
+	private QuickCollectAdapter quickCollectAdapter = null;
+	private List<Task> quickCollectTaskList = new ArrayList<>();
+	private List<Map<String, String>> quickCollectMapList = new ArrayList<Map<String, String>>();
+	private PopupWindow popupWindow;
 
 	public static void actionStart(Context context, long taskid, Handler handler, String location) {
 		Intent intent = new Intent(context, CheckActivity1.class);
@@ -136,6 +147,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //					initParam();
 //					initContentUI();
 					break;
+				case 3:
+
 				default:
 					break;
 			}
@@ -279,6 +292,17 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 			}
 		});
+		mRefresh = (Button) findViewById(R.id.bt_check_refresh);
+		Drawable drawable=getResources().getDrawable(R.drawable.ic_action_refresh);
+		drawable.setBounds(0,0,40,40);
+		mRefresh.setCompoundDrawables(drawable,null,null,null);
+		mRefresh.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CheckActivity1.actionStart(CheckActivity1.this, task_id, mHandler, "3");
+				finish();
+			}
+		});
 
 	}
 	
@@ -339,8 +363,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		rowCount = cellList.size()/cellCount;
 		headMap.clear();
 		for(int i=1; i<=cellCount; i++){
-			Cell cell = DataSupport.where("horizontalorder=? and taskid=? and verticalorder=? and rowsid=?", "1", task_id+"", i+"", String.valueOf(pagetype)).find(Cell.class).get(0);
-			headMap.add(cell);
+			List<Cell> cellList = DataSupport.where("horizontalorder=? and taskid=? and verticalorder=? and rowsid=?", "1", task_id+"", i+"", String.valueOf(pagetype)).find(Cell.class);
+			if (cellList.size() > 0) {
+				headMap.add(cellList.get(0));
+			}
 		}
 	}
 	
@@ -430,7 +456,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					//初始化EditText
 					final Operation operation2 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String str = CommonTools.null2String(operation2.getOpvalue());
-					EditText edittext2 = new EditText(context);
+					final EditText edittext2 = new EditText(context);
 					edittext2.setTextSize(16);
 					edittext2.setText(str);
 					edittext2.addTextChangedListener(new TextWatcher() {
@@ -456,6 +482,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    	            HtmlData data = new HtmlData(cell, operation2.getRealcellid());
 		    	            htmlList_text.add(data);
 //		    	            HtmlHelper.changeTextValue(htmlDoc, cell, operation2.getRealcellid());
+						}
+					});
+					edittext2.setOnLongClickListener(new View.OnLongClickListener() {
+						@Override
+						public boolean onLongClick(View v) {
+							getQuickSellectParm(currentTask, cell, operation2, edittext2);
+							return false;
 						}
 					});
 					linear2.addView(edittext2, para2_1);
@@ -690,6 +723,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    	            htmlList_text.add(data);
 						}
 					});
+					edit5.setOnLongClickListener(new View.OnLongClickListener() {
+						@Override
+						public boolean onLongClick(View v) {
+							getQuickSellectParm(currentTask, cell, operation5, edit5);
+							return false;
+						}
+					});
 					linear5.addView(image5, para5_2);
 					ImageView image5_1 = new ImageView(context);
 					image5_1.setBackgroundResource(R.drawable.blacktiao);
@@ -783,6 +823,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation6_2.getRealcellid());
 		    	            HtmlData data = new HtmlData(cell, operation6_2.getRealcellid());
 		    	            htmlList_text.add(data);
+						}
+					});
+					edit6.setOnLongClickListener(new View.OnLongClickListener() {
+						@Override
+						public boolean onLongClick(View v) {
+							getQuickSellectParm(currentTask, cell, operation6_2, edit6);
+							return false;
 						}
 					});
 					ImageView image6_1 = new ImageView(context);
@@ -1811,4 +1858,177 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		super.onDestroy();
 		EventBus.getDefault().unregister(this);
 	}
+
+	private void quickCollectPopu(final Cell cell, final Operation operation, final EditText editText) {
+		final Dialog dialog1 = new Dialog(this);
+
+		View contentView1 = LayoutInflater.from(this).inflate(R.layout.quick_collect_popu, null);
+		dialog1.setContentView(contentView1);
+		dialog1.setTitle("快速采集数据");
+		dialog1.setCanceledOnTouchOutside(false);
+
+		mTitlels = (ListView) contentView1.findViewById(R.id.title_ls);
+		mConfirmBtn = (Button) contentView1.findViewById(R.id.confirm_btn);
+		mCancelBtn = (Button) contentView1.findViewById(R.id.cancel_btn);
+
+		quickCollectAdapter = new QuickCollectAdapter();
+		mTitlels.setAdapter(quickCollectAdapter);
+		mConfirmBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (int i = 0; i < quickCollectMapList.size(); i++) {
+					//保存快速采集数据
+					saveQuickCollectData(cell,operation,quickCollectMapList.get(i));
+				}
+				dialog1.dismiss();
+				setInputText(editText, quickCollectMapList.get(0).get(quickCollectTaskList.get(0).getPath()));
+				quickCollectTaskList.clear();
+				quickCollectMapList.clear();
+			}
+		});
+		mCancelBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog1.dismiss();
+				quickCollectTaskList.clear();
+				quickCollectMapList.clear();
+			}
+		});
+		dialog1.show();
+	}
+
+	private class QuickCollectAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			return quickCollectTaskList.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return quickCollectTaskList.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			final QuickCollectAdapter.ViewHolder viewHolder;
+			if (convertView == null) {
+				convertView = LayoutInflater.from(context).inflate(R.layout.item_quick_collect, null);
+				viewHolder = new QuickCollectAdapter.ViewHolder();
+				final Map<String, String> m = new HashMap<String, String>();
+				final String[] string = {""};
+				viewHolder.title = (TextView) convertView.findViewById(R.id.tv_title);
+				viewHolder.content = (EditText) convertView.findViewById(R.id.ed_content);
+				viewHolder.title.setText(quickCollectTaskList.get(position).getPath() + "：");
+				viewHolder.content.addTextChangedListener(new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+					}
+
+					@Override
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+					}
+
+					@Override
+					public void afterTextChanged(Editable s) {
+						string[0] = viewHolder.content.getText().toString();
+						m.put(quickCollectTaskList.get(position).getPath(), string[0]);
+						for (int i = 0; i < quickCollectMapList.size(); i++) {
+							if (quickCollectMapList.get(i).containsKey(quickCollectTaskList.get(position))) {
+								quickCollectMapList.remove(i);
+							}
+						}
+						quickCollectMapList.add(m);
+						if (position == 0) {
+//							setText();
+						}
+					}
+				});
+
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (QuickCollectAdapter.ViewHolder) convertView.getTag();
+			}
+			return convertView;
+		}
+
+
+		class ViewHolder {
+			public TextView title;
+			public EditText content;
+		}
+
+	}
+
+	/**
+	 * @Description: 获取支撑快速采集操作所需数据
+	 * @author qiaozhili
+	 * @date 2019/3/7 15:40
+	 * @param
+	 * @return
+	 */
+	private void getQuickSellectParm(Task task, Cell cell, Operation operation, EditText editText) {
+		if (task.getIsBrother() != 1) {
+
+			quickCollectTaskList.add(task);
+			List<Task> taskList = DataSupport.where("broTaskId=?", task.getTaskid() + "").find(Task.class);
+			for (Task task1 : taskList) {
+				quickCollectTaskList.add(task1);
+			}
+			//调起弹窗
+			quickCollectPopu(cell, operation, editText);
+		} else {
+			Toast.makeText(context, "此表为复制表，不能进行快速采集！", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 保存快速检查采集数据
+	 * @author qiaozhili
+	 * @date 2019/3/7 17:30
+	 */
+	private void saveQuickCollectData(Cell cell1, Operation operation, Map<String, String> map) {
+		String value = "";
+		String taskId = "";
+		for (Task task : quickCollectTaskList) {
+			String key1 = task.getPath();
+			if (map.containsKey(key1)) {
+				value = map.get(key1);
+				taskId = task.getTaskid();
+			}
+		}
+		List<Cell> cellList = DataSupport.where("taskid=? and cellid=?", taskId, cell1.getCellid()).find(Cell.class);
+		List<Operation> operationList = DataSupport.where("taskid=? and cellid=?", taskId, cell1.getCellid()).find(Operation.class);
+		if (cellList.size() > 0) {
+			cellList.get(0).setOpvalue(value);
+			cellList.get(0).update(cellList.get(0).getId());
+			if (operationList.size() > 0) {
+				operationList.get(0).setOpvalue(value);
+				operationList.get(0).update(operationList.get(0).getId());
+				HtmlData data = new HtmlData(cellList.get(0), operationList.get(0).getRealcellid());
+				htmlList_text.add(data);
+			} else {
+				Toast.makeText(context, "operation数据有问题", Toast.LENGTH_SHORT).show();
+			}
+
+		} else {
+			Toast.makeText(context, "cell数据有问题", Toast.LENGTH_SHORT).show();
+		}
+
+
+	}
+
+	private void setInputText(EditText editText, String str) {
+		editText.setText(str);
+	}
+
 }

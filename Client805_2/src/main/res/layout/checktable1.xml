@@ -28,6 +28,18 @@
             android:textColor="@color/White"
             android:textSize="@dimen/titleI"/>
 
+        <Button
+            android:id="@+id/bt_check_refresh"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/check_close"
+            android:layout_marginRight="10dp"
+            android:text="刷新"
+            android:textSize="15dp"
+            android:textColor="@color/White"
+            android:background="@drawable/btn_selectimg"/>
+
         <ImageView
             android:id="@+id/check_close"
             android:layout_width="70dp"
@@ -164,7 +176,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
-                        android:text="注意！！！:点击该按钮表示该表格的检查工作已经完成，并且表格将会进入待签署状态，不能再次检查。"
+                        android:text="！！！注意:点击该按钮表示该表单的检查工作已经完成，
+                        并且表单将会进入待签署状态，不能再次检查。（回退表单除外）"
                         android:textColor="@color/red_btn_bg_color"
                         android:textSize="@dimen/content" />
 
