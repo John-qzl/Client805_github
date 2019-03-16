@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -93,6 +94,7 @@ public class LoginActivity extends BaseActivity{
 	private ImageButton shezhiBtn, deletedataBtn;
 	private Context context;
 	private AlertDialog.Builder dialog;
+	private TextView mVersion;
 	
 	private Handler mHandler = new Handler() {
         @Override
@@ -332,7 +334,9 @@ public class LoginActivity extends BaseActivity{
 		username.setText(SharedPrefsUtil.getValue(this, "username", ""));
 		password = (EditText) findViewById(R.id.password);
 		shezhiBtn = (ImageButton) findViewById(R.id.shezhi);
+		mVersion = (TextView) findViewById(R.id.tv_version);
 		context = this;
+		mVersion.setText("版本号：v"+packageName(context));
 		if (OrientApplication.getApplication().getWarn() != 1) {
 			warnInfo();
 		}
@@ -664,5 +668,14 @@ public class LoginActivity extends BaseActivity{
 		return result;
 	}
 
-
+	public static String packageName(Context context) {
+		PackageManager manager = context.getPackageManager();
+		String name = null;
+		try {
+			PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+			name = info.versionName;
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		} return name;
+	}
 }

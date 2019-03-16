@@ -1777,6 +1777,55 @@ public class SyncWorkThread extends Thread {
 		return true;
 	}
 
+	/**
+	 * @param
+	 * @return
+	 * @Description: 上传复制的节点信息
+	 * @author qiaozhili
+	 * @date 2019/3/9 11:29
+	 */
+
+	private boolean upLoadPackageInfo(Task task) {
+		List<Task> taskList = DataSupport.where("taskid=?", task.getBroTaskId()).find(Task.class);
+		String broPathId = "";
+		if (taskList.size() >= 0) {
+			broPathId = taskList.get(0).getPathId();
+		}
+		try {
+			HttpClient client = HttpClientHelper.getOrientHttpClient();
+			HttpPost postmethod = new HttpPost(HttpClientHelper.getURL());
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
+			nameValuePairs.add(new BasicNameValuePair("operationType", "uploadpackageinfo"));
+			nameValuePairs.add(new BasicNameValuePair("path", task.getPath()));
+			nameValuePairs.add(new BasicNameValuePair("pathId", task.getPathId()));
+			nameValuePairs.add(new BasicNameValuePair("broPathId", broPathId));
+			postmethod.setEntity(new UrlEncodedFormEntity(nameValuePairs, "utf-8"));
+			postmethod.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+			HttpResponse response;
+			errorMessage = "上传:\"" + task.getTaskname() + "\"的html和xml文件出错！（网络有误）";
+
+			response = client.execute(postmethod);
+			int code = response.getStatusLine().getStatusCode();
+			if (code != 200) {
+                errorMessage = "上传:\"" + task.getTaskname() + "\"的html和xml文件出错！（" + code + "错误）";
+                return false; // 错误
+            }
+
+			String uploadResponseContent = EntityUtils.toString(response.getEntity(), "utf-8");
+			if(uploadResponseContent.equals("true")){
+                task.setLocation(4);
+                task.save();
+                Log.i("location", task.getTaskname() + "上传成功！");
+            }else{
+                updateInformation("上传表格失败", "表格ID为："+task.getTaskid()+"的表格上传失败！");
+            }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
 	// 管理员操作，上传已完成表单实例及其相关的检查项照片数据
 	private boolean uploadDoneTable() {
 		String userid = OrientApplication.getApplication().loginUser
@@ -1786,8 +1835,17 @@ public class SyncWorkThread extends Thread {
 		try {
 			// 确定表格实例三要素：人员-任务-位置
 			List<Task> taskList = DataSupport.where("location = ?", location).find(Task.class);
+			List<String> pathList = new ArrayList<>();
 			for (int i = 0; i < taskList.size(); i++) {
 				Task task = taskList.get(i);
+
+				//qzl
+				if (task.getIsBrother() == 1 && !pathList.contains(task.getPath())) {
+					pathList.add(task.getPath());
+					//上传pad端复制的节点信息
+					upLoadPackageInfo(task);
+				}
+
 				HttpClient client = HttpClientHelper.getOrientHttpClient();
 				HttpPost postmethod = new HttpPost(HttpClientHelper.getURL());
 				// 上传三步骤
@@ -1853,8 +1911,6 @@ public class SyncWorkThread extends Thread {
 							+ "\"的html和xml文件出错！（" + code + "错误）";
 					return false; // 错误
 				}
-
-
 				String uploadResponseContent = EntityUtils.toString(response.getEntity(), "utf-8");
 				if(uploadResponseContent.equals("true")){
 					task.setLocation(4);
@@ -1865,9 +1921,8 @@ public class SyncWorkThread extends Thread {
 							.getTaskid()+"的表格上传失败！");
 				}
 				OrientApplication.getApplication().setFlag(0);
-
-
 			}
+			pathList.clear();
 		} catch (UnsupportedEncodingException e) {
 
 			e.printStackTrace();
@@ -2524,9 +2579,9 @@ public class SyncWorkThread extends Thread {
 	}
 
 	/**
-	 * 下载签署图片
+	 * 下载签署图片  下载签署图片需要userId和taskId
 	 * 
-	 * @param 下载签署图片需要userId和taskId
+	 * @param
 	 * @param root
 	 * @return
 	 */
@@ -2640,10 +2695,10 @@ public class SyncWorkThread extends Thread {
 	}
 
 	/**
-	 * 下载签署图片
+	 * 下载签署图片  下载签署图片需要userId和taskId
 	 *
-	 * @param 下载签署图片需要userId和taskId
-	 * @param root
+	 * @param
+	 * @param
 	 * @return
 	 */
 	public String downloadSignPhoto1(Task task, String signId) {

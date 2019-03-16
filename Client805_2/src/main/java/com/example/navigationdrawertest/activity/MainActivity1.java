@@ -273,8 +273,12 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
 //    }
 
     protected void initUserInformation(){
-        User user = DataSupport.where("userid = ?", OrientApplication.getApplication().loginUser.getUserid()).find(User.class).get(0);
-        OrientApplication.getApplication().loginUser = user;
+        List<User> userList = DataSupport.where("userid = ?", OrientApplication.getApplication().loginUser.getUserid()).find(User.class);
+        if (userList.size() >= 0) {
+            OrientApplication.getApplication().loginUser = userList.get(0);
+        } else {
+            Toast.makeText(this, "用户信息异常", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // 根据消息更新界面
