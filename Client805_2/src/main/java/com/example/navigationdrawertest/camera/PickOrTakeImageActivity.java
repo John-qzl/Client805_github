@@ -638,23 +638,23 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             //第一个要显示拍摄照片图片
-            if (currentShowPosition == -1 && i == 0) {
-                view = new ImageView(PickOrTakeImageActivity.this);
-                view.setBackgroundResource(R.drawable.take_pic);
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (MyUtils.checkTakePhotoPermissions(PickOrTakeImageActivity.this, PickOrTakeImageActivity.this)) {
-                            takePic();
-                        }
-                    }
-                });
-                view.setLayoutParams(new GridView.LayoutParams(perWidth, perWidth));
-                return view;
-            }
+//            if (currentShowPosition == -1 && i == 0) {
+//                view = new ImageView(PickOrTakeImageActivity.this);
+//                view.setBackgroundResource(R.drawable.take_pic);
+//                view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (MyUtils.checkTakePhotoPermissions(PickOrTakeImageActivity.this, PickOrTakeImageActivity.this)) {
+//                            takePic();
+//                        }
+//                    }
+//                });
+//                view.setLayoutParams(new GridView.LayoutParams(perWidth, perWidth));
+//                return view;
+//            }
             //在此处直接进行处理最好，能够省去其他部分的处理，其他部分直接可以使用原来的数据结构
-            if (currentShowPosition == -1)
-                i--;
+//            if (currentShowPosition == -1)
+//                i--;
             //其他部分的处理
             final String path = getImageDirectoryModelUrlFromMapById(i);
             lastPicTime = getImageDirectoryModelDateFromMapById(i);

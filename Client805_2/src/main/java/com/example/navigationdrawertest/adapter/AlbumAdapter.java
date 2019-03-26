@@ -17,6 +17,8 @@ import java.util.List;
 
 import com.bumptech.glide.Glide;
 import com.example.navigationdrawertest.R;
+import com.example.navigationdrawertest.activity.AlbumActivity;
+import com.example.navigationdrawertest.camera.MyUtils;
 import com.example.navigationdrawertest.utils.Config;
 
 /**
@@ -74,6 +76,17 @@ public class AlbumAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
+        if (i == 0) {
+            view = new ImageView(mContext);
+            view.setBackgroundResource(R.drawable.take_pic);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    takePic();
+                }
+            });
+            return view;
+        }
         if (view == null) {
             view = mLayoutInflater.inflate(R.layout.list_item_photo, viewGroup, false);
             holder = new ViewHolder(view);

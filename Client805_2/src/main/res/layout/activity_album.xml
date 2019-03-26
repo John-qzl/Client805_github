@@ -32,6 +32,19 @@
             android:visibility="visible"/>
 
         <Button
+            android:id="@+id/bt_takepic"
+            android:layout_width="40dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bt_add_video"
+            android:layout_marginRight="15dp"
+            android:text="拍照"
+            android:textSize="15dp"
+            android:textColor="@color/White"
+            android:background="@drawable/btn_selectimg"
+            android:visibility="visible"/>
+
+        <Button
             android:id="@+id/bt_add_video"
             android:layout_width="75dp"
             android:layout_height="27dp"

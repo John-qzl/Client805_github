@@ -32,6 +32,24 @@ public class Operation extends DataSupport{
 	private Cell cell;
 	private String taskid;				//表格外键
 	private String time;
+	private Long timeL;				//表单复制时的时间戳
+	private String cellidold;
+
+	public String getCellidold() {
+		return cellidold;
+	}
+
+	public void setCellidold(String cellidold) {
+		this.cellidold = cellidold;
+	}
+
+	public Long getTimeL() {
+		return timeL;
+	}
+
+	public void setTimeL(Long timeL) {
+		this.timeL = timeL;
+	}
 	
 	public static String TAG_Operation = "operation";
 	public static String Atti_Type = "type";

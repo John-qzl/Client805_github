@@ -28,19 +28,25 @@ public class FileOperation {
 	/**
 	 * 搜索目录，扩展名，是否进入子文件夹
 	 * @param path
-	 * @param Extension
+	 * @param jpg
 	 * @param isIterative
 	 * @return
 	 */
-	public static ArrayList<String> getAlbumByPath(String path, String Extension){
+	public static ArrayList<String> getAlbumByPath(String path, String jpg, String png){
 		ArrayList<String> lstFile =new ArrayList<String>(); 				//结果 List
-		File[] files = new File(path).listFiles();
+//		File[] files = new File(path).listFiles();
+		File file1 = new File(path);
+		File[] files = file1.listFiles();
+		if (!file1.exists()) {
+			file1.mkdirs();
+		}
 		if(files == null)
-			return null;
+			return lstFile;
 		for(int i=0; i<files.length; i++){
 			File f = files[i];
 			if(f.isFile()){
-				if(f.getPath().substring(f.getPath().length() - Extension.length()).equals(Extension)){
+				String pictureType = f.getPath().substring(f.getPath().length() - jpg.length());
+				if(pictureType.equals(jpg) || pictureType.equals(png)){
 					lstFile.add(f.getPath());
 				}
 			}

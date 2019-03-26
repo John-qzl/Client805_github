@@ -1693,48 +1693,54 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				+ File.separator
 				+ CommonTools.null2String(operation.getOperationid()) 
 				+ File.separator;
-		View view = LayoutInflater.from(CheckActivity1.this).inflate(R.layout.dialog_take_photo, null);
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(CheckActivity1.this)
-                .setIcon(R.drawable.logo_title)
-                .setTitle("请选择")
-                .setView(view);
-        final AlertDialog dialog = builder1.create();
-        dialog.show();
-        if (dialog.isShowing()) {
-            dialog.setCanceledOnTouchOutside(false);
-        }
-        Button btn_take_photo = (Button) view.findViewById(R.id.btn_take_photo);
-        Button btn_look_over = (Button) view.findViewById(R.id.btn_look_over_album);
-        Button btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.cancel();
-            }
-        });
-        btn_take_photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            	HtmlHelper.changePhotoValue(htmlDoc, operation);
-//				PhotoUtils.transferCamera(CheckActivity1.this, path);
-				Intent intent2 = new Intent();
-				intent2.setClass(CheckActivity1.this, CameraActivity.class);
-				intent2.putExtra("path", path);
-				startActivity(intent2);
-				dialog.dismiss();
-            }
-        });
-        btn_look_over.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.cancel();
-                Intent intent = new Intent(CheckActivity1.this, AlbumActivity.class);
-                intent.putExtra("path", path);
-                intent.putExtra("checkType", "check");
-                startActivity(intent);
-				dialog.dismiss();
-            }
-        });
+		//取消拍照选择弹框，直接进入相册
+		Intent intent = new Intent(CheckActivity1.this, AlbumActivity.class);
+		intent.putExtra("path", path);
+		intent.putExtra("checkType", "check");
+		startActivity(intent);
+//
+//		View view = LayoutInflater.from(CheckActivity1.this).inflate(R.layout.dialog_take_photo, null);
+//        AlertDialog.Builder builder1 = new AlertDialog.Builder(CheckActivity1.this)
+//                .setIcon(R.drawable.logo_title)
+//                .setTitle("请选择")
+//                .setView(view);
+//        final AlertDialog dialog = builder1.create();
+//        dialog.show();
+//        if (dialog.isShowing()) {
+//            dialog.setCanceledOnTouchOutside(false);
+//        }
+//        Button btn_take_photo = (Button) view.findViewById(R.id.btn_take_photo);
+//        Button btn_look_over = (Button) view.findViewById(R.id.btn_look_over_album);
+//        Button btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
+//        btn_cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.cancel();
+//            }
+//        });
+//        btn_take_photo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            	HtmlHelper.changePhotoValue(htmlDoc, operation);
+////				PhotoUtils.transferCamera(CheckActivity1.this, path);
+//				Intent intent2 = new Intent();
+//				intent2.setClass(CheckActivity1.this, CameraActivity.class);
+//				intent2.putExtra("path", path);
+//				startActivity(intent2);
+//				dialog.dismiss();
+//            }
+//        });
+//        btn_look_over.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.cancel();
+//                Intent intent = new Intent(CheckActivity1.this, AlbumActivity.class);
+//                intent.putExtra("path", path);
+//                intent.putExtra("checkType", "check");
+//                startActivity(intent);
+//				dialog.dismiss();
+//            }
+//        });
 	}
 	
 	@Override  
@@ -1881,7 +1887,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					saveQuickCollectData(cell,operation,quickCollectMapList.get(i));
 				}
 				dialog1.dismiss();
-				setInputText(editText, quickCollectMapList.get(0).get(quickCollectTaskList.get(0).getPath()));
+				if (quickCollectMapList.size() > 0 && quickCollectTaskList.size() > 0) {
+					setInputText(editText, quickCollectMapList.get(0).get(quickCollectTaskList.get(0).getPath()));
+				} else {
+					Toast.makeText(CheckActivity1.this, "数据不能为空", Toast.LENGTH_SHORT).show();
+				}
 				quickCollectTaskList.clear();
 				quickCollectMapList.clear();
 			}
@@ -1941,7 +1951,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						string[0] = viewHolder.content.getText().toString();
 						m.put(quickCollectTaskList.get(position).getPath(), string[0]);
 						for (int i = 0; i < quickCollectMapList.size(); i++) {
-							if (quickCollectMapList.get(i).containsKey(quickCollectTaskList.get(position))) {
+							if (quickCollectMapList.get(i).containsValue(s.toString())) {
 								quickCollectMapList.remove(i);
 							}
 						}
@@ -1978,7 +1988,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		if (task.getIsBrother() != 1) {
 
 			quickCollectTaskList.add(task);
-			List<Task> taskList = DataSupport.where("broTaskId=?", task.getTaskid() + "").find(Task.class);
+			List<Task> taskList = DataSupport.where("broTaskId=? and location=?", task.getTaskid() + "", "1").find(Task.class);
 			for (Task task1 : taskList) {
 				quickCollectTaskList.add(task1);
 			}
@@ -2006,8 +2016,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				taskId = task.getTaskid();
 			}
 		}
-		List<Cell> cellList = DataSupport.where("taskid=? and cellid=?", taskId, cell1.getCellid()).find(Cell.class);
-		List<Operation> operationList = DataSupport.where("taskid=? and cellid=?", taskId, cell1.getCellid()).find(Operation.class);
+		List<Cell> cellList = DataSupport.where("taskid=? and cellidold=?", taskId, cell1.getCellid()).find(Cell.class);
+		List<Operation> operationList = DataSupport.where("taskid=? and cellidold=?", taskId, cell1.getCellid()).find(Operation.class);
 		if (cellList.size() > 0) {
 			cellList.get(0).setOpvalue(value);
 			cellList.get(0).update(cellList.get(0).getId());
@@ -2020,8 +2030,6 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				Toast.makeText(context, "operation数据有问题", Toast.LENGTH_SHORT).show();
 			}
 
-		} else {
-			Toast.makeText(context, "cell数据有问题", Toast.LENGTH_SHORT).show();
 		}
 
 

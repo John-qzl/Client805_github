@@ -1,34 +1,47 @@
 package com.example.navigationdrawertest.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.SweetAlert.SweetAlertDialog;
 import com.example.navigationdrawertest.adapter.AlbumAdapter;
 import com.example.navigationdrawertest.adapter.PictureListAdapter;
+import com.example.navigationdrawertest.camera.MyUtils;
 import com.example.navigationdrawertest.camera.PicPathEvent;
 import com.example.navigationdrawertest.camera.PickOrTakeImageActivity;
 import com.example.navigationdrawertest.camera.PickOrTakeVideoActivity;
+import com.example.navigationdrawertest.camera1.CameraActivity;
+import com.example.navigationdrawertest.utils.CommonUtil;
 import com.example.navigationdrawertest.utils.FileOperation;
+import com.example.navigationdrawertest.utils.HtmlHelper;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,8 +50,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.navigationdrawertest.camera.PickOrTakeImageActivity.CODE_FOR_TAKE_PIC;
 
 /**
  * Created by qiaozhili on 2019/2/12 15:26.
@@ -54,7 +71,7 @@ public class AlbumActivity extends BaseActivity {
     private final static int MAXIMGNUMBER = 10;
     private PictureListAdapter adapter;
     private RecyclerView mRecyclerView;
-    private Button mAddPhoto, mAddVideo;
+    private Button mAddPhoto, mAddVideo, mTakePic;
     private ImageView mBack;
     private String mCheck = "";
 
@@ -77,11 +94,13 @@ public class AlbumActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         path = getIntent().getStringExtra("path");
         mCheck = getIntent().getStringExtra("checkType");
+
         initUI();
         initData();
     }
 
     private void initUI() {
+//        mGridView = ((GridView) findViewById(R.id.gridView));
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
         mBack = (ImageView) findViewById(R.id.iv_go_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +111,7 @@ public class AlbumActivity extends BaseActivity {
         });
         mAddPhoto = (Button) findViewById(R.id.bt_add_photo);
         mAddVideo = (Button) findViewById(R.id.bt_add_video);
+        mTakePic = (Button) findViewById(R.id.bt_takepic);
         if (mCheck.equals("check")) {
             mAddPhoto.setVisibility(View.VISIBLE);
             mAddVideo.setVisibility(View.VISIBLE);
@@ -129,11 +149,22 @@ public class AlbumActivity extends BaseActivity {
                 }
             }
         });
+        mTakePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                HtmlHelper.changePhotoValue(htmlDoc, operation);
+//				PhotoUtils.transferCamera(CheckActivity1.this, path);
+                Intent intent2 = new Intent();
+                intent2.setClass(AlbumActivity.this, CameraActivity.class);
+                intent2.putExtra("path", path);
+                startActivity(intent2);
+            }
+        });
 
     }
 
     private void initData() {
-        mPhotos = FileOperation.getAlbumByPath(path, "jpg");
+        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter = new PictureListAdapter(this, R.layout.image_list_item, mPhotos);
@@ -201,7 +232,7 @@ public class AlbumActivity extends BaseActivity {
 //        	}
 //        });
 
-        //从相册中选择照片 20190130 乔志理添加
+//        //从相册中选择照片 20190130 乔志理添加
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -259,7 +290,9 @@ public class AlbumActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
+//        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
+//        adapter.notifyDataSetChanged();
+        initData();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -276,6 +309,13 @@ public class AlbumActivity extends BaseActivity {
         event.getPathList().clear();
         adapter.notifyDataSetChanged();
     }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.readactivity, menu);
+//        return true;
+//    }
 
 
     /**
@@ -335,6 +375,130 @@ public class AlbumActivity extends BaseActivity {
             System.out.println(fileName);
         }
         return fileName;
+    }
+
+//    public class AlbumAdapter1 extends BaseAdapter {
+//
+//        private Context mContext;
+//        private LayoutInflater mLayoutInflater;
+//        private List<String> mPhotos;
+//        //全局变量，记录CheckBox是否可见
+//        private boolean isShowCheckBox;
+////        private OnShowItemClickListener1 mOnShowItemClickListener1;
+//
+////        //定义接口
+////        public interface OnShowItemClickListener1 {
+////            //        void onShowItemClick(String str);
+////            void onShortClick();
+////            void onLongClick();
+////        }
+//
+//        public boolean isShowCheckBox() {
+//            return isShowCheckBox;
+//        }
+//
+//        public void setShowCheckBox(boolean showCheckBox) {
+//            isShowCheckBox = showCheckBox;
+//        }
+//
+////        public AlbumAdapter1(Context context, List<String> photos, OnShowItemClickListener1 onShowItemClickListener1) {
+////            mContext = context;
+////            mLayoutInflater = LayoutInflater.from(context);
+////            mPhotos = photos;
+////            mOnShowItemClickListener1 = onShowItemClickListener1;
+////        }
+//
+//        @Override
+//        public int getCount() {
+//            return mPhotos == null ? 0 : mPhotos.size();
+//        }
+//
+//        @Override
+//        public Object getItem(int i) {
+//            return mPhotos.get(i);
+//        }
+//
+//        @Override
+//        public long getItemId(int i) {
+//            return i;
+//        }
+//
+//        @Override
+//        public View getView(final int i, View view, ViewGroup viewGroup) {
+//            ViewHolder holder;
+//
+//            if (i == 0) {
+//                view = new ImageView(AlbumActivity.this);
+//                view.setBackgroundResource(R.drawable.take_pic);
+//                view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (MyUtils.checkTakePhotoPermissions(AlbumActivity.this, AlbumActivity.this)) {
+////                            takePic();
+//                        }
+//                    }
+//                });
+////                view.setLayoutParams(new GridView.LayoutParams(perWidth, perWidth));
+//                return view;
+//            }
+//
+//            if (view == null) {
+//                view = mLayoutInflater.inflate(R.layout.list_item_photo, viewGroup, false);
+//                holder = new ViewHolder(view);
+//            } else {
+//                holder = (ViewHolder) view.getTag();
+//            }
+//            String str = mPhotos.get(i);
+//            Bitmap bitmap = BitmapFactory.decodeFile(str);
+//            if(bitmap != null)
+//                Glide
+//                        .with(mContext)
+//                        .load(str)
+//                        .override(80, 80)
+//                        .fitCenter()
+//                        .into(holder.simpleDraweeView);
+//            return view;
+//        }
+//
+////        public void setOnShowItemClickListener(OnShowItemClickListener1 onShowItemClickListener1) {
+////            mOnShowItemClickListener1 = onShowItemClickListener1;
+////        }
+//
+//        public final class ViewHolder {
+//            private ImageView simpleDraweeView;
+//
+//            public ViewHolder(View view) {
+//                simpleDraweeView = (ImageView) view.findViewById(R.id.simple_drawee_view);
+//                view.setTag(ViewHolder.this);
+//            }
+//        }
+//
+//        public void setData(List<String> photos) {
+//            mPhotos = photos;
+//            notifyDataSetChanged();
+//        }
+//
+//    }
+
+    /**
+     * 调用系统相机进行拍照
+     */
+    private void takePic() {
+        String name = "temp";
+        if (!new File(CommonUtil.getDataPath()).exists())
+            new File(CommonUtil.getDataPath()).mkdirs();
+        path = CommonUtil.getDataPath() + name + System.currentTimeMillis() + ".jpg";
+        File file = new File(path);
+        try {
+            if (file.exists())
+                file.delete();
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        startActivityForResult(intent, CODE_FOR_TAKE_PIC);
     }
 
 }

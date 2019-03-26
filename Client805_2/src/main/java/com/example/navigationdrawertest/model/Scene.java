@@ -14,8 +14,19 @@ public class Scene extends DataSupport{
 	private Task task;
 //	private String userid;
 	private String mTTID;
-	
-	
+
+
+	private Long timeL;				//表单复制时的时间戳
+
+	public Long getTimeL() {
+		return timeL;
+	}
+
+	public void setTimeL(Long timeL) {
+		this.timeL = timeL;
+	}
+
+
 	public static String TAG_Conditions = "conditions";
 	public static String TAG_Condition = "condition";
 	
@@ -23,7 +34,7 @@ public class Scene extends DataSupport{
 	public static String Atti_conditionname = "conditionname";
 	public static String Atti_valuename = "valuename";
 	public static String Atti_order = "order";
-	
+
 	public String getmTTID() {
 		return mTTID;
 	}

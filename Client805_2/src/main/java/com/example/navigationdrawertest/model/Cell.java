@@ -8,7 +8,8 @@ import org.w3c.dom.Element;
 public class Cell extends DataSupport{
 	private int id;
 	private String cellid;
-	private String rowname;		
+	private String cellidold;
+	private String rowname;
 	private String horizontalorder;			//水平order（row中的id），行的ID
 	private String verticalorder;				//垂直order（cell中的order）
 	private String type;							//是否是检查项（true/false）
@@ -26,7 +27,24 @@ public class Cell extends DataSupport{
 	private String opvalue;		//填值内容
 	
 	private String celltype;
-	
+	private Long timeL;				//表单复制时的时间戳
+
+	public Long getTimeL() {
+		return timeL;
+	}
+
+	public void setTimeL(Long timeL) {
+		this.timeL = timeL;
+	}
+
+	public String getCellidold() {
+		return cellidold;
+	}
+
+	public void setCellidold(String cellidold) {
+		this.cellidold = cellidold;
+	}
+
 	public static String	TAG_Cell = "cell";
 	public static String 	Atti_Type = "type";
 	public static String 	Atti_ColumnID = "columnid";

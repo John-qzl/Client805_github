@@ -16,10 +16,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.navigationdrawertest.R;
@@ -38,10 +38,11 @@ import java.util.Locale;
 import static android.R.attr.x;
 import static android.R.attr.y;
 import static com.example.navigationdrawertest.R.id.gridView1;
-import static com.example.navigationdrawertest.R.id.horizontalScrollView;
+//import static com.example.navigationdrawertest.R.id.horizontalScrollView;
 import static com.example.navigationdrawertest.R.id.tv_cancle;
 import static com.example.navigationdrawertest.R.id.tv_save;
 import static com.example.navigationdrawertest.R.id.view;
+import static com.example.navigationdrawertest.camera1.CameraActivity.setCameraDisplayOrientation;
 
 /**
  * Created by Destiny on 2016/12/16.
@@ -116,9 +117,9 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         PreviewHeight = sizeList.get(position).height;
 
         try {
-            if (PreviewWidth > 1400) {
-                return false;
-            }
+//            if (PreviewWidth > 1400) {
+//                return false;
+//            }
             parameters.setPreviewSize(PreviewWidth, PreviewHeight);
             // //获得摄像区域的大小
             parameters.setPictureFormat(PixelFormat.JPEG);// 设置照片输出的格式
@@ -126,8 +127,9 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
             parameters.setPictureSize(PreviewWidth, PreviewHeight);// 设置拍出来的屏幕大小
 
             mActivity.mCamera.setParameters(parameters);// 把上面的设置 赋给摄像头
-            mActivity.mCamera.setPreviewDisplay(  mActivity.mSurfaceView.getHolder());// 把摄像头获得画面显示在SurfaceView控件里面
-            mActivity.mCamera.setDisplayOrientation(90);
+            mActivity.mCamera.setPreviewDisplay(mActivity.mSurfaceView.getHolder());// 把摄像头获得画面显示在SurfaceView控件里面
+//            mActivity.mCamera.setDisplayOrientation(90);
+            setCameraDisplayOrientation(mActivity, 0, mActivity.mCamera);
             mActivity.mCamera.startPreview();// 开始预览
             return true;
         } catch (Exception e) {
@@ -167,8 +169,8 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
     @Override
     public void initView() {
         Log.e("initView","------------------------");
-        mActivity.gridView1 = (NoScrollGridView) mActivity.findViewById(gridView1);
-        mActivity.horizontalScrollView = (HorizontalScrollView) mActivity.findViewById(horizontalScrollView);
+        mActivity.gridView1 = (ListView) mActivity.findViewById(gridView1);
+//        mActivity.ScrollView = (ScrollView) mActivity.findViewById(horizontalScrollView);
         mActivity.tv_save = (Button) mActivity.findViewById(tv_save);
         mActivity.tv_cancle = (Button) mActivity.findViewById(tv_cancle);
         mActivity.view = mActivity.findViewById(view);
@@ -233,11 +235,11 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(allWidth, LinearLayout.LayoutParams.FILL_PARENT);
         mActivity.gridView1.setLayoutParams(params);
-        mActivity.gridView1.setHorizontalSpacing(30);
-        mActivity.gridView1.setStretchMode(GridView.NO_STRETCH);
-        mActivity.gridView1.setColumnWidth(itemWidth);
-        mActivity.gridView1.setNumColumns(mActivity.bitmaps.size());
-        mActivity.horizontalScrollView.smoothScrollTo(mActivity.gridView1.getMeasuredWidth(), 0);
+//        mActivity.gridView1.setHorizontalSpacing(30);
+//        mActivity.gridView1.setStretchMode(GridView.NO_STRETCH);
+//        mActivity.gridView1.setColumnWidth(itemWidth);
+//        mActivity.gridView1.setNumColumns(mActivity.bitmaps.size());
+//        mActivity.ScrollView.smoothScrollTo(mActivity.gridView1.getMeasuredWidth(), 0);
     }
 
     @Override

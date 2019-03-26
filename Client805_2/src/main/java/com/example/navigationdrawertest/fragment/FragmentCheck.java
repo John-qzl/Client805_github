@@ -611,7 +611,7 @@ public class FragmentCheck extends Fragment {
 			copySignature(task, taskIdNew, timeL);
 			copyRows(task, taskIdNew, timeL);
 			copyCells(task, taskIdNew, timeL);
-			copyHtml(task, task.getPostname(), taskIdNew, timeL);
+//			copyHtml(task, task.getPostname(), taskIdNew, timeL);
 		} else {
 			Toast.makeText(getActivity(), "数据有误，请检查数据", Toast.LENGTH_LONG);
 		}
@@ -637,6 +637,7 @@ public class FragmentCheck extends Fragment {
 				scneNew.setConditionid("");
 			}
 			scneNew.setTaskid(taskIdN);
+			scneNew.setTimeL(timeL);
 			scneNew.setConditionname(scne.getConditionname());
 			scneNew.setSceneorder(scne.getSceneorder());
 			scneNew.setScenevalue(scne.getScenevalue());
@@ -664,6 +665,7 @@ public class FragmentCheck extends Fragment {
 				signstureNew.setSignid("");
 			}
 			signstureNew.setTaskid(taskIdN);
+			signstureNew.setTimeL(timeL);
 			signstureNew.setSignname(signature.getSignname());
 			signstureNew.setSignorder(signature.getSignorder());
 			signstureNew.setTime(signature.getTime());
@@ -689,8 +691,10 @@ public class FragmentCheck extends Fragment {
 		for (Rows rows : rowsList) {
 			Rows rowsNew = new Rows();
 			rowsNew.setTaskid(taskIdN);
+			rowsNew.setTimeL(timeL);
 			rowsNew.setRowsid(rows.getRowsid());
 			rowsNew.setRowsnumber(rows.getRowsnumber());
+			rowsNew.save();
 		}
 	}
 
@@ -702,20 +706,30 @@ public class FragmentCheck extends Fragment {
 	 * @date 2019/3/4 15:24
 	 */
 	public void copyCells(Task task, String taskIdN, long timeL) {
+		Document htmlDoc = HtmlHelper.getHtmlDoc(task);
+		String fileAbsPath = Environment.getDataDirectory().getPath() + Config.packagePath
+				+ Config.htmlPath+ "/"+ task.getPostname()+"/" + taskIdN;
+		String htmlStr = htmlDoc.toString();
 		List<Cell> cellList = DataSupport.where("taskid=?", task.getTaskid()).find(Cell.class);
 		for (Cell cell : cellList) {
 			Cell cellNew = new Cell();
 			String cellIdNew = "";
-//			if (!cell.getCellid().equals("")) {
-//				long cellIdL = Long.parseLong(cell.getCellid());
-//				String cellIdN = String.valueOf(cellIdL + timeL);
-//				cellNew.setCellid(cellIdN);
-//				cellIdNew = cellIdN;
-//			} else {
-//				cellNew.setCellid("");
-//			}
-			cellNew.setCellid(cell.getCellid());
+			String cellIdOlder = cell.getCellid();
+			if (!cellIdOlder.equals("")) {
+				long cellIdL = Long.parseLong(cellIdOlder);
+				String cellIdN = String.valueOf(cellIdL + timeL);
+				cellNew.setCellid(cellIdN);
+				cellIdNew = cellIdN;
+			} else {
+				cellNew.setCellid("");
+			}
+			if (htmlStr.contains(cellIdOlder)) {
+				htmlStr = htmlStr.replace(cellIdOlder, cellIdNew);
+			}
+//			cellNew.setCellid(cell.getCellid());
+			cellNew.setCellidold(cellIdOlder);
 			cellNew.setTaskid(taskIdN);
+			cellNew.setTimeL(timeL);
 			cellNew.setRowname(cell.getRowname());
 			cellNew.setHorizontalorder(cell.getHorizontalorder());
 			cellNew.setVerticalorder(cell.getVerticalorder());
@@ -730,12 +744,20 @@ public class FragmentCheck extends Fragment {
 			cellNew.setCelltype(cell.getCelltype());
 			cellNew.save();
 
-			copyOperetion(task, taskIdN, cellIdNew, cell.getCellid());
 			if (!cell.getCellid().equals("")) {
+				copyOperetion(task, taskIdN, cellIdNew, cell.getCellid(), timeL);
 			} else {
 				Toast.makeText(getActivity(), "数据有误，请检查数据！", Toast.LENGTH_LONG);
 			}
 		}
+
+		boolean bWriteOK = HtmlHelper.writeTaskHtml(fileAbsPath, htmlStr);
+		if (bWriteOK) {
+			Toast.makeText(getActivity(), taskIdN + ":HTML复制成功", Toast.LENGTH_LONG);
+		} else {
+			Toast.makeText(getActivity(), taskIdN + ":HTML复制失败", Toast.LENGTH_LONG);
+		}
+
 	}
 
 	/**
@@ -745,14 +767,16 @@ public class FragmentCheck extends Fragment {
 	 * @author qiaozhili
 	 * @date 2019/3/4 15:25
 	 */
-	public void copyOperetion(Task task, String taskIdN, String cellIdN, String cellIdOld) {
+	public void copyOperetion(Task task, String taskIdN, String cellIdN, String cellIdOld, Long timeL) {
 		List<Operation> operationList = DataSupport.where("cellid=? and taskid=?", cellIdOld, task.getTaskid()).find(Operation.class);
 		for (Operation operation : operationList) {
 			Operation operationNew = new Operation();
 			operationNew.setTaskid(taskIdN);
-			operationNew.setCellid(cellIdOld);
-			operationNew.setOperationid(cellIdOld);
-			operationNew.setRealcellid(cellIdOld);
+			operationNew.setCellidold(cellIdOld);
+			operationNew.setTimeL(timeL);
+			operationNew.setCellid(cellIdN);
+			operationNew.setOperationid(cellIdN);
+			operationNew.setRealcellid(cellIdN);
 			operationNew.setType(operation.getType());
 			operationNew.setOpvalue(operation.getOpvalue());
 			operationNew.setRemark(operation.getRemark());

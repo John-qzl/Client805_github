@@ -2,6 +2,7 @@ package com.example.navigationdrawertest.camera1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
@@ -11,6 +12,7 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.os.Trace;
 import android.view.KeyEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -20,6 +22,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,13 +35,13 @@ import java.util.List;
 
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback {
-    public HorizontalScrollView horizontalScrollView;
+    public ScrollView ScrollView;
     public Camera mCamera;
     public ImageView mButton;
     public SurfaceView mSurfaceView;
     public SurfaceHolder holder;
     public AutoFocusCallback mAutoFocusCallback = new AutoFocusCallback();
-    public NoScrollGridView gridView1;
+    public ListView gridView1;
     public View view;
     public Button tv_save, tv_cancle;
     public ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
@@ -55,6 +59,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.photograph_layout_1);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         presenter = new CameraPresenterImpl(this);
 
@@ -175,8 +180,9 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                                     try {
                                         // 把摄像头获得画面显示在SurfaceView控件里面
                                         mCamera.setPreviewDisplay(mSurfaceView.getHolder());
-                                        mCamera.setDisplayOrientation(90);
+//                                        mCamera.setDisplayOrientation(90);
                                         mCamera.startPreview();// 开始预览
+                                        setCameraDisplayOrientation(CameraActivity.this, 0, mCamera);
                                         view.setVisibility(View.GONE);
                                     } catch (IOException e) {
                                         e.printStackTrace();
@@ -316,6 +322,36 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         {
 //            Trace.Log("--------the phone not support zoom");
         }
+    }
+
+    public static void setCameraDisplayOrientation (Activity activity, int cameraId, Camera camera) {
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo (cameraId , info);
+        int rotation = activity.getWindowManager ().getDefaultDisplay ().getRotation ();
+        int degrees = 0;
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;   // compensate the mirror
+        } else {
+            // back-facing
+            result = ( info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation (result);
     }
 
 }

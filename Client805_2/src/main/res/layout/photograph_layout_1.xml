@@ -1,129 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical" >
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
         <SurfaceView
             android:id="@+id/mSurfaceView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignBottom="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:visibility="visible" />
 
         <View
             android:visibility="gone"
             android:id="@+id/view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@android:color/black" />
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:background="#7bffffff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <ImageView
+                android:id="@+id/camera_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/icon_plusminus_reduce_black"/>
+            <ImageView
+                android:id="@+id/camera_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_plusminus_add_black"/>
+        </RelativeLayout>
+
     </FrameLayout>
+
 
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/black"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" >
+        android:layout_width="166dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true">
 
-        <Button
-            android:id="@+id/tv_cancle"
-            android:layout_width="80dp"
+        <LinearLayout
+            android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:background="#00000000"
-            android:gravity="center"
-            android:text="取消"
-            android:textColor="@android:color/white"
-            android:textSize="13dp" />
+            android:background="#60000000">
 
-        <FrameLayout
-            android:layout_width="0dp"
+            <ListView
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:id="@+id/gridView1"
+                android:scrollbars="none"/>
+
+        </LinearLayout>
+
+        <!--<ScrollView-->
+            <!--android:id="@+id/horizontalScrollView"-->
+            <!--android:layout_width="90dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#60000000"-->
+            <!--android:scrollbars="none" >-->
+
+
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:orientation="vertical" >&ndash;&gt;-->
+
+                <!--&lt;!&ndash;&lt;!&ndash;<com.example.navigationdrawertest.camera1.NoScrollGridView&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/gridView1"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:columnWidth="70dp"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:horizontalSpacing="10dp"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:listSelector="#00000000"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:numColumns="auto_fit"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:scrollbars="none"&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;android:stretchMode="spacingWidthUniform" >&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</com.example.navigationdrawertest.camera1.NoScrollGridView>&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+        <!--</ScrollView>-->
+
+        <RelativeLayout
+            android:layout_width="76dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:background="#90000000">
+
+            <Button
+                android:id="@+id/tv_cancle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="取消"
+                android:textColor="@android:color/white"
+                android:textSize="13dp" />
 
             <ImageView
                 android:id="@+id/myButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
+                android:layout_centerInParent="true"
                 android:background="@drawable/curcle" />
-        </FrameLayout>
 
-        <Button
-            android:id="@+id/tv_save"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="15dp"
-            android:background="#00000000"
-            android:gravity="center"
-            android:text="保存"
-            android:textColor="@android:color/white"
-            android:textSize="13dp" />
+            <!--<FrameLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1" >-->
+            <!--</FrameLayout>-->
+
+            <Button
+                android:id="@+id/tv_save"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:text="保存"
+                android:textColor="@android:color/white"
+                android:textSize="13dp" />
+        </RelativeLayout>
+
     </LinearLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="#90000000"
-        android:scrollbars="none" >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <com.example.navigationdrawertest.camera1.NoScrollGridView
-                android:id="@+id/gridView1"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginLeft="5dp"
-                android:columnWidth="70dp"
-                android:horizontalSpacing="10dp"
-                android:listSelector="#00000000"
-                android:numColumns="auto_fit"
-                android:scrollbars="none"
-                android:stretchMode="spacingWidthUniform" >
-            </com.example.navigationdrawertest.camera1.NoScrollGridView>
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <RelativeLayout
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:background="#7bffffff"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp">
-        <ImageView
-            android:id="@+id/camera_small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="26dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/icon_plusminus_reduce_black"/>
-        <ImageView
-            android:id="@+id/camera_big"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/icon_plusminus_add_black"/>
-    </RelativeLayout>
 
     <!--<ImageView-->
         <!--android:id="@+id/iv_touch"-->
@@ -134,36 +150,36 @@
         <!--android:src="@drawable/touch_focus_x"-->
         <!--android:visibility="gone" />-->
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:visibility="gone" >
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:visibility="gone" >-->
 
-        <ImageView
-            android:id="@+id/iv_img"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_img"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#b0000000"
-            android:orientation="vertical"
-            android:padding="10dp" >
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:background="#b0000000"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="10dp" >-->
 
-            <TextView
-                android:id="@+id/tv_flag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@android:color/white"
-                android:textSize="15dp" />
-        </LinearLayout>
-    </FrameLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_flag"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="TextView"-->
+                <!--android:textColor="@android:color/white"-->
+                <!--android:textSize="15dp" />-->
+        <!--</LinearLayout>-->
+    <!--</FrameLayout>-->
 
 </RelativeLayout>
