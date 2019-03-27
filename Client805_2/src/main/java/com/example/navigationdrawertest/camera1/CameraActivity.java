@@ -78,8 +78,6 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 }
             }
         });
-
-
     }
 
     public void surfaceCreated(SurfaceHolder surfaceholder) {

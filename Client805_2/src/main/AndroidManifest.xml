@@ -146,6 +146,12 @@
             android:screenOrientation="landscape"/>
         <activity android:name=".camera.PickOrTakeVideoActivity"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".camera1.video.PickerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".camera1.video.PreviewActivity"
+            android:screenOrientation="landscape" />
         
         <receiver android:name="com.example.navigationdrawertest.Broadcast.BootBroadcastReceiver"> 
 			<intent-filter> 

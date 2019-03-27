@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,6 +41,9 @@ import com.example.navigationdrawertest.camera.PicPathEvent;
 import com.example.navigationdrawertest.camera.PickOrTakeImageActivity;
 import com.example.navigationdrawertest.camera.PickOrTakeVideoActivity;
 import com.example.navigationdrawertest.camera1.CameraActivity;
+import com.example.navigationdrawertest.camera1.video.PickerActivity;
+import com.example.navigationdrawertest.camera1.video.PickerConfig;
+import com.example.navigationdrawertest.camera1.video.entity.Media;
 import com.example.navigationdrawertest.utils.CommonUtil;
 import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.HtmlHelper;
@@ -61,7 +66,6 @@ import static com.example.navigationdrawertest.camera.PickOrTakeImageActivity.CO
  * Created by qiaozhili on 2019/2/12 15:26.
  */
 public class AlbumActivity extends BaseActivity {
-
     private GridView mGridView;
     private AlbumAdapter mAlbumAdapter;
     private String path;
@@ -74,6 +78,7 @@ public class AlbumActivity extends BaseActivity {
     private Button mAddPhoto, mAddVideo, mTakePic;
     private ImageView mBack;
     private String mCheck = "";
+    private ArrayList<Media> mediaList;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -138,14 +143,21 @@ public class AlbumActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (mPhotos != null) {
-                    int surplus_pics = MAXIMGNUMBER - mPhotos.size() + 1;//mPhotos没有变
-                    Intent intent = new Intent(AlbumActivity.this, PickOrTakeVideoActivity.class);
-                    intent.putExtra("pic_max", surplus_pics);
-                    startActivity(intent);
+                    Intent intent =new Intent(AlbumActivity.this, PickerActivity.class);
+                    intent.putExtra(PickerConfig.SELECT_MODE,PickerConfig.PICKER_VIDEO);//default image and video (Optional)
+                    long maxSize=188743680L;//long long long
+                    intent.putExtra(PickerConfig.MAX_SELECT_SIZE,maxSize); //default 180MB (Optional)
+                    intent.putExtra(PickerConfig.MAX_SELECT_COUNT,15);  //default 40 (Optional)
+                    intent.putExtra(PickerConfig.DEFAULT_SELECTED_LIST, mediaList); // (Optional)
+                    AlbumActivity.this.startActivityForResult(intent,200);
                 } else {
-                    Intent intent = new Intent(AlbumActivity.this, PickOrTakeVideoActivity.class);
-                    intent.putExtra("pic_max", 10);
-                    startActivity(intent);
+                    Intent intent =new Intent(AlbumActivity.this, PickerActivity.class);
+                    intent.putExtra(PickerConfig.SELECT_MODE,PickerConfig.PICKER_VIDEO);//default image and video (Optional)
+                    long maxSize=188743680L;//long long long
+                    intent.putExtra(PickerConfig.MAX_SELECT_SIZE,maxSize); //default 180MB (Optional)
+                    intent.putExtra(PickerConfig.MAX_SELECT_COUNT,15);  //default 40 (Optional)
+                    intent.putExtra(PickerConfig.DEFAULT_SELECTED_LIST, mediaList); // (Optional)
+                    AlbumActivity.this.startActivityForResult(intent,200);
                 }
             }
         });
@@ -164,7 +176,7 @@ public class AlbumActivity extends BaseActivity {
     }
 
     private void initData() {
-        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
+        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png", "mp4", "avi", "FLV");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter = new PictureListAdapter(this, R.layout.image_list_item, mPhotos);
@@ -309,14 +321,22 @@ public class AlbumActivity extends BaseActivity {
         event.getPathList().clear();
         adapter.notifyDataSetChanged();
     }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.readactivity, menu);
-//        return true;
-//    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==200&&resultCode==PickerConfig.RESULT_CODE){
+            mediaList =data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);
+            Log.i("mediaList","mediaList.size"+ mediaList.size());
+            for(Media media: mediaList){
+                Log.i("media",media.path);
+                Log.e("media","s:"+media.size);
+
+                mPhotos.add(media.path);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    }
 
     /**
      * 复制单个文件  （可考虑添加复制进度条）

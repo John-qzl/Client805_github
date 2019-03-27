@@ -24,29 +24,31 @@ import android.os.Environment;
 import android.util.Base64;
 
 public class FileOperation {
-	
+
 	/**
 	 * 搜索目录，扩展名，是否进入子文件夹
+	 *
 	 * @param path
 	 * @param jpg
 	 * @param isIterative
 	 * @return
 	 */
-	public static ArrayList<String> getAlbumByPath(String path, String jpg, String png){
-		ArrayList<String> lstFile =new ArrayList<String>(); 				//结果 List
+	public static ArrayList<String> getAlbumByPath(String path, String jpg, String png, String mp4, String avi, String FLV) {
+
+		ArrayList<String> lstFile = new ArrayList<String>();                //结果 List
 //		File[] files = new File(path).listFiles();
 		File file1 = new File(path);
 		File[] files = file1.listFiles();
 		if (!file1.exists()) {
 			file1.mkdirs();
 		}
-		if(files == null)
+		if (files == null)
 			return lstFile;
-		for(int i=0; i<files.length; i++){
+		for (int i = 0; i < files.length; i++) {
 			File f = files[i];
-			if(f.isFile()){
+			if (f.isFile()) {
 				String pictureType = f.getPath().substring(f.getPath().length() - jpg.length());
-				if(pictureType.equals(jpg) || pictureType.equals(png)){
+				if (pictureType.equals(jpg) || pictureType.equals(png)) {
 					lstFile.add(f.getPath());
 				}
 			}
