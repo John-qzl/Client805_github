@@ -53,11 +53,22 @@
         android:layout_height="wrap_content"
         android:padding="10dp" >
 
+
+        <TextView
+            android:id="@+id/tv_totalPhNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/warn"
+            android:textColor="@color/Black"
+            android:text="照片数量：10"/>
+
         <LinearLayout
             android:id="@+id/lin_title_readheader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_below="@+id/tv_totalPhNum"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">

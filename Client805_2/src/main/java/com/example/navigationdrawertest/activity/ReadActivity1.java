@@ -99,14 +99,15 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 	private SyncHorizontalScrollView myScrollView, titleHorScr;
 
 	private ImageView mBack, mClose;
-	private TextView mTablename;
+	private TextView mTablename, mTotalPhNum;
 
 	private LinearLayout mReadSign;
 	private RelativeLayout mBottom;
 	private Button mProview, mNext;
 	private int rowsnum;
 	private int pagetype;
-	
+	private int totalPhNumber = 0;
+
 	public static void actionStart(Context context, long taskid, Handler handler, String location) {
 		Intent intent = new Intent(context, ReadActivity1.class);
 		task_id = taskid;
@@ -156,7 +157,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 //					}
 //				});
 		
-		
+		mTotalPhNum.setText("照片数量：" + String.valueOf(totalPhNumber));
 	}
 	
 	private void initUI(){
@@ -165,6 +166,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 		listView_1 = (NoScrollListview) findViewById(R.id.read_mylistview_1);
 		listView_3 = (ListView) findViewById(R.id.read_mylistview_3);
 		mTablename = (TextView) findViewById(R.id.table_name);
+		mTotalPhNum = (TextView) findViewById(R.id.tv_totalPhNum);
 		mReadSign = (LinearLayout) findViewById(R.id.read_signname);
 		mClose = (ImageView) findViewById(R.id.read_close);
 		mClose.setOnClickListener(new OnClickListener() {
@@ -443,6 +445,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 						}
 					}
 					image4_1.setNum(picturenumbers);
+					totalPhNumber = totalPhNumber + picturenumbers;
 					picturenumbers = 0;
 					image4_1.setBackgroundResource(R.drawable.albumphoto);
 					image4_1.setOnClickListener(new OnClickListener() {
@@ -493,6 +496,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 						}
 					}
 					image5.setNum(picturenumbers);
+					totalPhNumber = totalPhNumber + picturenumbers;
 					picturenumbers = 0;
 					image5.setBackgroundResource(R.drawable.albumphoto);
 					image5.setOnClickListener(new OnClickListener() {
@@ -594,6 +598,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 						}
 					}
 					image7_1.setNum(picturenumbers);
+					totalPhNumber = totalPhNumber + picturenumbers;
 					picturenumbers = 0;
 					image7_1.setBackgroundResource(R.drawable.albumphoto);
 					image7_1.setOnClickListener(new OnClickListener() {
@@ -833,6 +838,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 						}
 					}
 					image10_1.setNum(picturenumbers);
+					totalPhNumber = totalPhNumber + picturenumbers;
 					picturenumbers = 0;
 
 					image10_1.setBackgroundResource(R.drawable.albumphoto);
@@ -961,6 +967,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 						}
 					}
 					image12_1.setNum(picturenumbers);
+					totalPhNumber = totalPhNumber + picturenumbers;
 					picturenumbers = 0;
 					image12_1.setBackgroundResource(R.drawable.albumphoto);
 					image12_1.setOnClickListener(new OnClickListener() {
@@ -1044,6 +1051,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 						}
 					}
 					image13_1.setNum(picturenumbers);
+					totalPhNumber = totalPhNumber + picturenumbers;
 					picturenumbers = 0;
 					image13_1.setBackgroundResource(R.drawable.albumphoto);
 					image13_1.setOnClickListener(new OnClickListener() {

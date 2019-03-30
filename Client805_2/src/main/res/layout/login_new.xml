@@ -150,7 +150,7 @@
             android:layout_marginLeft="38dp"
             android:text="版本信息"
             android:textColor="#0987da"
-            android:textSize="13dp"/>
+            android:textSize="@dimen/warn"/>
 
     </RelativeLayout>
 

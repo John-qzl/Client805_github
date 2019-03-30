@@ -28,4 +28,5 @@
     <dimen name="titleI">20dp</dimen>
     <dimen name="titleII">18dp</dimen>
     <dimen name="content">16dp</dimen>
+    <dimen name="warn">13dp</dimen>
 </resources>
