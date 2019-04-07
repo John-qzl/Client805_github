@@ -912,7 +912,11 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
     private String getImageDirectoryModelUrlFromMapById(int position) {
         //如果是选择的全部图片
         if (currentShowPosition == -1) {
-            return allImages.get(position).path;
+            if (allImages.size() == position) {
+                return allImages.get(position - 1).path;
+            } else {
+                return allImages.get(position).path;
+            }
         } else {
             return imageDirectories.get(currentShowPosition).images.getImagePath(position);
         }
@@ -927,7 +931,11 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
         }
         //如果是选择的全部图片
         if (currentShowPosition == -1) {
-            return allImages.get(position).date;
+            if (allImages.size() == position) {
+                return allImages.get(position - 1).date;
+            } else {
+                return allImages.get(position).date;
+            }
         } else {
             return imageDirectories.get(currentShowPosition).images.getImages().get(position).date;
         }
@@ -939,7 +947,11 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
     private boolean getImageDirectoryModelStateFromMapById(int position) {
         //如果是选择的全部图片
         if (currentShowPosition == -1) {
-            return allImages.get(position).isPicked;
+            if (allImages.size() == position) {
+                return allImages.get(position - 1).isPicked;
+            } else {
+                return allImages.get(position).isPicked;
+            }
         } else {
             return imageDirectories.get(currentShowPosition).images.getImagePickOrNot(position);
         }
@@ -953,9 +965,16 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
     private void toggleImageDirectoryModelStateFromMapById(int position) {
         //如果是选择的全部图片
         if (currentShowPosition == -1) {
-            allImages.get(position).isPicked = !allImages.get(position).isPicked;
-            for (SingleImageDirectories directories : imageDirectories) {
-                directories.images.toggleSetImage(allImages.get(position).path);
+            if (allImages.size() == position) {
+                allImages.get(position - 1).isPicked = !allImages.get(position - 1).isPicked;
+                for (SingleImageDirectories directories : imageDirectories) {
+                    directories.images.toggleSetImage(allImages.get(position - 1).path);
+                }
+            } else {
+                allImages.get(position).isPicked = !allImages.get(position).isPicked;
+                for (SingleImageDirectories directories : imageDirectories) {
+                    directories.images.toggleSetImage(allImages.get(position).path);
+                }
             }
         } else {
             imageDirectories.get(currentShowPosition).images.toggleSetImage(position);

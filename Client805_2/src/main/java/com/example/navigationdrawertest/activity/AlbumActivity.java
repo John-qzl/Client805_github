@@ -119,10 +119,10 @@ public class AlbumActivity extends BaseActivity {
         mTakePic = (Button) findViewById(R.id.bt_takepic);
         if (mCheck.equals("check")) {
             mAddPhoto.setVisibility(View.VISIBLE);
-            mAddVideo.setVisibility(View.VISIBLE);
+//            mAddVideo.setVisibility(View.VISIBLE);
         } else {
             mAddPhoto.setVisibility(View.INVISIBLE);
-            mAddVideo.setVisibility(View.INVISIBLE);
+//            mAddVideo.setVisibility(View.INVISIBLE);
         }
         mAddPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -55,7 +55,7 @@
             android:textSize="15dp"
             android:textColor="@color/White"
             android:background="@drawable/btn_selectimg"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/bt_add_photo"

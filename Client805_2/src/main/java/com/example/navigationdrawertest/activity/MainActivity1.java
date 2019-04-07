@@ -143,8 +143,26 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
         mQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MainActivity1.this, LoginActivity.class);
-                startActivity(intent1);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity1.this);
+                dialog.setIcon(R.drawable.logo_title).setTitle("警告");
+                dialog.setMessage("是否退出？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent1 = new Intent(MainActivity1.this, LoginActivity.class);
+                        startActivity(intent1);
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
             }
         });
         mMedia.setOnClickListener(new View.OnClickListener() {
