@@ -618,7 +618,8 @@ public class LoginActivity extends BaseActivity{
 		String file = "warn.txt";
 		AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
 		dialog.setIcon(R.drawable.logo_title).setTitle("重要提示！");
-		dialog.setMessage(loadFromSDFile(file));
+//		dialog.setMessage(loadFromSDFile(file));
+		dialog.setMessage("1、请检查网络是否正常；" + "\r\n" +"2、请确认是否为本人操作；" + "\r\n"+"3、请确认Pad系统时间是否正确。");
 		dialog.setCancelable(false);
 		dialog.setPositiveButton("时间设置", new DialogInterface.OnClickListener() {
 			@Override

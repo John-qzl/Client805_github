@@ -104,7 +104,7 @@ public class DocActivity extends BaseActivity{
 //		String ttidandname = OrientApplication.getApplication().loginUser.getTtidandname();		//试验队的id和名称
 		//1,找到所有的产品数据
 		List<Product> productList = DataSupport.findAll(Product.class);
-		rootNode = new DepartmentNode(Long.valueOf(-1), "805多媒体资料", "0", null, 0);
+		rootNode = new DepartmentNode(Long.valueOf(-1), "多媒体资料", "0", null, 0);
 		if(productList.size() > 0){
 			for(Product product : productList){
 //				rootNode = new DepartmentNode(-1, product.getProduct_Name(), null, 0);

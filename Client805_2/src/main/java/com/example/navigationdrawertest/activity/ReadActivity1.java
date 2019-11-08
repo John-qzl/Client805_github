@@ -293,7 +293,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 			TextView textview = new TextView(context);
 			String labelName1 = cell.getRowname();
 			textview.setGravity(Gravity.CENTER);
-			textview.setText(HtmlHelper.transCellLabel(labelName1));
+//			textview.setText(HtmlHelper.transCellLabel(labelName1));
+			textview.setText(CheckActivity1.replaceStr(labelName1));
 			textview.setTextSize(16);
 			linear4.addView(textview, para411);
 			//初始化textInfo
@@ -343,7 +344,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					textview.setWidth(avewdith);
 //					textview.setHeight(100);
 					textview.setTextSize(16);
-					textview.setText(HtmlHelper.transCellLabel(labelName));
+//					textview.setText(HtmlHelper.transCellLabel(labelName));
+					textview.setText(CheckActivity1.replaceStr(labelName));
 					linear0.addView(textview, para1_1);
 					//初始化textInfo
 					ImageView image = new ImageView(context);
@@ -362,7 +364,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation2 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String str = CommonTools.null2String(operation2.getOpvalue());
 					EditText edittext2 = new EditText(context);
-					edittext2.setText(str);
+					edittext2.setText(CheckActivity1.replaceStr(str));
 					edittext2.setTextSize(16);
 					edittext2.setEnabled(false);
 					linear2.addView(edittext2, para2_1);
@@ -476,7 +478,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final EditText edit5 = new EditText(context);
 					final Operation operation5 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					String stringdata5 = CommonTools.null2String(operation5.getOpvalue());
-					edit5.setText(stringdata5);
+					edit5.setText(CheckActivity1.replaceStr(stringdata5));
 					edit5.setTextSize(16);
 					linear5.addView(edit5, para5_1);
 					//初始化textInfo
@@ -527,7 +529,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation6_1 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "1").find(Operation.class).get(0);			//checkbox
 					final Operation operation6_2 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 					String stringdata6 = CommonTools.null2String(operation6_2.getOpvalue());
-	    			edit6.setText(stringdata6);
+	    			edit6.setText(CheckActivity1.replaceStr(stringdata6));
 	    			edit6.setTextSize(16);
 					linear6.addView(edit6, para6_1);
 					//初始化checkbox
@@ -564,7 +566,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation71 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "1").find(Operation.class).get(0);			//checkbox
 					final Operation operation72 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 					String stringdata7 = CommonTools.null2String(operation72.getOpvalue());
-	    			edit7.setText(stringdata7);
+	    			edit7.setText(CheckActivity1.replaceStr(stringdata7));
 	    			edit7.setTextSize(16);
 					linear7.addView(edit7, para7_2);
 					//初始化checkbox
@@ -692,7 +694,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation91 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "1").find(Operation.class).get(0);			//checkbox
 					final Operation operation92 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 					String stringdata9 = CommonTools.null2String(operation92.getOpvalue());
-	    			edit9.setText(stringdata9);
+	    			edit9.setText(CheckActivity1.replaceStr(stringdata9));
 	    			edit9.setTextSize(16);
 					linear9.addView(edit9, para9_2);
 					//初始化checkbox
@@ -761,7 +763,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					//初始化EditText
 					String stringdata10 = CommonTools.null2String(operation10_2.getOpvalue());
 					final EditText edit10 = new EditText(context);
-	    			edit10.setText(stringdata10);
+	    			edit10.setText(CheckActivity1.replaceStr(stringdata10));
 	    			edit10.setTextSize(16);
 					linear10.addView(edit10, para10_2);
 					//初始化checkbox
@@ -877,7 +879,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					//初始化EditText
 					String stringdata11 = CommonTools.null2String(operation11.getOpvalue());
 					final EditText edit11 = new EditText(context);
-	    			edit11.setText(stringdata11);
+	    			edit11.setText(CheckActivity1.replaceStr(stringdata11));
 	    			edit11.setTextSize(16);
 	    			edit11.setEnabled(false);
 					linear11.addView(edit11, para11_1);
@@ -924,7 +926,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					//初始化EditText
 					String stringdata12 = CommonTools.null2String(operation12_2.getOpvalue());
 					final EditText edit12 = new EditText(context);
-	    			edit12.setText(stringdata12);
+	    			edit12.setText(CheckActivity1.replaceStr(stringdata12));
 	    			edit12.setTextSize(16);
 					linear12.addView(edit12, para12_1);
 					edit12.setEnabled(false);

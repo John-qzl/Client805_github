@@ -388,7 +388,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			TextView textview = new TextView(context);
 			String labelName1 = cell.getRowname();
 			textview.setGravity(Gravity.CENTER);
-			textview.setText(HtmlHelper.transCellLabel(labelName1));
+//			textview.setText(HtmlHelper.transCellLabel(replaceStr(labelName1)));
+			textview.setText(replaceStr(labelName1));
 			textview.setTextSize(16);
 			linear4.addView(textview, para411);
 			//初始化textInfo
@@ -438,7 +439,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					textview.setWidth(avewdith);
 //					textview.setHeight(85);
 					textview.setTextSize(16);
-					textview.setText(HtmlHelper.transCellLabel(labelName));
+//					textview.setText(HtmlHelper.transCellLabel(replaceStr(labelName)));
+					textview.setText(replaceStr(labelName));
 					linear0.addView(textview, para1_1);
 					//初始化textInfo
 					ImageView image = new ImageView(context);
@@ -458,7 +460,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final String str = CommonTools.null2String(operation2.getOpvalue());
 					final EditText edittext2 = new EditText(context);
 					edittext2.setTextSize(16);
-					edittext2.setText(str);
+					edittext2.setText(replaceStr(str));
 					edittext2.addTextChangedListener(new TextWatcher() {
 						@Override
 						public void onTextChanged(CharSequence text, int start, int before,
@@ -482,6 +484,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    	            HtmlData data = new HtmlData(cell, operation2.getRealcellid());
 		    	            htmlList_text.add(data);
 //		    	            HtmlHelper.changeTextValue(htmlDoc, cell, operation2.getRealcellid());
+
 						}
 					});
 					edittext2.setOnLongClickListener(new View.OnLongClickListener() {
@@ -660,7 +663,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final Operation operation5 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					String stringdata5 = CommonTools.null2String(operation5.getOpvalue());
 					edit5.setTextSize(16);
-					edit5.setText(stringdata5);
+					edit5.setText(replaceStr(stringdata5));
 					linear5.addView(edit5, para5_1);
 					//初始化textInfo
 					final String userId5 = OrientApplication.getApplication().loginUser.getUserid();
@@ -751,7 +754,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //					final Operation operation6_1 = cell.getHookOperation();
 //					final Operation operation6_2 = cell.getStringOperation();
 					String stringdata6 = CommonTools.null2String(operation6_2.getOpvalue());
-	    			edit6.setText(stringdata6);
+	    			edit6.setText(replaceStr(stringdata6));
 	    			edit6.setTextSize(16);
 					linear6.addView(edit6, para6_1);
 					//初始化checkbox
@@ -853,7 +856,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 					String stringdata7 = CommonTools.null2String(operation72.getOpvalue());
 					edit7.setTextSize(16);
-	    			edit7.setText(stringdata7);
+	    			edit7.setText(replaceStr(stringdata7));
 					linear7.addView(edit7, para7_2);
 					//初始化checkbox
 					CheckBox cb7 = new CheckBox(context);
@@ -1082,7 +1085,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //					final Operation operation91 = cell.getHookOperation();
 //					final Operation operation92 = cell.getStringOperation();
 					String stringdata9 = CommonTools.null2String(operation92.getOpvalue());
-	    			edit9.setText(stringdata9);
+	    			edit9.setText(replaceStr(stringdata9));
 	    			edit9.setTextSize(16);
 					linear9.addView(edit9, para9_2);
 					//初始化checkbox
@@ -1211,7 +1214,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					//初始化EditText
 					String stringdata10 = CommonTools.null2String(operation10_2.getOpvalue());
 					final EditText edit10 = new EditText(context);
-	    			edit10.setText(stringdata10);
+	    			edit10.setText(replaceStr(stringdata10));
 	    			edit10.setTextSize(16);
 					linear10.addView(edit10, para10_2);
 					//初始化checkbox
@@ -1383,7 +1386,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					//初始化EditText
 					String stringdata11 = CommonTools.null2String(operation11.getOpvalue());
 					final EditText edit11 = new EditText(context);
-	    			edit11.setText(stringdata11);
+	    			edit11.setText(replaceStr(stringdata11));
 	    			edit11.setTextSize(16);
 	    			edit11.addTextChangedListener(new TextWatcher() {
 						@Override
@@ -1459,7 +1462,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					//初始化EditText
 					String stringdata12 = CommonTools.null2String(operation12_2.getOpvalue());
 					final EditText edit12 = new EditText(context);
-	    			edit12.setText(stringdata12);
+	    			edit12.setText(replaceStr(stringdata12));
 	    			edit12.setTextSize(16);
 					linear12.addView(edit12, para12_1);
 					edit12.addTextChangedListener(new TextWatcher() {
@@ -2037,6 +2040,23 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 	private void setInputText(EditText editText, String str) {
 		editText.setText(str);
+	}
+
+	/**
+	 * @Description: 替换尖括号
+	 * @author qiaozhili
+	 * @date 2019/8/26 16:37
+	 * @param
+	 * @return  newStr
+	 */
+	public static String replaceStr(String oldStr) {
+		String newStr = "";
+		if (oldStr.contains("#lt;") || oldStr.contains("#gt;")) {
+			newStr = oldStr.replace("#lt;", "<").replace("#gt;", ">");
+        } else {
+			newStr = oldStr;
+        }
+		return newStr;
 	}
 
 }
