@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--<string name="app_name">产品现场测试与验收数据包APP</string>-->
-    <string name="app_name">数据采集及管理系统</string>
+    <string name="app_name">产品现场测试与验收数据包APP</string>
+    <!--<string name="app_name">数据采集及管理系统</string>-->
 
     <string name="docactivity">多媒体资料</string>
     <string name="media">多媒体资料</string>

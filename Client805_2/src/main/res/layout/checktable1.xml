@@ -40,6 +40,30 @@
             android:textColor="@color/White"
             android:background="@drawable/btn_selectimg"/>
 
+        <!--<Button-->
+            <!--android:id="@+id/bt_check_pandu"-->
+            <!--android:layout_width="90dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/bt_check_refresh"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="符合度校验"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:background="@drawable/btn_selectimg"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/bt_check_wanz"-->
+            <!--android:layout_width="90dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/bt_check_pandu"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="完整性检查"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:background="@drawable/btn_selectimg"/>-->
+
         <ImageView
             android:id="@+id/check_close"
             android:layout_width="70dp"
