@@ -117,9 +117,9 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         PreviewHeight = sizeList.get(position).height;
 
         try {
-//            if (PreviewWidth > 1400) {
-//                return false;
-//            }
+            if (PreviewWidth > 1400) {
+                return false;
+            }
             parameters.setPreviewSize(PreviewWidth, PreviewHeight);
             // //获得摄像区域的大小
             parameters.setPictureFormat(PixelFormat.JPEG);// 设置照片输出的格式

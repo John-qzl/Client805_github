@@ -29,6 +29,61 @@ public class Cell extends DataSupport{
 	private String celltype;
 	private Long timeL;				//表单复制时的时间戳
 
+	private String requireval; //要求值
+	private String upper; //上偏差
+	private String lower; //下偏差
+	private String actualval; //实测值
+	private String compliance; //符合度
+	private String markup; //符合度校验标记
+
+	public String getRequireval() {
+		return requireval;
+	}
+
+	public void setRequireval(String requireval) {
+		this.requireval = requireval;
+	}
+
+	public String getUpper() {
+		return upper;
+	}
+
+	public void setUpper(String upper) {
+		this.upper = upper;
+	}
+
+	public String getLower() {
+		return lower;
+	}
+
+	public void setLower(String lower) {
+		this.lower = lower;
+	}
+
+	public String getActualval() {
+		return actualval;
+	}
+
+	public void setActualval(String actualval) {
+		this.actualval = actualval;
+	}
+
+	public String getCompliance() {
+		return compliance;
+	}
+
+	public void setCompliance(String compliance) {
+		this.compliance = compliance;
+	}
+
+	public String getMarkup() {
+		return markup;
+	}
+
+	public void setMarkup(String markup) {
+		this.markup = markup;
+	}
+
 	public Long getTimeL() {
 		return timeL;
 	}

@@ -799,6 +799,7 @@ public class SyncWorkThread extends Thread {
 					cell.setTextvalue(xmlCell.getAttribute("textvalue"));
 					cell.setVerticalorder(xmlCell.getAttribute("order"));
 					cell.setType(xmlCell.getAttribute("type"));
+					cell.setMarkup(xmlCell.getAttribute("markup"));
 					// cell.setUserid(OrientApplication.getApplication().loginUser.getUserid());
 					cell.setmTTID(task.getPostinstanceid());
 					cell.setTaskid(task.getTaskid());

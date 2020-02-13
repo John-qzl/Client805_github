@@ -28,6 +28,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
 import com.bumptech.glide.Glide;
@@ -72,13 +73,14 @@ public class AlbumActivity extends BaseActivity {
     private ArrayList<String> mPhotos = new ArrayList<String>();
     private ArrayList<String> mPhotosnew = new ArrayList<String>();
     private ProgressDialog prodlg;
-    private final static int MAXIMGNUMBER = 10;
+    private final static int MAXIMGNUMBER = 100;
     private PictureListAdapter adapter;
     private RecyclerView mRecyclerView;
     private Button mAddPhoto, mAddVideo, mTakePic;
     private ImageView mBack;
     private String mCheck = "";
     private ArrayList<Media> mediaList;
+    private LinearLayout mNoPhoto;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -107,6 +109,7 @@ public class AlbumActivity extends BaseActivity {
     private void initUI() {
 //        mGridView = ((GridView) findViewById(R.id.gridView));
         mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
+        mNoPhoto = (LinearLayout) findViewById(R.id.noPhoto);
         mBack = (ImageView) findViewById(R.id.iv_go_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,9 +122,11 @@ public class AlbumActivity extends BaseActivity {
         mTakePic = (Button) findViewById(R.id.bt_takepic);
         if (mCheck.equals("check")) {
             mAddPhoto.setVisibility(View.VISIBLE);
+            mTakePic.setVisibility(View.VISIBLE);
 //            mAddVideo.setVisibility(View.VISIBLE);
         } else {
             mAddPhoto.setVisibility(View.INVISIBLE);
+            mTakePic.setVisibility(View.INVISIBLE);
 //            mAddVideo.setVisibility(View.INVISIBLE);
         }
         mAddPhoto.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +182,9 @@ public class AlbumActivity extends BaseActivity {
 
     private void initData() {
         mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png", "mp4", "avi", "FLV");
+        if (mPhotos.size() > 0) {
+            mNoPhoto.setVisibility(View.GONE);
+        }
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter = new PictureListAdapter(this, R.layout.image_list_item, mPhotos);

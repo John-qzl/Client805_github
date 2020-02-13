@@ -324,10 +324,10 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
 
         handler = new MyHandler(this);
         //默认显示全部图片
-        currentShowPosition = -1;
+        currentShowPosition = 0;
         adapter = new GridViewAdapter();
         getAllImages();
-        tv_choose_image_directory.setText(getString(R.string.all_pic));
+        tv_choose_image_directory.setText(getString(R.string.camera_pic));
         tv_preview.setText(getString(R.string.preview_without_num));
 
         rl_choose_directory.setOnClickListener(this);

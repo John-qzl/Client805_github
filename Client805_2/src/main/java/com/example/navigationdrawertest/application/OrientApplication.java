@@ -28,6 +28,7 @@ public class OrientApplication extends Application {
 	public RwRelation rw = null;                                            //用于保存当前任务页面的信息
 	public int pageflage;
 	private int flag;
+	public int panduFlag;
 	public int warn;
 	private static OrientApplication instance;
 	public boolean isCommander;
@@ -87,6 +88,14 @@ public class OrientApplication extends Application {
 
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+
+	public int getPanduFlag() {
+		return panduFlag;
+	}
+
+	public void setPanduFlag(int panduFlag) {
+		this.panduFlag = panduFlag;
 	}
 
 	public int getPageflage() {

@@ -33,7 +33,7 @@
 		android:layout_height="80dp"
 		android:layout_marginLeft="20dp"
 		android:layout_gravity="center"
-		android:background="#d5d5d5"
+		android:background="@color/sign_bg"
 		android:scaleType="fitXY"/>
  	
  	<TextView

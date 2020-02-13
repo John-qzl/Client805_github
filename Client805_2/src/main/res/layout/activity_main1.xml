@@ -50,7 +50,8 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/upload_normal"
                 android:layout_toLeftOf="@+id/data_syn"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/data_syn"

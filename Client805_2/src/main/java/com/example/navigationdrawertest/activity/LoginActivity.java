@@ -420,6 +420,10 @@ public class LoginActivity extends BaseActivity{
 				                	DataSupport.deleteAll(Mmc.class);
 				                	DataSupport.deleteAll(Product.class);
 				                	DataSupport.deleteAll(UploadFileRecord.class);
+									File v2pFile = new File(Environment.getExternalStorageDirectory() + Config.v2photoPath);
+									File mmcFile = new File(Environment.getExternalStorageDirectory() + Config.mmcPath);
+									deleteFiles(v2pFile);
+									deleteFiles(mmcFile);
 				                	message.what = 1;
 				                	mHandler.sendMessage(message);
 				                }catch (Exception e) {
@@ -678,5 +682,25 @@ public class LoginActivity extends BaseActivity{
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		} return name;
+	}
+
+	/**
+	 * @Description: 删除本地文件夹中附件，mmccopy目录及检查表805/files/v2p下所有文件
+	 * @author qiaozhili
+	 * @date 2019/12/28 14:01
+	 * @param
+	 * @return
+	 */
+	private void deleteFiles(File file) {
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				File f = files[i];
+				deleteFiles(f);
+			}
+//			file.delete();//如要保留文件夹，只删除文件，请注释这行
+		} else if (file.exists()) {
+			file.delete();
+		}
 	}
 }

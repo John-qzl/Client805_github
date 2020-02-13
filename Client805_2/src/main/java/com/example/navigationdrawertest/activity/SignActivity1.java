@@ -64,6 +64,7 @@ import com.example.navigationdrawertest.model.Scene;
 import com.example.navigationdrawertest.model.Signature;
 import com.example.navigationdrawertest.model.Task;
 import com.example.navigationdrawertest.utils.ActivityCollector;
+import com.example.navigationdrawertest.utils.BitmapUtil;
 import com.example.navigationdrawertest.utils.CommonTools;
 import com.example.navigationdrawertest.utils.Config;
 import com.example.navigationdrawertest.utils.DateUtil;
@@ -354,6 +355,8 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					android.widget.TableRow.LayoutParams para2 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para2_3 = new android.widget.TableRow.LayoutParams(80, 70);
+					android.widget.TableRow.LayoutParams para2_4 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear2 = new LinearLayout(context);
 					linear2.setOrientation(LinearLayout.HORIZONTAL);
 					linear2.setLayoutParams(para2);
@@ -361,8 +364,23 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation2 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String str = CommonTools.null2String(operation2.getOpvalue());
 					EditText edittext2 = new EditText(context);
+					final ImageButton signButton = new ImageButton(context);
+					final ImageView signImage = new ImageView(context);
+					final String markup = cell.getMarkup();
+					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
+//					final Signature signnature = new Signature();
+					if (signatureList.size() > 0) {
+//						signnature = signatureList.get(0);
+						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
+						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
+						if (SignBitmap != null) {
+							signImage.setImageBitmap(SignBitmap);
+						}
+					}
+					signButton.setBackgroundResource(R.drawable.takephoto);
 					edittext2.setText(CheckActivity1.replaceStr(str));
 					edittext2.setTextSize(16);
+					edittext2.setEnabled(false);
 					edittext2.addTextChangedListener(new TextWatcher() {
 						@Override
 						public void onTextChanged(CharSequence text, int start, int before,
@@ -386,7 +404,12 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 		    	            HtmlHelper.changeTextValue(htmlDoc, cell, operation2.getRealcellid());
 						}
 					});
-					linear2.addView(edittext2, para2_1);
+					if (!markup.equals("") && markup.equals("sign")) {
+						linear2.addView(signImage, para2_4);
+						linear2.addView(signButton, para2_3);
+					} else {
+						linear2.addView(edittext2, para2_1);
+					}
 					//初始化textInfo
 					ImageView image2 = new ImageView(context);
 					image2.setBackgroundResource(R.drawable.blacktiao);
@@ -405,6 +428,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					layoutParams3.gravity = Gravity.CENTER;
 					layoutParams3_1.setMargins((avewdith-1)/2, 0, 0, 0);				//左上右下
 					CheckBox cb3 = new CheckBox(context);
+					cb3.setEnabled(false);
 					final Operation operation3 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					String value = CommonTools.null2String(operation3.getOpvalue());
 					if(value != null){
@@ -460,6 +484,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					linear4.setLayoutParams(para4);
 					//初始化EditText
 					CheckBox checkbox4 = new CheckBox(context);
+					checkbox4.setEnabled(false);
 //					checkbox4.setGravity(Gravity.CENTER);
 					final Operation operation4 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					String value4 = operation4.getOpvalue();
@@ -551,6 +576,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					String stringdata5 = CommonTools.null2String(operation5.getOpvalue());
 					edit5.setText(CheckActivity1.replaceStr(stringdata5));
 					edit5.setTextSize(16);
+					edit5.setEnabled(false);
 					linear5.addView(edit5, para5_1);
 					//初始化textInfo
 					final String userId5 = OrientApplication.getApplication().loginUser.getUserid();
@@ -635,9 +661,11 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					String stringdata6 = CommonTools.null2String(operation6_2.getOpvalue());
 	    			edit6.setText(CheckActivity1.replaceStr(stringdata6));
 	    			edit6.setTextSize(16);
+					edit6.setEnabled(false);
 					linear6.addView(edit6, para6_1);
 					//初始化checkbox
 					CheckBox checkbox6 = new CheckBox(context);
+					checkbox6.setEnabled(false);
 					String value6 = operation6_1.getOpvalue();
 		    		if(value6 != null){
 						if(value6.equals("is")){				//打钩状态
@@ -724,9 +752,11 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					String stringdata7 = CommonTools.null2String(operation72.getOpvalue());
 	    			edit7.setText(CheckActivity1.replaceStr(stringdata7));
 	    			edit7.setTextSize(16);
+					edit7.setEnabled(false);
 					linear7.addView(edit7, para7_2);
 					//初始化checkbox
 					CheckBox cb7 = new CheckBox(context);
+					cb7.setEnabled(false);
 					String value7 = CommonTools.null2String(operation71.getOpvalue());
 					if(value7 != null){
 						if(value7.equals("is")){						//打钩状态

@@ -14,6 +14,7 @@
     <string name="action_photo">拍照</string>
     <string name="look_photo">查看相册</string>
     <string name="select_photo">从系统相册选择照片</string>
+    <string name="no_photo">暂无照片</string>
 
     <string name="desc_list_item_icon">Item Icon</string>
     
@@ -81,6 +82,7 @@
     <string name="cancel">Cancel</string>
 
     <string name="all_pic">全部图片</string>
+    <string name="camera_pic">Camera</string>
     <string name="preview_without_num">预览</string>
     <string name="preview_with_num">预览(%1$d)</string>
     <string name="choose_pic_finish">完成</string>
@@ -115,6 +117,10 @@
     <string name="video">视频</string>
     <string name="cant_play_video">没有可以播放的程序</string>
     <string name="READ_EXTERNAL_STORAGE">需要打开读取存储权限</string>
-    
+
+
+
+    <string name="chaek_warning">注意:点击该按钮表示该表单的检查工作已经完成，并且表单将会进入待签署状态，不能再次检查。（回退表单除外）</string>
+
     
 </resources>

@@ -36,7 +36,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:src="@drawable/close"
-            android:textColor="@color/White"/>
+            android:textColor="@color/White"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/back"
@@ -153,7 +154,8 @@
                     android:id="@+id/sign_bottom"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/sign_proview"

@@ -1,10 +1,15 @@
 package com.example.navigationdrawertest.activity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.nodes.Document;
@@ -20,12 +25,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -69,13 +76,17 @@ import com.example.navigationdrawertest.data.HtmlData;
 import com.example.navigationdrawertest.model.Cell;
 import com.example.navigationdrawertest.model.Operation;
 import com.example.navigationdrawertest.model.Scene;
+import com.example.navigationdrawertest.model.Signature;
 import com.example.navigationdrawertest.model.Task;
 import com.example.navigationdrawertest.utils.ActivityCollector;
+import com.example.navigationdrawertest.utils.BitmapUtil;
 import com.example.navigationdrawertest.utils.CommonTools;
 import com.example.navigationdrawertest.utils.Config;
 import com.example.navigationdrawertest.utils.DateUtil;
 import com.example.navigationdrawertest.utils.HtmlHelper;
 import com.example.navigationdrawertest.utils.ScreenUtils;
+import com.example.navigationdrawertest.write.DialogListener;
+import com.example.navigationdrawertest.write.WritePadDialog;
 
 import de.greenrobot.event.EventBus;
 
@@ -95,16 +106,16 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	private int width;							//屏幕总宽度
 	private int avewdith;					//平均宽度
 	private List<Cell> headMap = new ArrayList<Cell>();			//head的Cell集合
-	public Document htmlDoc = null;	
+	public Document htmlDoc = null;
 	private static long task_id;					//表格ID
-	
+
 	private ProgressDialog prodlg;
-	
+
 	//只有返回的时候保存HTML数据(check)
 	private List<HtmlData> htmlList;
 	//只有返回的时候保存HTML数据(string)
 	private List<HtmlData> htmlList_text;
-	
+
 	//表格之外的其他布局
 	private com.example.navigationdrawertest.CustomUI.NoScrollListview listView_1;
 	private Switch checkSwitch;
@@ -112,12 +123,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //	private ConditionAdapter conditionadapter = null;
 	private ConditionAdapter1 conditionadapter;
 	public static int picturenumbers = 0;
+	public static int totalPhotoNum = 0;
 	private ImageView mBack;
-	private TextView mTablename;
+	private TextView mTablename, mTotalPhotoNum;
 
 	private LinearLayout mSumit;
 	private RelativeLayout mBottom;
-	private Button mProview, mNext, mRefresh, mConfirmBtn, mCancelBtn;
+	private Button mProview, mNext, mRefresh, mConfirmBtn, mCancelBtn, mPandu, mWanzhengxing;
 	private ImageView mClose;
 	private int rowsnum;
 	private int pagetype;
@@ -128,12 +140,18 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	private List<Map<String, String>> quickCollectMapList = new ArrayList<Map<String, String>>();
 	private PopupWindow popupWindow;
 
+	private Bitmap mSignBitmap;
+	private String signPath;
+	int windowHeight;
+	int windowWidth;
+
 	public static void actionStart(Context context, long taskid, Handler handler, String location) {
 		Intent intent = new Intent(context, CheckActivity1.class);
 		task_id = Long.valueOf(taskid);
 		context.startActivity(intent);
+		totalPhotoNum = 0;
 	}
-	
+
 	private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -154,7 +172,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			}
         }
     };
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -169,15 +187,20 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 		initHeaderUI();
 		initContentUI();
+		DisplayMetrics dm = new DisplayMetrics();
+		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		windowWidth = dm.widthPixels;// 获取屏幕分辨率宽度
+		windowHeight = dm.heightPixels;
+		mTotalPhotoNum.setText("照片数量："+String.valueOf(totalPhotoNum));
 		setTitle(currentTask.getTaskname());
 		mTablename.setText(currentTask.getTaskname());
 		if(currentTask.getEndTime() != null && !currentTask.getEndTime().equals("")){
 			checkSwitch.setChecked(true);
 		}
-		checkSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {  
-            @Override  
-            public void onCheckedChanged(CompoundButton buttonView,  
-                    boolean isChecked) {  
+		checkSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                    boolean isChecked) {
                 if(isChecked) {  	//任务完成
                 	currentTask.setEndTime(DateUtil.getCurrentDate());
                 	currentTask.setLocation(2);
@@ -186,11 +209,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
                 	currentTask.setEndTime("");
                 	currentTask.setLocation(1);
                 	currentTask.save();
-                }  
-            }  
+                }
+            }
         });
 		loadConditionAdapter(task_id, OrientApplication.getApplication().loginUser.getUserid());
-//		conditionadapter = new ConditionAdapter(CheckActivity1.this, R.layout.checkconditionitem, scenelists);
 		conditionadapter = new ConditionAdapter1(CheckActivity1.this, scenelists);
 		listView_1.setAdapter(conditionadapter);
 
@@ -198,19 +220,6 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		titleHorScr =  (SyncHorizontalScrollView) findViewById(R.id.title_horsv);
 		titleHorScr.setScrollView(myScrollView);
 		myScrollView.setScrollView(titleHorScr);
-
-		// 当布局的状态或者控件的可见性发生改变回调的接口
-//		findViewById(R.id.parent_layout).getViewTreeObserver()
-//				.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-//
-//					@Override
-//					public void onGlobalLayout() {
-//						// 这一步很重要，使得上面的购买布局和下面的购买布局重合
-//						onScroll(myScrollView.getScrollY());
-//
-//						System.out.println(myScrollView.getScrollY());
-//					}
-//				});
 	}
 
 	@Override
@@ -303,9 +312,49 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				finish();
 			}
 		});
-
+		mPandu = (Button) findViewById(R.id.bt_check_pandu);
+		mPandu.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OrientApplication.getApplication().setPanduFlag(1);
+				List<Cell> actualvalCellList = DataSupport.where("markup=? and taskid=? and rowsid=?", Config.actualval, task_id+"", String.valueOf(pagetype)).order("verticalorder asc").find(Cell.class);
+				for (Cell cell : actualvalCellList) {
+					if (cell.getMarkup().equals(Config.actualval) && OrientApplication.getApplication().getPageflage() == 1) {
+						pandu(cell);
+					}
+				}
+				CheckActivity1.actionStart(CheckActivity1.this, task_id, mHandler, "3");
+				finish();
+			}
+		});
+		mTotalPhotoNum = (TextView) findViewById(R.id.check_total_photoNum);
+		mWanzhengxing = (Button) findViewById(R.id.bt_check_wanzheng);
+		mWanzhengxing.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//实测值
+				List<Cell> actualvalCellList = DataSupport.where("taskid=? and markup=?", task_id+"", Config.actualval).find(Cell.class);
+				String actualvalNum = "";
+				int isWanzheng = 0;
+				if (actualvalCellList.size() > 0) {
+					for (Cell cell : actualvalCellList) {
+						actualvalNum = cell.getOpvalue();
+						if (actualvalNum.equals("")) {
+							isWanzheng = isWanzheng + 1;
+						}
+					}
+				} else {
+					Toast.makeText(context, "该表单无实测值。", Toast.LENGTH_SHORT).show();
+				}
+				if (isWanzheng != 0) {
+					Toast.makeText(context, "有实测值未填写。", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(context, "该表单具备完整性。", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
-	
+
 	// 初始化参数
 	private void initParam() {
 		htmlList = new ArrayList<HtmlData>();
@@ -369,7 +418,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			}
 		}
 	}
-	
+
 	/**
 	 * 初始化Header
 	 */
@@ -401,7 +450,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		table_header.addView(tablerow, new TableLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, 55));
 	}
-	
+
 	/**
 	 * 初始化内容(type=1,checkbox    2,edittext)
 	 */
@@ -452,6 +501,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					android.widget.TableRow.LayoutParams para2 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para2_3 = new android.widget.TableRow.LayoutParams(80, 70);
+					android.widget.TableRow.LayoutParams para2_4 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear2 = new LinearLayout(context);
 					linear2.setOrientation(LinearLayout.HORIZONTAL);
 					linear2.setLayoutParams(para2);
@@ -459,8 +510,54 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final Operation operation2 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String str = CommonTools.null2String(operation2.getOpvalue());
 					final EditText edittext2 = new EditText(context);
+					final ImageButton signButton = new ImageButton(context);
+					final ImageView signImage = new ImageView(context);
+					final String markup = cell.getMarkup();
+					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
+					final Signature signnature = new Signature();
+					if (signatureList.size() > 0) {
+//						signnature = signatureList.get(0);
+						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
+						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
+						if (SignBitmap != null) {
+							signImage.setImageBitmap(SignBitmap);
+						}
+					}
+//					signImage.setBackgroundResource(R.color.sign_bg);
+					signButton.setBackgroundResource(R.drawable.takephoto);
+					signButton.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(final View v) {
+							WritePadDialog writeTabletDialog = new WritePadDialog(context, new DialogListener() {
+								@Override
+								public void refreshActivity(Object object,
+															Signature sign) {
+
+									mSignBitmap = (Bitmap) object;
+									signPath = createFile(String.valueOf(cell.getCellid()), String.valueOf(task_id));
+									Bitmap bmp = getBitmapByOpt(signPath);
+									if (bmp != null) {
+										String time = DateUtil.getCurrentDate();
+										sign.setIsFinish("is");
+										sign.setBitmappath(signPath);
+										sign.setSignTime(time);
+										sign.setSignid(cell.getCellid());
+										sign.setId(Integer.parseInt(cell.getCellid().substring(8,14)));
+										sign.save();
+										setLocation(sign);
+										signImage.setImageBitmap(bmp);
+									}
+									v.setEnabled(false);
+								}
+							}, signnature);
+							writeTabletDialog.show();
+						}
+					});
 					edittext2.setTextSize(16);
 					edittext2.setText(replaceStr(str));
+					if (str.equals(Config.bufuhe)) {
+						edittext2.setTextColor(this.getResources().getColor(R.color.red));
+					}
 					edittext2.addTextChangedListener(new TextWatcher() {
 						@Override
 						public void onTextChanged(CharSequence text, int start, int before,
@@ -484,7 +581,6 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    	            HtmlData data = new HtmlData(cell, operation2.getRealcellid());
 		    	            htmlList_text.add(data);
 //		    	            HtmlHelper.changeTextValue(htmlDoc, cell, operation2.getRealcellid());
-
 						}
 					});
 					edittext2.setOnLongClickListener(new View.OnLongClickListener() {
@@ -494,7 +590,12 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 							return false;
 						}
 					});
-					linear2.addView(edittext2, para2_1);
+					if (!markup.equals("") && markup.equals("sign")) {
+						linear2.addView(signImage, para2_4);
+						linear2.addView(signButton, para2_3);
+					} else {
+						linear2.addView(edittext2, para2_1);
+					}
 					//初始化textInfo
 					ImageView image2 = new ImageView(context);
 					image2.setBackgroundResource(R.drawable.blacktiao);
@@ -541,7 +642,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            HtmlData data = new HtmlData(cell, operation3.getRealcellid());
 			    	            htmlList.add(data);
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -600,7 +701,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            HtmlData data = new HtmlData(cell, operation4.getRealcellid());
 			    	            htmlList.add(data);
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation4.getRealcellid());
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -637,6 +738,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						}
 					}
 					image4_1.setNum(picturenumbers);
+					totalPhotoNum = totalPhotoNum + picturenumbers;
 					picturenumbers = 0;
 					image4_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -688,6 +790,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					NumImageButton image5 = new NumImageButton(context);
 					image5.setBackgroundResource(R.drawable.takephoto);
 					image5.setNum(picturenumbers);
+					totalPhotoNum = totalPhotoNum + picturenumbers;
 					picturenumbers = 0;
 					image5.setOnClickListener(new OnClickListener() {
 						@Override
@@ -709,7 +812,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit5.getText().toString();  
+							String str = edit5.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 //		    	        	Task task = DataSupport.where("rwid=? and taskid = ?", OrientApplication.getApplication().rw.getRwid(), cell.getTaskid()).find(Task.class).get(0);
@@ -785,7 +888,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            HtmlData data = new HtmlData(cell, operation6_1.getRealcellid());
 			    	            htmlList.add(data);
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation6_1.getRealcellid());
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -812,7 +915,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit6.getText().toString();  
+							String str = edit6.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 //		    	        	Task task = DataSupport.where("rwid=? and taskid = ?", OrientApplication.getApplication().rw.getRwid(), cell.getTaskid()).find(Task.class).get(0);
@@ -888,7 +991,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation71.getRealcellid());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -914,7 +1017,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit7.getText().toString();  
+							String str = edit7.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 		    	        	operation72.setOpvalue(str);
@@ -961,6 +1064,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					NumImageButton image7_1 = new NumImageButton(context);
 					image7_1.setBackgroundResource(R.drawable.takephoto);
 					image7_1.setNum(picturenumbers);
+					totalPhotoNum = totalPhotoNum + picturenumbers;
 					picturenumbers = 0;
 					image7_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -994,7 +1098,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					linear8.setOrientation(LinearLayout.HORIZONTAL);
 					linear8.setLayoutParams(para8);
 					//初始化EditText
-					final Operation operation8 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);		
+					final Operation operation8 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String opId8 = operation8.getSketchmap();
 					final String userId8 = OrientApplication.getApplication().loginUser.getUserid();
 		    		final String taskId8 = cell.getTaskid();
@@ -1030,7 +1134,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation8.getRealcellid());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -1054,7 +1158,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					    	    .with(context)
 					    	    .load(absPath)
 					    	    .override(80, 80)
-					    	    .fitCenter() 
+					    	    .fitCenter()
 					    	    .into(image8);
 
 						image8.setOnClickListener(new OnClickListener() {
@@ -1119,7 +1223,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation91.getRealcellid());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -1145,7 +1249,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit9.getText().toString();  
+							String str = edit9.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 //		    	        	Task task = DataSupport.where("rwid=? and taskid = ?", OrientApplication.getApplication().rw.getRwid(), cell.getTaskid()).find(Task.class).get(0);
@@ -1182,7 +1286,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					    	    .with(getApplicationContext())
 					    	    .load(absPath9)
 					    	    .override(80, 80)
-					    	    .fitCenter() 
+					    	    .fitCenter()
 					    	    .into(image9);
 
 						image9.setOnClickListener(new OnClickListener() {
@@ -1249,7 +1353,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation10_1.getRealcellid());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -1275,7 +1379,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit10.getText().toString();  
+							String str = edit10.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 //		    	        	Task task = DataSupport.where("rwid=? and taskid = ?", OrientApplication.getApplication().rw.getRwid(), cell.getTaskid()).find(Task.class).get(0);
@@ -1348,6 +1452,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						}
 					}
 					image10_1.setNum(picturenumbers);
+					totalPhotoNum = totalPhotoNum + picturenumbers;
 					picturenumbers = 0;
 					image10_1.setBackgroundResource(R.drawable.takephoto);
 					image10_1.setOnClickListener(new OnClickListener() {
@@ -1382,7 +1487,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					linear11.setOrientation(LinearLayout.HORIZONTAL);
 					linear11.setLayoutParams(para11);
 					//初始化EditText
-					final Operation operation11 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);		
+					final Operation operation11 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					//初始化EditText
 					String stringdata11 = CommonTools.null2String(operation11.getOpvalue());
 					final EditText edit11 = new EditText(context);
@@ -1401,7 +1506,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit11.getText().toString();  
+							String str = edit11.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 //		    	        	Task task = DataSupport.where("rwid=? and taskid = ?", OrientApplication.getApplication().rw.getRwid(), cell.getTaskid()).find(Task.class).get(0);
@@ -1425,7 +1530,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 							+ Config.opphotoPath + "/"
 							+ taskId11 + "/" + opId11 + ".jpg";
 		    		Bitmap bitmap11 = BitmapFactory.decodeFile(absPath11);
-		    		
+
 					final ImageView image11 = new ImageButton(context);
 					if(bitmap11 != null)
 
@@ -1478,7 +1583,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 						@Override
 						public void afterTextChanged(Editable edit) {
-							String str = edit12.getText().toString();  
+							String str = edit12.getText().toString();
 		    	        	cell.setOpvalue(str);
 		    	        	cell.update(cell.getId());
 //		    	        	Task task = DataSupport.where("rwid=? and taskid = ?", OrientApplication.getApplication().rw.getRwid(), cell.getTaskid()).find(Task.class).get(0);
@@ -1511,7 +1616,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					    	    .with(context)
 					    	    .load(absPath12)
 					    	    .override(80, 80)
-					    	    .fitCenter() 
+					    	    .fitCenter()
 					    	    .into(image12);
 
 						image12.setOnClickListener(new OnClickListener() {
@@ -1536,6 +1641,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						}
 					}
 					image12_1.setNum(picturenumbers);
+					totalPhotoNum = totalPhotoNum + picturenumbers;
 					picturenumbers = 0;
 					image12_1.setBackgroundResource(R.drawable.takephoto);
 					image12_1.setOnClickListener(new OnClickListener() {
@@ -1594,7 +1700,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation13_1.getRealcellid());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show(); 
+								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -1649,6 +1755,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						}
 					}
 					image13_1.setNum(picturenumbers);
+					totalPhotoNum = totalPhotoNum + picturenumbers;
 					picturenumbers = 0;
 					image13_1.setBackgroundResource(R.drawable.takephoto);
 					image13_1.setOnClickListener(new OnClickListener() {
@@ -1665,36 +1772,36 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					tablerow.addView(linear13, para13);
 					break;
 				default:
-					
+
 				}
 			}
 			table_content.addView(tablerow, new TableLayout.LayoutParams(
 					LayoutParams.WRAP_CONTENT, 55));
 		}
 	}
-	
+
 	//加载Condition数据
 	private void loadConditionAdapter(long taskid, String userid){
 		List<Scene> conditions = aerospacedb.loadConditionAdapter(taskid, userid);
 		scenelists = conditions;
 	}
-	
+
 	//加载Table数据
 	private List<Cell> loadCellAdapter(long taskid, String userid, int pagetype){
 		List<Cell> cellList = aerospacedb.loadTableAdapter(taskid, userid, pagetype);
 		return cellList;
 	}
-	
+
 	private void showPhotoDialog(final String cellId, final String taskId, final Operation operation){
 		String opId = "";
 
-		final String path = Environment.getExternalStorageDirectory() + Config.v2photoPath 
+		final String path = Environment.getExternalStorageDirectory() + Config.v2photoPath
 				+ File.separator
 				+ OrientApplication.getApplication().rw.getRwid()
-				+ File.separator 
+				+ File.separator
 				+ taskId
 				+ File.separator
-				+ CommonTools.null2String(operation.getOperationid()) 
+				+ CommonTools.null2String(operation.getOperationid())
 				+ File.separator;
 		//取消拍照选择弹框，直接进入相册
 		Intent intent = new Intent(CheckActivity1.this, AlbumActivity.class);
@@ -1745,18 +1852,18 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //            }
 //        });
 	}
-	
-	@Override  
-	public boolean onCreateOptionsMenu(Menu menu) {  
-	    MenuInflater inflater = getMenuInflater();  
-	    inflater.inflate(R.menu.readactivity, menu);  
-	    return super.onCreateOptionsMenu(menu);  
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.readactivity, menu);
+	    return super.onCreateOptionsMenu(menu);
 	}
-	
-	@Override  
-	public boolean onOptionsItemSelected(MenuItem item) {  
-		switch (item.getItemId()) {  
-	    case R.id.action_save:  
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+	    case R.id.action_save:
 	    	this.prodlg = ProgressDialog.show(this, "返回", "正在保存数据");
 			prodlg.setIcon(this.getResources().getDrawable(R.drawable.logo_title));
 			new Thread(new Runnable() {
@@ -1773,50 +1880,50 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					mHandler.sendMessage(message);
 				}
 			}).start();
-	        return true;  
-	    default:  
-	        return super.onOptionsItemSelected(item);  
-	    }  
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
-	
+
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:             
+            case 1:
                 if (resultCode == Activity.RESULT_OK) {
                 }
         }
     }
-	
-	@Override  
-	public boolean dispatchKeyEvent(KeyEvent event) {  
-	    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK  
-	            && event.getAction() == KeyEvent.ACTION_DOWN  
-	            && event.getRepeatCount() == 0) {             
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+	    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK
+	            && event.getAction() == KeyEvent.ACTION_DOWN
+	            && event.getRepeatCount() == 0) {
 	    	if(HtmlHelper.saveHtmlDoc(currentTask, htmlDoc))
 	    		Log.i("HTML编辑保存", currentTask.getTaskname()+"保存成功！");
-	    }  
-	    return super.dispatchKeyEvent(event);  
-	} 
-	
+	    }
+	    return super.dispatchKeyEvent(event);
+	}
+
 	/**
 	 * Activity加载完成之后的时间
 	 */
-	@Override  
+	@Override
     public void onWindowFocusChanged(boolean hasFocus){
 		super.onWindowFocusChanged(hasFocus);
         if(hasFocus){
 
 		}
-    } 
-	
-	@Override    
-	public boolean onKeyDown(int keyCode, KeyEvent event) {  
-		if(keyCode == KeyEvent.KEYCODE_BACK){      
+    }
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
 			EventBus.getDefault().post(new LocationEvent("ok"));
-		}  
-		return  super.onKeyDown(keyCode, event);     
+		}
+		return  super.onKeyDown(keyCode, event);
 	}
 
 	@Override
@@ -1851,8 +1958,6 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				}
 			}
 		}
-
-
 	}
 
 	@Subscribe
@@ -1866,6 +1971,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	protected void onDestroy() {
 		super.onDestroy();
 		EventBus.getDefault().unregister(this);
+		OrientApplication.getApplication().setPanduFlag(0);
+		totalPhotoNum = 0;
 	}
 
 	private void quickCollectPopu(final Cell cell, final Operation operation, final EditText editText) {
@@ -2059,4 +2166,230 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		return newStr;
 	}
 
+	/**
+	 * @Description: 数据判读
+	 * @author qiaozhili
+	 * @date 2019/12/24 10:47
+	 * @param
+	 * @return
+	 */
+	private void pandu(Cell cell) {
+		//实测值
+		List<Cell> actualvalCellList = DataSupport.where("horizontalorder=? and taskid=? and markup=? and rowsid=?", cell.getHorizontalorder(), task_id+"", Config.actualval, String.valueOf(pagetype)).find(Cell.class);
+		//要求值
+		List<Cell> requirevalCellList = DataSupport.where("horizontalorder=? and taskid=? and markup=? and rowsid=?", cell.getHorizontalorder(), task_id+"", Config.requireval, String.valueOf(pagetype)).find(Cell.class);
+		//上偏差
+		List<Cell> upperCellList = DataSupport.where("horizontalorder=? and taskid=? and markup=? and rowsid=?", cell.getHorizontalorder(), task_id+"", Config.upper, String.valueOf(pagetype)).find(Cell.class);
+		//下偏差
+		List<Cell> lowerCellList = DataSupport.where("horizontalorder=? and taskid=? and markup=? and rowsid=?", cell.getHorizontalorder(), task_id+"", Config.lower, String.valueOf(pagetype)).find(Cell.class);
+		//符合度
+		List<Cell> complianceCellList = DataSupport.where("horizontalorder=? and taskid=? and markup=? and rowsid=?", cell.getHorizontalorder(), task_id+"", Config.compliance, String.valueOf(pagetype)).find(Cell.class);
+		Operation operation2 = DataSupport.where("cellid=? and taskid=?", complianceCellList.get(0).getCellid(), task_id+"").find(Operation.class).get(0);
+		//实测值
+		String actualvalNum = "";
+		if (actualvalCellList.size() > 0) {
+			actualvalNum = actualvalCellList.get(0).getOpvalue();
+		}
+		//要求值
+		String requirevalNum = "";
+		//前缀符号
+		String prefixCode = "";
+		if (requirevalCellList.size() > 0) {
+			prefixCode = requirevalCellList.get(0).getTextvalue();
+			requirevalNum = prefixCode.substring(1, prefixCode.length());
+		}
+		//要求值中有无≥/≤/＞/＜等的情况
+		String pattern = "^(\\≥|\\＞|\\≤|\\＜)(\\-|\\+)?([\\d]+)(\\.[\\d]+)?$";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(prefixCode);
+		System.out.println(m.matches());
+		//包含≥/≤/＞/＜等的情况
+		if (m.matches()) {
+			String symbol = prefixCode.substring(0,1);
+			if (!actualvalNum.equals("") && !requirevalNum.equals("")) {
+				switch (symbol) {
+					case "≥":
+						judgeResult((Integer.parseInt(actualvalNum) >= Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						break;
+					case "＞":
+						judgeResult((Integer.parseInt(actualvalNum) > Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						break;
+					case "≤":
+						judgeResult((Integer.parseInt(actualvalNum) <= Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						break;
+					case "＜":
+						judgeResult((Integer.parseInt(actualvalNum) < Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						break;
+				}
+			} else {
+				Toast.makeText(context, "判读数据异常，请检查判读数据。", Toast.LENGTH_SHORT).show();
+			}
+		}
+		//上下偏差情况
+		else {
+			//要求值
+			String require = requirevalCellList.get(0).getTextvalue();
+			if (!actualvalNum.equals("") && !require.equals("")) {
+				//上限 实测值+上偏差
+				int max = Integer.parseInt(require) + Integer.parseInt(upperCellList.get(0).getTextvalue());
+				//下限 实测值+下偏差
+				int min = Integer.parseInt(require) + Integer.parseInt(lowerCellList.get(0).getTextvalue());
+				boolean judge = Integer.parseInt(actualvalNum) > min && Integer.parseInt(actualvalNum) < max;
+				judgeResult(judge, complianceCellList.get(0), operation2);
+			} else {
+
+				Toast.makeText(context, "判读数据异常，请检查判读数据。", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	}
+
+	private void judgeResult(boolean judge, Cell cell, Operation operation) {
+		if (judge) {
+			cell.setOpvalue("符合");
+			operation.setOpvalue("符合");
+		} else {
+			cell.setOpvalue("不符合");
+			operation.setOpvalue("不符合");
+		}
+		cell.update(cell.getId());
+		operation.update(operation.getId());
+		HtmlData data = new HtmlData(cell, operation.getRealcellid());
+		htmlList_text.add(data);
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 统计照片数量
+	 * @author qiaozhili
+	 * @date 2019/12/27 14:45
+	 */
+	private void getAllPhotoNum() {
+		List<Cell> cellList = DataSupport.where("taskid=?",task_id+"").order("verticalorder asc").find(Cell.class);
+		int totalPhotoNum = 0;
+		for (Cell cell : cellList) {
+			if (cell.getCelltype().contains("PHOTO")) {
+				final Operation operation4 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id + "").find(Operation.class).get(0);
+				final String path1 = Environment.getExternalStorageDirectory() + Config.v2photoPath
+						+ File.separator
+						+ OrientApplication.getApplication().rw.getRwid()
+						+ File.separator
+						+ task_id
+						+ File.separator
+						+ CommonTools.null2String(operation4.getOperationid())
+						+ File.separator;
+			}
+		}
+		List<Cell> newCellList = new ArrayList<Cell>();
+		for(int j=1; j<=cellList.size(); j++){
+			for(int k=1; k<=cellList.size(); k++){
+				Cell cell = cellList.get(k-1);
+				if(cell.getVerticalorder().equals(j+"")){
+					newCellList.add(cell);
+					break;
+				}
+			}
+		}
+	}
+
+	public void getPicturesNum(String string) {
+		// TODO Auto-generated method stub
+		File file = new File(string);
+		File[] files = file.listFiles();
+		if (files != null) {
+			for (int j = 0; j < files.length; j++) {
+				String name = files[j].getName();
+				if (files[j].isDirectory()) {
+					String dirPath = files[j].toString().toLowerCase();
+					System.out.println(dirPath);
+					getPicturesNum(dirPath + "/");
+				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")) {
+					System.out.println("FileName===" + files[j].getName());
+					picturenumbers++;
+				}
+			}
+		}
+	}
+
+	/**
+	 * 创建手写签名文件
+	 *
+	 * @return
+	 */
+	private String createFile(String cellId, String taskId) {
+		ByteArrayOutputStream baos = null;
+		String _path = null;
+		try {
+			String signphotoPath = Environment.getDataDirectory().getPath()
+					+ Config.packagePath + Config.signphotoPath + "/" + taskId
+					+ "/";
+			_path = signphotoPath + cellId + ".jpg";
+			File path = new File(signphotoPath);
+			if (!path.exists()) {// 目录存在返回false
+				path.mkdirs();// 创建一个目录
+			}
+			baos = new ByteArrayOutputStream();
+			mSignBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			byte[] photoBytes = baos.toByteArray();
+			if (photoBytes != null) {
+				new FileOutputStream(new File(_path)).write(photoBytes);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (baos != null)
+					baos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return _path;
+	}
+
+	public Bitmap getBitmapByOpt(String picturePath) {
+		BitmapFactory.Options opt = new BitmapFactory.Options();
+		opt.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(picturePath, opt);
+		int imgHeight = opt.outHeight;
+		int imgWidth = opt.outWidth;
+		int scaleX = imgWidth / windowWidth;
+		int scaleY = imgHeight / windowHeight;
+		int scale = 1;
+		if (scaleX > scaleY & scaleY >= 1) {
+			scale = scaleX;
+		}
+		if (scaleY > scaleX & scaleX >= 1) {
+			scale = scaleY;
+		}
+		opt.inJustDecodeBounds = false;
+		opt.inSampleSize = scale;
+		return BitmapFactory.decodeFile(picturePath, opt);
+	}
+
+	public void setLocation(Signature sign) {
+		int sumcount = 0; // 总共多少个签署项
+		int finishcount = 0; // 已经完成多少个签署项
+		List<Signature> signs = DataSupport.where("taskid = ?",
+				sign.getTaskid()).find(Signature.class);
+		Task task = DataSupport.where("taskid = ?", sign.getTaskid())
+				.find(Task.class).get(0);
+		sumcount = signs.size();
+		for (int i = 0; i < signs.size(); i++) {
+			if (signs.get(i).getIsFinish() != null
+					&& signs.get(i).getIsFinish().equals("is")) {
+				finishcount++;
+			}
+		}
+		if (sumcount == finishcount) { // 全部签署完成
+			task.setLocation(3);
+			task.update(task.getId());
+		} else if (sumcount > finishcount && finishcount > 0) { // 签署了一部分
+			task.setLocation(2);
+			task.update(task.getId());
+		} else {
+
+		}
+	}
 }

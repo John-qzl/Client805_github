@@ -15,6 +15,7 @@
     <color name="gray">#DBDBDB</color>
     <color name="cream">#EBEBFC</color>
     <color name="info_bg">#d8000000</color>
+    <color name="sign_bg">#d5d5d5</color>
 
     <!-- dialog框颜色 -->
     <color name="float_transparent">#00000000</color>
@@ -64,6 +65,11 @@
     <color name="buttonBg1">#1d8ae7</color>
     <color name="status_back">#f9f350</color>
     <color name="bt_copy">#fa0408</color>
+
+    //纯色
+    <color name="red">#fa0408</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
 
 
 </resources>

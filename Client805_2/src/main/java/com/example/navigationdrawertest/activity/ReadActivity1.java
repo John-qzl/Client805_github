@@ -60,6 +60,7 @@ import com.example.navigationdrawertest.model.Scene;
 import com.example.navigationdrawertest.model.Signature;
 import com.example.navigationdrawertest.model.Task;
 import com.example.navigationdrawertest.utils.ActivityCollector;
+import com.example.navigationdrawertest.utils.BitmapUtil;
 import com.example.navigationdrawertest.utils.CommonTools;
 import com.example.navigationdrawertest.utils.Config;
 import com.example.navigationdrawertest.utils.HtmlHelper;
@@ -357,17 +358,38 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					android.widget.TableRow.LayoutParams para2 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para2_3 = new android.widget.TableRow.LayoutParams(80, 70);
+					android.widget.TableRow.LayoutParams para2_4 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear2 = new LinearLayout(context);
 					linear2.setOrientation(LinearLayout.HORIZONTAL);
 					linear2.setLayoutParams(para2);
 					//初始化EditText
 					final Operation operation2 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String str = CommonTools.null2String(operation2.getOpvalue());
+					final ImageButton signButton = new ImageButton(context);
+					final ImageView signImage = new ImageView(context);
+					final String markup = cell.getMarkup();
+					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
+//					final Signature signnature = new Signature();
+					if (signatureList.size() > 0) {
+//						signnature = signatureList.get(0);
+						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
+						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
+						if (SignBitmap != null) {
+							signImage.setImageBitmap(SignBitmap);
+						}
+					}
+					signButton.setBackgroundResource(R.drawable.takephoto);
 					EditText edittext2 = new EditText(context);
 					edittext2.setText(CheckActivity1.replaceStr(str));
 					edittext2.setTextSize(16);
 					edittext2.setEnabled(false);
-					linear2.addView(edittext2, para2_1);
+					if (!markup.equals("") && markup.equals("sign")) {
+						linear2.addView(signImage, para2_4);
+						linear2.addView(signButton, para2_3);
+					} else {
+						linear2.addView(edittext2, para2_1);
+					}
 					//初始化textInfo
 					ImageView image2 = new ImageView(context);
 					image2.setBackgroundResource(R.drawable.blacktiao);
