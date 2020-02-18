@@ -1,8 +1,10 @@
 package com.example.navigationdrawertest.activity;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
@@ -11,8 +13,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,14 +43,20 @@ import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.SweetAlert.SweetAlertDialog;
 import com.example.navigationdrawertest.adapter.AlbumAdapter;
 import com.example.navigationdrawertest.adapter.PictureListAdapter;
+import com.example.navigationdrawertest.application.OrientApplication;
+import com.example.navigationdrawertest.camera.ImageDirectoryModel;
 import com.example.navigationdrawertest.camera.MyUtils;
 import com.example.navigationdrawertest.camera.PicPathEvent;
 import com.example.navigationdrawertest.camera.PickOrTakeImageActivity;
 import com.example.navigationdrawertest.camera.PickOrTakeVideoActivity;
+import com.example.navigationdrawertest.camera.SingleImageModel;
 import com.example.navigationdrawertest.camera1.CameraActivity;
 import com.example.navigationdrawertest.camera1.video.PickerActivity;
 import com.example.navigationdrawertest.camera1.video.PickerConfig;
 import com.example.navigationdrawertest.camera1.video.entity.Media;
+import com.example.navigationdrawertest.fragment.AlbumFragment;
+import com.example.navigationdrawertest.fragment.HomeFragment;
+import com.example.navigationdrawertest.model.RwRelation;
 import com.example.navigationdrawertest.utils.CommonUtil;
 import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.HtmlHelper;
@@ -58,6 +70,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,28 +79,54 @@ import static com.example.navigationdrawertest.camera.PickOrTakeImageActivity.CO
 /**
  * Created by qiaozhili on 2019/2/12 15:26.
  */
-public class AlbumActivity extends BaseActivity {
-    private GridView mGridView;
-    private AlbumAdapter mAlbumAdapter;
+public class AlbumActivity extends FragmentActivity{
+//    private GridView mGridView;
+//    private AlbumAdapter mAlbumAdapter;
     private String path;
     private ArrayList<String> mPhotos = new ArrayList<String>();
     private ArrayList<String> mPhotosnew = new ArrayList<String>();
     private ProgressDialog prodlg;
     private final static int MAXIMGNUMBER = 100;
-    private PictureListAdapter adapter;
-    private RecyclerView mRecyclerView;
+//    private PictureListAdapter adapter;
+//    private RecyclerView mRecyclerView;
     private Button mAddPhoto, mAddVideo, mTakePic;
     private ImageView mBack;
     private String mCheck = "";
     private ArrayList<Media> mediaList;
     private LinearLayout mNoPhoto;
+    private static int localPosition = 0;
+    String tempPath = null;
+    private MyHandler handler;
+    private int currentShowPosition;
+    /**
+     * 按时间排序的所有图片list
+     */
+    private ArrayList<SingleImageModel> allImages;
+    /**
+     * 按目录排序的所有图片list
+     */
+    private ArrayList<SingleImageDirectories> imageDirectories;
+
+    /**
+     * 一个文件夹中的图片数据实体
+     */
+    private class SingleImageDirectories {
+        /**
+         * 父目录的路径
+         */
+        public String directoryPath;
+        /**
+         * 目录下的所有图片实体
+         */
+        public ImageDirectoryModel images;
+    }
 
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
                 prodlg.dismiss();
-                adapter.notifyDataSetChanged();
+//                adapter.notifyDataSetChanged();
             }
         }
     };
@@ -101,15 +140,19 @@ public class AlbumActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         path = getIntent().getStringExtra("path");
         mCheck = getIntent().getStringExtra("checkType");
-
+        handler = new MyHandler(this);
+        localPosition = 0;
+        selectItem(localPosition);
         initUI();
         initData();
+        allImages = new ArrayList<SingleImageModel>();
+        imageDirectories = new ArrayList<SingleImageDirectories>();
+        getAllImages();
+        getCurrentAblumPosition();
     }
 
     private void initUI() {
-//        mGridView = ((GridView) findViewById(R.id.gridView));
-        mRecyclerView = (RecyclerView) findViewById(R.id.mRecyclerView);
-        mNoPhoto = (LinearLayout) findViewById(R.id.noPhoto);
+//        mNoPhoto = (LinearLayout) findViewById(R.id.noPhoto);
         mBack = (ImageView) findViewById(R.id.iv_go_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,23 +166,25 @@ public class AlbumActivity extends BaseActivity {
         if (mCheck.equals("check")) {
             mAddPhoto.setVisibility(View.VISIBLE);
             mTakePic.setVisibility(View.VISIBLE);
-//            mAddVideo.setVisibility(View.VISIBLE);
+            mAddVideo.setVisibility(View.VISIBLE);
         } else {
             mAddPhoto.setVisibility(View.INVISIBLE);
             mTakePic.setVisibility(View.INVISIBLE);
-//            mAddVideo.setVisibility(View.INVISIBLE);
+            mAddVideo.setVisibility(View.INVISIBLE);
         }
         mAddPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getCurrentAblumPosition();
                 if (mPhotos != null) {
                     int surplus_pics = MAXIMGNUMBER - mPhotos.size() + 1;//mPhotos没有变
                     Intent intent = new Intent(AlbumActivity.this, PickOrTakeImageActivity.class);
                     intent.putExtra("pic_max", surplus_pics);
+                    intent.putExtra("currentShowPosition", currentShowPosition);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(AlbumActivity.this, PickOrTakeImageActivity.class);
-                    intent.putExtra("pic_max", 10);
+                    intent.putExtra("pic_max", 100);
                     startActivity(intent);
                 }
             }
@@ -169,8 +214,6 @@ public class AlbumActivity extends BaseActivity {
         mTakePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                HtmlHelper.changePhotoValue(htmlDoc, operation);
-//				PhotoUtils.transferCamera(CheckActivity1.this, path);
                 Intent intent2 = new Intent();
                 intent2.setClass(AlbumActivity.this, CameraActivity.class);
                 intent2.putExtra("path", path);
@@ -183,122 +226,8 @@ public class AlbumActivity extends BaseActivity {
     private void initData() {
         mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png", "mp4", "avi", "FLV");
         if (mPhotos.size() > 0) {
-            mNoPhoto.setVisibility(View.GONE);
+//            mNoPhoto.setVisibility(View.GONE);
         }
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        adapter = new PictureListAdapter(this, R.layout.image_list_item, mPhotos);
-        mRecyclerView.setAdapter(adapter);
-        //适配器刚开始绑定的数据为空
-//        mAlbumAdapter = new AlbumAdapter(this, mPhotos, new AlbumAdapter.OnShowItemClickListener() {
-//
-//			@Override
-//			public void onShortClick() {
-//
-//			}
-//
-//			@Override
-//			public void onLongClick() {
-//
-//			}
-//		});
-//        mGridView.setAdapter(mAlbumAdapter);
-//        mGridView.setOnItemClickListener(new OnItemClickListener() {
-//        	@Override
-//        	public void onItemClick(AdapterView<?> parent, View view, int position,
-//        			long id) {
-//        		Intent intent = new Intent(AlbumActivity.this, PhotoActivity.class);
-//        		intent.putStringArrayListExtra("photos", mPhotos);
-//        		intent.putExtra("position", position);
-//        		startActivity(intent);
-//        	}
-//		});
-//        mGridView.setOnItemLongClickListener(new OnItemLongClickListener() {
-//        	@Override
-//        	public boolean onItemLongClick(AdapterView<?> parent, View view, final int position,
-//        			long id) {
-//        		new SweetAlertDialog(AlbumActivity.this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("确定删除?")
-//                .setContentText("是否确定删除本张照片？")
-//                .setCancelText("否")
-//                .setConfirmText("是，删除！")
-//                .showCancelButton(true)
-//                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                    	sDialog.dismiss();
-//                    }
-//                })
-//                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                    @Override
-//                    public void onClick(SweetAlertDialog sDialog) {
-//                    	prodlg = ProgressDialog.show(AlbumActivity.this, "删除", "正在删除照片");
-//            			prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
-//            			new Thread(new Runnable() {
-//            				@Override
-//            				public void run() {
-//            					FileOperation.deleteFile(mPhotos.get(position));
-//            					mPhotos.remove(position);
-//            					Message message = new Message();
-//            					message.what = 1;
-//            					mHandler.sendMessage(message);
-//            				}
-//            			}).start();
-//            			sDialog.dismiss();
-//                    }
-//                })
-//                .show();
-//        		return true;
-//        	}
-//        });
-
-//        //从相册中选择照片 20190130 乔志理添加
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(AlbumActivity.this, PhotoActivity.class);
-                intent.putStringArrayListExtra("photos", mPhotos);
-                intent.putExtra("position", position);
-                startActivity(intent);
-            }
-        });
-        adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
-                new SweetAlertDialog(AlbumActivity.this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("确定删除?")
-                        .setContentText("是否确定删除本张照片？")
-                        .setCancelText("否")
-                        .setConfirmText("是，删除！")
-                        .showCancelButton(true)
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.dismiss();
-                            }
-                        })
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                prodlg = ProgressDialog.show(AlbumActivity.this, "删除", "正在删除照片");
-                                prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        FileOperation.deleteFile(mPhotos.get(position));
-                                        mPhotos.remove(position);
-                                        Message message = new Message();
-                                        message.what = 1;
-                                        mHandler.sendMessage(message);
-                                    }
-                                }).start();
-                                sDialog.dismiss();
-                            }
-                        })
-                        .show();
-                return true;
-            }
-        });
     }
 
     @Override
@@ -313,6 +242,7 @@ public class AlbumActivity extends BaseActivity {
 //        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
 //        adapter.notifyDataSetChanged();
         initData();
+        selectItem(localPosition);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -327,7 +257,7 @@ public class AlbumActivity extends BaseActivity {
         }
         mPhotosnew.clear();
         event.getPathList().clear();
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -339,10 +269,10 @@ public class AlbumActivity extends BaseActivity {
             for(Media media: mediaList){
                 Log.i("media",media.path);
                 Log.e("media","s:"+media.size);
-
+                getCopyVideo(media.path, path, media.name);
                 mPhotos.add(media.path);
             }
-            adapter.notifyDataSetChanged();
+            selectItem(localPosition);
         }
     }
 
@@ -405,109 +335,6 @@ public class AlbumActivity extends BaseActivity {
         return fileName;
     }
 
-//    public class AlbumAdapter1 extends BaseAdapter {
-//
-//        private Context mContext;
-//        private LayoutInflater mLayoutInflater;
-//        private List<String> mPhotos;
-//        //全局变量，记录CheckBox是否可见
-//        private boolean isShowCheckBox;
-////        private OnShowItemClickListener1 mOnShowItemClickListener1;
-//
-////        //定义接口
-////        public interface OnShowItemClickListener1 {
-////            //        void onShowItemClick(String str);
-////            void onShortClick();
-////            void onLongClick();
-////        }
-//
-//        public boolean isShowCheckBox() {
-//            return isShowCheckBox;
-//        }
-//
-//        public void setShowCheckBox(boolean showCheckBox) {
-//            isShowCheckBox = showCheckBox;
-//        }
-//
-////        public AlbumAdapter1(Context context, List<String> photos, OnShowItemClickListener1 onShowItemClickListener1) {
-////            mContext = context;
-////            mLayoutInflater = LayoutInflater.from(context);
-////            mPhotos = photos;
-////            mOnShowItemClickListener1 = onShowItemClickListener1;
-////        }
-//
-//        @Override
-//        public int getCount() {
-//            return mPhotos == null ? 0 : mPhotos.size();
-//        }
-//
-//        @Override
-//        public Object getItem(int i) {
-//            return mPhotos.get(i);
-//        }
-//
-//        @Override
-//        public long getItemId(int i) {
-//            return i;
-//        }
-//
-//        @Override
-//        public View getView(final int i, View view, ViewGroup viewGroup) {
-//            ViewHolder holder;
-//
-//            if (i == 0) {
-//                view = new ImageView(AlbumActivity.this);
-//                view.setBackgroundResource(R.drawable.take_pic);
-//                view.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (MyUtils.checkTakePhotoPermissions(AlbumActivity.this, AlbumActivity.this)) {
-////                            takePic();
-//                        }
-//                    }
-//                });
-////                view.setLayoutParams(new GridView.LayoutParams(perWidth, perWidth));
-//                return view;
-//            }
-//
-//            if (view == null) {
-//                view = mLayoutInflater.inflate(R.layout.list_item_photo, viewGroup, false);
-//                holder = new ViewHolder(view);
-//            } else {
-//                holder = (ViewHolder) view.getTag();
-//            }
-//            String str = mPhotos.get(i);
-//            Bitmap bitmap = BitmapFactory.decodeFile(str);
-//            if(bitmap != null)
-//                Glide
-//                        .with(mContext)
-//                        .load(str)
-//                        .override(80, 80)
-//                        .fitCenter()
-//                        .into(holder.simpleDraweeView);
-//            return view;
-//        }
-//
-////        public void setOnShowItemClickListener(OnShowItemClickListener1 onShowItemClickListener1) {
-////            mOnShowItemClickListener1 = onShowItemClickListener1;
-////        }
-//
-//        public final class ViewHolder {
-//            private ImageView simpleDraweeView;
-//
-//            public ViewHolder(View view) {
-//                simpleDraweeView = (ImageView) view.findViewById(R.id.simple_drawee_view);
-//                view.setTag(ViewHolder.this);
-//            }
-//        }
-//
-//        public void setData(List<String> photos) {
-//            mPhotos = photos;
-//            notifyDataSetChanged();
-//        }
-//
-//    }
-
     /**
      * 调用系统相机进行拍照
      */
@@ -529,4 +356,182 @@ public class AlbumActivity extends BaseActivity {
         startActivityForResult(intent, CODE_FOR_TAKE_PIC);
     }
 
+    public void selectItem(final int position) {
+        Fragment fragment = null;
+        OrientApplication.getApplication().setCommander(false);
+        fragment = new AlbumFragment(path);
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.album_content_frame, fragment).commit();
+        } else {
+            Log.e("MainActivity", "Error in creating fragment");
+        }
+    }
+
+
+    /**
+     * 从手机中获取所有的手机图片
+     */
+    private void getAllImages() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SingleImageModel temp = new SingleImageModel();
+                temp.path = tempPath;
+                temp.date = System.currentTimeMillis();
+                temp.id = 0;
+
+
+                Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                ContentResolver contentResolver = getContentResolver();
+                //获取jpeg和png格式的文件，并且按照时间进行倒序
+                Cursor cursor = contentResolver.query(uri, null, MediaStore.Images.Media.MIME_TYPE + "=\"image/jpeg\" or " +
+                                MediaStore.Images.Media.MIME_TYPE + "=\"image/png\" or "+ MediaStore.Video.Media.MIME_TYPE+ "=\"video/mp4\""
+                        , null, MediaStore.Images.Media.DATE_MODIFIED + " desc");
+                if (cursor != null) {
+                    allImages.clear();
+                    if (!TextUtils.isEmpty(temp.path)) {
+                        allImages.add(temp);
+                    }
+                    while (cursor.moveToNext()) {
+                        SingleImageModel singleImageModel = new SingleImageModel();
+                        singleImageModel.path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                        try {
+                            singleImageModel.date = Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATE_MODIFIED)));
+                        } catch (NumberFormatException e) {
+                            singleImageModel.date = System.currentTimeMillis();
+                        }
+                        try {
+                            singleImageModel.id = Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)));
+                        } catch (NumberFormatException e) {
+                            singleImageModel.id = 0;
+                        }
+
+                        //存入按照目录分配的list
+                        String path = singleImageModel.path;
+                        File file = new File(path);
+                        String parentPath = file.getParent();
+
+                        //图片是否破损
+                        boolean isFalseFile = false;
+                        BitmapFactory.Options options = null;
+                        if (options == null) options = new BitmapFactory.Options();
+                        options.inJustDecodeBounds = true;
+
+                        BitmapFactory.decodeFile(path, options); //filePath代表图片路径
+                        if (options.mCancel || options.outWidth == -1
+                                || options.outHeight == -1) {
+                            //表示图片已损毁
+                            isFalseFile = true;
+                        }
+
+                        if (file.length() > 0 && !isFalseFile) {
+                            allImages.add(singleImageModel);
+                            putImageToParentDirectories(parentPath, path, singleImageModel.date, singleImageModel.id);
+                        }
+                    }
+                    cursor.close();
+                    handler.sendEmptyMessage(0);
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * 从手机中获取所有的手机图片
+     */
+    private void getCopyVideo(final String oldPath, final String newPath, final String photoName) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int bytesum = 0;
+                    int byteread = 0;
+                    File oldfile = new File(oldPath);
+                    File newfile = new File(newPath);
+                    if (!newfile.exists()) {
+                        newfile.mkdir();
+                    }
+                    String newfile1 = newfile + "/" + photoName;
+                    if (oldfile.exists()) {
+                        //文件存在时
+                        InputStream inStream = new FileInputStream(oldPath);//读入原文件
+                        FileOutputStream fs = new FileOutputStream(newfile1);
+                        byte[] buffer = new byte[1444];
+                        int length;
+                        int value = 0;
+                        while ((byteread = inStream.read(buffer)) != -1) {
+                            bytesum += byteread;//字节数 文件大小
+                            value++; //计数
+//                     System.out.println("完成"+bytesum+"  总大小"+fileTotalLength);
+                            fs.write(buffer, 0, byteread);
+                            Message msg = new Message(); //创建一个msg对象
+                            msg.what = 110;
+                            msg.arg1 = value; //当前的value
+//                    handler.sendMessage(msg);
+//                    Thread.sleep(10);//每隔10ms发送一消息，也就是说每隔10ms value就自增一次，将这个value发送给主线程处理
+                        }
+                        inStream.close();
+                    }
+                } catch (Exception e) {
+                    System.out.println("复制单个文件操作出错");
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    /**
+     * 将图片插入到对应parentPath路径的文件夹中
+     */
+    private void putImageToParentDirectories(String parentPath, String path, long date, long id) {
+        ImageDirectoryModel model = getModelFromKey(parentPath);
+        if (model == null) {
+            model = new ImageDirectoryModel();
+            SingleImageDirectories directories = new SingleImageDirectories();
+            directories.images = model;
+            directories.directoryPath = parentPath;
+            imageDirectories.add(directories);
+        }
+        model.addImage(path, date, id);
+    }
+
+    private ImageDirectoryModel getModelFromKey(String path) {
+        for (SingleImageDirectories directories : imageDirectories) {
+            if (directories.directoryPath.equalsIgnoreCase(path)) {
+                return directories.images;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * leak memory
+     */
+    private static class MyHandler extends Handler {
+
+        WeakReference<AlbumActivity> activity = null;
+
+        public MyHandler(AlbumActivity context) {
+            activity = new WeakReference<AlbumActivity>(context);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    }
+
+    private void getCurrentAblumPosition() {
+        for (int i = 0; i < imageDirectories.size(); i++) {
+            String dircFullname = imageDirectories.get(i).directoryPath;
+            String dircName = dircFullname.substring(dircFullname.lastIndexOf("/") + 1, dircFullname.length());
+            if (dircName.equals("Camera")) {
+                currentShowPosition = i;
+            }
+        }
+    }
 }

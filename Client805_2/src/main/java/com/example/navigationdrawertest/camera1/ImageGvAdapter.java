@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.navigationdrawertest.R;
 
@@ -50,13 +51,13 @@ public class ImageGvAdapter extends BaseAdapter {
             horld = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.gridview_item, null);
             horld.iv_photo = (ImageView) convertView.findViewById(R.id.iv_photo);
-            horld.iv_delete = (ImageView) convertView.findViewById(R.id.iv_delete);
+            horld.lin_delete = (LinearLayout) convertView.findViewById(R.id.lin_delete);
             convertView.setTag(horld);
         } else {
             horld = (ViewHolder) convertView.getTag();
         }
 
-        horld.iv_delete.setOnClickListener(new View.OnClickListener() {
+        horld.lin_delete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -84,7 +85,7 @@ public class ImageGvAdapter extends BaseAdapter {
 
     class ViewHolder {
         ImageView iv_photo, iv_delete;
-        ;
+        LinearLayout lin_delete;
     }
 
 }

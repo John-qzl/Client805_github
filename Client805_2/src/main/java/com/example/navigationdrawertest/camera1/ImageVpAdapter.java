@@ -38,7 +38,7 @@ public class ImageVpAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup view, int position) {
         TouchImageView iv=new TouchImageView(mContext);
         iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
         iv.setImageBitmap(bitmaps.get(position));
         ((ViewPager) view).addView(iv, 0); // 将图片增加到ViewPager
         return iv;

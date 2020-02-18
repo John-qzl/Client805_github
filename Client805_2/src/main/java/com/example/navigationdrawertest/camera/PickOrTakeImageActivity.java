@@ -160,6 +160,16 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
     private LoaderNativeImage loaderNativeImage;
 
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                adapter.notifyDataSetChanged();
+            }
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -273,7 +283,7 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
         });
 
         TextView tv_titleBar_title = ((TextView) findViewById(R.id.tv_center));
-        tv_titleBar_title.setText("选择图片");
+        tv_titleBar_title.setText(getText(R.string.select_image_title));
         tv_titleBar_title.setVisibility(View.VISIBLE);
 
         tv_titleBar_right = (TextView) findViewById(R.id.tv_right);
@@ -285,11 +295,7 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
                 returnDataAndClose();
             }
         });
-
-
-        if (MyUtils.checkReadStoragePermissions(this, this)) {
-            initData();
-        }
+        initData();
     }
 
     @TargetApi(23)
@@ -323,8 +329,8 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
         imageDirectories = new ArrayList<SingleImageDirectories>();
 
         handler = new MyHandler(this);
-        //默认显示全部图片
-        currentShowPosition = 0;
+        //默认显示   全部图片 -1   第二个0  第三个1
+        currentShowPosition = getIntent().getIntExtra("currentShowPosition", 1);
         adapter = new GridViewAdapter();
         getAllImages();
         tv_choose_image_directory.setText(getString(R.string.camera_pic));
@@ -334,7 +340,7 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
         tv_choose_image_directory.setOnClickListener(this);
         tv_preview.setOnClickListener(this);
         //计算每张图片应该显示的宽度
-        perWidth = (((WindowManager) (getApplicationContext().getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getWidth() - CommonUtil.dip2px(this, 4)) / 3;
+        perWidth = (((WindowManager) (getApplicationContext().getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getWidth() - CommonUtil.dip2px(this, 4)) / 5;
 
         try {
             picNums = getIntent().getIntExtra("pic_max", 1);
@@ -752,7 +758,7 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
      */
     private void showTimeLine(long date) {
         alphaAnimation.cancel();
-        rl_date.setVisibility(View.VISIBLE);
+        rl_date.setVisibility(View.GONE);
         tv_date.setText(calculateShowTime(date * 1000));
     }
 
@@ -1161,24 +1167,6 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
         } else {
             EventBus.getDefault().post(new PicPathEvent(picklist));
         }
-//        finish();
-
-
-//        StringBuilder sb = new StringBuilder();
-//        for (String model : picklist){
-//            sb.append(model+"\n");
-//        }
-//        TextView textview = new TextView(this);
-//        textview.setText(sb);
-//        Dialog dialog = new Dialog(this);
-//        dialog.setTitle("结果");
-//        dialog.setContentView(textview);
-//        dialog.show();
-//        if (picNums == 1)
-//            picklist.clear();
-//        Intent data = new Intent();
-//        data.putExtra("data", list);
-//        setResult(RESULT_OK, data);
         finish();
     }
 

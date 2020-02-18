@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/White"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="45dp"
         android:background="#0ac39e"
         >
 
         <ImageView
             android:id="@+id/iv_titleBar_left"
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="@null"
@@ -43,7 +43,7 @@
             android:background="@null"
             android:gravity="center"
             android:singleLine="true"
-            android:text="选择图片"
+            android:text="@string/select_image_title"
             android:textColor="@color/White"
             android:textSize="20sp"
             android:visibility="visible" />
@@ -57,13 +57,13 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_content"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/White">
         </android.support.v4.view.ViewPager>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="46.6666666dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:background="#aa505a5c"
             android:paddingBottom="8dp"

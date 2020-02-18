@@ -3,6 +3,7 @@ package com.example.navigationdrawertest.camera1;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
@@ -59,7 +60,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.photograph_layout_1);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         presenter = new CameraPresenterImpl(this);
 
@@ -179,8 +180,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                                         // 把摄像头获得画面显示在SurfaceView控件里面
                                         mCamera.setPreviewDisplay(mSurfaceView.getHolder());
 //                                        mCamera.setDisplayOrientation(90);
-                                        mCamera.startPreview();// 开始预览
                                         setCameraDisplayOrientation(CameraActivity.this, 0, mCamera);
+                                        mCamera.startPreview();// 开始预览
                                         view.setVisibility(View.GONE);
                                     } catch (IOException e) {
                                         e.printStackTrace();
@@ -220,23 +221,23 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
             List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
 
-            boolean flag = false;
-            // 如果sizeList只有一个我们也没有必要做什么了，因为就他一个别无选择
-            if (sizeList.size() > 0) {
-
-                for (int i = 0; i < sizeList.size(); i++) {
-
-                    if (i != 0 && sizeList.get(0).width > sizeList.get(i).width && !flag) {
-                        flag = true;
-                        // 从大到小
-                        break;
-                    }
-
-                }
-                presenter.getCameraSize(parameters, sizeList, flag);
-            } else {
-                Toast.makeText(this, "您的手机暂不支持拍照", Toast.LENGTH_SHORT).show();
-            }
+//            boolean flag = false;
+//            // 如果sizeList只有一个我们也没有必要做什么了，因为就他一个别无选择
+//            if (sizeList.size() > 0) {
+//
+//                for (int i = 0; i < sizeList.size(); i++) {
+//
+//                    if (i != 0 && sizeList.get(0).width > sizeList.get(i).width && !flag) {
+//                        flag = true;
+//                        // 从大到小
+//                        break;
+//                    }
+//
+//                }
+//                presenter.getCameraSize(parameters, sizeList, flag);
+//            } else {
+//                Toast.makeText(this, "您的手机暂不支持拍照", Toast.LENGTH_SHORT).show();
+//            }
 
         }
     }
@@ -352,4 +353,16 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
         camera.setDisplayOrientation (result);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        // TODO Auto-generated method stub
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            //横屏
+            mCamera.setDisplayOrientation(0);
+        }else{
+            //竖屏
+            mCamera.setDisplayOrientation(90);
+        }
+    }
 }

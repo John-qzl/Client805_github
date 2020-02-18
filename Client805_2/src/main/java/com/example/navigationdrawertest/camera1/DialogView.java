@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 /**
  * 自定义Dialog控件
- * Created by 苏奥博 on 2016/12/12.
  */
 
 public class DialogView implements View.OnClickListener, ViewPager.OnPageChangeListener {

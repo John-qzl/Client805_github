@@ -11,14 +11,19 @@
         android:layout_height="90dp"
          />
 
-    <ImageView
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="3dp"
-        android:id="@+id/iv_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/lin_delete"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/iv_photo"
-        android:src="@drawable/schedule_icon_delete_statue" />
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/schedule_icon_delete_statue" />
+    </LinearLayout>
 
 </RelativeLayout>

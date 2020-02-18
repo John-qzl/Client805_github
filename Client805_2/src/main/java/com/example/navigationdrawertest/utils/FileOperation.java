@@ -55,6 +55,29 @@ public class FileOperation {
 		}
 		return lstFile;
 	}
+
+	public static ArrayList<String> getVideoByPath(String path, String mp4, String avi, String FLV) {
+
+		ArrayList<String> lstFile = new ArrayList<String>();                //结果 List
+//		File[] files = new File(path).listFiles();
+		File file1 = new File(path);
+		File[] files = file1.listFiles();
+		if (!file1.exists()) {
+			file1.mkdirs();
+		}
+		if (files == null)
+			return lstFile;
+		for (int i = 0; i < files.length; i++) {
+			File f = files[i];
+			if (f.isFile()) {
+				String pictureType = f.getPath().substring(f.getPath().length() - mp4.length());
+				if (pictureType.equals(mp4) || pictureType.equals(avi) || pictureType.equals(FLV)) {
+					lstFile.add(f.getPath());
+				}
+			}
+		}
+		return lstFile;
+	}
 	
 	public static boolean fileWriter(String filePath, String fileContent) {
 		try {

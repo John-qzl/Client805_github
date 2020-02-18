@@ -130,8 +130,9 @@
             android:screenOrientation="landscape">
         </activity>
 
-        <activity android:name=".camera1.CameraActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.navigationdrawertest.camera1.CameraActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"/>
 
         <activity
             android:name="com.zgy.catchuninstallself.ScrollViewStopTest"

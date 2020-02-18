@@ -37,7 +37,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.navigationdrawertest.CustomUI.*;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.utils.CommonUtil;
 
@@ -317,7 +316,14 @@ public class PickOrTakeVideoActivity extends FragmentActivity implements View.On
         //默认显示全部图片
         currentShowPosition = -1;
         adapter = new PickOrTakeVideoActivity.GridViewAdapter();
-        getAllImages();
+        getAllVideos();
+        for (int i = 1; i <= imageDirectories.size(); i++) {
+            String dircName = imageDirectories.get(i).directoryPath;
+            if (dircName.substring(dircName.lastIndexOf("/") + 1, dircName.length()).equals(getString(R.string.camera_pic))) {
+                tv_choose_image_directory.setText(dircName);
+                currentShowPosition = i;
+            }
+        }
         tv_choose_image_directory.setText(getString(R.string.all_pic));
         tv_preview.setText(getString(R.string.preview_without_num));
 
@@ -346,7 +352,7 @@ public class PickOrTakeVideoActivity extends FragmentActivity implements View.On
     /**
      * 从手机中获取所有的手机图片
      */
-    private void getAllImages() {
+    private void getAllVideos() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1070,7 +1076,7 @@ public class PickOrTakeVideoActivity extends FragmentActivity implements View.On
                     sendBroadcast(intent);
 
                     //重新拉取最新数据库文件
-                    getAllImages();
+                    getAllVideos();
                 }
                 break;
             case CODE_FOR_CLIP:
