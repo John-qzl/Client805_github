@@ -60,6 +60,7 @@ import com.example.navigationdrawertest.model.RwRelation;
 import com.example.navigationdrawertest.utils.CommonUtil;
 import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.HtmlHelper;
+import com.example.navigationdrawertest.utils.VideoInfo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -98,6 +99,7 @@ public class AlbumActivity extends FragmentActivity{
     String tempPath = null;
     private MyHandler handler;
     private int currentShowPosition;
+    private ArrayList<VideoInfo> videoInfos = new ArrayList<>();
     /**
      * 按时间排序的所有图片list
      */
@@ -152,7 +154,6 @@ public class AlbumActivity extends FragmentActivity{
     }
 
     private void initUI() {
-//        mNoPhoto = (LinearLayout) findViewById(R.id.noPhoto);
         mBack = (ImageView) findViewById(R.id.iv_go_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +229,18 @@ public class AlbumActivity extends FragmentActivity{
         if (mPhotos.size() > 0) {
 //            mNoPhoto.setVisibility(View.GONE);
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        videoInfos = getAllVideoFiles(getBaseContext(), path);
+                        selectItem(localPosition);
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
@@ -265,12 +278,30 @@ public class AlbumActivity extends FragmentActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==200&&resultCode==PickerConfig.RESULT_CODE){
             mediaList =data.getParcelableArrayListExtra(PickerConfig.EXTRA_RESULT);
+            VideoInfo video = new VideoInfo();
             Log.i("mediaList","mediaList.size"+ mediaList.size());
             for(Media media: mediaList){
                 Log.i("media",media.path);
                 Log.e("media","s:"+media.size);
                 getCopyVideo(media.path, path, media.name);
                 mPhotos.add(media.path);
+
+                video.setVideoPath(media.path);
+                video.setSize(String.valueOf(media.size));
+                video.setVideoName(media.name);
+                //获取当前Video对应的ID, 然后根据该ID获取缩略图
+                int id = media.id;
+                String selection = MediaStore.Video.Thumbnails.VIDEO_ID + "=?";
+                String[] selectionArgs = new String[]{
+                        id + ""
+                };
+                ContentResolver crThumb = this.getContentResolver();
+                BitmapFactory.Options options=new BitmapFactory.Options();
+                options.inSampleSize = 1;
+                Bitmap curThumb = MediaStore.Video.Thumbnails.getThumbnail(crThumb, id, MediaStore.Video.Thumbnails.MICRO_KIND, options);
+
+                video.setThumbBitmap(curThumb);
+                videoInfos.add(video);
             }
             selectItem(localPosition);
         }
@@ -359,7 +390,7 @@ public class AlbumActivity extends FragmentActivity{
     public void selectItem(final int position) {
         Fragment fragment = null;
         OrientApplication.getApplication().setCommander(false);
-        fragment = new AlbumFragment(path);
+        fragment = new AlbumFragment(path, videoInfos);
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -533,5 +564,43 @@ public class AlbumActivity extends FragmentActivity{
                 currentShowPosition = i;
             }
         }
+    }
+
+    public static ArrayList<VideoInfo> getAllVideoFiles(Context mContext, String path) {
+        VideoInfo video;
+        ArrayList<VideoInfo> videos = new ArrayList<>();
+        ContentResolver contentResolver = mContext.getContentResolver();
+        try {
+            Cursor cursor = contentResolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null,
+                    null, null, null);
+            while (cursor.moveToNext()) {
+                video = new VideoInfo();
+
+                if (cursor.getLong(cursor.getColumnIndex(MediaStore.Video.Media.DURATION)) != 0) {
+                    video.setDuration(cursor.getLong(cursor.getColumnIndex(MediaStore.Video.Media.DURATION)));
+                    video.setVideoPath(cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA)));
+                    video.setCreateTime(cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATE_ADDED)));
+                    video.setVideoName(cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME)));
+                    //获取当前Video对应的ID, 然后根据该ID获取缩略图
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID));
+                    String selection = MediaStore.Video.Thumbnails.VIDEO_ID + "=?";
+                    String[] selectionArgs = new String[]{
+                            id + ""
+                    };
+                    ContentResolver crThumb = mContext.getContentResolver();
+                    BitmapFactory.Options options=new BitmapFactory.Options();
+                    options.inSampleSize = 1;
+                    Bitmap curThumb = MediaStore.Video.Thumbnails.getThumbnail(crThumb, id, MediaStore.Video.Thumbnails.MICRO_KIND, options);
+
+                    video.setThumbBitmap(curThumb);
+                    videos.add(video);
+                }
+            }
+
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return videos;
     }
 }

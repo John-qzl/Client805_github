@@ -153,6 +153,9 @@
         <activity
             android:name=".camera1.video.PreviewActivity"
             android:screenOrientation="landscape" />
+        <activity android:name=".activity.VideoActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:screenOrientation="landscape"/>
         
         <receiver android:name="com.example.navigationdrawertest.Broadcast.BootBroadcastReceiver"> 
 			<intent-filter> 

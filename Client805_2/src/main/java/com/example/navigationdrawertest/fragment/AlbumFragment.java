@@ -18,9 +18,12 @@ import android.view.ViewGroup;
 
 import com.cssrc.astuetz.PagerSlidingTabStrip;
 import com.example.navigationdrawertest.R;
+import com.example.navigationdrawertest.camera1.video.entity.Media;
 import com.example.navigationdrawertest.model.RwRelation;
+import com.example.navigationdrawertest.utils.VideoInfo;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  * Created by qiaozhili on 2020/2/17 15:32.
@@ -39,6 +42,7 @@ public class AlbumFragment extends Fragment {
 
     private Handler handler;
     private String path;
+    ArrayList<VideoInfo> videoInfos;
 
     /**
      * PagerSlidingTabStrip的实例
@@ -50,8 +54,9 @@ public class AlbumFragment extends Fragment {
      */
     private DisplayMetrics dm;
 
-    public AlbumFragment(String path){
+    public AlbumFragment(String path, ArrayList<VideoInfo> videoInfos){
         this.path = path;
+        this.videoInfos = videoInfos;
 //		refresh();
     }
 
@@ -135,7 +140,7 @@ public class AlbumFragment extends Fragment {
                     return fragmentPhoto;
                 case 1:
                     if (fragmentVideo == null) {
-                        fragmentVideo = new FragmentVideo(path);
+                        fragmentVideo = new FragmentVideo(path, videoInfos);
                     }
                     return fragmentVideo;
                 default:
