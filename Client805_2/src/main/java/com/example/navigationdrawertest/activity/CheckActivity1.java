@@ -192,6 +192,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		windowWidth = dm.widthPixels;// 获取屏幕分辨率宽度
 		windowHeight = dm.heightPixels;
 		mTotalPhotoNum.setText("照片数量："+String.valueOf(totalPhotoNum));
+		if (totalPhotoNum > 0) {
+			currentTask.setIsChecking(1);
+			currentTask.update(currentTask.getId());
+		}
 		setTitle(currentTask.getTaskname());
 		mTablename.setText(currentTask.getTaskname());
 		if(currentTask.getEndTime() != null && !currentTask.getEndTime().equals("")){
@@ -580,6 +584,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    	            operation2.update(operation2.getId());
 		    	            HtmlData data = new HtmlData(cell, operation2.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 //		    	            HtmlHelper.changeTextValue(htmlDoc, cell, operation2.getRealcellid());
 						}
 					});
@@ -641,6 +647,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation3.getRealcellid());
 			    	            HtmlData data = new HtmlData(cell, operation3.getRealcellid());
 			    	            htmlList.add(data);
+								currentTask.setIsChecking(1);
+								currentTask.update(currentTask.getId());
 			    	            //记录第一次操作的时间
 								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
@@ -700,6 +708,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            }
 			    	            HtmlData data = new HtmlData(cell, operation4.getRealcellid());
 			    	            htmlList.add(data);
+								currentTask.setIsChecking(1);
+								currentTask.update(currentTask.getId());
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation4.getRealcellid());
 								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
@@ -827,6 +837,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation5.getRealcellid());
 		    	            HtmlData data = new HtmlData(cell, operation5.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					edit5.setOnLongClickListener(new View.OnLongClickListener() {
@@ -887,6 +899,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            }
 			    	            HtmlData data = new HtmlData(cell, operation6_1.getRealcellid());
 			    	            htmlList.add(data);
+								currentTask.setIsChecking(1);
+								currentTask.update(currentTask.getId());
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation6_1.getRealcellid());
 								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
@@ -929,6 +943,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation6_2.getRealcellid());
 		    	            HtmlData data = new HtmlData(cell, operation6_2.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					edit6.setOnLongClickListener(new View.OnLongClickListener() {
@@ -989,6 +1005,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            }
 			    	            HtmlData data = new HtmlData(cell, operation71.getRealcellid());
 			    	            htmlList.add(data);
+								currentTask.setIsChecking(1);
+								currentTask.update(currentTask.getId());
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation71.getRealcellid());
 			    	            //记录第一次操作的时间
 								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
@@ -1029,6 +1047,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    	            }
 		    	            HtmlData data = new HtmlData(cell, operation72.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					final String userId7 = OrientApplication.getApplication().loginUser.getUserid();

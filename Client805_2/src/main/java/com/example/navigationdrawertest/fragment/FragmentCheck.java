@@ -128,7 +128,13 @@ public class FragmentCheck extends Fragment {
 		mListView.setOnItemClickListener(listViewItemClickListener);
 		return v;
 	}
-	
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.notifyDataSetChanged();
+	}
+
 	private void loadData() {
 		List<Rw> rwList = new ArrayList<Rw>();				//任务id---人物名称
 		List<Post> postList = new ArrayList<Post>();		//岗位实例ID---path
@@ -354,6 +360,12 @@ public class FragmentCheck extends Fragment {
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.img_tree_left);
 					holder.check_button = (Button) convertView.findViewById(R.id.check_button);
 					holder.read_button = (Button) convertView.findViewById(R.id.read_button);
+					final List<Task> taskList1 = DataSupport.where("taskid = ?", String.valueOf(nodeList.get(position).getId())).find(Task.class);
+					if (taskList1.size() > 0) {
+						if (taskList1.get(0).getIsChecking() == 1) {
+							holder.tv_name.setTextColor(getResources().getColor(R.color.actionbar));
+						}
+					}
 					holder.check_button.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
@@ -407,7 +419,12 @@ public class FragmentCheck extends Fragment {
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.img_tree_left);
 					holder.check_button = (Button) convertView.findViewById(R.id.check_button);
 					holder.read_button = (Button) convertView.findViewById(R.id.read_button);
-
+					final List<Task> taskList1 = DataSupport.where("taskid = ?", String.valueOf(nodeList.get(position).getId())).find(Task.class);
+					if (taskList1.size() > 0) {
+						if (taskList1.get(0).getIsChecking() == 1) {
+							holder.tv_name.setTextColor(getResources().getColor(R.color.actionbar));
+						}
+					}
 					holder.check_button.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {

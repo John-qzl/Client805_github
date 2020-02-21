@@ -52,6 +52,15 @@ public class Task extends DataSupport{
 	private Map<String, String> rownummap;
 	private int IsBrother;		//是否为复制的表单，1为复制
 	private String broTaskId;			//复制于哪张表的ID
+	private int isChecking;     //是否检查中状态  0 未开始    1 进行中
+
+	public int getIsChecking() {
+		return isChecking;
+	}
+
+	public void setIsChecking(int isChecking) {
+		this.isChecking = isChecking;
+	}
 
 	public String getBroTaskId() {
 		return broTaskId;
