@@ -16,7 +16,6 @@ import org.jsoup.nodes.Document;
 import org.litepal.crud.DataSupport;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,8 +23,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -70,7 +67,6 @@ import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.adapter.ConditionAdapter1;
 import com.example.navigationdrawertest.adapter.Event.LocationEvent;
 import com.example.navigationdrawertest.application.OrientApplication;
-import com.example.navigationdrawertest.camera1.CameraActivity;
 import com.example.navigationdrawertest.data.AerospaceDB;
 import com.example.navigationdrawertest.data.HtmlData;
 import com.example.navigationdrawertest.model.Cell;
@@ -306,9 +302,9 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			}
 		});
 		mRefresh = (Button) findViewById(R.id.bt_check_refresh);
-		Drawable drawable=getResources().getDrawable(R.drawable.ic_action_refresh);
-		drawable.setBounds(0,0,40,40);
-		mRefresh.setCompoundDrawables(drawable,null,null,null);
+//		Drawable drawable=getResources().getDrawable(R.drawable.ic_action_refresh);
+//		drawable.setBounds(0,0,40,40);
+//		mRefresh.setCompoundDrawables(drawable,null,null,null);
 		mRefresh.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -322,13 +318,17 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			public void onClick(View v) {
 				OrientApplication.getApplication().setPanduFlag(1);
 				List<Cell> actualvalCellList = DataSupport.where("markup=? and taskid=? and rowsid=?", Config.actualval, task_id+"", String.valueOf(pagetype)).order("verticalorder asc").find(Cell.class);
-				for (Cell cell : actualvalCellList) {
-					if (cell.getMarkup().equals(Config.actualval) && OrientApplication.getApplication().getPageflage() == 1) {
-						pandu(cell);
+				if (actualvalCellList.size() != 0) {
+					for (Cell cell : actualvalCellList) {
+						if (cell.getMarkup().equals(Config.actualval) && OrientApplication.getApplication().getPageflage() == 1) {
+							pandu(cell);
+						}
 					}
+					CheckActivity1.actionStart(CheckActivity1.this, task_id, mHandler, "3");
+					finish();
+				} else {
+					Toast.makeText(context, "没有查询到判读依据！", Toast.LENGTH_SHORT).show();
 				}
-				CheckActivity1.actionStart(CheckActivity1.this, task_id, mHandler, "3");
-				finish();
 			}
 		});
 		mTotalPhotoNum = (TextView) findViewById(R.id.check_total_photoNum);
@@ -482,6 +482,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					android.widget.TableRow.LayoutParams para1 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para1_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para1_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					para1_1.gravity = Gravity.CENTER_VERTICAL;
 					LinearLayout linear0 = new LinearLayout(context);
 					linear0.setOrientation(LinearLayout.HORIZONTAL);
 					linear0.setLayoutParams(para1);
@@ -503,11 +504,12 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					break;
 				case "STRING":
 					android.widget.TableRow.LayoutParams para2 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);
 					android.widget.TableRow.LayoutParams para2_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_3 = new android.widget.TableRow.LayoutParams(80, 70);
 					android.widget.TableRow.LayoutParams para2_4 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear2 = new LinearLayout(context);
+					para2_1.gravity = Gravity.CENTER_VERTICAL;
 					linear2.setOrientation(LinearLayout.HORIZONTAL);
 					linear2.setLayoutParams(para2);
 					//初始化EditText
@@ -544,6 +546,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 										String time = DateUtil.getCurrentDate();
 										sign.setIsFinish("is");
 										sign.setBitmappath(signPath);
+										sign.setTaskid(String.valueOf(task_id));
 										sign.setSignTime(time);
 										sign.setSignid(cell.getCellid());
 										sign.setId(Integer.parseInt(cell.getCellid().substring(8,14)));
@@ -676,6 +679,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					android.widget.TableRow.LayoutParams para4_3= new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear4 = new LinearLayout(context);
 					para4_1.gravity = Gravity.CENTER;
+					para4_2.gravity = Gravity.CENTER_VERTICAL;
 					para4_1.setMargins((avewdith-81)/2, 0, 0, 0);				//左上右下
 					linear4.setOrientation(LinearLayout.HORIZONTAL);
 					linear4.setLayoutParams(para4);
@@ -764,10 +768,12 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					break;
 				case "STRINGPHOTO":
 					android.widget.TableRow.LayoutParams para5 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para5_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para5_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);
 					android.widget.TableRow.LayoutParams para5_2 = new android.widget.TableRow.LayoutParams(80, 70);
 					android.widget.TableRow.LayoutParams para5_3= new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear5 = new LinearLayout(context);
+					para5_1.gravity = Gravity.CENTER_VERTICAL;
+					para5_2.gravity = Gravity.CENTER_VERTICAL;
 					linear5.setOrientation(LinearLayout.HORIZONTAL);
 					linear5.setLayoutParams(para5);
 					//初始化EditText
@@ -856,11 +862,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					break;
 				case "HOOKSTRING":
 					android.widget.TableRow.LayoutParams para6 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para6_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para6_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);
 					android.widget.TableRow.LayoutParams para6_2 = new android.widget.TableRow.LayoutParams(80, 80);
 					android.widget.TableRow.LayoutParams para6_3 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear6 = new LinearLayout(context);
 					linear6.setOrientation(LinearLayout.HORIZONTAL);
+					para6_1.gravity = Gravity.CENTER_VERTICAL;
+					para6_2.gravity = Gravity.CENTER_VERTICAL;
 					linear6.setLayoutParams(para6);
 					//初始化EditText
 					final EditText edit6 = new EditText(context);
@@ -871,6 +879,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					String stringdata6 = CommonTools.null2String(operation6_2.getOpvalue());
 	    			edit6.setText(replaceStr(stringdata6));
 	    			edit6.setTextSize(16);
+					edit6.setMinLines(1);
 					linear6.addView(edit6, para6_1);
 					//初始化checkbox
 					CheckBox checkbox6 = new CheckBox(context);
@@ -961,11 +970,14 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					break;
 				case "HOOKSTRINGPHOTO":
 					android.widget.TableRow.LayoutParams para7 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para7_1 = new android.widget.TableRow.LayoutParams(60, 60);			//checkbox
-					android.widget.TableRow.LayoutParams para7_2 = new android.widget.TableRow.LayoutParams(avewdith-141, android.widget.TableRow.LayoutParams.MATCH_PARENT);			//string
+					android.widget.TableRow.LayoutParams para7_1 = new android.widget.TableRow.LayoutParams(70, 70);			//checkbox
+					android.widget.TableRow.LayoutParams para7_2 = new android.widget.TableRow.LayoutParams(avewdith-151, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);			//string
 					android.widget.TableRow.LayoutParams para7_3 = new android.widget.TableRow.LayoutParams(80, 70);			//photo
 					android.widget.TableRow.LayoutParams para7_4 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear7 = new LinearLayout(context);
+					para7_3.gravity = Gravity.CENTER_VERTICAL;
+					para7_2.gravity = Gravity.CENTER_VERTICAL;
+					para7_1.gravity = Gravity.CENTER_VERTICAL;
 					linear7.setOrientation(LinearLayout.HORIZONTAL);
 					linear7.setLayoutParams(para7);
 					//初始化EditText
@@ -975,6 +987,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 					String stringdata7 = CommonTools.null2String(operation72.getOpvalue());
 					edit7.setTextSize(16);
+					edit7.setMinLines(1);
 	    			edit7.setText(replaceStr(stringdata7));
 					linear7.addView(edit7, para7_2);
 					//初始化checkbox
@@ -1027,12 +1040,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						public void onTextChanged(CharSequence text, int start, int before,
 								int count) {
 						}
-
 						@Override
 						public void beforeTextChanged(CharSequence text, int start,
 								int count, int after) {
 						}
-
 						@Override
 						public void afterTextChanged(Editable edit) {
 							String str = edit7.getText().toString();
@@ -1060,11 +1071,9 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						Operation operation = null;
 						if(operation71.getIsmedia().equals("TRUE")){
 							operation = operation71;
-
 						}
 						if(operation72.getIsmedia().equals("TRUE")){
 							operation = operation72;
-
 						}
 						if (operation != null) {
 							final String path1 = Environment.getExternalStorageDirectory() + Config.v2photoPath
@@ -1078,9 +1087,6 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 							getPictures(path1);
 						}
 					}
-
-
-
 					NumImageButton image7_1 = new NumImageButton(context);
 					image7_1.setBackgroundResource(R.drawable.takephoto);
 					image7_1.setNum(picturenumbers);
@@ -1090,17 +1096,17 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						@Override
 						public void onClick(View v) {
 
-							Operation temp = null;
-							if(operation71.getIsmedia().equals("TRUE")){
-								temp = operation71;
-								HtmlHelper.changePhotoValue(htmlDoc, operation71);
-							}
-							if(operation72.getIsmedia().equals("TRUE")){
-								temp = operation72;
-								HtmlHelper.changePhotoValue(htmlDoc, operation72);
-							}
-							if(temp != null)
-								showPhotoDialog(cellId7, taskId7, temp);
+//							Operation temp = null;
+//							if(operation71.getIsmedia().equals("TRUE")){
+//								temp = operation71;
+//								HtmlHelper.changePhotoValue(htmlDoc, operation71);
+//							}
+//							if(operation72.getIsmedia().equals("TRUE")){
+//								temp = operation72;
+//								HtmlHelper.changePhotoValue(htmlDoc, operation72);
+//							}
+//							if(temp != null)
+								showPhotoDialog(cellId7, taskId7, operation72);
 						}
 					});
 					linear7.addView(image7_1, para7_3);
@@ -1479,17 +1485,17 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						@Override
 						public void onClick(View v) {
 
-							Operation temp = null;
-							if(operation10_1.getIsmedia().equals("TRUE")){
-								temp = operation10_1;
-								HtmlHelper.changePhotoValue(htmlDoc, operation10_1);
-							}
-							if(operation10_2.getIsmedia().equals("TRUE")){
-								temp = operation10_2;
-								HtmlHelper.changePhotoValue(htmlDoc, operation10_2);
-							}
-							if(temp != null)
-								showPhotoDialog(cellId10, taskId10, temp);
+//							Operation temp = null;
+//							if(operation10_1.getIsmedia().equals("TRUE")){
+//								temp = operation10_1;
+//								HtmlHelper.changePhotoValue(htmlDoc, operation10_1);
+//							}
+//							if(operation10_2.getIsmedia().equals("TRUE")){
+//								temp = operation10_2;
+//								HtmlHelper.changePhotoValue(htmlDoc, operation10_2);
+//							}
+//							if(temp != null)
+								showPhotoDialog(cellId10, taskId10, operation10_2);
 						}
 					});
 					linear10.addView(image10_1, para10_4);
@@ -2211,54 +2217,185 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			actualvalNum = actualvalCellList.get(0).getOpvalue();
 		}
 		//要求值
-		String requirevalNum = "";
-		//前缀符号
 		String prefixCode = "";
 		if (requirevalCellList.size() > 0) {
 			prefixCode = requirevalCellList.get(0).getTextvalue();
-			requirevalNum = prefixCode.substring(1, prefixCode.length());
 		}
 		//要求值中有无≥/≤/＞/＜等的情况
 		String pattern = "^(\\≥|\\＞|\\≤|\\＜)(\\-|\\+)?([\\d]+)(\\.[\\d]+)?$";
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(prefixCode);
 		System.out.println(m.matches());
+
+		//要求值中是否包含汉字
+		String pattern1 = "[\\u4e00-\\u9fa5]";
+		Pattern r1 = Pattern.compile(pattern1);
+		Matcher m1 = r1.matcher(prefixCode);
+		System.out.println(m1.matches());
+
+		//要求值中是否包5(+1, -1)、 5[+1, 0]
+		String pattern2 = "^([\\d]+)(\\.[\\d]+)?(\\(|\\[){1}(\\+){1}([\\d]+)(\\.[\\d]+)?(\\,)?(\\-){1}([\\d]+)(\\.[\\d]+)?(\\)|\\]){1}$";
+		Pattern r2 = Pattern.compile(pattern2);
+		Matcher m2 = r2.matcher(prefixCode);
+		System.out.println(m2.matches());
+
+		//要求值为纯数字
+		String pattern3 = "^(\\-|\\+)?([\\d]+)(\\.[\\d]+)?$";
+		Pattern r3 = Pattern.compile(pattern3);
+		Matcher m3 = r3.matcher(prefixCode);
+		System.out.println(m3.matches());
+
 		//包含≥/≤/＞/＜等的情况
 		if (m.matches()) {
+			//要求值
+			String requirevalNum = prefixCode.substring(1, prefixCode.length());
 			String symbol = prefixCode.substring(0,1);
 			if (!actualvalNum.equals("") && !requirevalNum.equals("")) {
 				switch (symbol) {
 					case "≥":
-						judgeResult((Integer.parseInt(actualvalNum) >= Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						judgeResult((Float.valueOf(actualvalNum) >= Float.valueOf(requirevalNum)), complianceCellList.get(0), operation2);
 						break;
 					case "＞":
-						judgeResult((Integer.parseInt(actualvalNum) > Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						judgeResult((Float.valueOf(actualvalNum) > Float.valueOf(requirevalNum)), complianceCellList.get(0), operation2);
 						break;
 					case "≤":
-						judgeResult((Integer.parseInt(actualvalNum) <= Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						judgeResult((Float.valueOf(actualvalNum) <= Float.valueOf(requirevalNum)), complianceCellList.get(0), operation2);
 						break;
 					case "＜":
-						judgeResult((Integer.parseInt(actualvalNum) < Integer.parseInt(requirevalNum)), complianceCellList.get(0), operation2);
+						judgeResult((Float.valueOf(actualvalNum) < Float.valueOf(requirevalNum)), complianceCellList.get(0), operation2);
 						break;
 				}
 			} else {
-				Toast.makeText(context, "判读数据异常，请检查判读数据。", Toast.LENGTH_SHORT).show();
+				judgeResult(false, complianceCellList.get(0), operation2);
+			}
+		}
+		//文字类型判读，判断是否包含“已”“未”
+		else if (m1.find()) {
+			if (!actualvalNum.equals("")) {
+				if (actualvalNum.contains("已")) {
+					judgeResult(true, complianceCellList.get(0), operation2);
+				} else {
+					judgeResult(false, complianceCellList.get(0), operation2);
+				}
+			} else {
+				judgeResult(false, complianceCellList.get(0), operation2);
+			}
+		}
+		//5(+1, -1)、 5[+1, 0]；
+		else if (m2.matches()) {
+			if (!actualvalNum.equals("") && !prefixCode.equals("")) {
+				String leftS = prefixCode.indexOf("(") >= 0 ? "1" : "0";// 判断有没有左小括号
+				String rightS = prefixCode.indexOf(")") >= 0 ? "1" : "0";// 判断有没有右小括号
+				String leftM = prefixCode.indexOf("[") >= 0 ? "1" : "0";// 判断有没有左中括号
+				String rightM = prefixCode.indexOf("]") >= 0 ? "1" : "0";// 判断有没有右中括号
+				String condition = leftS + rightS + leftM + rightM;
+				switch (condition) {
+					case "1100":
+						Float mid = Float.valueOf(prefixCode.substring(0, prefixCode.indexOf("(")));
+						Float sup = Float.valueOf(prefixCode.substring(prefixCode.indexOf("+"), prefixCode.indexOf(",")));
+						Float sub = Float.valueOf(prefixCode.substring(prefixCode.indexOf("-")+1, prefixCode.lastIndexOf(")")));
+						Float min = mid - sub;
+						Float max = mid + sup;
+						Float req = Float.valueOf(actualvalNum);
+						if (req >= max || req <= min) {
+							judgeResult(false, complianceCellList.get(0), operation2);
+						} else {
+							judgeResult(true, complianceCellList.get(0), operation2);
+						}
+						break;
+					case "1001":
+						Float mid1 = Float.valueOf(prefixCode.substring(0, prefixCode.indexOf("(")));
+						Float sup1 = Float.valueOf(prefixCode.substring(prefixCode.indexOf("+"), prefixCode.indexOf(",")));
+						Float sub1 = Float.valueOf(prefixCode.substring(prefixCode.indexOf("-")+1, prefixCode.lastIndexOf("]")));
+						Float min1 = mid1 - sub1;
+						Float max1 = mid1 + sup1;
+						Float req1 = Float.valueOf(actualvalNum);
+						if (req1 >= max1 || req1 < min1) {
+							judgeResult(false, complianceCellList.get(0), operation2);
+						} else {
+							judgeResult(true, complianceCellList.get(0), operation2);
+						}
+						break;
+					case "0110":
+						Float mid2 = Float.valueOf(prefixCode.substring(0, prefixCode.indexOf("[")));
+						Float sup2 = Float.valueOf(prefixCode.substring(prefixCode.indexOf("+"), prefixCode.indexOf(",")));
+						Float sub2 = Float.valueOf(prefixCode.substring(prefixCode.indexOf("-")+1, prefixCode.lastIndexOf(")")));
+						Float min2 = mid2 - sub2;
+						Float max2 = mid2 + sup2;
+						Float req2 = Float.valueOf(actualvalNum);
+						if (req2 > max2 || req2 <= min2) {
+							judgeResult(false, complianceCellList.get(0), operation2);
+						} else {
+							judgeResult(true, complianceCellList.get(0), operation2);
+						}
+						break;
+					case "0011":
+						Float mid3 = Float.valueOf(prefixCode.substring(0, prefixCode.indexOf("[")));
+						Float sup3 = Float.valueOf(prefixCode.substring(prefixCode.indexOf("+"), prefixCode.indexOf(",")));
+						Float sub3 = Float.valueOf(prefixCode.substring(prefixCode.indexOf("-")+1, prefixCode.lastIndexOf("]")));
+						Float min3 = mid3 - sub3;
+						Float max3 = mid3 + sup3;
+						Float req3 = Float.valueOf(actualvalNum);
+						if (req3 > max3 || req3 < min3) {
+							judgeResult(false, complianceCellList.get(0), operation2);
+						} else {
+							judgeResult(true, complianceCellList.get(0), operation2);
+						}
+						break;
+				}
+			} else {
+				judgeResult(false, complianceCellList.get(0), operation2);
+			}
+
+		}
+		//0~2
+		else if (prefixCode.contains("~")) {
+			if (!actualvalNum.equals("") && !prefixCode.equals("")) {
+				String min = prefixCode.substring(0,prefixCode.indexOf("~"));
+				String max = prefixCode.substring(prefixCode.indexOf("~")+1,prefixCode.length());
+				if ((Float.valueOf(actualvalNum) < Float.valueOf(min)) || (Float.valueOf(actualvalNum) > Float.valueOf(max))) {
+					judgeResult(false, complianceCellList.get(0), operation2);
+				} else {
+					judgeResult(true, complianceCellList.get(0), operation2);
+				}
+			} else {
+				judgeResult(false, complianceCellList.get(0), operation2);
+			}
+		}
+		//5±0.2
+		else if (prefixCode.contains("±")) {
+			if (!actualvalNum.equals("") && !prefixCode.equals("")) {
+				String mid = prefixCode.substring(0,prefixCode.indexOf("±"));
+				String mm = prefixCode.substring(prefixCode.indexOf("±")+1,prefixCode.length());
+				Float min = Float.valueOf(mid) - Float.valueOf(mm);
+				Float max = Float.valueOf(mid) + Float.valueOf(mm);
+				if (Float.valueOf(actualvalNum) < min || Float.valueOf(actualvalNum) > max) {
+					judgeResult(false, complianceCellList.get(0), operation2);
+				} else {
+					judgeResult(true, complianceCellList.get(0), operation2);
+				}
+			} else {
+				judgeResult(false, complianceCellList.get(0), operation2);
 			}
 		}
 		//上下偏差情况
 		else {
-			//要求值
-			String require = requirevalCellList.get(0).getTextvalue();
-			if (!actualvalNum.equals("") && !require.equals("")) {
-				//上限 实测值+上偏差
-				int max = Integer.parseInt(require) + Integer.parseInt(upperCellList.get(0).getTextvalue());
-				//下限 实测值+下偏差
-				int min = Integer.parseInt(require) + Integer.parseInt(lowerCellList.get(0).getTextvalue());
-				boolean judge = Integer.parseInt(actualvalNum) > min && Integer.parseInt(actualvalNum) < max;
-				judgeResult(judge, complianceCellList.get(0), operation2);
+			if (m3.matches()) {
+				//要求值
+				String require = requirevalCellList.get(0).getTextvalue();
+				if (!actualvalNum.equals("") && !require.equals("")) {
+					//上限 实测值+上偏差
+					Float max = Float.valueOf(require) + Float.valueOf(upperCellList.get(0).getTextvalue());
+					//下限 实测值+下偏差
+					Float min = Float.valueOf(require) + Float.valueOf(lowerCellList.get(0).getTextvalue());
+					boolean judge = Float.valueOf(actualvalNum) > min && Float.valueOf(actualvalNum) < max;
+					judgeResult(judge, complianceCellList.get(0), operation2);
+				} else {
+					judgeResult(false, complianceCellList.get(0), operation2);
+				}
 			} else {
-
-				Toast.makeText(context, "判读数据异常，请检查判读数据。", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, prefixCode + "不符合判读标准", Toast.LENGTH_SHORT).show();
+				judgeResult(false, complianceCellList.get(0), operation2);
 			}
 		}
 

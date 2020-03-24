@@ -1100,8 +1100,7 @@ public class SyncWorkThread extends Thread {
 			if (code != 200) {
 				return false;
 			}
-			String taskXMLContent = EntityUtils.toString(response.getEntity(),
-					"utf-8");
+			String taskXMLContent = EntityUtils.toString(response.getEntity(), "utf-8");
 			syncList.add("2,我的任务---检查表格下载列表");
 			Task downloadtask = invertXMLtoTask(taskXMLContent, "unfinish");
 			if (downloadtask != null) { // 如果表格实例XML保存到数据库，就下载该表格的HTML表格
@@ -1111,6 +1110,9 @@ public class SyncWorkThread extends Thread {
 				downloadBitmap(downloadtask);
 				updateInformation("下载", downloadtask.getTaskname()
 						+ "---Bitmap文件成功");
+				//下载示意图
+				List<Cell> cellList = DataSupport.where("taskid = ? and type = ?", downloadtask.getTaskid(), "TRUE").find(Cell.class);
+				downloadrefphoto(downloadtask);
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -1230,6 +1232,79 @@ public class SyncWorkThread extends Thread {
 					+ task.getTaskid();
 //					+ ".zip";
 			String path = Environment.getExternalStorageDirectory() + Config.v2photoPath
+					+ File.separator
+					+ task.getRwid()
+					+ File.separator
+					+ task.getTaskid()
+					+ File.separator;
+
+			File file1 = new File(filepath);
+			file1.delete();
+			if (!file1.exists()) {
+				file1.mkdirs();
+			}
+
+			ByteArrayInputStream is = new ByteArrayInputStream(
+					EntityUtils.toByteArray(response.getEntity()));
+			File file = new File(file1.getAbsolutePath(),task.getTaskid()+".zip");// 新建一个file文件
+			FileOutputStream fos = new FileOutputStream(file); // 对应文件建立输出流
+			byte[] buffer = new byte[1024]; // 新建缓存 用来存储 从网络读取数据 再写入文件
+			int len = 0;
+			while ((len = is.read(buffer)) != -1) {// 当没有读到最后的时候
+				fos.write(buffer, 0, len);// 将缓存中的存储的文件流file文件
+			}
+			fos.flush();// 将缓存中的写入file
+			fos.close();
+
+			Unzip(file.getAbsolutePath(), filepath + File.separator);
+			file.delete();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	/**
+	 * @Description: 下载检查项示意图
+	 * @author qiaozhili
+	 * @date 2020/3/11 17:32
+	 * @param
+	 * @return
+	 */
+	private boolean downloadrefphoto(Task task) {
+		try {
+			HttpClient client = HttpClientHelper.getOrientHttpClient();
+			HttpPost postmethod = new HttpPost(
+					HttpClientHelper.getURL());
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+					1);
+			nameValuePairs.add(new BasicNameValuePair("taskid", task
+					.getTaskid()));
+			nameValuePairs.add(new BasicNameValuePair("operationType",
+					"downloadrefphoto"));
+			postmethod.setEntity(new UrlEncodedFormEntity(
+					nameValuePairs, "utf-8"));
+			postmethod.setHeader("Content-Type",
+					"application/x-www-form-urlencoded; charset=utf-8");
+			HttpResponse response = client.execute(postmethod);
+			int code = response.getStatusLine().getStatusCode();
+			if (code != 200) {
+				errorMessage = code + "错误";
+				return false; // 错误
+			}
+			updateInformation("保存", task.getTaskname() + "--检查项照片");
+
+			String filepath = Environment.getExternalStorageDirectory() + Config.refphotoPath
+					+ File.separator
+					+ task.getRwid()
+					+ File.separator
+					+ task.getTaskid();
+//					+ ".zip";
+			String path = Environment.getExternalStorageDirectory() + Config.refphotoPath
 					+ File.separator
 					+ task.getRwid()
 					+ File.separator

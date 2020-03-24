@@ -332,6 +332,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					android.widget.TableRow.LayoutParams para1 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para1_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para1_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					para1_1.gravity = Gravity.CENTER_VERTICAL;
 					LinearLayout linear0 = new LinearLayout(context);
 					linear0.setOrientation(LinearLayout.HORIZONTAL);
 					linear0.setLayoutParams(para1);
@@ -353,10 +354,11 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					break;
 				case "STRING":
 					android.widget.TableRow.LayoutParams para2 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para2_1 = new android.widget.TableRow.LayoutParams(avewdith-1, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);
 					android.widget.TableRow.LayoutParams para2_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para2_3 = new android.widget.TableRow.LayoutParams(80, 70);
 					android.widget.TableRow.LayoutParams para2_4 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					para2_1.gravity = Gravity.CENTER_VERTICAL;
 					LinearLayout linear2 = new LinearLayout(context);
 					linear2.setOrientation(LinearLayout.HORIZONTAL);
 					linear2.setLayoutParams(para2);
@@ -479,6 +481,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					android.widget.TableRow.LayoutParams para4_3= new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear4 = new LinearLayout(context);
 					para4_1.gravity = Gravity.CENTER;
+					para4_2.gravity = Gravity.CENTER_VERTICAL;
 					para4_1.setMargins((avewdith-81)/2, 0, 0, 0);				//左上右下
 					linear4.setOrientation(LinearLayout.HORIZONTAL);
 					linear4.setLayoutParams(para4);
@@ -564,9 +567,11 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					break;
 				case "STRINGPHOTO":
 					android.widget.TableRow.LayoutParams para5 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para5_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para5_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);
 					android.widget.TableRow.LayoutParams para5_2 = new android.widget.TableRow.LayoutParams(80, 70);
 					android.widget.TableRow.LayoutParams para5_3= new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					para5_1.gravity = Gravity.CENTER_VERTICAL;
+					para5_2.gravity = Gravity.CENTER_VERTICAL;
 					LinearLayout linear5 = new LinearLayout(context);
 					linear5.setOrientation(LinearLayout.HORIZONTAL);
 					linear5.setLayoutParams(para5);
@@ -646,9 +651,11 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					break;
 				case "HOOKSTRING":
 					android.widget.TableRow.LayoutParams para6 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para6_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para6_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);
 					android.widget.TableRow.LayoutParams para6_2 = new android.widget.TableRow.LayoutParams(80, 80);
 					android.widget.TableRow.LayoutParams para6_3 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					para6_1.gravity = Gravity.CENTER_VERTICAL;
+					para6_2.gravity = Gravity.CENTER_VERTICAL;
 					LinearLayout linear6 = new LinearLayout(context);
 					linear6.setOrientation(LinearLayout.HORIZONTAL);
 					linear6.setLayoutParams(para6);
@@ -737,9 +744,12 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 				case "HOOKSTRINGPHOTO":
 					android.widget.TableRow.LayoutParams para7 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para7_1 = new android.widget.TableRow.LayoutParams(60, 60);			//checkbox
-					android.widget.TableRow.LayoutParams para7_2 = new android.widget.TableRow.LayoutParams(avewdith-141, android.widget.TableRow.LayoutParams.MATCH_PARENT);			//string
+					android.widget.TableRow.LayoutParams para7_2 = new android.widget.TableRow.LayoutParams(avewdith-141, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);			//string
 					android.widget.TableRow.LayoutParams para7_3 = new android.widget.TableRow.LayoutParams(80, 70);			//photo
 					android.widget.TableRow.LayoutParams para7_4 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					para7_3.gravity = Gravity.CENTER_VERTICAL;
+					para7_2.gravity = Gravity.CENTER_VERTICAL;
+					para7_1.gravity = Gravity.CENTER_VERTICAL;
 					LinearLayout linear7 = new LinearLayout(context);
 					linear7.setOrientation(LinearLayout.HORIZONTAL);
 					linear7.setLayoutParams(para7);
@@ -857,17 +867,17 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					image7_1.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							Operation temp = null;
-							if(operation71.getIsmedia().equals("TRUE")){
-								temp = operation71;
-								HtmlHelper.changePhotoValue(htmlDoc, operation71);
-							}
-							if(operation72.getIsmedia().equals("TRUE")){
-								temp = operation72;
-								HtmlHelper.changePhotoValue(htmlDoc, operation72);
-							}
-							if(temp != null)
-								transAlbum(cell.getCellid(), cell.getTaskid(), temp);
+//							Operation temp = null;
+//							if(operation71.getIsmedia().equals("TRUE")){
+//								temp = operation71;
+//								HtmlHelper.changePhotoValue(htmlDoc, operation71);
+//							}
+//							if(operation72.getIsmedia().equals("TRUE")){
+//								temp = operation72;
+//								HtmlHelper.changePhotoValue(htmlDoc, operation72);
+//							}
+//							if(temp != null)
+								transAlbum(cell.getCellid(), cell.getTaskid(), operation72);
 						}
 					});
 					linear7.addView(image7_1, para7_3);

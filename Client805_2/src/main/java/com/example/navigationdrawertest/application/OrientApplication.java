@@ -25,6 +25,7 @@ public class OrientApplication extends Application {
 	public User loginUser = null;								//用于保存当前登录的用户信息
 	public boolean bConnenct = false;					//用于保存当前网络连接状态
 	public List<String> uploadDownloadList = new ArrayList<String>();		//保存同步时上传下载信息
+	public List<String> updataInfoList = new ArrayList<String>();		//保存同步时上传下载信息
 	public RwRelation rw = null;                                            //用于保存当前任务页面的信息
 	public int pageflage;
 	private int flag;
