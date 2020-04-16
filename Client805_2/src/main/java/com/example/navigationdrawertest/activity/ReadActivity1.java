@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -99,7 +100,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 	private SignAdapter1 signadapter = null;
 	private SyncHorizontalScrollView myScrollView, titleHorScr;
 
-	private ImageView mBack, mClose;
+	private ImageView mClose;
+	private LinearLayout lin_back;
 	private TextView mTablename, mTotalPhNum;
 
 	private LinearLayout mReadSign;
@@ -158,7 +160,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 //					}
 //				});
 		
-		mTotalPhNum.setText("照片数量：" + String.valueOf(totalPhNumber));
+		mTotalPhNum.setText("" + String.valueOf(totalPhNumber));
 	}
 	
 	private void initUI(){
@@ -178,8 +180,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 				ReadActivity1.this.finish();
 			}
 		});
-		mBack = (ImageView) findViewById(R.id.back);
-		mBack.setOnClickListener(new View.OnClickListener(){
+		lin_back = (LinearLayout) findViewById(R.id.lin_back);
+		lin_back.setOnClickListener(new View.OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
@@ -281,7 +283,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 	 */
 	private void initHeaderUI(){
 		TableRow tablerow = new TableRow(context);
-		tablerow.setBackgroundColor(Color.rgb(236, 247, 82));
+		tablerow.setBackgroundColor(getResources().getColor(R.color.table_titlebg));
 		tablerow.setGravity(Gravity.CENTER_VERTICAL);
 		for (Cell cell : headMap) {
 			android.widget.TableRow.LayoutParams para4 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
@@ -296,7 +298,9 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 			textview.setGravity(Gravity.CENTER);
 //			textview.setText(HtmlHelper.transCellLabel(labelName1));
 			textview.setText(CheckActivity1.replaceStr(labelName1));
-			textview.setTextSize(16);
+			textview.setTextSize(14);
+			textview.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+			textview.setTextColor(getResources().getColor(R.color.content));
 			linear4.addView(textview, para411);
 			//初始化textInfo
 			ImageView image = new ImageView(context);
@@ -305,7 +309,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 			tablerow.addView(linear4, para4);
 		}
 		table_header.addView(tablerow, new TableLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, 55));
+				LayoutParams.MATCH_PARENT, 66));
 	}
 	
 	/**
@@ -315,9 +319,9 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 		for(int i=1; i<=rowCount; i++){
 			TableRow tablerow = new TableRow(context);
 			if (i % 2 == 0)
-				tablerow.setBackgroundColor(Color.rgb(255, 255, 255));
+				tablerow.setBackgroundColor(getResources().getColor(R.color.white));
 			else
-				tablerow.setBackgroundColor(Color.rgb(153, 204, 255));
+				tablerow.setBackgroundColor(getResources().getColor(R.color.table_contentbg));
 			List<Cell> cellList = DataSupport.where("horizontalorder=? and taskid=? and rowsid=?", i+"", task_id+"", String.valueOf(pagetype)).order("verticalorder asc").find(Cell.class);
 			List<Cell> newCellList = new ArrayList<Cell>();
 			for(int j=1; j<=cellList.size(); j++){
@@ -345,7 +349,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					textview.setGravity(Gravity.CENTER);
 					textview.setWidth(avewdith);
 //					textview.setHeight(100);
-					textview.setTextSize(16);
+					textview.setTextSize(14);
+					textview.setTextColor(getResources().getColor(R.color.content));
 //					textview.setText(HtmlHelper.transCellLabel(labelName));
 					textview.setText(CheckActivity1.replaceStr(labelName));
 					linear0.addView(textview, para1_1);
@@ -371,27 +376,29 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final ImageButton signButton = new ImageButton(context);
 					final ImageView signImage = new ImageView(context);
 					final String markup = cell.getMarkup();
-					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
-//					final Signature signnature = new Signature();
-					if (signatureList.size() > 0) {
-//						signnature = signatureList.get(0);
-						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
-						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
-						if (SignBitmap != null) {
-							signImage.setImageBitmap(SignBitmap);
-						}
-					}
+//					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
+////					final Signature signnature = new Signature();
+//					if (signatureList.size() > 0) {
+////						signnature = signatureList.get(0);
+//						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
+//						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
+//						if (SignBitmap != null) {
+//							signImage.setImageBitmap(SignBitmap);
+//						}
+//					}
 					signButton.setBackgroundResource(R.drawable.takephoto);
 					EditText edittext2 = new EditText(context);
 					edittext2.setText(CheckActivity1.replaceStr(str));
-					edittext2.setTextSize(16);
+					edittext2.setTextSize(14);
+					edittext2.setTextColor(getResources().getColor(R.color.content));
 					edittext2.setEnabled(false);
-					if (!markup.equals("") && markup.equals("sign")) {
-						linear2.addView(signImage, para2_4);
-						linear2.addView(signButton, para2_3);
-					} else {
-						linear2.addView(edittext2, para2_1);
-					}
+//					if (!markup.equals("") && markup.equals("sign")) {
+//						linear2.addView(signImage, para2_4);
+//						linear2.addView(signButton, para2_3);
+//					} else {
+//						linear2.addView(edittext2, para2_1);
+//					}
+					linear2.addView(edittext2, para2_1);
 					//初始化textInfo
 					ImageView image2 = new ImageView(context);
 					image2.setBackgroundResource(R.drawable.blacktiao);
@@ -506,7 +513,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation5 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					String stringdata5 = CommonTools.null2String(operation5.getOpvalue());
 					edit5.setText(CheckActivity1.replaceStr(stringdata5));
-					edit5.setTextSize(16);
+					edit5.setTextSize(14);
+					edit5.setTextColor(getResources().getColor(R.color.content));
 					linear5.addView(edit5, para5_1);
 					//初始化textInfo
 					NumImageButton image5 = new NumImageButton(context);
@@ -559,7 +567,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation6_2 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 					String stringdata6 = CommonTools.null2String(operation6_2.getOpvalue());
 	    			edit6.setText(CheckActivity1.replaceStr(stringdata6));
-	    			edit6.setTextSize(16);
+	    			edit6.setTextSize(14);
+					edit6.setTextColor(getResources().getColor(R.color.content));
 					linear6.addView(edit6, para6_1);
 					//初始化checkbox
 					CheckBox checkbox6 = new CheckBox(context);
@@ -599,7 +608,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation72 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 					String stringdata7 = CommonTools.null2String(operation72.getOpvalue());
 	    			edit7.setText(CheckActivity1.replaceStr(stringdata7));
-	    			edit7.setTextSize(16);
+	    			edit7.setTextSize(14);
+					edit7.setTextColor(getResources().getColor(R.color.content));
 					linear7.addView(edit7, para7_2);
 					//初始化checkbox
 					CheckBox cb7 = new CheckBox(context);
@@ -727,7 +737,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					final Operation operation92 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 					String stringdata9 = CommonTools.null2String(operation92.getOpvalue());
 	    			edit9.setText(CheckActivity1.replaceStr(stringdata9));
-	    			edit9.setTextSize(16);
+	    			edit9.setTextSize(14);
+					edit9.setTextColor(getResources().getColor(R.color.content));
 					linear9.addView(edit9, para9_2);
 					//初始化checkbox
 					CheckBox cb9 = new CheckBox(context);
@@ -796,7 +807,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					String stringdata10 = CommonTools.null2String(operation10_2.getOpvalue());
 					final EditText edit10 = new EditText(context);
 	    			edit10.setText(CheckActivity1.replaceStr(stringdata10));
-	    			edit10.setTextSize(16);
+	    			edit10.setTextSize(14);
+					edit10.setTextColor(getResources().getColor(R.color.content));
 					linear10.addView(edit10, para10_2);
 					//初始化checkbox
 					CheckBox cb10 = new CheckBox(context);
@@ -912,7 +924,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					String stringdata11 = CommonTools.null2String(operation11.getOpvalue());
 					final EditText edit11 = new EditText(context);
 	    			edit11.setText(CheckActivity1.replaceStr(stringdata11));
-	    			edit11.setTextSize(16);
+	    			edit11.setTextSize(14);
+					edit11.setTextColor(getResources().getColor(R.color.content));
 	    			edit11.setEnabled(false);
 					linear11.addView(edit11, para11_1);
 					final String userId11 = OrientApplication.getApplication().loginUser.getUserid();
@@ -959,7 +972,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					String stringdata12 = CommonTools.null2String(operation12_2.getOpvalue());
 					final EditText edit12 = new EditText(context);
 	    			edit12.setText(CheckActivity1.replaceStr(stringdata12));
-	    			edit12.setTextSize(16);
+	    			edit12.setTextSize(14);
+					edit12.setTextColor(getResources().getColor(R.color.content));
 					linear12.addView(edit12, para12_1);
 					edit12.setEnabled(false);
 					String opId12 = operation12_2.getSketchmap();
@@ -1107,7 +1121,7 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 				}
 			}
 			table_content.addView(tablerow, new TableLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, 50));
+					LayoutParams.WRAP_CONTENT, 66));
 		}
 	}
 	
@@ -1203,7 +1217,8 @@ public class ReadActivity1 extends BaseActivity implements ObservableScrollView.
 					String dirPath = files[j].toString().toLowerCase();
 					System.out.println(dirPath);
 					getPictures(dirPath + "/");
-				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")) {
+				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")
+						|| name.endsWith(".mp4") || name.endsWith(".3gp") || name.contains(".avi") || name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP")) {
 					System.out.println("FileName===" + files[j].getName());
 					picturenumbers++;
 				}

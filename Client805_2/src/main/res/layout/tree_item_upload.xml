@@ -29,7 +29,8 @@
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@+id/fragmentupload_img_tree_left"
             android:text="TextView"
-            android:textSize="@dimen/content" />
+            android:textSize="@dimen/size14"
+            android:textColor="@color/login_seting"/>
 
         <!-- <Button  
             android:id="@+id/fragmentupload_look_deletebutton"  
@@ -46,42 +47,94 @@
             android:focusable="false"
             android:textSize="20sp" /> -->
 
-        <Button
-            android:id="@+id/fragmentUnupload_back_button"
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_alignParentLeft="false"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/fragmentupload_look_button"
-            android:background="@drawable/status_back_shape"
-            android:focusable="false"
-            android:text="回退"
-            android:textColor="@color/White"
-            android:visibility="gone"/>
-        
-        <Button  
-            android:id="@+id/fragmentupload_look_button"  
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="15dp"
+        <!--<Button-->
+            <!--android:id="@+id/fragmentUnupload_back_button"-->
+            <!--android:layout_width="85dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_alignParentLeft="false"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/fragmentupload_look_button"-->
+            <!--android:background="@drawable/status_back_shape"-->
+            <!--android:focusable="false"-->
+            <!--android:text="回退"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:visibility="gone"/>-->
+        <!---->
+        <!--<Button  -->
+            <!--android:id="@+id/fragmentupload_look_button"  -->
+            <!--android:layout_width="85dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentLeft="false"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:background="@drawable/chakan_new"-->
+            <!--android:focusable="false"/>-->
+
+
+        <LinearLayout
+            android:id="@+id/unUpload_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/unUpload_line"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/huitui"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回退"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/huitui"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/unUpload_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="false"
-            android:layout_centerVertical="true"
-            android:background="@drawable/chakan_new"
-            android:focusable="false"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/read"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
 
         <!-- android:layout_toLeftOf="@+id/fragmentupload_look_deletebutton" -->
         
         <ImageView
             android:id="@+id/fragmentupload_img_tree_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="44dp"
             android:layout_toRightOf="@+id/fragmentupload_txt_tree_width"
-            android:src="@drawable/icon_plusminus_add_black" />
+            android:src="@drawable/tree_z" />
 
     </RelativeLayout>
 

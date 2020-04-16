@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -90,7 +91,7 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
                             adapter.notifyDataSetChanged();
                             mActivity.tv_save.setEnabled(true);
                             mActivity.tv_save.setTextColor(Color.WHITE);
-                            savePictureNow(mActivity.path, bm1, photoName);//时时保存照片
+//                            savePictureNow(mActivity.path, bm1, photoName);//时时保存照片
                         }
                     });
 
@@ -115,6 +116,18 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
 
         PreviewWidth = sizeList.get(position).width;
         PreviewHeight = sizeList.get(position).height;
+//        if (sizeList.size() > 1) {
+//            Iterator<Camera.Size> itor = sizeList.iterator();
+//            while (itor.hasNext()) {
+//                Camera.Size cur = itor.next();
+//                if (cur.width >= PreviewWidth
+//                        && cur.height >= PreviewHeight) {
+//                    PreviewWidth = cur.width;
+//                    PreviewHeight = cur.height;
+//                    break;
+//                }
+//            }
+//        }
 
         try {
             if (PreviewWidth > 1400) {
@@ -123,7 +136,7 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
             parameters.setPreviewSize(PreviewWidth, PreviewHeight);
             // //获得摄像区域的大小
             parameters.setPictureFormat(PixelFormat.JPEG);// 设置照片输出的格式
-            parameters.setJpegQuality(80);// 设置照片质量
+            parameters.set("jpeg-quality", 85);// 设置照片质量
             parameters.setPictureSize(PreviewWidth, PreviewHeight);// 设置拍出来的屏幕大小
 
             mActivity.mCamera.setParameters(parameters);// 把上面的设置 赋给摄像头
@@ -176,6 +189,7 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
         mActivity.view = mActivity.findViewById(view);
         mActivity.mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.mSurfaceView);
         mActivity.mButton = (ImageView) mActivity.findViewById(R.id.myButton);
+        mActivity.mButton.setEnabled(false);
         mActivity.mSmall = (ImageView) mActivity.findViewById(R.id.camera_small);
         mActivity.mBig = (ImageView) mActivity.findViewById(R.id.camera_big);
     }
@@ -246,7 +260,9 @@ public class CameraPresenterImpl implements CameraPresenter,View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()){
             case tv_cancle:
-                mActivity.finish();
+                if (saveBitemap(mActivity.path)) {
+                    mActivity.finish();
+                }
                 break;
             case tv_save:
                 if (saveBitemap(mActivity.path)) {

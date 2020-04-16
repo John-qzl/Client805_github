@@ -60,7 +60,6 @@
     <color name="reveal_color">#1b000000</color>
     <color name="light_green">#0ac39e</color>
 
-
     <color name="actionbar">#1d8ae7</color>
     <color name="buttonBg">#1562c4</color>
     <color name="buttonBg1">#1d8ae7</color>
@@ -72,5 +71,24 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
 
+
+    <color name="hint">#999999</color>
+    <color name="login_back">#0781EB</color>
+    <color name="login_seting">#666666</color>
+    <color name="genalbg">#E9EAEE</color>
+    <color name="toolBarbg">#2990EA</color>
+    <color name="read">#F89559</color>
+    <color name="sign">#49BCFC</color>
+    <color name="huitui">#A1BDD1</color>
+    <color name="shanchu">#F96E32</color>
+    <color name="black1">#333333</color>
+    <color name="line">#EEEEEE</color>
+    <color name="content">#38434E</color>
+    <color name="warn_color">#FB0006</color>
+    <color name="table_titlebg">#F0F7FE</color>
+    <color name="table_contentbg">#F7F7F7</color>
+    <color name="table_line">#DBE3EA</color>
+
+    <color name="bt_bg">#22000000</color>
 
 </resources>

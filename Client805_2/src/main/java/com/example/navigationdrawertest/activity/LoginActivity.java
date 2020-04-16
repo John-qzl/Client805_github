@@ -1,30 +1,18 @@
 package com.example.navigationdrawertest.activity;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.EncodingUtils;
-import org.apache.http.util.EntityUtils;
 import org.litepal.crud.DataSupport;
 
 import android.Manifest;
@@ -38,7 +26,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -48,6 +35,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -60,18 +48,14 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.navigationdrawertest.MainActivity;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.CustomUI.CustomDialog;
-import com.example.navigationdrawertest.application.MyApplication;
 import com.example.navigationdrawertest.application.OrientApplication;
-import com.example.navigationdrawertest.internet.HttpClientHelper;
 import com.example.navigationdrawertest.internet.SyncWorkThread;
 import com.example.navigationdrawertest.internet.UpdataVersionThread;
 import com.example.navigationdrawertest.login.Login;
@@ -97,13 +81,15 @@ import com.example.navigationdrawertest.utils.NetCheckTool;
 import com.example.navigationdrawertest.utils.RegexValidateUtil;
 import com.example.navigationdrawertest.utils.SharedPrefsUtil;
 
+import static com.example.navigationdrawertest.customCamera.album.view.FilterImageView.TAG;
+
 public class LoginActivity extends BaseActivity{
 
 	private Button loginBtn, exitBtn;
 	private EditText username, password;
 	private ProgressDialog prodlg;
 	private boolean isClicked = false;
-	private ImageButton shezhiBtn, deletedataBtn, version_updata;
+	private LinearLayout shezhiBtn, deletedataBtn, version_updata;
 	private Context context;
 	private AlertDialog.Builder dialog;
 	private TextView mVersion;
@@ -244,6 +230,19 @@ public class LoginActivity extends BaseActivity{
 				String apkpath = (String) bundle.get("apkpath");
 				String apkVersion = (String) bundle.get("apkVersion");
 				updataWarn(apkpath, apkVersion);
+			} else if (readResult != null && readResult.equalsIgnoreCase("disableUrl")) {
+				prodlg.dismiss();
+				AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+				dialog.setIcon(R.drawable.logo_title).setTitle("警告");
+				dialog.setMessage("IP和Port无效，请检查端口设置后重试！");
+				dialog.setCancelable(false);
+				dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+				dialog.show();
 			}
 			return;
 		}
@@ -352,18 +351,19 @@ public class LoginActivity extends BaseActivity{
 
 		loginBtn = (Button) findViewById(R.id.loginButton);
 		exitBtn = (Button) findViewById(R.id.eixtButton);
-		deletedataBtn = (ImageButton) findViewById(R.id.deletedata);
+		deletedataBtn = (LinearLayout) findViewById(R.id.deletedata);
 		username = (EditText) findViewById(R.id.username);
 		username.setText(SharedPrefsUtil.getValue(this, "username", ""));
 		password = (EditText) findViewById(R.id.password);
-		shezhiBtn = (ImageButton) findViewById(R.id.shezhi);
-		version_updata = (ImageButton) findViewById(R.id.version_updata);
+		shezhiBtn = (LinearLayout) findViewById(R.id.shezhi);
+		version_updata = (LinearLayout) findViewById(R.id.version_updata);
 		mVersion = (TextView) findViewById(R.id.tv_version);
 		context = this;
 		mVersion.setText("版本号：v"+packageName(context));
 		version_updata.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+//				install("/storage/emulated/0/805/files/v2p/221.apk");
 				checkInternet();
 			}
 		});
@@ -374,7 +374,7 @@ public class LoginActivity extends BaseActivity{
 		if (Build.VERSION.SDK_INT >= 23) {
 			int REQUEST_CODE_CONTACT = 101;
 			String[] permissions1 = {Manifest.permission.CAMERA,
-					Manifest.permission.WRITE_EXTERNAL_STORAGE};
+					Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 			for (String str : permissions1) {
 				if (ActivityCompat.checkSelfPermission(getApplicationContext(), str) != PackageManager.PERMISSION_GRANTED) {
 					//申请权限
@@ -534,7 +534,7 @@ public class LoginActivity extends BaseActivity{
 		public void onClick(View v) {
 			if (isClicked) {
 				Log.d("DoubleClick", "doubleClicked");
-				return;
+//				return;
 			}
 			isClicked = true;
 			login();
@@ -650,10 +650,13 @@ public class LoginActivity extends BaseActivity{
 	 */
 	private void warnInfo() {
 		String file = "warn.txt";
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.login_warn,(ViewGroup) findViewById(R.id.warn));
 		AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
 		dialog.setIcon(R.drawable.logo_title).setTitle("重要提示！");
+		dialog.setView(layout);
 //		dialog.setMessage(loadFromSDFile(file));
-		dialog.setMessage("1、请检查网络是否正常；" + "\r\n" +"2、请确认是否为本人操作；" + "\r\n"+"3、请确认Pad系统时间是否正确。");
+//		dialog.setMessage("1、请检查网络是否正常；" + "\r\n" +"2、请确认是否为本人操作；" + "\r\n"+"3、请确认Pad系统时间是否正确。");
 		dialog.setCancelable(false);
 		dialog.setPositiveButton("时间设置", new DialogInterface.OnClickListener() {
 			@Override
@@ -773,13 +776,14 @@ public class LoginActivity extends BaseActivity{
 	private void updataWarn(final String apkPath, String apkVersion) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(context);
 		dialog.setIcon(R.drawable.logo_title).setTitle("检测到新版本，是否进行升级？");
-		dialog.setMessage("version:" + apkVersion);
+//		dialog.setMessage("version:" + apkVersion);
 		dialog.setCancelable(false);
 		dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				if (apkPath != "") {
+//					installAPK(apkPath);
 					install(apkPath);
 				} else {
 					Toast.makeText(LoginActivity.this, "没查询apk文件，请检查服务端数据！", Toast.LENGTH_SHORT).show();
@@ -802,7 +806,7 @@ public class LoginActivity extends BaseActivity{
 	 * @param
 	 * @return
 	 */
-	private void install(String apkname) {
+	private void installAPK(String apkname) {
 		try {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			File file = new File(apkname);
@@ -811,10 +815,51 @@ public class LoginActivity extends BaseActivity{
 				context.startActivity(intent);
 			} else {
 				//安装包已经删除请重新下载
+				Toast.makeText(LoginActivity.this, "没查找到安装包，请检查服务端数据！", Toast.LENGTH_SHORT).show();
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+
+//		if (apkname == null) {
+//			return;
+//		}
+//		File file = new File(apkname);
+//		if (file == null || !file.exists()) {
+//			return;
+//		}
+//		Intent intent = new Intent(Intent.ACTION_VIEW);
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//			intent.setDataAndType(FileProvider.getUriForFile(context, authority, file), "application/vnd.android.package-archive");
+//		} else {
+//			intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//		}
+//		context.startActivity(intent);
+	}
+
+	private void install(String filePath) {
+		Log.i(TAG, "开始执行安装: " + filePath);
+		try {
+			File apkFile = new File(filePath);
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			if (Build.VERSION.SDK_INT >= 24) {
+                Log.w(TAG, "版本大于 N ，开始使用 fileProvider 进行安装");
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(
+                        context
+                        , "com.example.navigationdrawertest.fileprovider"
+                        , apkFile);
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            } else {
+                Log.w(TAG, "正常进行安装");
+                intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+            }
+			startActivity(intent);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

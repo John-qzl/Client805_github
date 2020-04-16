@@ -80,11 +80,12 @@ import static com.example.navigationdrawertest.camera.PickOrTakeImageActivity.CO
 /**
  * Created by qiaozhili on 2019/2/12 15:26.
  */
-public class AlbumActivity extends FragmentActivity{
+public class AlbumActivity extends FragmentActivity {
 //    private GridView mGridView;
 //    private AlbumAdapter mAlbumAdapter;
     private String path;
     private ArrayList<String> mPhotos = new ArrayList<String>();
+    private ArrayList<String> mVideos = new ArrayList<String>();
     private ArrayList<String> mPhotosnew = new ArrayList<String>();
     private ProgressDialog prodlg;
     private final static int MAXIMGNUMBER = 100;
@@ -178,7 +179,7 @@ public class AlbumActivity extends FragmentActivity{
             public void onClick(View v) {
                 getCurrentAblumPosition();
                 if (mPhotos != null) {
-                    int surplus_pics = MAXIMGNUMBER - mPhotos.size() + 1;//mPhotos没有变
+                    int surplus_pics = MAXIMGNUMBER - mPhotos.size();//mPhotos没有变
                     Intent intent = new Intent(AlbumActivity.this, PickOrTakeImageActivity.class);
                     intent.putExtra("pic_max", surplus_pics);
                     intent.putExtra("currentShowPosition", currentShowPosition);
@@ -193,21 +194,25 @@ public class AlbumActivity extends FragmentActivity{
         mAddVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mPhotos != null) {
+//                mVideos = FileOperation.getAlbumVideoByPath(path, "mp4", "avi", "FLV");
+                if (mVideos != null) {
+                    int surplus_vids = 5 - mVideos.size();//mPhotos没有变
                     Intent intent =new Intent(AlbumActivity.this, PickerActivity.class);
                     intent.putExtra(PickerConfig.SELECT_MODE,PickerConfig.PICKER_VIDEO);//default image and video (Optional)
                     long maxSize=188743680L;//long long long
                     intent.putExtra(PickerConfig.MAX_SELECT_SIZE,maxSize); //default 180MB (Optional)
-                    intent.putExtra(PickerConfig.MAX_SELECT_COUNT,15);  //default 40 (Optional)
+                    intent.putExtra(PickerConfig.MAX_SELECT_COUNT,surplus_vids);  //default 5 (Optional)
                     intent.putExtra(PickerConfig.DEFAULT_SELECTED_LIST, mediaList); // (Optional)
+                    intent.putExtra("currentShowPosition", currentShowPosition);
                     AlbumActivity.this.startActivityForResult(intent,200);
                 } else {
                     Intent intent =new Intent(AlbumActivity.this, PickerActivity.class);
                     intent.putExtra(PickerConfig.SELECT_MODE,PickerConfig.PICKER_VIDEO);//default image and video (Optional)
-                    long maxSize=188743680L;//long long long
+                    long maxSize=108743680L;//long long long
                     intent.putExtra(PickerConfig.MAX_SELECT_SIZE,maxSize); //default 180MB (Optional)
-                    intent.putExtra(PickerConfig.MAX_SELECT_COUNT,15);  //default 40 (Optional)
+                    intent.putExtra(PickerConfig.MAX_SELECT_COUNT,5);  //default 5 (Optional)
                     intent.putExtra(PickerConfig.DEFAULT_SELECTED_LIST, mediaList); // (Optional)
+                    intent.putExtra("currentShowPosition", currentShowPosition);
                     AlbumActivity.this.startActivityForResult(intent,200);
                 }
             }
@@ -225,7 +230,8 @@ public class AlbumActivity extends FragmentActivity{
     }
 
     private void initData() {
-        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png", "mp4", "avi", "FLV");
+        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
+        mVideos = FileOperation.getAlbumVideoByPath(path, "mp4", "avi", "FLV");
         if (mPhotos.size() > 0) {
 //            mNoPhoto.setVisibility(View.GONE);
         }

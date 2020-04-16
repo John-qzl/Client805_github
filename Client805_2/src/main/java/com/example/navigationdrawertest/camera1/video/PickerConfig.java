@@ -19,7 +19,7 @@ public class PickerConfig {
      */
     public static final String MAX_SELECT_SIZE = "max_select_size";
 
-    public static final long DEFAULT_SELECTED_MAX_SIZE = 188743680;
+    public static final long DEFAULT_SELECTED_MAX_SIZE = 108743680;
 
     /**
      * 图片选择模式，默认选视频和图片

@@ -31,6 +31,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +62,14 @@ public class UpdataVersionThread extends Thread {
     public void run() {
         super.run();
         aerospacedb = AerospaceDB.getInstance();
-        // 获取版本信息
-        versionCheck();
+        boolean ss = checkUrl();
+        if (ss) {
+            // 获取版本信息
+            versionCheck();
+        } else {
+            //地址无效
+            notifyCompletion("disableUrl");
+        }
 
 //        notifyCompletion();
     }
@@ -167,7 +178,7 @@ public class UpdataVersionThread extends Thread {
             }
             updateInformation(path);
             apkpath = path;
-            notifyCompletion();
+            notifyCompletion("okupdata");
         } catch (ClientProtocolException e) {
             e.printStackTrace();
             return false;
@@ -198,11 +209,11 @@ public class UpdataVersionThread extends Thread {
         return versioncode;
     }
 
-    public void notifyCompletion() {
+    public void notifyCompletion(String status) {
         OrientApplication.getApplication().updataInfoList = updataList;
         Message msg = handler.obtainMessage();
         Bundle bundle = new Bundle();
-        bundle.putString("localread", "okupdata");
+        bundle.putString("localread", status);
         bundle.putString("apkpath", apkpath);
         bundle.putString("apkVersion", apkVersion);
         msg.setData(bundle);
@@ -217,5 +228,38 @@ public class UpdataVersionThread extends Thread {
         bundle.putString("apkpath", apkpath);
         msg.setData(bundle);
         handler.sendMessage(msg);
+    }
+
+    public static Boolean checkUrl()
+    {
+        Socket socket = null;
+        try {
+            URL url = new URL(HttpClientHelper.getURL());
+            String host = url.getHost();
+            int port = url.getPort();
+            if (port == -1) {
+                port = 80;
+            }
+            socket = new Socket();
+            InetSocketAddress isa = new InetSocketAddress(InetAddress.getByName(host), port);
+
+            socket.connect(isa, 10);
+            if (socket.isConnected()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -33,7 +33,7 @@ public class FileOperation {
 	 * @param isIterative
 	 * @return
 	 */
-	public static ArrayList<String> getAlbumByPath(String path, String jpg, String png, String mp4, String avi, String FLV) {
+	public static ArrayList<String> getAlbumByPath(String path, String jpg, String png) {
 
 		ArrayList<String> lstFile = new ArrayList<String>();                //结果 List
 //		File[] files = new File(path).listFiles();
@@ -49,6 +49,29 @@ public class FileOperation {
 			if (f.isFile()) {
 				String pictureType = f.getPath().substring(f.getPath().length() - jpg.length());
 				if (pictureType.equals(jpg) || pictureType.equals(png)) {
+					lstFile.add(f.getPath());
+				}
+			}
+		}
+		return lstFile;
+	}
+
+	public static ArrayList<String> getAlbumVideoByPath(String path, String mp4, String avi, String FLV) {
+
+		ArrayList<String> lstFile = new ArrayList<String>();                //结果 List
+//		File[] files = new File(path).listFiles();
+		File file1 = new File(path);
+		File[] files = file1.listFiles();
+		if (!file1.exists()) {
+			file1.mkdirs();
+		}
+		if (files == null)
+			return lstFile;
+		for (int i = 0; i < files.length; i++) {
+			File f = files[i];
+			if (f.isFile()) {
+				String pictureType = f.getPath().substring(f.getPath().length() - mp4.length());
+				if (pictureType.equals(avi) || pictureType.equals(FLV) || pictureType.equals(mp4)) {
 					lstFile.add(f.getPath());
 				}
 			}

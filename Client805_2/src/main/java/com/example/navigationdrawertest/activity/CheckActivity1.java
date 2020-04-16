@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -120,12 +121,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	private ConditionAdapter1 conditionadapter;
 	public static int picturenumbers = 0;
 	public static int totalPhotoNum = 0;
-	private ImageView mBack;
+	private LinearLayout mBack;
 	private TextView mTablename, mTotalPhotoNum;
 
 	private LinearLayout mSumit;
 	private RelativeLayout mBottom;
-	private Button mProview, mNext, mRefresh, mConfirmBtn, mCancelBtn, mPandu, mWanzhengxing;
+	private Button mProview, mNext, mConfirmBtn, mCancelBtn;
+	private LinearLayout mRefresh, mPandu, mWanzhengxing;
 	private ImageView mClose;
 	private int rowsnum;
 	private int pagetype;
@@ -187,7 +189,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		windowWidth = dm.widthPixels;// 获取屏幕分辨率宽度
 		windowHeight = dm.heightPixels;
-		mTotalPhotoNum.setText("照片数量："+String.valueOf(totalPhotoNum));
+		mTotalPhotoNum.setText(String.valueOf(totalPhotoNum));
 		if (totalPhotoNum > 0) {
 			currentTask.setIsChecking(1);
 			currentTask.update(currentTask.getId());
@@ -248,7 +250,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				CheckActivity1.this.finish();
 			}
 		});
-		mBack = (ImageView) findViewById(R.id.back);
+		mBack = (LinearLayout) findViewById(R.id.lin_back);
 		mBack.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -301,7 +303,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 			}
 		});
-		mRefresh = (Button) findViewById(R.id.bt_check_refresh);
+		mRefresh = (LinearLayout) findViewById(R.id.lin_check_refresh);
 //		Drawable drawable=getResources().getDrawable(R.drawable.ic_action_refresh);
 //		drawable.setBounds(0,0,40,40);
 //		mRefresh.setCompoundDrawables(drawable,null,null,null);
@@ -312,7 +314,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				finish();
 			}
 		});
-		mPandu = (Button) findViewById(R.id.bt_check_pandu);
+		mPandu = (LinearLayout) findViewById(R.id.lin_check_pandu);
 		mPandu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -332,7 +334,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			}
 		});
 		mTotalPhotoNum = (TextView) findViewById(R.id.check_total_photoNum);
-		mWanzhengxing = (Button) findViewById(R.id.bt_check_wanzheng);
+		mWanzhengxing = (LinearLayout) findViewById(R.id.lin_check_wanzheng);
 		mWanzhengxing.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -428,7 +430,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	 */
 	private void initHeaderUI(){
 		TableRow tablerow = new TableRow(context);
-		tablerow.setBackgroundColor(Color.rgb(236, 247, 82));
+		tablerow.setBackgroundColor(getResources().getColor(R.color.table_titlebg));
 		tablerow.setGravity(Gravity.CENTER_VERTICAL);
 		for (Cell cell : headMap) {
 			android.widget.TableRow.LayoutParams para4 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
@@ -443,7 +445,9 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			textview.setGravity(Gravity.CENTER);
 //			textview.setText(HtmlHelper.transCellLabel(replaceStr(labelName1)));
 			textview.setText(replaceStr(labelName1));
-			textview.setTextSize(16);
+			textview.setTextSize(14);
+			textview.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+			textview.setTextColor(getResources().getColor(R.color.content));
 			linear4.addView(textview, para411);
 			//初始化textInfo
 			ImageView image = new ImageView(context);
@@ -452,7 +456,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			tablerow.addView(linear4, para4);
 		}
 		table_header.addView(tablerow, new TableLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, 55));
+				LayoutParams.MATCH_PARENT, 66));
 	}
 
 	/**
@@ -462,9 +466,9 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		for(int i=1; i<=rowCount; i++){
 			TableRow tablerow = new TableRow(context);
 			if (i % 2 == 0)
-				tablerow.setBackgroundColor(Color.rgb(255, 255, 255));
+				tablerow.setBackgroundColor(getResources().getColor(R.color.white));
 			else
-				tablerow.setBackgroundColor(Color.rgb(153, 204, 255));
+				tablerow.setBackgroundColor(getResources().getColor(R.color.table_contentbg));
 			List<Cell> cellList = DataSupport.where("horizontalorder=? and taskid=? and rowsid=?", i+"", task_id+"", String.valueOf(pagetype)).order("verticalorder asc").find(Cell.class);
 			List<Cell> newCellList = new ArrayList<Cell>();
 			for(int j=1; j<=cellList.size(); j++){
@@ -492,7 +496,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					textview.setGravity(Gravity.CENTER);
 					textview.setWidth(avewdith);
 //					textview.setHeight(85);
-					textview.setTextSize(16);
+					textview.setTextSize(14);
+					textview.setTextColor(getResources().getColor(R.color.content));
 //					textview.setText(HtmlHelper.transCellLabel(replaceStr(labelName)));
 					textview.setText(replaceStr(labelName));
 					linear0.addView(textview, para1_1);
@@ -519,48 +524,49 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final ImageButton signButton = new ImageButton(context);
 					final ImageView signImage = new ImageView(context);
 					final String markup = cell.getMarkup();
-					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
-					final Signature signnature = new Signature();
-					if (signatureList.size() > 0) {
-//						signnature = signatureList.get(0);
-						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
-						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
-						if (SignBitmap != null) {
-							signImage.setImageBitmap(SignBitmap);
-						}
-					}
+//					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
+//					final Signature signnature = new Signature();
+//					if (signatureList.size() > 0) {
+////						signnature = signatureList.get(0);
+//						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
+//						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
+//						if (SignBitmap != null) {
+//							signImage.setImageBitmap(SignBitmap);
+//						}
+//					}
 //					signImage.setBackgroundResource(R.color.sign_bg);
-					signButton.setBackgroundResource(R.drawable.takephoto);
-					signButton.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(final View v) {
-							WritePadDialog writeTabletDialog = new WritePadDialog(context, new DialogListener() {
-								@Override
-								public void refreshActivity(Object object,
-															Signature sign) {
-
-									mSignBitmap = (Bitmap) object;
-									signPath = createFile(String.valueOf(cell.getCellid()), String.valueOf(task_id));
-									Bitmap bmp = getBitmapByOpt(signPath);
-									if (bmp != null) {
-										String time = DateUtil.getCurrentDate();
-										sign.setIsFinish("is");
-										sign.setBitmappath(signPath);
-										sign.setTaskid(String.valueOf(task_id));
-										sign.setSignTime(time);
-										sign.setSignid(cell.getCellid());
-										sign.setId(Integer.parseInt(cell.getCellid().substring(8,14)));
-										sign.save();
-										setLocation(sign);
-										signImage.setImageBitmap(bmp);
-									}
-									v.setEnabled(false);
-								}
-							}, signnature);
-							writeTabletDialog.show();
-						}
-					});
-					edittext2.setTextSize(16);
+//					signButton.setBackgroundResource(R.drawable.hangqianshu);
+//					signButton.setOnClickListener(new OnClickListener() {
+//						@Override
+//						public void onClick(final View v) {
+//							WritePadDialog writeTabletDialog = new WritePadDialog(context, new DialogListener() {
+//								@Override
+//								public void refreshActivity(Object object,
+//															Signature sign) {
+//
+//									mSignBitmap = (Bitmap) object;
+//									signPath = createFile(String.valueOf(cell.getCellid()), String.valueOf(task_id));
+//									Bitmap bmp = getBitmapByOpt(signPath);
+//									if (bmp != null) {
+//										String time = DateUtil.getCurrentDate();
+//										sign.setIsFinish("is");
+//										sign.setBitmappath(signPath);
+//										sign.setTaskid(String.valueOf(task_id));
+//										sign.setSignTime(time);
+//										sign.setSignid(cell.getCellid());
+//										sign.setId(Integer.parseInt(cell.getCellid().substring(8,14)));
+//										sign.save();
+//										setLocation(sign);
+//										signImage.setImageBitmap(bmp);
+//									}
+//									v.setEnabled(false);
+//								}
+//							}, signnature);
+//							writeTabletDialog.show();
+//						}
+//					});
+					edittext2.setTextSize(14);
+					edittext2.setTextColor(getResources().getColor(R.color.content));
 					edittext2.setText(replaceStr(str));
 					if (str.equals(Config.bufuhe)) {
 						edittext2.setTextColor(this.getResources().getColor(R.color.red));
@@ -599,12 +605,13 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 							return false;
 						}
 					});
-					if (!markup.equals("") && markup.equals("sign")) {
-						linear2.addView(signImage, para2_4);
-						linear2.addView(signButton, para2_3);
-					} else {
-						linear2.addView(edittext2, para2_1);
-					}
+//					if (!markup.equals("") && markup.equals("sign")) {
+//						linear2.addView(signImage, para2_4);
+//						linear2.addView(signButton, para2_3);
+//					} else {
+//						linear2.addView(edittext2, para2_1);
+//					}
+					linear2.addView(edittext2, para2_1);
 					//初始化textInfo
 					ImageView image2 = new ImageView(context);
 					image2.setBackgroundResource(R.drawable.blacktiao);
@@ -653,7 +660,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								currentTask.setIsChecking(1);
 								currentTask.update(currentTask.getId());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -662,7 +669,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			    	            HtmlData data = new HtmlData(cell, operation3.getRealcellid());
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation3.getRealcellid());
-								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
 							}
 						}
 					});
@@ -715,7 +722,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								currentTask.setIsChecking(1);
 								currentTask.update(currentTask.getId());
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation4.getRealcellid());
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -724,7 +731,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								HtmlData data = new HtmlData(cell, operation4.getRealcellid());
 			    	            htmlList.add(data);
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation4.getRealcellid());
-								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
 							}
 						}
 					});
@@ -780,7 +787,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final EditText edit5 = new EditText(context);
 					final Operation operation5 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					String stringdata5 = CommonTools.null2String(operation5.getOpvalue());
-					edit5.setTextSize(16);
+					edit5.setTextSize(14);
+					edit5.setTextColor(getResources().getColor(R.color.content));
 					edit5.setText(replaceStr(stringdata5));
 					linear5.addView(edit5, para5_1);
 					//初始化textInfo
@@ -878,7 +886,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //					final Operation operation6_2 = cell.getStringOperation();
 					String stringdata6 = CommonTools.null2String(operation6_2.getOpvalue());
 	    			edit6.setText(replaceStr(stringdata6));
-	    			edit6.setTextSize(16);
+	    			edit6.setTextSize(14);
+					edit6.setTextColor(getResources().getColor(R.color.content));
 					edit6.setMinLines(1);
 					linear6.addView(edit6, para6_1);
 					//初始化checkbox
@@ -911,7 +920,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								currentTask.setIsChecking(1);
 								currentTask.update(currentTask.getId());
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation6_1.getRealcellid());
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -920,7 +929,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								HtmlData data = new HtmlData(cell, operation6_1.getRealcellid());
 			    	            htmlList.add(data);
 //								HtmlHelper.changeCheckValue(htmlDoc, cell, operation6_1.getRealcellid());
-								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
 							}
 						}
 					});
@@ -986,7 +995,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final Operation operation72 = DataSupport.where("cellid=? and taskid=? and type=?", cell.getCellid(), task_id+"", "2").find(Operation.class).get(0);			//edittext
 
 					String stringdata7 = CommonTools.null2String(operation72.getOpvalue());
-					edit7.setTextSize(16);
+					edit7.setTextSize(14);
+					edit7.setTextColor(getResources().getColor(R.color.content));
 					edit7.setMinLines(1);
 	    			edit7.setText(replaceStr(stringdata7));
 					linear7.addView(edit7, para7_2);
@@ -1022,7 +1032,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								currentTask.update(currentTask.getId());
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation71.getRealcellid());
 			    	            //记录第一次操作的时间
-								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "选中", Toast.LENGTH_SHORT).show();
 							}else{
 								cell.setIshook("no");
 								cell.update(cell.getId());
@@ -1031,7 +1041,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 								HtmlData data = new HtmlData(cell, operation71.getRealcellid());
 			    	            htmlList.add(data);
 //			    	            HtmlHelper.changeCheckValue(htmlDoc, cell, operation71.getRealcellid());
-								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
+//								Toast.makeText(context, "未选中", Toast.LENGTH_SHORT).show();
 							}
 						}
 					});
@@ -1216,7 +1226,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //					final Operation operation92 = cell.getStringOperation();
 					String stringdata9 = CommonTools.null2String(operation92.getOpvalue());
 	    			edit9.setText(replaceStr(stringdata9));
-	    			edit9.setTextSize(16);
+	    			edit9.setTextSize(14);
+					edit9.setTextColor(getResources().getColor(R.color.content));
 					linear9.addView(edit9, para9_2);
 					//初始化checkbox
 					CheckBox cb9 = new CheckBox(context);
@@ -1345,7 +1356,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					String stringdata10 = CommonTools.null2String(operation10_2.getOpvalue());
 					final EditText edit10 = new EditText(context);
 	    			edit10.setText(replaceStr(stringdata10));
-	    			edit10.setTextSize(16);
+	    			edit10.setTextSize(14);
+					edit10.setTextColor(getResources().getColor(R.color.content));
 					linear10.addView(edit10, para10_2);
 					//初始化checkbox
 					CheckBox cb10 = new CheckBox(context);
@@ -1518,7 +1530,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					String stringdata11 = CommonTools.null2String(operation11.getOpvalue());
 					final EditText edit11 = new EditText(context);
 	    			edit11.setText(replaceStr(stringdata11));
-	    			edit11.setTextSize(16);
+	    			edit11.setTextSize(14);
+					edit11.setTextColor(getResources().getColor(R.color.content));
 	    			edit11.addTextChangedListener(new TextWatcher() {
 						@Override
 						public void onTextChanged(CharSequence text, int start, int before,
@@ -1594,7 +1607,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					String stringdata12 = CommonTools.null2String(operation12_2.getOpvalue());
 					final EditText edit12 = new EditText(context);
 	    			edit12.setText(replaceStr(stringdata12));
-	    			edit12.setTextSize(16);
+	    			edit12.setTextSize(14);
+					edit12.setTextColor(getResources().getColor(R.color.content));
 					linear12.addView(edit12, para12_1);
 					edit12.addTextChangedListener(new TextWatcher() {
 						@Override
@@ -1802,7 +1816,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				}
 			}
 			table_content.addView(tablerow, new TableLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, 55));
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		}
 	}
 
@@ -1978,7 +1992,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					String dirPath = files[j].toString().toLowerCase();
 					System.out.println(dirPath);
 					getPictures(dirPath + "/");
-				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")) {
+				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")
+						|| name.endsWith(".mp4") || name.endsWith(".3gp") || name.contains(".avi") || name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP")) {
 					System.out.println("FileName===" + files[j].getName());
 					picturenumbers++;
 				}

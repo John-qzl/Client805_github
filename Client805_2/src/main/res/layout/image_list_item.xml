@@ -3,42 +3,50 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.example.navigationdrawertest.CustomUI.SquareImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop" />
-
-    <RelativeLayout
-        android:visibility="invisible"
-        android:id="@+id/rl_video_info"
-        android:background="#6e000000"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_marginLeft="6dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+
+        <com.example.navigationdrawertest.CustomUI.SquareImageView
+            android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:text="@string/video"/>
-        <TextView
-            android:id="@+id/textView_size"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:text=""/>
-    </RelativeLayout>
+            android:layout_margin="2dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:visibility="invisible"
+            android:id="@+id/rl_video_info"
+            android:background="#6e000000"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="6dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:text="@string/video"/>
+            <TextView
+                android:id="@+id/textView_size"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:text=""/>
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <!--android:src="@drawable/add_square"-->
 </FrameLayout>

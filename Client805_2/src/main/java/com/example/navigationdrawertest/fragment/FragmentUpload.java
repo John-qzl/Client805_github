@@ -27,6 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -253,11 +254,11 @@ public class FragmentUpload extends Fragment{
 		@Override
 		public void onClick(View arg0) {
 			switch(arg0.getId()){
-			case R.id.check_button:
+			case R.id.check_line:
 				Log.d("表的ID", clicktaskid+"");
 //				showSweetAlertDialog();
 				break;
-			case R.id.read_button:
+			case R.id.read_line:
 				Log.d("表的ID", clicktaskid+"");
 //				showSweetAlertDialog();
 				break;
@@ -369,18 +370,12 @@ public class FragmentUpload extends Fragment{
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
-				if(layer != 2){
-					convertView = inflater.inflate(R.layout.tree_item_init, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
-//					holder.iv_right = (ImageView) convertView.findViewById(R.id.init_img_tree_right);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-				}else{
+				if(layer == 2){
 					convertView = inflater.inflate(R.layout.tree_item_last, null);
 					holder.tv_name = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.fragmentupload_img_tree_left);
-					holder.read_button = (Button) convertView.findViewById(R.id.fragmentupload_look_button);
+					holder.read_button = (LinearLayout) convertView.findViewById(R.id.upload_read);
 					holder.read_button.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
@@ -388,18 +383,24 @@ public class FragmentUpload extends Fragment{
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
 						}
 					});
-					holder.read_delete = (Button) convertView.findViewById(R.id.fragmentupload_look_deletebutton);
+					holder.read_delete = (LinearLayout) convertView.findViewById(R.id.upload_shanchu);
 					holder.read_delete.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							Dialog alertDialog = new AlertDialog.Builder(context). 
-								    setTitle("确定删除？"). 
-								    setMessage("您确定删除该条表单吗？"). 
-								    setIcon(R.drawable.logo_title).
-								    setPositiveButton("确定", new DialogInterface.OnClickListener() { 
-								    	@Override 
-								    	public void onClick(DialogInterface dialog, int which) { 
-								    		String deleteint = nodeList.get(position).getId()+"";
+							Dialog alertDialog = new AlertDialog.Builder(context).
+									setTitle("确定删除？").
+									setMessage("您确定删除该条表单吗？").
+									setIcon(R.drawable.logo_title).
+									setNegativeButton("取消", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									}).
+									setPositiveButton("确定", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											String deleteint = nodeList.get(position).getId()+"";
 											DataSupport.deleteAll(Task.class, "taskid = ?", deleteint);
 											DataSupport.deleteAll(Signature.class, "taskid = ?", deleteint);
 											DataSupport.deleteAll(Cell.class, "taskid = ?", deleteint);
@@ -407,45 +408,46 @@ public class FragmentUpload extends Fragment{
 											DataSupport.deleteAll(Scene.class, "taskid = ?", deleteint);
 											DataSupport.deleteAll(Rw.class, "tableinstanceid = ?", deleteint);
 											EventBus.getDefault().post(new LocationEvent("ok"));
-								    	} 
-								    }). 
-								    setNegativeButton("取消", new DialogInterface.OnClickListener() { 
-								    	@Override 
-								    	public void onClick(DialogInterface dialog, int which) {
-								    		dialog.dismiss();
-								    	} 
-								    }). 
-								    create(); 	
-								alertDialog.show(); 
+										}
+									}).
+									create();
+							alertDialog.show();
 						}
 					});
-					holder.read_back = (Button) convertView.findViewById(R.id.fragmentupload_back_button);
+
+					holder.upload_back = (LinearLayout) convertView.findViewById(R.id.upload_back);
 					if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
-						holder.read_back.setVisibility(View.VISIBLE);
+						holder.upload_back.setVisibility(View.VISIBLE);
 					}
-					holder.read_back.setOnClickListener(new OnClickListener() {
+					holder.upload_back.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(task.get(0));
 						}
 					});
+
+				}else if (layer == 1) {
+					convertView = inflater.inflate(R.layout.tree_item_init_sign, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+				}else{
+					convertView = inflater.inflate(R.layout.tree_item_init, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 				}
 				convertView.setTag(holder);
 			}
 			else {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
-				if(layer != 2){
-					convertView = inflater.inflate(R.layout.tree_item_init, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-				}else{
+				if(layer == 2){
 					convertView = inflater.inflate(R.layout.tree_item_last, null);
 					holder.tv_name = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.fragmentupload_img_tree_left);
-					holder.read_button = (Button) convertView.findViewById(R.id.fragmentupload_look_button);
+					holder.read_button = (LinearLayout) convertView.findViewById(R.id.upload_read);
 					holder.read_button.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
@@ -453,24 +455,24 @@ public class FragmentUpload extends Fragment{
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
 						}
 					});
-					holder.read_delete = (Button) convertView.findViewById(R.id.fragmentupload_look_deletebutton);
+					holder.read_delete = (LinearLayout) convertView.findViewById(R.id.upload_shanchu);
 					holder.read_delete.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							Dialog alertDialog = new AlertDialog.Builder(context). 
-								    setTitle("确定删除？"). 
-								    setMessage("您确定删除该条表单吗？"). 
-								    setIcon(R.drawable.logo_title).
-								    setNegativeButton("取消", new DialogInterface.OnClickListener() { 
-								    	@Override 
-								    	public void onClick(DialogInterface dialog, int which) {
-								    		dialog.dismiss();
-								    	} 
-								    }). 
-								    setPositiveButton("确定", new DialogInterface.OnClickListener() { 
-								    	@Override 
-								    	public void onClick(DialogInterface dialog, int which) { 
-								    		String deleteint = nodeList.get(position).getId()+"";
+							Dialog alertDialog = new AlertDialog.Builder(context).
+									setTitle("确定删除？").
+									setMessage("您确定删除该条表单吗？").
+									setIcon(R.drawable.logo_title).
+									setNegativeButton("取消", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									}).
+									setPositiveButton("确定", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											String deleteint = nodeList.get(position).getId()+"";
 											DataSupport.deleteAll(Task.class, "taskid = ?", deleteint);
 											DataSupport.deleteAll(Signature.class, "taskid = ?", deleteint);
 											DataSupport.deleteAll(Cell.class, "taskid = ?", deleteint);
@@ -478,23 +480,34 @@ public class FragmentUpload extends Fragment{
 											DataSupport.deleteAll(Scene.class, "taskid = ?", deleteint);
 											DataSupport.deleteAll(Rw.class, "tableinstanceid = ?", deleteint);
 											EventBus.getDefault().post(new LocationEvent("ok"));
-								    	} 
-								    }). 
-								    create(); 	
-								alertDialog.show(); 
+										}
+									}).
+									create();
+							alertDialog.show();
 						}
 					});
 
-					holder.read_back = (Button) convertView.findViewById(R.id.fragmentupload_back_button);
+					holder.upload_back = (LinearLayout) convertView.findViewById(R.id.upload_back);
 					if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
-						holder.read_back.setVisibility(View.VISIBLE);
+						holder.upload_back.setVisibility(View.VISIBLE);
 					}
-					holder.read_back.setOnClickListener(new OnClickListener() {
+					holder.upload_back.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(task.get(0));
 						}
 					});
+
+				}else if (layer == 1) {
+					convertView = inflater.inflate(R.layout.tree_item_init_sign, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+				}else{
+					convertView = inflater.inflate(R.layout.tree_item_init, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 				}
 				convertView.setTag(holder);
 			}
@@ -502,9 +515,9 @@ public class FragmentUpload extends Fragment{
 			holder.tv_name.setText("" + nodeList.get(position).getName());
 			holder.tv_width.setText("");
 
-			int[] leftIds = { R.drawable.icon_plusminus_add_black, R.drawable.icon_plusminus_reduce_black, R.drawable.icon_head_default };
+			int[] leftIds = { R.drawable.tree_z, R.drawable.tree_s, R.drawable.biao };
 			holder.iv_left.setImageResource(leftIds[nodeList.get(position).getExpandStatus()]);
-			int[] rightIds = { R.drawable.icon_checkbox_none, R.drawable.icon_checkbox_all, R.drawable.icon_checkbox_part };
+//			int[] rightIds = { R.drawable.icon_checkbox_none, R.drawable.icon_checkbox_all, R.drawable.icon_checkbox_part };
 			holder.tv_width.setMinWidth(layer * (holder.iv_left.getLayoutParams().width));
 
 			return convertView;
@@ -516,9 +529,9 @@ public class FragmentUpload extends Fragment{
 			public TextView tv_name;
 			public TextView tv_width;
 			//查看，检查，签署按钮
-			public Button read_button;
-			public Button read_delete;
-			public Button read_back;
+			public LinearLayout read_button;
+			public LinearLayout read_delete;
+			public LinearLayout upload_back;
 		}
 	}
 	@Subscribe

@@ -7,7 +7,6 @@ import org.litepal.crud.DataSupport;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,28 +24,21 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.navigationdrawertest.R;
-import com.example.navigationdrawertest.SweetAlert.SweetAlertDialog;
-import com.example.navigationdrawertest.activity.CheckActivity;
 import com.example.navigationdrawertest.activity.CheckActivity1;
 import com.example.navigationdrawertest.activity.MainActivity1;
-import com.example.navigationdrawertest.activity.ReadActivity;
 import com.example.navigationdrawertest.activity.ReadActivity1;
-import com.example.navigationdrawertest.activity.SignActivity;
 import com.example.navigationdrawertest.activity.SignActivity1;
 import com.example.navigationdrawertest.adapter.Event.LocationEvent;
 import com.example.navigationdrawertest.application.OrientApplication;
-import com.example.navigationdrawertest.model.Cell;
-import com.example.navigationdrawertest.model.Operation;
 import com.example.navigationdrawertest.model.Post;
 import com.example.navigationdrawertest.model.Rw;
 import com.example.navigationdrawertest.model.RwRelation;
-import com.example.navigationdrawertest.model.Scene;
-import com.example.navigationdrawertest.model.Signature;
 import com.example.navigationdrawertest.model.Task;
 import com.example.navigationdrawertest.model.User;
 import com.example.navigationdrawertest.tree.DepartmentNode;
@@ -235,11 +227,11 @@ public class FragmentUnupload extends Fragment {
 		@Override
 		public void onClick(View arg0) {
 			switch(arg0.getId()){
-			case R.id.check_button:
+			case R.id.check_line:
 				Log.d("表的ID", clicktaskid+"");
 //				showSweetAlertDialog();
 				break;
-			case R.id.read_button:
+			case R.id.read_line:
 				Log.d("表的ID", clicktaskid+"");
 //				showSweetAlertDialog();
 				break;
@@ -322,69 +314,80 @@ public class FragmentUnupload extends Fragment {
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
-				if(layer != 2){
-					convertView = inflater.inflate(R.layout.tree_item_init, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-				}else{
+				if(layer == 2){
 					convertView = inflater.inflate(R.layout.tree_item_upload, null);
 					holder.tv_name = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.fragmentupload_img_tree_left);
-					holder.read_button = (Button) convertView.findViewById(R.id.fragmentupload_look_button);
-					holder.read_button.setOnClickListener(new OnClickListener(){
+					holder.unUpload_line = (LinearLayout) convertView.findViewById(R.id.unUpload_line);
+					holder.unUpload_line.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
 							clicktaskid = nodeList.get(position).getId();
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
 						}
 					});
-					holder.unupload_back = (Button) convertView.findViewById(R.id.fragmentUnupload_back_button);
+					holder.unUpload_back = (LinearLayout) convertView.findViewById(R.id.unUpload_back);
 					if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
-						holder.unupload_back.setVisibility(View.VISIBLE);
+						holder.unUpload_back.setVisibility(View.VISIBLE);
 					}
-					holder.unupload_back.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							warnInfo(task.get(0));
-						}
-					});
-				}
-				convertView.setTag(holder);
-			}
-			else {
-				LayoutInflater inflater = LayoutInflater.from(context);
-				holder = new ViewHolder();
-				if(layer != 2){
-					convertView = inflater.inflate(R.layout.tree_item_init, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-				}else{
-					convertView = inflater.inflate(R.layout.tree_item_upload, null);
-					holder.tv_name = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_name);
-					holder.tv_width = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_width);
-					holder.iv_left = (ImageView) convertView.findViewById(R.id.fragmentupload_img_tree_left);
-					holder.read_button = (Button) convertView.findViewById(R.id.fragmentupload_look_button);
-					holder.read_button.setOnClickListener(new OnClickListener(){
-						@Override
-						public void onClick(View v) {
-							clicktaskid = nodeList.get(position).getId();
-							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
-						}
-					});
-					holder.unupload_back = (Button) convertView.findViewById(R.id.fragmentUnupload_back_button);
-					if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
-						holder.unupload_back.setVisibility(View.VISIBLE);
-					}
-					holder.unupload_back.setOnClickListener(new OnClickListener() {
+					holder.unUpload_back.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(task.get(0));
 						}
 					});
 
+				}else if (layer == 1) {
+					convertView = inflater.inflate(R.layout.tree_item_init_sign, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+				}else{
+					convertView = inflater.inflate(R.layout.tree_item_init, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+				}
+				convertView.setTag(holder);
+			}
+			else {
+				LayoutInflater inflater = LayoutInflater.from(context);
+				holder = new ViewHolder();
+				if(layer == 2){
+					convertView = inflater.inflate(R.layout.tree_item_upload, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.fragmentupload_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.fragmentupload_img_tree_left);
+					holder.unUpload_line = (LinearLayout) convertView.findViewById(R.id.unUpload_line);
+					holder.unUpload_line.setOnClickListener(new OnClickListener(){
+						@Override
+						public void onClick(View v) {
+							clicktaskid = nodeList.get(position).getId();
+							showSweetAlertDialog(clicktaskid, NodeButtonEnum.READBUTTON);
+						}
+					});
+					holder.unUpload_back = (LinearLayout) convertView.findViewById(R.id.unUpload_back);
+					if (task.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())) {
+						holder.unUpload_back.setVisibility(View.VISIBLE);
+					}
+					holder.unUpload_back.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							warnInfo(task.get(0));
+						}
+					});
+
+				}else if (layer == 1) {
+					convertView = inflater.inflate(R.layout.tree_item_init_sign, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
+				}else{
+					convertView = inflater.inflate(R.layout.tree_item_init, null);
+					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
+					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
+					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 				}
 				convertView.setTag(holder);
 			
@@ -393,9 +396,9 @@ public class FragmentUnupload extends Fragment {
 			holder.tv_name.setText("" + nodeList.get(position).getName());
 			holder.tv_width.setText("");
 
-			int[] leftIds = { R.drawable.icon_plusminus_add_black, R.drawable.icon_plusminus_reduce_black, R.drawable.icon_head_default };
+			int[] leftIds = { R.drawable.tree_z, R.drawable.tree_s, R.drawable.biao };
 			holder.iv_left.setImageResource(leftIds[nodeList.get(position).getExpandStatus()]);
-			int[] rightIds = { R.drawable.icon_checkbox_none, R.drawable.icon_checkbox_all, R.drawable.icon_checkbox_part };
+//			int[] rightIds = { R.drawable.icon_checkbox_none, R.drawable.icon_checkbox_all, R.drawable.icon_checkbox_part };
 			holder.tv_width.setMinWidth(layer * (holder.iv_left.getLayoutParams().width));
 
 			return convertView;
@@ -407,9 +410,9 @@ public class FragmentUnupload extends Fragment {
 			public TextView tv_name;
 			public TextView tv_width;
 			//查看，检查，签署按钮
-			public Button read_button;
+			public LinearLayout unUpload_line;
 			public Button read_delete;
-			public Button unupload_back;
+			public LinearLayout unUpload_back;
 		}
 	}
 	

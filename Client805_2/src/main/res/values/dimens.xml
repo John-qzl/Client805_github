@@ -26,7 +26,15 @@
 
     <!-- 805二期style 2018.1.16-->
     <dimen name="titleI">20dp</dimen>
-    <dimen name="titleII">18dp</dimen>
-    <dimen name="content">16dp</dimen>
+    <dimen name="titleII">14dp</dimen>
+    <dimen name="content">14dp</dimen>
     <dimen name="warn">13dp</dimen>
+
+    <!-- 805二期style 2020.3.26-->
+    <dimen name="size14">14dp</dimen>
+    <dimen name="size12">12dp</dimen>
+    <dimen name="size16">16dp</dimen>
+    <!--<dimen name="warn">13dp</dimen>-->
+
+
 </resources>

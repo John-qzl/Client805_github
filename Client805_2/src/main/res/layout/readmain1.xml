@@ -2,17 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/genalbg">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#1d8ae7">
+        android:background="@color/toolBarbg">
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:src="@drawable/logo"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"/>
@@ -26,7 +27,7 @@
             android:layout_toRightOf="@+id/logo"
             android:text="表名"
             android:textColor="@color/White"
-            android:textSize="@dimen/titleI"/>
+            android:textSize="@dimen/size14"/>
 
         <ImageView
             android:id="@+id/read_close"
@@ -39,30 +40,47 @@
             android:layout_toStartOf="@+id/back"
             android:visibility="gone"/>
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="70dp"
-            android:layout_height="25dp"
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/back_new"-->
+            <!--android:layout_marginRight="15dp"/>-->
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/back_new"
-            android:layout_marginRight="15dp"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_fanhui"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp" >
-
-
-        <TextView
-            android:id="@+id/tv_totalPhNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="@dimen/warn"
-            android:textColor="@color/Black"
-            android:text="照片数量：10"/>
+        android:background="@color/White"
+        android:layout_margin="18dp" >
 
         <LinearLayout
             android:id="@+id/lin_title_readheader"
@@ -130,11 +148,40 @@
                                 android:stretchColumns="*" >
                             </TableLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/table_line"/>
+
                         </LinearLayout>
 
                     </FrameLayout>
 
                 </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/size12"
+                        android:textColor="@color/hint"
+                        android:text="照片数量："/>
+
+                    <TextView
+                        android:id="@+id/tv_totalPhNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/black1"
+                        android:text="0"/>
+
+                </LinearLayout>
 
                 <com.example.navigationdrawertest.CustomUI.NoScrollListview
                     android:id="@+id/read_mylistview_1"
@@ -143,7 +190,8 @@
                     android:background="@drawable/list_default_round"
                     android:cacheColorHint="#00000000"
                     android:gravity="center"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:layout_marginTop="8dp"/>
 
                 <LinearLayout
                     android:id="@+id/read_signname"

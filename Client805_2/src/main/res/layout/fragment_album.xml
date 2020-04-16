@@ -5,9 +5,11 @@
 
     <com.cssrc.astuetz.PagerSlidingTabStrip
         android:id="@+id/album_tabs"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/size16"
+        android:layout_marginRight="@dimen/size16"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/album_pager"

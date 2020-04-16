@@ -29,15 +29,16 @@
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@+id/init_img_tree_left"
             android:text="TextView"
-            android:textSize="@dimen/content" />
+            android:textSize="@dimen/size14"
+            android:textColor="@color/login_seting" />
 
         <ImageView
             android:id="@+id/init_img_tree_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/init_txt_tree_width"
-            android:src="@drawable/icon_plusminus_add_black" />
+            android:src="@drawable/tree_z" />
 
         <ImageView
             android:id="@+id/init_img_tree_delete"

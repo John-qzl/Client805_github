@@ -26,7 +26,7 @@
             android:layout_toRightOf="@+id/logo"
             android:text="表名"
             android:textColor="@color/White"
-            android:textSize="@dimen/titleI"/>
+            android:textSize="@dimen/size14"/>
 
         <ImageView
             android:id="@+id/sign_close"
@@ -119,11 +119,40 @@
                                 android:stretchColumns="*" >
                             </TableLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/table_line"/>
+
                         </LinearLayout>
 
                     </FrameLayout>
 
                 </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="@dimen/size12"
+                        android:textColor="@color/hint"
+                        android:text="照片数量："/>
+
+                    <TextView
+                        android:id="@+id/tv_totalPhNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/black1"
+                        android:text="0"/>
+
+                </LinearLayout>
 
                 <com.example.navigationdrawertest.CustomUI.NoScrollListview
                     android:id="@+id/sign_mylistview_1"
@@ -132,7 +161,8 @@
                     android:background="@drawable/list_default_round"
                     android:cacheColorHint="#00000000"
                     android:gravity="center"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:layout_marginTop="8dp"/>
 
                 <LinearLayout
                     android:id="@+id/lin_signname"

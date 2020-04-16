@@ -46,6 +46,7 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
     MediaGridAdapter gridAdapter;
     ListPopupWindow mFolderPopupWindow;
     private FolderAdapter mFolderAdapter;
+    private int currentShowPosition;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
         done.setOnClickListener(this);
         category_btn.setOnClickListener(this);
         preview.setOnClickListener(this);
+        currentShowPosition = getIntent().getIntExtra("currentShowPosition", 1);
         //get view end
         createAdapter();
         createFolderAdapter();
@@ -109,7 +111,7 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mFolderAdapter.setSelectIndex(position);
-                category_btn.setText(mFolderAdapter.getItem(position).name);
+                category_btn.setText(mFolderAdapter.getItem(currentShowPosition).name);
                 gridAdapter.updateAdapter(mFolderAdapter.getSelectMedias());
                 mFolderPopupWindow.dismiss();
             }
@@ -135,12 +137,12 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
     @Override
     public void onData(ArrayList<Folder> list) {
         setView(list);
-        category_btn.setText(list.get(0).name);
+        category_btn.setText(list.get(getCurrentAblumPosition(list)).name);
         mFolderAdapter.updateAdapter(list);
     }
 
     void setView(ArrayList<Folder> list) {
-        gridAdapter.updateAdapter(list.get(0).getMedias());
+        gridAdapter.updateAdapter(list.get(getCurrentAblumPosition(list)).getMedias());
         setButtonText();
         gridAdapter.setOnItemClickListener(new MediaGridAdapter.OnRecyclerViewItemClickListener() {
             @Override
@@ -169,7 +171,9 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
                 mFolderPopupWindow.show();
             }
         } else if (id == R.id.done) {
-            done(gridAdapter.getSelectMedias());
+            ArrayList<Media> selects = gridAdapter.getSelectMedias();
+
+            done(selects);
         } else if (id == R.id.preview) {
             if (gridAdapter.getSelectMedias().size() <= 0) {
                 Toast.makeText(this, getString(R.string.select_null), Toast.LENGTH_SHORT).show();
@@ -225,5 +229,19 @@ public class PickerActivity extends Activity implements DataCallback, View.OnCli
                 done(selects);
             }
         }
+    }
+
+
+    public int getCurrentAblumPosition(ArrayList<Folder> list) {
+        int pos = 0;
+        for (int i = 0; i < list.size(); i++) {
+            String dircFullname = list.get(i).name;
+            String dircName = dircFullname.substring(dircFullname.lastIndexOf("/") + 1, dircFullname.length());
+            if (dircName.equals("Camera")) {
+                currentShowPosition = i;
+                pos = i;
+            }
+        }
+        return pos;
     }
 }

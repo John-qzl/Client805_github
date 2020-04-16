@@ -15,6 +15,8 @@ import android.util.Log;
 import com.example.navigationdrawertest.activity.LoginActivity;
 import com.example.navigationdrawertest.application.OrientApplication;
 import com.example.navigationdrawertest.internet.HttpClientHelper;
+import com.example.navigationdrawertest.internet.SyncWorkThread;
+import com.example.navigationdrawertest.internet.UpdataVersionThread;
 import com.example.navigationdrawertest.utils.SharedPrefsUtil;
 
 public class  Login extends Thread {
@@ -37,7 +39,13 @@ public class  Login extends Thread {
 	 */
 	@Override
 	public void run() {
-		try{			
+		try{
+
+			if (!UpdataVersionThread.checkUrl()) {
+				// 地址无效
+				notifyCompletion("disableUrl");
+				return;
+			}
 			String seriNumber = PadInfoHelp.getSeriNumber();
 			seritycode  = PasswordUtil.generatePassword(seriNumber);
 			
@@ -65,5 +73,14 @@ public class  Login extends Thread {
 			 msg.setData(bundle);
 			 handler.sendMessage(msg);
 		}					
+	}
+
+
+	public void notifyCompletion(String status) {
+		Message msg = handler.obtainMessage();
+		Bundle bundle = new Bundle();
+		bundle.putString("localread", status);
+		msg.setData(bundle);
+		handler.sendMessage(msg);
 	}
 }

@@ -45,7 +45,7 @@ public class PictureListAdapter extends BaseQuickAdapter<String,BaseViewHolder> 
             imgType= url.substring(url.length()-3,url.length());
         }
         if (TextUtils.isEmpty(url)){
-//            img.setImageResource(R.drawable.ic_add_img);
+            img.setImageResource(R.drawable.ic_add_img);
         } else if (imgType.equals("jpg") || imgType.equals("png")) {
             loaderNativeImage.displayImage(url, img);
         } else if (imgType.equals("mp4") || imgType.equals("avi") || imgType.equals("FLV")){

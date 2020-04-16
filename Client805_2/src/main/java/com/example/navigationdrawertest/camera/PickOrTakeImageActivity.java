@@ -625,7 +625,7 @@ public class PickOrTakeImageActivity extends FragmentActivity implements View.On
             //如果显示全部图片,则第一项为
             if (currentShowPosition == -1) {
                 size = allImages.size() + 1;
-            } else {
+            } else if (imageDirectories.size() != 0){
                 size = imageDirectories.get(currentShowPosition).images.getImageCounts();
             }
             return size;

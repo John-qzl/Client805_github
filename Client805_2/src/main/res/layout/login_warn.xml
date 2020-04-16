@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/warn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1.请检查网络是否正常；"
+            android:textColor="@color/content"
+            android:textSize="@dimen/size14"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="2.请确认是否为本人操作；"
+            android:textColor="@color/content"
+            android:textSize="@dimen/size14"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="3.请确认Pad系统时间是否正确。"
+            android:textColor="@color/content"
+            android:textSize="@dimen/size14"/>
+
+    </LinearLayout>
+
+</LinearLayout>

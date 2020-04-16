@@ -106,6 +106,7 @@ public class SyncWorkThread extends Thread {
 	public void run() {
 		super.run();
 		aerospacedb = AerospaceDB.getInstance();
+
 		// 1,更新用户信息
 		downloadUsers();
 
@@ -150,7 +151,7 @@ public class SyncWorkThread extends Thread {
 		initData();
 		
 		// 7,更新同步完成
-		notifyCompletion();
+		notifyCompletion("oksync");
 
 		// 4,5,8,7
 	}
@@ -621,11 +622,11 @@ public class SyncWorkThread extends Thread {
 		return true;
 	}
 
-	public void notifyCompletion() {
+	public void notifyCompletion(String status) {
 		OrientApplication.getApplication().uploadDownloadList = syncList;
 		Message msg = handler.obtainMessage();
 		Bundle bundle = new Bundle();
-		bundle.putString("localread", "oksync");
+		bundle.putString("localread", status);
 		msg.setData(bundle);
 		handler.sendMessage(msg);
 	}
@@ -1110,9 +1111,9 @@ public class SyncWorkThread extends Thread {
 				downloadBitmap(downloadtask);
 				updateInformation("下载", downloadtask.getTaskname()
 						+ "---Bitmap文件成功");
-				//下载示意图
-				List<Cell> cellList = DataSupport.where("taskid = ? and type = ?", downloadtask.getTaskid(), "TRUE").find(Cell.class);
-				downloadrefphoto(downloadtask);
+				//qzl 下载示意图
+//				List<Cell> cellList = DataSupport.where("taskid = ? and type = ?", downloadtask.getTaskid(), "TRUE").find(Cell.class);
+//				downloadrefphoto(downloadtask);
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -1276,6 +1277,7 @@ public class SyncWorkThread extends Thread {
 	 * @return
 	 */
 	private boolean downloadrefphoto(Task task) {
+		String path="";
 		try {
 			HttpClient client = HttpClientHelper.getOrientHttpClient();
 			HttpPost postmethod = new HttpPost(
@@ -1294,32 +1296,27 @@ public class SyncWorkThread extends Thread {
 			int code = response.getStatusLine().getStatusCode();
 			if (code != 200) {
 				errorMessage = code + "错误";
-				return false; // 错误
 			}
-			updateInformation("保存", task.getTaskname() + "--检查项照片");
+			// 根据文档Id获取文档信息
+			// String picContent =
+			// EntityUtils.toString(response.getEntity(), "utf-8");
+			updateInformation("保存", task.getTaskname() + "--签署照片");
 
-			String filepath = Environment.getExternalStorageDirectory() + Config.refphotoPath
-					+ File.separator
-					+ task.getRwid()
-					+ File.separator
-					+ task.getTaskid();
-//					+ ".zip";
-			String path = Environment.getExternalStorageDirectory() + Config.refphotoPath
-					+ File.separator
-					+ task.getRwid()
-					+ File.separator
-					+ task.getTaskid()
-					+ File.separator;
+			String filepath = Environment.getDataDirectory().getPath()
+					+ Config.packagePath + Config.signphotoPath
+					+ "/" + task.getTaskid() + "/";
+			path = Environment.getDataDirectory().getPath()
+					+ Config.packagePath + Config.signphotoPath
+					+ "/" + task.getTaskid() + "/"
+					+ task.getTaskid() + ".jpg";
 
 			File file1 = new File(filepath);
-			file1.delete();
 			if (!file1.exists()) {
 				file1.mkdirs();
 			}
-
 			ByteArrayInputStream is = new ByteArrayInputStream(
 					EntityUtils.toByteArray(response.getEntity()));
-			File file = new File(file1.getAbsolutePath(),task.getTaskid()+".zip");// 新建一个file文件
+			File file = new File(path);// 新建一个file文件
 			FileOutputStream fos = new FileOutputStream(file); // 对应文件建立输出流
 			byte[] buffer = new byte[1024]; // 新建缓存 用来存储 从网络读取数据 再写入文件
 			int len = 0;
@@ -1328,9 +1325,7 @@ public class SyncWorkThread extends Thread {
 			}
 			fos.flush();// 将缓存中的写入file
 			fos.close();
-
-			Unzip(file.getAbsolutePath(), filepath + File.separator);
-			file.delete();
+			createFile(task.getTaskid(), task.getTaskid());
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -2051,9 +2046,14 @@ public class SyncWorkThread extends Thread {
 				+ File.separator;
 
 		List<String> presultList = new ArrayList<String>();
-//		List<String> vresultList = new ArrayList<String>();
+		List<String> vresultList = new ArrayList<String>();
 		FileOperation.findFiles(path, ".jpg", presultList);
-//		FileOperation.findFiles(path, ".mp4", vresultList);
+		FileOperation.findFiles(path, ".mp4", vresultList);
+		if (vresultList.size() > 0) {
+			for (String video : vresultList) {
+				presultList.add(video);
+			}
+		}
 		String username = OrientApplication.getApplication().loginUser
 				.getUsername();
 		String userid = OrientApplication.getApplication().loginUser

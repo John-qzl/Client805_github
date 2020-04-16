@@ -33,6 +33,12 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
     allprojects {
         repositories {
             jcenter()

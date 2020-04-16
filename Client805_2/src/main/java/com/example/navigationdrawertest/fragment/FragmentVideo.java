@@ -125,7 +125,7 @@ public class FragmentVideo extends Fragment implements AdapterView.OnItemClickLi
         if (mPhotos.size() > 0) {
             mNoPhoto.setVisibility(View.GONE);
         }
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 6);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 5);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter = new VideoListAdapter(context, R.layout.video_list_item, mPhotos);
 //        adapter = new VideoAdapter(context);

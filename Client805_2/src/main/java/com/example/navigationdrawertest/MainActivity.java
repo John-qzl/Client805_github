@@ -246,8 +246,7 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 
 		if (fragment != null) {
 			FragmentManager fragmentManager = getSupportFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
 			// update selected item and title, then close the drawer
 			mDrawerList.setItemChecked(position, true);

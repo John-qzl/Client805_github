@@ -104,9 +104,9 @@ public class AlbumFragment extends Fragment {
         album_tabs.setTextSize((int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP, 16, dm));
         // 设置Tab Indicator的颜色
-        album_tabs.setIndicatorColor(Color.parseColor("#45c01a"));
+        album_tabs.setIndicatorColor(Color.parseColor("#2990EA"));
         // 设置选中Tab文字的颜色 (这是我自定义的一个方法)
-        album_tabs.setSelectedTextColor(Color.parseColor("#45c01a"));
+        album_tabs.setSelectedTextColor(Color.parseColor("#2990EA"));
         // 取消点击Tab时的背景色
         album_tabs.setTabBackground(0);
     }

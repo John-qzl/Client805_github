@@ -2,17 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/genalbg">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#1d8ae7">
+        android:background="@color/toolBarbg">
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:src="@drawable/logo"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"/>
@@ -26,43 +27,43 @@
             android:layout_toRightOf="@+id/logo"
             android:text="表名"
             android:textColor="@color/White"
-            android:textSize="@dimen/titleI"/>
+            android:textSize="@dimen/size14"/>
 
-        <Button
-            android:id="@+id/bt_check_refresh"
-            android:layout_width="60dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/check_close"
-            android:layout_marginRight="10dp"
-            android:text="刷新"
-            android:textSize="15dp"
-            android:textColor="@color/White"
-            android:background="@drawable/btn_selectimg"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/bt_check_refresh"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/check_close"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="刷新"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:background="@drawable/btn_selectimg"-->
+            <!--/>-->
 
-        <Button
-            android:id="@+id/bt_check_pandu"
-            android:layout_width="60dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/bt_check_refresh"
-            android:layout_marginRight="10dp"
-            android:text="判读"
-            android:textSize="15dp"
-            android:textColor="@color/White"
-            android:background="@drawable/btn_selectimg"/>
-        <Button
-            android:id="@+id/bt_check_wanzheng"
-            android:layout_width="60dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/bt_check_pandu"
-            android:layout_marginRight="10dp"
-            android:text="完整性"
-            android:textSize="15dp"
-            android:textColor="@color/White"
-            android:background="@drawable/btn_selectimg"/>
+        <!--<Button-->
+            <!--android:id="@+id/bt_check_pandu"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/bt_check_refresh"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="判读"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:background="@drawable/btn_selectimg"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/bt_check_wanzheng"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@+id/bt_check_pandu"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:text="完整性"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:background="@drawable/btn_selectimg"/>-->
 
         <!--<Button-->
             <!--android:id="@+id/bt_check_wanz"-->
@@ -86,171 +87,311 @@
             android:layout_marginRight="10dp"
             android:visibility="gone"/>
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="70dp"
-            android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/back_new"
-            android:layout_marginRight="15dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/back_new"-->
+            <!--android:layout_marginRight="15dp"/>-->
 
         <LinearLayout
-            android:id="@+id/lin_title_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:id="@+id/lin_check_wanzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/lin_check_pandu"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
 
-            <com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView
-                android:id="@+id/title_horsv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
-                android:scrollbars="none">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wanzhengxing"
+                android:layout_marginRight="5dp"/>
 
-                <TableLayout
-                    android:id="@+id/table_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/Black"
-                    android:gravity="center"
-                    android:stretchColumns="*"></TableLayout>
-
-            </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="完整性"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
 
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/table_scroll"
+        <LinearLayout
+            android:id="@+id/lin_check_pandu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/lin_check_refresh"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pandu"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="判读"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_check_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/lin_back"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="刷新"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_fanhui"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:layout_margin="18dp">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lin_title_header"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/lin_title_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView
-                    android:id="@+id/parent_scroll"
+                    android:id="@+id/title_horsv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="50dp">
+                    android:fillViewport="true"
+                    android:scrollbars="none">
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TableLayout
-                                android:id="@+id/table_content"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="#dedcd2"
-                                android:stretchColumns="*"></TableLayout>
-
-                        </LinearLayout>
-
-                    </FrameLayout>
+                    <TableLayout
+                        android:id="@+id/table_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:stretchColumns="*"></TableLayout>
 
                 </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
 
-                <TextView
-                    android:id="@+id/check_total_photoNum"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:textColor="@color/Black"
-                    android:text="照片数据量："/>
+            </LinearLayout>
 
-                <com.example.navigationdrawertest.CustomUI.NoScrollListview
-                    android:id="@+id/check_mylistview_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/list_default_round"
-                    android:cacheColorHint="#00000000"
-                    android:gravity="center"
-                    android:padding="10dp" />
+            <ScrollView
+                android:id="@+id/table_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lin_title_header">
 
                 <LinearLayout
-                    android:id="@+id/check_sumit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/table_scroll"
-                    android:orientation="horizontal"
-                    android:paddingTop="20dp">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView
+                        android:id="@+id/parent_scroll"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="50dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TableLayout
+                                    android:id="@+id/table_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="#dedcd2"
+                                    android:stretchColumns="*"></TableLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/table_line"/>
+
+                            </LinearLayout>
+
+                        </FrameLayout>
+
+                    </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="@dimen/size12"
+                            android:textColor="@color/hint"
+                            android:text="照片数据："/>
+
+                        <TextView
+                            android:id="@+id/check_total_photoNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="20dp"
+                            android:textColor="@color/black1"
+                            android:text="0"/>
+
+                    </LinearLayout>
+
+                    <com.example.navigationdrawertest.CustomUI.NoScrollListview
+                        android:id="@+id/check_mylistview_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/list_default_round"
+                        android:cacheColorHint="#00000000"
                         android:gravity="center"
-                        android:text="是否检查完成："
-                        android:textSize="@dimen/content" />
+                        android:padding="5dp"
+                        android:layout_margin="10dp"/>
 
-                    <Switch
-                        android:id="@+id/checkSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="8dp"
-                        android:checked="false"
-                        android:gravity="center"
-                        android:textOff="   否   "
-                        android:textOn="   是   "
-                        android:textSize="@dimen/content" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                    <LinearLayout
+                        android:id="@+id/check_sumit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/table_scroll"
+                        android:orientation="horizontal"
+                        android:paddingTop="20dp"
                         android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:text="@string/chaek_warning"
-                        android:textColor="@color/red_btn_bg_color"
-                        android:textSize="@dimen/content" />
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="是否检查完成："
+                            android:textSize="@dimen/size14"
+                            android:textColor="@color/login_seting"/>
+
+                        <Switch
+                            android:id="@+id/checkSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:checked="false"
+                            android:gravity="center"
+                            android:textOff="   否   "
+                            android:textOn="   是   "
+                            android:textSize="@dimen/size14" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/warn"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="2dp"
+                                android:gravity="center"
+                                android:text="@string/chaek_warning"
+                                android:textColor="@color/warn_color"
+                                android:textSize="@dimen/size12" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/check_bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="20dp">
+
+                        <Button
+                            android:id="@+id/check_proview"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/preview" />
+
+                        <Button
+                            android:id="@+id/check_next"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/next" />
+                    </RelativeLayout>
 
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/check_bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp">
+            </ScrollView>
 
-                    <Button
-                        android:id="@+id/check_proview"
-                        android:layout_width="70dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/preview" />
+        </RelativeLayout>
 
-                    <Button
-                        android:id="@+id/check_next"
-                        android:layout_width="70dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/next" />
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </ScrollView>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

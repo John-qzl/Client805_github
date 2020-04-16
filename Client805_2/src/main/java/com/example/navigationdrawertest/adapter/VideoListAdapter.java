@@ -6,6 +6,7 @@ import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,6 +17,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.navigationdrawertest.CustomUI.LoaderNativeImage;
 import com.example.navigationdrawertest.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -50,5 +54,60 @@ public class VideoListAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
             img.setImageBitmap(bitmap);
 //            videoInfo.setVisibility(View.INVISIBLE);
         }
+        double size = getFileOrFilesSize(url, 3);
+        videoSize.setText(String.valueOf(size) + "M");
+    }
+
+    /**
+     * 获取文件指定文件的指定单位的大小
+     *
+     * @param filePath 文件路径
+     * @param sizeType 获取大小的类型1为B、2为KB、3为MB、4为GB
+     * @return double值的大小
+     */
+    public static double getFileOrFilesSize(String filePath, int sizeType) {
+        File file = new File(filePath);
+        long blockSize = 0;
+        try {
+            blockSize = getFileSize(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG,"获取文件大小失败!");
+        }
+        return FormetFileSize(blockSize, sizeType);
+    }
+
+    /**
+     * 获取指定文件大小
+     *
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    private static long getFileSize(File file) throws Exception {
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        } else {
+            file.createNewFile();
+            Log.e(TAG,"获取文件大小不存在!");
+        }
+        return size;
+    }
+
+    /**
+     * 转换文件大小,指定转换的类型
+     *
+     * @param fileS
+     * @param sizeType
+     * @return
+     */
+    private static double FormetFileSize(long fileS, int sizeType) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        double fileSizeLong = 0;
+        fileSizeLong = Double.valueOf(df.format((double) fileS / 1048576));
+        return fileSizeLong;
     }
 }

@@ -93,8 +93,10 @@ import java.util.List;
 public class MainActivity1 extends FragmentActivity implements OnItemClickListener {
 
     private DrawerLayout mDrawerLayout;
-    private ImageView leftMenu, mDoneSync, mSyn, mMedia, mQuit;
-    private TextView mtitle;
+    private LinearLayout leftMenu;
+    private ImageView mDoneSync;
+    private LinearLayout mSyn, mMedia, mQuit;
+    private TextView mtitle, mLoginName;
     private ListView mDrawerList;
     private NavDrawerListAdapter mAdapter;
     private List<RwRelation> projectList;
@@ -124,12 +126,14 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
 
     @SuppressLint("NewApi")
     private void initview() {
-        leftMenu = (ImageView) findViewById(R.id.leftmenu);
+        leftMenu = (LinearLayout) findViewById(R.id.leftmenu);
         mtitle = (TextView) findViewById(R.id.title);
-        mSyn = (ImageView) findViewById(R.id.data_syn);
+        mLoginName = (TextView) findViewById(R.id.loginName);
+        mLoginName.setText(OrientApplication.getApplication().loginUser.getUsername() + "");
+        mSyn = (LinearLayout) findViewById(R.id.data_syn);
         mDoneSync = (ImageView) findViewById(R.id.done_data_syn);
-        mMedia = (ImageView) findViewById(R.id.media);
-        mQuit = (ImageView) findViewById(R.id.quit);
+        mMedia = (LinearLayout) findViewById(R.id.media);
+        mQuit = (LinearLayout) findViewById(R.id.quit);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         mDrawerList = (ListView) findViewById(R.id.left_listview);
         leftMenu.setOnClickListener(new View.OnClickListener() {

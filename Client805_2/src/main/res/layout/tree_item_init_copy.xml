@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="80dp"
     android:orientation="vertical"
     android:paddingBottom="8dp"
     android:paddingLeft="5dp"
@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
 
         <TextView
             android:id="@+id/init_txt_tree_width"
@@ -29,15 +29,17 @@
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@+id/init_img_tree_left"
             android:text="TextView"
-            android:textSize="@dimen/content" />
+            android:textSize="@dimen/size14"
+            android:textColor="@color/login_seting"/>
 
         <ImageView
             android:id="@+id/init_img_tree_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/init_txt_tree_width"
-            android:src="@drawable/icon_plusminus_add_black" />
+            android:src="@drawable/tree_z" />
 
         <ImageView
             android:id="@+id/init_img_tree_delete"
@@ -48,21 +50,30 @@
             android:visibility="gone"
             android:src="@drawable/icon_delete" />
 
-        <Button
-            android:id="@+id/copy_button"
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_alignParentLeft="false"
+        <LinearLayout
+            android:id="@+id/copy_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/bt_copy_bgshape"
-            android:focusable="false"
-            android:text="复制"
-            android:textColor="@color/White"
-            android:textSize="@dimen/content"
-            android:visibility="gone"/>
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/copy"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="复制"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/toolBarbg"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

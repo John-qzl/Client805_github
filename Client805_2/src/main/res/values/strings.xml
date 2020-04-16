@@ -118,6 +118,7 @@
     <string name="video">视频</string>
     <string name="cant_play_video">没有可以播放的程序</string>
     <string name="READ_EXTERNAL_STORAGE">需要打开读取存储权限</string>
+    <string name="maxvideowarn">(最多选5个短视频，且总量不大于180M！)</string>
 
 
 

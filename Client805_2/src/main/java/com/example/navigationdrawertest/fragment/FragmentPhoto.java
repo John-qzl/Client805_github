@@ -95,11 +95,11 @@ public class FragmentPhoto extends Fragment {
     }
 
     private void initData() {
-        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png", "mp4", "avi", "FLV");
+        mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
         if (mPhotos.size() > 0) {
             mNoPhoto.setVisibility(View.GONE);
         }
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 6);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 5);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         adapter = new PictureListAdapter(context, R.layout.image_list_item, mPhotos);
         mRecyclerView.setAdapter(adapter);

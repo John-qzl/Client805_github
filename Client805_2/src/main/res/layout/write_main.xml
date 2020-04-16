@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+	android:gravity="center_vertical"
     android:orientation="horizontal" >
 
     <TextView 
@@ -10,22 +11,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/Black"
+        android:textColor="@color/login_seting"
         android:textSize="@dimen/content"
         android:text="@string/write_signname"
         android:layout_marginLeft="10dp"/>
-    
+
     <Button  
 		android:id="@+id/button_sign"
-		android:layout_width="80dp"
-		android:layout_height="30dp"
+		android:layout_width="74dp"
+		android:layout_height="32dp"
 		android:layout_marginLeft="5dp"
 		android:layout_marginRight="5dp"
+		android:paddingLeft="8dp"
 		android:layout_gravity="center"
-		android:background="@drawable/sign_new"
+		android:background="@drawable/sign_shape"
 		android:focusable="false"
-		android:textSize="22dp"
-		android:textColor="@color/White"/>
+		android:textSize="@dimen/size14"
+		android:textColor="@color/White"
+		android:text="签署"
+		android:drawableLeft="@drawable/sign"/>
     
  	<ImageButton
 		android:id="@+id/signimage"
@@ -33,7 +37,7 @@
 		android:layout_height="80dp"
 		android:layout_marginLeft="20dp"
 		android:layout_gravity="center"
-		android:background="@color/sign_bg"
+		android:background="@color/White"
 		android:scaleType="fitXY"/>
  	
  	<TextView
@@ -41,7 +45,7 @@
  	    android:layout_width="match_parent"
  	    android:layout_height="match_parent"
  	    android:gravity="center"
- 	    android:textColor="@color/Black"
+ 	    android:textColor="@color/login_seting"
         android:textSize="@dimen/content"
         android:layout_marginLeft="20dp" />
  	

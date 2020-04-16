@@ -36,6 +36,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -250,10 +251,10 @@ public class FragmentCheck extends Fragment {
 		@Override
 		public void onClick(View arg0) {
 			switch(arg0.getId()){
-			case R.id.check_button:
+			case R.id.check_line:
 				Log.d("表的ID", clicktaskid+"");
 				break;
-			case R.id.read_button:
+			case R.id.read_line:
 				Log.d("表的ID", clicktaskid+"");
 				break;
 
@@ -358,15 +359,15 @@ public class FragmentCheck extends Fragment {
 					holder.tv_name = (TextView) convertView.findViewById(R.id.txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.img_tree_left);
-					holder.check_button = (Button) convertView.findViewById(R.id.check_button);
-					holder.read_button = (Button) convertView.findViewById(R.id.read_button);
+					holder.check_line = (LinearLayout) convertView.findViewById(R.id.check_line);
+					holder.read_line = (LinearLayout) convertView.findViewById(R.id.read_line);
 					final List<Task> taskList1 = DataSupport.where("taskid = ?", String.valueOf(nodeList.get(position).getId())).find(Task.class);
 					if (taskList1.size() > 0) {
 						if (taskList1.get(0).getIsChecking() == 1) {
 							holder.tv_name.setTextColor(getResources().getColor(R.color.actionbar));
 						}
 					}
-					holder.check_button.setOnClickListener(new OnClickListener(){
+					holder.check_line.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -374,7 +375,7 @@ public class FragmentCheck extends Fragment {
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.CHECKBUTTON);
 						}
 					});
-					holder.read_button.setOnClickListener(new OnClickListener(){
+					holder.read_line.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -388,14 +389,14 @@ public class FragmentCheck extends Fragment {
 					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-					holder.copy_button = (Button) convertView.findViewById(R.id.copy_button);
+					holder.copy_line = (LinearLayout) convertView.findViewById(R.id.copy_line);
 					if (taskList.size() > 0) {
 						if (taskList.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())
 								&& taskList.get(0).getIsBrother() != 1) {
-							holder.copy_button.setVisibility(View.VISIBLE);
+							holder.copy_line.setVisibility(View.VISIBLE);
 						}
 					}
-					holder.copy_button.setOnClickListener(new OnClickListener() {
+					holder.copy_line.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(taskList);
@@ -417,15 +418,15 @@ public class FragmentCheck extends Fragment {
 					holder.tv_name = (TextView) convertView.findViewById(R.id.txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.img_tree_left);
-					holder.check_button = (Button) convertView.findViewById(R.id.check_button);
-					holder.read_button = (Button) convertView.findViewById(R.id.read_button);
+					holder.check_line = (LinearLayout) convertView.findViewById(R.id.check_line);
+					holder.read_line = (LinearLayout) convertView.findViewById(R.id.read_line);
 					final List<Task> taskList1 = DataSupport.where("taskid = ?", String.valueOf(nodeList.get(position).getId())).find(Task.class);
 					if (taskList1.size() > 0) {
 						if (taskList1.get(0).getIsChecking() == 1) {
 							holder.tv_name.setTextColor(getResources().getColor(R.color.actionbar));
 						}
 					}
-					holder.check_button.setOnClickListener(new OnClickListener(){
+					holder.check_line.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -433,7 +434,7 @@ public class FragmentCheck extends Fragment {
 							showSweetAlertDialog(clicktaskid, NodeButtonEnum.CHECKBUTTON);
 						}
 					});
-					holder.read_button.setOnClickListener(new OnClickListener(){
+					holder.read_line.setOnClickListener(new OnClickListener(){
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -446,14 +447,14 @@ public class FragmentCheck extends Fragment {
 					holder.tv_name = (TextView) convertView.findViewById(R.id.init_txt_tree_name);
 					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
-					holder.copy_button = (Button) convertView.findViewById(R.id.copy_button);
+					holder.copy_line = (LinearLayout) convertView.findViewById(R.id.copy_line);
 					if (taskList.size() > 0) {
 						if (taskList.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())
 								&& taskList.get(0).getIsBrother() != 1) {
-							holder.copy_button.setVisibility(View.VISIBLE);
+							holder.copy_line.setVisibility(View.VISIBLE);
 						}
 					}
-					holder.copy_button.setOnClickListener(new OnClickListener() {
+					holder.copy_line.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(taskList);
@@ -476,7 +477,7 @@ public class FragmentCheck extends Fragment {
 			holder.tv_name.setText("" + nodeList.get(position).getName()); 
 			holder.tv_width.setText("");
 
-			int[] leftIds = { R.drawable.icon_plusminus_add_black, R.drawable.icon_plusminus_reduce_black, R.drawable.icon_head_default };
+			int[] leftIds = { R.drawable.tree_z, R.drawable.tree_s, R.drawable.biao };
 			holder.iv_left.setImageResource(leftIds[nodeList.get(position).getExpandStatus()]);
 			holder.tv_width.setMinWidth(layer * (holder.iv_left.getLayoutParams().width));
 
@@ -488,10 +489,10 @@ public class FragmentCheck extends Fragment {
 			public TextView tv_name;
 			public TextView tv_width;
 			//查看，检查，签署按钮
-			public Button check_button;
-			public Button read_button;
+			public LinearLayout check_line;
+			public LinearLayout read_line;
 			public Button delete_button;
-			public Button copy_button;
+			public LinearLayout copy_line;
 		}
 	}
 

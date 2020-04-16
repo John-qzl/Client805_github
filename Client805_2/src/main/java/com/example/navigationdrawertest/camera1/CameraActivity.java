@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.os.Trace;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -29,10 +30,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.navigationdrawertest.R;
+import com.example.navigationdrawertest.activity.LoginActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.navigationdrawertest.customCamera.album.view.FilterImageView.TAG;
 
 
 public class CameraActivity extends Activity implements SurfaceHolder.Callback {
@@ -221,24 +225,27 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
             List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();
 
-//            boolean flag = false;
-//            // 如果sizeList只有一个我们也没有必要做什么了，因为就他一个别无选择
-//            if (sizeList.size() > 0) {
-//
-//                for (int i = 0; i < sizeList.size(); i++) {
-//
-//                    if (i != 0 && sizeList.get(0).width > sizeList.get(i).width && !flag) {
-//                        flag = true;
-//                        // 从大到小
-//                        break;
-//                    }
-//
-//                }
-//                presenter.getCameraSize(parameters, sizeList, flag);
-//            } else {
-//                Toast.makeText(this, "您的手机暂不支持拍照", Toast.LENGTH_SHORT).show();
-//            }
+            String deviceName = getPhoneModel();
+            if (deviceName.contains("Lenovo")) {
+                boolean flag = false;
+                // 如果sizeList只有一个我们也没有必要做什么了，因为就他一个别无选择
+                if (sizeList.size() > 0) {
 
+                    for (int i = 0; i < sizeList.size(); i++) {
+
+                        if (i != 0 && sizeList.get(0).width > sizeList.get(i).width && !flag) {
+                            flag = true;
+                            // 从大到小
+                            break;
+                        }
+
+                    }
+                    presenter.getCameraSize(parameters, sizeList, flag);
+                } else {
+                    Toast.makeText(this, "您的手机暂不支持拍照", Toast.LENGTH_SHORT).show();
+                }
+            }
+            mButton.setEnabled(true);
         }
     }
 
@@ -364,5 +371,14 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             //竖屏
             mCamera.setDisplayOrientation(90);
         }
+    }
+
+    public static String getPhoneModel() {
+//        TelephonyManager manager= (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//        String mtype = android.os.Build.MODEL;
+        String brand = android.os.Build.BRAND;//手机品牌
+        String model = android.os.Build.MODEL;//手机型号
+        Log.w(TAG, "手机型号：" + brand + " " + model);
+        return brand + " " + model;
     }
 }

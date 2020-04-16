@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +50,7 @@ public class DocActivity extends BaseActivity{
 	private ListView searchList;
 	private ProgressDialog progressDialog;
 	private Context context;
-	private ImageView mBack;
+	private LinearLayout mBack;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class DocActivity extends BaseActivity{
 	
 	public void initUI(){
 		searchList = (ListView) findViewById(R.id.doclist_list);
-		mBack = (ImageView) findViewById(R.id.back);
+		mBack = (LinearLayout) findViewById(R.id.lin_doc_back);
 		mBack.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -271,7 +272,7 @@ public class DocActivity extends BaseActivity{
 			if(viewholder == null){
 				viewholder = new ViewHolder();
 				LayoutInflater mInflater = LayoutInflater.from(DocActivity.this);
-				view = mInflater.inflate(R.layout.tree_item_init, null);
+				view = mInflater.inflate(R.layout.tree_item_init_doc, null);
 				viewholder.iv_left = (ImageView) view.findViewById(R.id.init_img_tree_left);
 				viewholder.tv_name = (TextView) view.findViewById(R.id.init_txt_tree_name);
 				viewholder.tv_width = (TextView) view.findViewById(R.id.init_txt_tree_width);
@@ -280,29 +281,37 @@ public class DocActivity extends BaseActivity{
 			}else{
 				viewholder = (ViewHolder) view.getTag();
 			}
-			
+
 			int layer = nodeList.get(position).getLayer();
 			viewholder.tv_name.setText("" + nodeList.get(position).getName());
 			viewholder.tv_width.setText("");
-			int[] leftIds = {R.drawable.icon_plusminus_add_black, R.drawable.icon_plusminus_reduce_black, R.drawable.icon_head_default};
-			int[] fourType = {R.drawable.iconfont_doc, R.drawable.iconfont_dwg, R.drawable.iconfont_mp3, R.drawable.iconfont_txt, R.drawable.iconfont_jpg};
+			int[] leftIds = {R.drawable.tree_z, R.drawable.tree_s, R.drawable.unknow};
+			int[] fourType = {R.drawable.world, R.drawable.mp4, R.drawable.mp3, R.drawable.txt, R.drawable.image,
+					R.drawable.exel, R.drawable.ppt, R.drawable.pdf};
 			if(layer == 5){
 				viewholder.delete.setVisibility(View.VISIBLE);
 				String name = nodeList.get(position).getName();
-				if(name.contains(".doc") || name.contains(".DOC") || name.contains(".docx") || name.contains(".DOCX") || name.contains(".xls") || name.contains(".XLS")
-						|| name.contains(".xlsx") || name.contains(".XLSX")){
+				if(name.contains(".doc") || name.contains(".DOC") || name.contains(".docx") || name.contains(".DOCX")){
 					viewholder.iv_left.setImageResource(fourType[0]);
-				}else if(name.contains(".dwg") || name.contains(".dwf") || name.contains(".dxf") || name.contains(".DWG") || name.contains(".DWF") || name.contains(".DXF")){
+				} else if (name.contains(".xls") || name.contains(".XLS") || name.contains(".xlsx") || name.contains(".XLSX")) {
+					viewholder.iv_left.setImageResource(fourType[5]);
+				}  else if (name.contains(".ppt") || name.contains(".pptx") || name.contains(".PPT") || name.contains(".PPTX")) {
+					viewholder.iv_left.setImageResource(fourType[6]);
+				} else if (name.contains(".pdf") || name.contains(".PDF")) {
+					viewholder.iv_left.setImageResource(fourType[7]);
+				}else if (name.contains(".dwg") || name.contains(".dwf") || name.contains(".dxf") || name.contains(".DWG") || name.contains(".DWF") || name.contains(".DXF")) {
 					viewholder.iv_left.setImageResource(fourType[1]);
-				}else if(name.contains(".txt") || name.contains(".TXT")){
+				} else if (name.contains(".txt") || name.contains(".TXT")) {
 					viewholder.iv_left.setImageResource(fourType[3]);
-				}else if(name.contains(".mp3") || name.contains(".avi") || name.contains(".3gp")
-						||name.equals(".mp4") || name.contains(".MP3") || name.contains(".AVI") || name.contains(".3GP")
-						||name.equals(".MP4")){
+				} else if (name.contains(".avi") || name.contains(".3gp") ||
+						name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP") || name.equals(".MP4")) {
+					viewholder.iv_left.setImageResource(fourType[1]);
+				} else if (name.contains(".mp3") || name.contains(".MP3") ) {
 					viewholder.iv_left.setImageResource(fourType[2]);
-				}else if(name.contains(".jpg") || name.contains(".png") || name.contains(".JPG") || name.contains(".PNG")){
+				}else if (name.contains(".jpg") || name.contains(".png") || name.contains(".JPG") || name.contains(".PNG")) {
 					viewholder.iv_left.setImageResource(fourType[4]);
-				}else{
+				}
+				else {
 					viewholder.iv_left.setImageResource(leftIds[nodeList.get(position).getExpandStatus()]);
 				}
 			}else{
