@@ -124,7 +124,8 @@
                 <LinearLayout
                     android:id="@+id/quit"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:gravity="center_vertical"
                     android:layout_alignParentRight="true"
                     android:orientation="horizontal">
@@ -142,12 +143,23 @@
                         android:text="张三"
                         android:textSize="@dimen/size14"
                         android:textColor="@color/White"
-                        android:layout_marginRight="3dp"/>
+                        android:layout_marginRight="8dp"/>
 
                     <ImageView
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@color/white"
+                        android:layout_marginRight="8dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_quit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/more"
+                        android:text="退出"
+                        android:textSize="@dimen/size14"
+                        android:textColor="@color/White"
                         android:layout_marginRight="19dp"/>
 
                 </LinearLayout>

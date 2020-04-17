@@ -233,8 +233,21 @@ public class LoginActivity extends BaseActivity{
 			} else if (readResult != null && readResult.equalsIgnoreCase("disableUrl")) {
 				prodlg.dismiss();
 				AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-				dialog.setIcon(R.drawable.logo_title).setTitle("警告");
+				dialog.setIcon(R.drawable.logo_title).setTitle("提示");
 				dialog.setMessage("IP和Port无效，请检查端口设置后重试！");
+				dialog.setCancelable(false);
+				dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+				dialog.show();
+			} else if (readResult != null && readResult.equalsIgnoreCase("noNewVersion")) {
+				prodlg.dismiss();
+				AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+				dialog.setIcon(R.drawable.logo_title).setTitle("提示");
+				dialog.setMessage("没有检测到新版本，请检查新版本是否存在！");
 				dialog.setCancelable(false);
 				dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					@Override

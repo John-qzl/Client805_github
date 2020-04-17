@@ -156,5 +156,10 @@
         <!--<item name="colorControlNormal">@color/indigo</item>-->
         <!--<item name="colorControlActivated">@color/pink</item>-->
     <!--</style>-->
-    
+
+    <style name="AnimationPreview">
+        <item name="android:windowEnterAnimation">@anim/face_in</item>
+        <item name="android:windowExitAnimation">@anim/face_out</item>
+    </style>
+
 </resources>

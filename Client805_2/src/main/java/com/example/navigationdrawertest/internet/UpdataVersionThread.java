@@ -102,16 +102,13 @@ public class UpdataVersionThread extends Thread {
                 errorMessage = code + "错误";
 //                return false; // 错误
             }
-            String versionNew = EntityUtils.toString(response.getEntity(), "utf-8");
-            apkVersion = versionNew;
-            if (version != "" && versionNew != "") {
-                if (Integer.valueOf(versionNew) > Integer.valueOf(version)) {
-                    downloadapk(versionNew);
-                } else {
-                    updataList.add(versionNew + "---无新版本");
-                }
+            String isUpdate = EntityUtils.toString(response.getEntity(), "utf-8");
+//            apkVersion = versionNew;
+            if (isUpdate.contains("true")) {
+                downloadapk(version);
             } else {
-                updataList.add(versionNew + "---版本信息有误");
+                notifyCompletion("noNewVersion");
+                updataList.add("版本更新提示：没有检测到新版本");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -131,8 +128,8 @@ public class UpdataVersionThread extends Thread {
         errorMessage = "网络有误!";
         try {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("operationType",
-                    "downloadapk"));
+            nameValuePairs.add(new BasicNameValuePair("operationType", "downloadapk"));
+            nameValuePairs.add(new BasicNameValuePair("version", versionNew));
             postmethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = client.execute(postmethod);
             int code = response.getStatusLine().getStatusCode();

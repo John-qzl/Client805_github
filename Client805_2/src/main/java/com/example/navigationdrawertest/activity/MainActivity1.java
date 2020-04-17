@@ -65,6 +65,7 @@ import com.example.navigationdrawertest.utils.ConverXML;
 import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.FontSize;
 import com.example.navigationdrawertest.utils.ListStyle;
+import com.example.navigationdrawertest.utils.MyPopWindow;
 import com.example.navigationdrawertest.utils.NetCheckTool;
 
 import org.apache.http.HttpResponse;
@@ -147,6 +148,8 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
         mQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                MyPopWindow myPopWindow=new MyPopWindow(MainActivity1.this);
+//                myPopWindow.showPopupWindow(mLoginName);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity1.this);
                 dialog.setIcon(R.drawable.logo_title).setTitle("警告");
                 dialog.setMessage("是否退出？");
@@ -731,11 +734,11 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
     }
 
     /**
+     * @param
+     * @return
      * @Description: 判断用户是否为该节点的负责人
      * @author qiaozhili
      * @date 2019/2/19 16:44
-     * @param
-     * @return
      */
 //    private void isCommander(String nodeIds) {
 //        String userId = OrientApplication.getApplication().loginUser.getUserid();
@@ -764,4 +767,7 @@ public class MainActivity1 extends FragmentActivity implements OnItemClickListen
 //            OrientApplication.getApplication().setCommander(false);
 //        }
 //    }
+    public void quit() {
+        finish();
+    }
 }
