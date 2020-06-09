@@ -39,14 +39,39 @@
             android:textColor="@color/White"
             android:visibility="gone"/>
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="70dp"
-            android:layout_height="25dp"
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/back_new"-->
+            <!--android:layout_marginRight="15dp"/>-->
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/back_new"
-            android:layout_marginRight="15dp"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_fanhui"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

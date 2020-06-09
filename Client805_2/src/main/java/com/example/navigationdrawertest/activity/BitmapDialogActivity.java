@@ -12,16 +12,20 @@ import android.widget.ImageView;
 
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.utils.Config;
+import com.example.navigationdrawertest.utils.FileOperation;
+
+import java.util.ArrayList;
 
 public class BitmapDialogActivity extends BaseActivity{
 	
 	private ImageView imageview;
-	private static String userId;
+	private static String refphoto;
 	private static String taskId;
 	private static String opId;
-	public static void actionStart(Context context, String userid, String taskid, String opid) {
+	private ArrayList<String> mPhotos = new ArrayList<String>();
+	public static void actionStart(Context context, String refphotoId, String taskid, String opid) {
 		Intent intent = new Intent(context, BitmapDialogActivity.class);
-		userId = userid;
+		refphoto = refphotoId;
 		taskId = taskid;
 		opId = opid;
 		context.startActivity(intent);
@@ -37,13 +41,22 @@ public class BitmapDialogActivity extends BaseActivity{
 	public void initUI(){
 		imageview = (ImageView) findViewById(R.id.bitmapdialog_imageview);
 //		String absPath = Environment.getDataDirectory().getPath() + Config.packagePath
-//				+ Config.opphotoPath+ "/"+ userId+"/" + taskId + "/" + opId + ".jpg";
+//				+ Config.opphotoPath+ "/"+ refphotoId+"/" + taskId + "/" + opId + ".jpg";
 //		String absPath = Environment.getDataDirectory().getPath() + Config.packagePath
 //				+ Config.opphotoPath+ "/"+ taskId + "/" + opId + ".jpg";
 		final String absPath = Environment.getExternalStorageDirectory()
-				+ Config.opphotoPath + "/"
-				+ taskId + "/" + opId + ".jpg";
-		Bitmap bitmap = BitmapFactory.decodeFile(absPath);
+				+ Config.refphotoPath + "/"
+				+ taskId + "/";
+		String refPath = "";
+		mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+		if (mPhotos.size() > 0) {
+			for (int i = 0; i < mPhotos.size(); i++) {
+				if (mPhotos.get(i).contains(refphoto)) {
+					refPath = mPhotos.get(i);
+				}
+			}
+		}
+		Bitmap bitmap = BitmapFactory.decodeFile(refPath);
 		if(bitmap != null){
 			imageview.setImageBitmap(bitmap);
 		}

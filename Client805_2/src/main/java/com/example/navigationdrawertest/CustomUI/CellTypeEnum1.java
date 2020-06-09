@@ -16,5 +16,6 @@ public class CellTypeEnum1 {
 	public static String STRINGBITMAP="STRINGBITMAP";								//填值+示意图
 	public static String STRINGPHOTOBITMAP="STRINGPHOTOBITMAP";					//填值+拍照+示意图
 	public static String HOOKPHOTOBITMAP	="HOOKPHOTOBITMAP";					//打钩+拍照+示意图
+	public static String SIGN="SIGN";		//行签署
 	
 }

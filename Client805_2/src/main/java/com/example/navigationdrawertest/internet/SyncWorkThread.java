@@ -207,7 +207,7 @@ public class SyncWorkThread extends Thread {
 								cell.setCelltype(CellTypeEnum1.HOOKSTRINGBITMAP);
 							}else if(isPhoto && isBitmap){		//打钩+填值+拍照+缩略图
 								cell.setCelltype(CellTypeEnum1.HOOKSTRINGPHOTOBITMAP);
-							}else{											//打钩+填值
+							}else {                                            //打钩+填值
 								cell.setCelltype(CellTypeEnum1.HOOKSTRING);
 							}
 							cell.update(cell.getId());
@@ -242,7 +242,9 @@ public class SyncWorkThread extends Thread {
 									cell.setCelltype(CellTypeEnum1.STRINGPHOTOBITMAP);
 								}else if(!pows.contains(128) && isBitmap){	//填值+缩略图
 									cell.setCelltype(CellTypeEnum1.STRINGBITMAP);
-								}else{															//填值
+								} else if (cell.getMarkup().equals("sign")) { //行签署
+									cell.setCelltype(CellTypeEnum1.SIGN);
+								} else{															//填值
 									cell.setCelltype(CellTypeEnum1.STRING);
 								}
 								cell.update(cell.getId());
@@ -251,7 +253,10 @@ public class SyncWorkThread extends Thread {
 								cell.update(cell.getId());
 							}
 						}
-					}else{
+					} else if (cell.getType().equals("SIGN")) {
+						cell.setCelltype("SIGN");
+						cell.update(cell.getId());
+					} else {
 						cell.setCelltype(CellTypeEnum1.LABEL);
 						cell.update(cell.getId());
 					}
@@ -795,6 +800,7 @@ public class SyncWorkThread extends Thread {
 					cell.setRowsid(rowsid);
 					cell.setHorizontalorder(Horizontalorder);
 					cell.setCellid(xmlCell.getAttribute("cellid"));
+					cell.setRefphoto(xmlCell.getAttribute("refphoto"));
 					cell.setRowname(xmlCell.getAttribute("column"));
 					cell.setColumnid(xmlCell.getAttribute("columnid"));
 					cell.setTextvalue(xmlCell.getAttribute("textvalue"));
@@ -843,6 +849,7 @@ public class SyncWorkThread extends Thread {
 				Signature sign = new Signature();
 				String signId=xmlSign.getAttribute("signId");
 				sign.setSignid(signId);
+				sign.setSignType(0);
 				if(state.equalsIgnoreCase("finish")){
 					String path = downloadSignPhoto1(task, signId);
 					if (!CommonTools.Obj2String(path).equals("")) {
@@ -1112,8 +1119,8 @@ public class SyncWorkThread extends Thread {
 				updateInformation("下载", downloadtask.getTaskname()
 						+ "---Bitmap文件成功");
 				//qzl 下载示意图
-//				List<Cell> cellList = DataSupport.where("taskid = ? and type = ?", downloadtask.getTaskid(), "TRUE").find(Cell.class);
-//				downloadrefphoto(downloadtask);
+				List<Cell> cellList = DataSupport.where("taskid = ? and type = ?", downloadtask.getTaskid(), "TRUE").find(Cell.class);
+				downloadrefphoto(downloadtask);
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -1277,7 +1284,6 @@ public class SyncWorkThread extends Thread {
 	 * @return
 	 */
 	private boolean downloadrefphoto(Task task) {
-		String path="";
 		try {
 			HttpClient client = HttpClientHelper.getOrientHttpClient();
 			HttpPost postmethod = new HttpPost(
@@ -1297,35 +1303,37 @@ public class SyncWorkThread extends Thread {
 			if (code != 200) {
 				errorMessage = code + "错误";
 			}
-			// 根据文档Id获取文档信息
-			// String picContent =
-			// EntityUtils.toString(response.getEntity(), "utf-8");
-			updateInformation("保存", task.getTaskname() + "--签署照片");
-
-			String filepath = Environment.getDataDirectory().getPath()
-					+ Config.packagePath + Config.signphotoPath
-					+ "/" + task.getTaskid() + "/";
-			path = Environment.getDataDirectory().getPath()
-					+ Config.packagePath + Config.signphotoPath
-					+ "/" + task.getTaskid() + "/"
-					+ task.getTaskid() + ".jpg";
+			String filepath = Environment.getExternalStorageDirectory() + Config.refphotoPath
+					+ File.separator
+					+ task.getTaskid();
+//					+ ".zip";
+			String path = Environment.getExternalStorageDirectory() + Config.refphotoPath
+					+ File.separator
+					+ task.getRwid()
+					+ File.separator
+					+ task.getTaskid()
+					+ File.separator;
 
 			File file1 = new File(filepath);
+			file1.delete();
 			if (!file1.exists()) {
 				file1.mkdirs();
 			}
+
 			ByteArrayInputStream is = new ByteArrayInputStream(
 					EntityUtils.toByteArray(response.getEntity()));
-			File file = new File(path);// 新建一个file文件
+			File file = new File(file1.getAbsolutePath(),task.getTaskid()+".zip");// 新建一个file文件
 			FileOutputStream fos = new FileOutputStream(file); // 对应文件建立输出流
 			byte[] buffer = new byte[1024]; // 新建缓存 用来存储 从网络读取数据 再写入文件
 			int len = 0;
 			while ((len = is.read(buffer)) != -1) {// 当没有读到最后的时候
-				fos.write(buffer, 0, len);// 将缓存中的存储的文件流秀娥问file文件
+				fos.write(buffer, 0, len);// 将缓存中的存储的文件流file文件
 			}
 			fos.flush();// 将缓存中的写入file
 			fos.close();
-			createFile(task.getTaskid(), task.getTaskid());
+
+			Unzip(file.getAbsolutePath(), filepath + File.separator);
+			file.delete();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -1721,6 +1729,11 @@ public class SyncWorkThread extends Thread {
 				// 上传步骤一
 				if (task == null) {
 					errorMessage = "检查表格Id号为：'" + task.getTaskid() + "'值为NULL。";
+					return false;
+				}
+				// 优先上传行签署图片  需要更新web端的表单
+				if(!uploadHangSignPhoto(task.getTaskid())){
+					Log.i("photo", task.getTaskid()+"签署照片");
 					return false;
 				}
 				String taskxml = ConverXML.ConverTaskToXml(task);
@@ -2628,6 +2641,87 @@ public class SyncWorkThread extends Thread {
 						errorMessage = "上传\""
 								+ CommonTools.null2String(OrientApplication.getApplication().rw
 										.getRwname()) + "\"的任务（Id=" + resultId
+								+ "）对应的拍照出错！（" + code + "错误）";
+						return false;
+					}
+					postmethod = null;
+				}
+
+			} catch (UnsupportedEncodingException e) {
+				return false;
+			} catch (ClientProtocolException e) {
+				return false;
+			} catch (IOException e) {
+				return false;
+			} catch (Exception e) {
+				return false;
+			}
+
+		}
+		return true;
+	}
+
+	/**
+	 * @Description: 上传行签署图片
+	 * @author qiaozhili
+	 * @date 2020/5/29 15:04
+	 * @param
+	 * @return
+	 */
+	public boolean uploadHangSignPhoto(String taskId) {
+		// 1,找到该任务照片目录
+		String userId = OrientApplication.getApplication().loginUser
+				.getUserid();
+		String signphotoPath = Environment.getExternalStorageDirectory()
+				+ Config.hangsignphotoPath + "/" + taskId + "/";
+		String photoName = "";
+//		List<String> photoNameList = GetFiles(signphotoPath, "jpg");
+		List<String> photoNameList = FileOperation.getAlbumByPath(signphotoPath, "jpg", "png");
+		String username = OrientApplication.getApplication().loginUser
+				.getUsername();
+		String userid = OrientApplication.getApplication().loginUser
+				.getUserid();
+		if (photoNameList.size() != 0) {
+
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");// HH:mm:ss
+			Date date = new Date(System.currentTimeMillis());
+			String uniqueNum = simpleDateFormat.format(date);
+			try {
+				updateInformation("上传", taskId + "的表格签署照片！");
+
+				// 表格级别照片命名规则
+				for (int i = 0; i < photoNameList.size(); i++) {
+					String phName = photoNameList.get(i);
+					int startLocation = phName.lastIndexOf("/") + 1;
+					int endLocation = phName.lastIndexOf(".");
+					String resultId = phName.substring(startLocation,
+							endLocation);
+					String photopath = phName;
+					HttpClient client = HttpClientHelper.getOrientHttpClient();
+					String str = "http://"
+							+ OrientApplication.getApplication().setting.IPAdress
+							+ ":"
+							+ OrientApplication.getApplication().setting.PortAdress
+							+ "/dp/datasync/sync.do?operationType=uploadhangsignphoto&username="
+							+ username + "&userid=" + userid + "&resultId="
+							+ resultId + "&tableInstanId=" + taskId + "&describe=" + uniqueNum;
+					HttpPost postmethod = new HttpPost(str);
+
+					File file = new File(photopath);
+					MultipartEntity mpEntity = new MultipartEntity(); // 文件传输
+					ContentBody cbFile = new FileBody(file);
+					mpEntity.addPart("userfile", cbFile); // <input type="file"
+					// name="userfile"
+					// /> 对应的
+					postmethod.setEntity(mpEntity);
+
+					HttpResponse response = client.execute(postmethod);
+
+					int code = response.getStatusLine().getStatusCode();
+					if (code != 200) {
+						errorMessage = "上传\""
+								+ CommonTools.null2String(OrientApplication.getApplication().rw
+								.getRwname()) + "\"的任务（Id=" + resultId
 								+ "）对应的拍照出错！（" + code + "错误）";
 						return false;
 					}

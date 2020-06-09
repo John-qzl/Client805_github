@@ -215,7 +215,7 @@ public class AerospaceDB {
 	public List<Signature> loadSignatureAdapter(long taskid, String userid){
 		String taskidToStr = taskid+"";
 //		List<Signature> signs = DataSupport.where("taskid = ? and userid = ?", taskidToStr, userid).find(Signature.class);
-		List<Signature> signs = DataSupport.where("taskid = ?", taskidToStr).order("signorder asc").find(Signature.class);
+		List<Signature> signs = DataSupport.where("taskid = ? and signType = ?", taskidToStr, "0").order("signorder asc").find(Signature.class);
 		return signs;
 	}
 	

@@ -240,7 +240,7 @@ public class UpdataVersionThread extends Thread {
             socket = new Socket();
             InetSocketAddress isa = new InetSocketAddress(InetAddress.getByName(host), port);
 
-            socket.connect(isa, 10);
+            socket.connect(isa, 100);
             if (socket.isConnected()) {
                 return true;
             } else {

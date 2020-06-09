@@ -90,5 +90,6 @@
     <color name="table_line">#DBE3EA</color>
 
     <color name="bt_bg">#22000000</color>
+    <color name="ref_bg">#98000000</color>
 
 </resources>

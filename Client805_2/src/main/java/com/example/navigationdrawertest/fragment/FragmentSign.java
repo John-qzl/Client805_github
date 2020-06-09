@@ -425,6 +425,7 @@ public class FragmentSign extends Fragment {
 
 	public void setLocation(Task task) {
 		task.setLocation(1);
+		task.setBackFlag(1);
 		task.update(task.getId());
 		adapter.notifyDataSetChanged();
 //		getActivity().finish();

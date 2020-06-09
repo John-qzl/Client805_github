@@ -42,6 +42,7 @@ public class AlbumFragment extends Fragment {
 
     private Handler handler;
     private String path;
+    private String checkType;
     ArrayList<VideoInfo> videoInfos;
 
     /**
@@ -54,9 +55,10 @@ public class AlbumFragment extends Fragment {
      */
     private DisplayMetrics dm;
 
-    public AlbumFragment(String path, ArrayList<VideoInfo> videoInfos){
+    public AlbumFragment(String path, ArrayList<VideoInfo> videoInfos, String checkType){
         this.path = path;
         this.videoInfos = videoInfos;
+        this.checkType = checkType;
 //		refresh();
     }
 
@@ -135,12 +137,12 @@ public class AlbumFragment extends Fragment {
             switch (position) {
                 case 0:
                     if (fragmentPhoto == null) {
-                        fragmentPhoto = new FragmentPhoto(path);
+                        fragmentPhoto = new FragmentPhoto(path, checkType);
                     }
                     return fragmentPhoto;
                 case 1:
                     if (fragmentVideo == null) {
-                        fragmentVideo = new FragmentVideo(path, videoInfos);
+                        fragmentVideo = new FragmentVideo(path, videoInfos, checkType);
                     }
                     return fragmentVideo;
                 default:

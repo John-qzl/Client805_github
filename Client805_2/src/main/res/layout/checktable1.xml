@@ -289,7 +289,7 @@
                             android:layout_marginLeft="10dp"
                             android:textSize="@dimen/size12"
                             android:textColor="@color/hint"
-                            android:text="照片数据："/>
+                            android:text="照片数量："/>
 
                         <TextView
                             android:id="@+id/check_total_photoNum"

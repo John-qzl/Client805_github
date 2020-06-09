@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +15,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +30,8 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.SweetAlert.SweetAlertDialog;
-import com.example.navigationdrawertest.activity.PhotoActivity;
 import com.example.navigationdrawertest.activity.VideoActivity;
 import com.example.navigationdrawertest.adapter.AlbumAdapter;
-import com.example.navigationdrawertest.adapter.PictureListAdapter;
 import com.example.navigationdrawertest.adapter.VideoListAdapter;
 import com.example.navigationdrawertest.application.OrientApplication;
 import com.example.navigationdrawertest.camera1.video.entity.Media;
@@ -43,12 +39,7 @@ import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.VideoInfo;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,17 +54,19 @@ public class FragmentVideo extends Fragment implements AdapterView.OnItemClickLi
     private VideoListAdapter adapter;
 //    private VideoAdapter adapter;
     Context context;
-    private ArrayList<String> mPhotos = new ArrayList<String>();
+    private ArrayList<String> mVideos = new ArrayList<String>();
     private ProgressDialog prodlg;
-    private LinearLayout mNoPhoto;
+    private LinearLayout mNoVideo;
     private String path;
+    private String checkType;
     private ArrayList<Media> mediaList;
     ArrayList<VideoInfo> videoInfos;
     private ListView listView;
 
-    public FragmentVideo(String path, ArrayList<VideoInfo> videoInfos){
+    public FragmentVideo(String path, ArrayList<VideoInfo> videoInfos, String checkType){
         this.path = path;
         this.videoInfos = videoInfos;
+        this.checkType = checkType;
     }
 
     private Handler mHandler = new Handler() {
@@ -110,24 +103,24 @@ public class FragmentVideo extends Fragment implements AdapterView.OnItemClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View v = inflater.inflate(R.layout.fragment_photo, container, false);
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.mRecyclerView);
+        View v = inflater.inflate(R.layout.fragment_video, container, false);
+        mRecyclerView = (RecyclerView) v.findViewById(R.id.video_mRecyclerView);
 //        listView = (ListView)v. findViewById(R.id.lv_show);
 //        listView.setOnItemClickListener(context);
-        mNoPhoto = (LinearLayout) v.findViewById(R.id.noPhoto);
+        mNoVideo = (LinearLayout) v.findViewById(R.id.no_video);
         context = getActivity();
         initData();
         return v;
     }
 
     private void initData() {
-        mPhotos = FileOperation.getVideoByPath(path, "mp4", "avi", "FLV");
-        if (mPhotos.size() > 0) {
-            mNoPhoto.setVisibility(View.GONE);
+        mVideos = FileOperation.getVideoByPath(path, "mp4", "avi", "FLV");
+        if (mVideos.size() > 0) {
+            mNoVideo.setVisibility(View.GONE);
         }
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 5);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-        adapter = new VideoListAdapter(context, R.layout.video_list_item, mPhotos);
+        adapter = new VideoListAdapter(context, R.layout.video_list_item, mVideos);
 //        adapter = new VideoAdapter(context);
 //        mRecyclerView.addItemDecoration(new SpaceItemDecoration(10));
         new Thread(new Runnable() {
@@ -151,7 +144,7 @@ public class FragmentVideo extends Fragment implements AdapterView.OnItemClickLi
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(context, VideoActivity.class);
-                intent.putStringArrayListExtra("photos", mPhotos);
+                intent.putStringArrayListExtra("photos", mVideos);
                 intent.putExtra("position", position);
                 startActivity(intent);
             }
@@ -179,8 +172,8 @@ public class FragmentVideo extends Fragment implements AdapterView.OnItemClickLi
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        FileOperation.deleteFile(mPhotos.get(position));
-                                        mPhotos.remove(position);
+                                        FileOperation.deleteFile(mVideos.get(position));
+                                        mVideos.remove(position);
                                         Message message = new Message();
                                         message.what = 1;
                                         mHandler.sendMessage(message);

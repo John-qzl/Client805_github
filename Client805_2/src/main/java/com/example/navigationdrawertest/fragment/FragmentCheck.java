@@ -390,16 +390,24 @@ public class FragmentCheck extends Fragment {
 					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 					holder.copy_line = (LinearLayout) convertView.findViewById(R.id.copy_line);
+					holder.add_line = (LinearLayout) convertView.findViewById(R.id.add_line);
 					if (taskList.size() > 0) {
 						if (taskList.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())
 								&& taskList.get(0).getIsBrother() != 1) {
 							holder.copy_line.setVisibility(View.VISIBLE);
+							holder.add_line.setVisibility(View.VISIBLE);
 						}
 					}
 					holder.copy_line.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(taskList);
+						}
+					});
+					holder.add_line.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							warnAddInfo(taskList);
 						}
 					});
 				} else {
@@ -448,16 +456,24 @@ public class FragmentCheck extends Fragment {
 					holder.tv_width = (TextView) convertView.findViewById(R.id.init_txt_tree_width);
 					holder.iv_left = (ImageView) convertView.findViewById(R.id.init_img_tree_left);
 					holder.copy_line = (LinearLayout) convertView.findViewById(R.id.copy_line);
+					holder.add_line = (LinearLayout) convertView.findViewById(R.id.add_line);
 					if (taskList.size() > 0) {
 						if (taskList.get(0).getNodeLeaderId().contains(OrientApplication.getApplication().loginUser.getUserid())
 								&& taskList.get(0).getIsBrother() != 1) {
 							holder.copy_line.setVisibility(View.VISIBLE);
+							holder.add_line.setVisibility(View.VISIBLE);
 						}
 					}
 					holder.copy_line.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							warnInfo(taskList);
+						}
+					});
+					holder.add_line.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							warnAddInfo(taskList);
 						}
 					});
 				} else {
@@ -492,7 +508,7 @@ public class FragmentCheck extends Fragment {
 			public LinearLayout check_line;
 			public LinearLayout read_line;
 			public Button delete_button;
-			public LinearLayout copy_line;
+			public LinearLayout copy_line, add_line;
 		}
 	}
 
@@ -855,5 +871,124 @@ public class FragmentCheck extends Fragment {
 		return timeStamp;
 	}
 
+	/**
+	 * @Description: 新增通用模板提示
+	 * @author qiaozhili
+	 * @date 2020/5/25 16:01
+	 * @param
+	 * @return
+	 */
+	public void warnAddInfo(final List<Task> taskList) {
+		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+		dialog.setIcon(R.drawable.logo_title).setTitle("新增通用表单");
+		dialog.setMessage("是否要添加通用的表单模板？");
+		dialog.setCancelable(false);
+		dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				addNormalTask(taskList.get(0));
+			}
+		});
+		dialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
+	}
+
+	public void addNormalTask(final Task task) {
+		LayoutInflater factory = LayoutInflater.from(getActivity());//提示框
+		final View view = factory.inflate(R.layout.editbox_layout, null);//这里必须是final的
+		final EditText edit=(EditText)view.findViewById(R.id.editText);//获得输入框对象
+		final String[] taskName = {""};
+		new AlertDialog.Builder(getActivity())
+				.setTitle("请输入表单名称！")//提示框标题
+				.setView(view)
+				.setPositiveButton("确定",//提示框的两个按钮
+						new android.content.DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+												int which) {
+								Message message = new Message();
+								prodlg = ProgressDialog.show(context, "警告", "正在新增，请稍侯...");
+								taskName[0] = String.valueOf(edit.getText());
+								addTask(taskName[0], task);
+								message.what = 1;
+								mHandler.sendMessage(message);
+							}
+						})
+				.setNegativeButton("取消", null).create().show();
+	}
+
+	/**
+	 * @Description: 添加通用Task
+	 * @author qiaozhili
+	 * @date 2020/5/25 16:36
+	 * @param
+	 * @return
+	 */
+	public void addTask(String newTaskName, Task task) {
+		Task taskNew = new Task();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+		String timeString = formatter.format(curDate);
+		long timeL = 0;
+		String taskIdNew = "";
+		String currentSecond = getTime(timeString);
+		String normalTaskId = "10000123456789";
+		long taskIdL = Long.parseLong(normalTaskId);
+		if (task.getTaskid().length() > currentSecond.length()) {
+			int size = task.getTaskid().length() - currentSecond.length();
+			timeL = (long) (Long.parseLong(currentSecond) * Math.pow(10,size));
+		}
+		if (!task.getTaskid().equals("")) {
+			String taskIdN = String.valueOf(taskIdL + timeL);
+			taskNew.setTaskid(taskIdN);
+			taskIdNew = taskIdN;
+		} else {
+			taskNew.setTaskid("");
+		}
+		taskNew.setPathId(task.getPathId());
+		taskNew.setPath(task.getPath());
+		taskNew.setTaskname(newTaskName);
+		taskNew.setRemark(task.getRemark());
+		taskNew.setVersion(task.getVersion());
+		taskNew.setLocation(task.getLocation());
+		taskNew.setTaskpic(task.getTaskpic());
+		taskNew.setTablesize(task.getTablesize());
+		taskNew.setRwid(task.getRwid());
+		taskNew.setRwname(task.getRwname());
+		taskNew.setPost(task.getPost());
+		taskNew.setPostinstanceid(task.getPostinstanceid());
+		taskNew.setPostname(task.getPostname());
+		taskNew.setNodeLeaderId(task.getNodeLeaderId());
+		taskNew.setLinenum(task.getLinenum());
+		taskNew.setRownum(task.getRownum());
+		taskNew.setStartTime(task.getStartTime());
+		taskNew.setEndTime(task.getEndTime());
+		taskNew.setIsfinish("false");
+		taskNew.setIsfirstfinish(task.getIsfirstfinish());
+		taskNew.setInitStatue(task.getInitStatue());
+		taskNew.setConditions(task.getConditions());
+		taskNew.setSigns(task.getSigns());
+		taskNew.setCells(task.getCells());
+		taskNew.setRownummap(task.getRownummap());
+		taskNew.setIsBrother(1);
+		taskNew.setBroTaskId(task.getTaskid());
+		taskNew.save();
+		if (!taskIdNew.equals("")) {
+			copyCondition(task, taskIdNew, timeL);
+			copySignature(task, taskIdNew, timeL);
+			copyRows(task, taskIdNew, timeL);
+			copyCells(task, taskIdNew, timeL);
+//			copyHtml(task, task.getPostname(), taskIdNew, timeL);
+		} else {
+			Toast.makeText(getActivity(), "数据有误，请检查数据", Toast.LENGTH_LONG);
+		}
+
+	}
 	
 }

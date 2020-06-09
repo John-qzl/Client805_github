@@ -491,6 +491,8 @@ public class LoginActivity extends BaseActivity{
 				final CustomDialog dialog = new CustomDialog(context);
 				final EditText edit_ip = (EditText) dialog.getEdit_ip();		//方法在CustomDialog中实现
         		final EditText edit_port = (EditText) dialog.getEdit_port();
+				edit_ip.setText(R.string.IP);
+				edit_port.setText(R.string.port);
         		SharedPreferences sp = context.getSharedPreferences("config", MODE_PRIVATE);
         	    String ipcontent = sp.getString("ip", "").toString();
         	    String portcontent = sp.getString("port", "").toString();

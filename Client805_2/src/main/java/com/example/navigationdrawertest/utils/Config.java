@@ -20,6 +20,7 @@ public class Config{
 	public static String packagePath = "/data/com.example.navigationdrawertest";			//包路径
 //	public static String packagePath = "/activity";			//包路径
 	public static String signphotoPath = "/805/files/signphoto";			//检查表格签署照片路径
+	public static String hangsignphotoPath = "/805/files/hangsignphoto";			//行签署签署照片路径
 	public static String opphotoPath = "/805/files/opphoto";					//检查项照片路径
 	public static String refphotoPath = "/805/files/refphoto";					//示意图照片路径
 

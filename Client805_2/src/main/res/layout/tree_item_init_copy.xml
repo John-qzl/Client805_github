@@ -51,6 +51,32 @@
             android:src="@drawable/icon_delete" />
 
         <LinearLayout
+            android:id="@+id/add_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/copy_line"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/add"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/toolBarbg"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/copy_line"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

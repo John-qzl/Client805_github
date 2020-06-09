@@ -27,9 +27,18 @@ public class Signature extends DataSupport{
 	public void setTimeL(Long timeL) {
 		this.timeL = timeL;
 	}
-	
-	
-//	public Bitmap bitmaps;
+
+	private int signType; //区分签署类别   行签署 1  表单签署 0
+
+	public int getSignType() {
+		return signType;
+	}
+
+	public void setSignType(int signType) {
+		this.signType = signType;
+	}
+
+	//	public Bitmap bitmaps;
 	private String isFinish;		//是否完成
 //	public Bitmap getBitmap(){
 //		return this.bitmaps;

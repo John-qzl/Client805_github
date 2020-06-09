@@ -35,6 +35,15 @@ public class Cell extends DataSupport{
 	private String actualval; //实测值
 	private String compliance; //符合度
 	private String markup; //符合度校验标记
+	private String refphoto; //乔志理添加PAD端 示意图ID
+
+	public String getRefphoto() {
+		return refphoto;
+	}
+
+	public void setRefphoto(String refphoto) {
+		this.refphoto = refphoto;
+	}
 
 	public String getRequireval() {
 		return requireval;

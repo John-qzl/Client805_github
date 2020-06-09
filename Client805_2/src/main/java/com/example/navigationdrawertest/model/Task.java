@@ -52,7 +52,16 @@ public class Task extends DataSupport{
 	private Map<String, String> rownummap;
 	private int IsBrother;		//是否为复制的表单，1为复制
 	private String broTaskId;			//复制于哪张表的ID
-	private int isChecking;     //是否检查中状态  0 未开始    1 进行中
+	private int isChecking;     //是否检查中状态  0 未开始    1 进行中   2 回退的表单
+	private int backFlag;    //回退标识  1 回退
+
+	public int getBackFlag() {
+		return backFlag;
+	}
+
+	public void setBackFlag(int backFlag) {
+		this.backFlag = backFlag;
+	}
 
 	public int getIsChecking() {
 		return isChecking;

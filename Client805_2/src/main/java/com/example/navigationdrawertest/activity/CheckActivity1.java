@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
@@ -80,6 +79,7 @@ import com.example.navigationdrawertest.utils.BitmapUtil;
 import com.example.navigationdrawertest.utils.CommonTools;
 import com.example.navigationdrawertest.utils.Config;
 import com.example.navigationdrawertest.utils.DateUtil;
+import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.HtmlHelper;
 import com.example.navigationdrawertest.utils.ScreenUtils;
 import com.example.navigationdrawertest.write.DialogListener;
@@ -197,7 +197,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		setTitle(currentTask.getTaskname());
 		mTablename.setText(currentTask.getTaskname());
 		if(currentTask.getEndTime() != null && !currentTask.getEndTime().equals("")){
-			checkSwitch.setChecked(true);
+			if (currentTask.getBackFlag() == 1) {
+				checkSwitch.setChecked(false);
+			} else {
+				checkSwitch.setChecked(true);
+			}
 		}
 		checkSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
@@ -206,6 +210,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
                 if(isChecked) {  	//任务完成
                 	currentTask.setEndTime(DateUtil.getCurrentDate());
                 	currentTask.setLocation(2);
+					currentTask.setBackFlag(0);
                 	currentTask.save();
                 }else {					//任务没有完成
                 	currentTask.setEndTime("");
@@ -481,6 +486,12 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				}
 			}
 			for(final Cell cell : newCellList){
+				final String refphotoId = cell.getRefphoto();
+				ArrayList<String> mPhotos = new ArrayList<String>();
+				String refPath = "";
+				String absPath = Environment.getExternalStorageDirectory()
+						+ Config.refphotoPath + "/"
+						+ currentTask + "/";
 				switch(cell.getCelltype()){
 				case "LABEL":
 					android.widget.TableRow.LayoutParams para1 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
@@ -521,9 +532,9 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final Operation operation2 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id+"").find(Operation.class).get(0);
 					final String str = CommonTools.null2String(operation2.getOpvalue());
 					final EditText edittext2 = new EditText(context);
-					final ImageButton signButton = new ImageButton(context);
-					final ImageView signImage = new ImageView(context);
-					final String markup = cell.getMarkup();
+//					final ImageButton signButton = new ImageButton(context);
+//					final ImageView signImage = new ImageView(context);
+//					final String markup = cell.getMarkup();
 //					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
 //					final Signature signnature = new Signature();
 //					if (signatureList.size() > 0) {
@@ -980,7 +991,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 				case "HOOKSTRINGPHOTO":
 					android.widget.TableRow.LayoutParams para7 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					android.widget.TableRow.LayoutParams para7_1 = new android.widget.TableRow.LayoutParams(70, 70);			//checkbox
-					android.widget.TableRow.LayoutParams para7_2 = new android.widget.TableRow.LayoutParams(avewdith-151, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);			//string
+					android.widget.TableRow.LayoutParams para7_2 = new android.widget.TableRow.LayoutParams(avewdith-231, android.widget.TableRow.LayoutParams.MATCH_PARENT-30);			//string
 					android.widget.TableRow.LayoutParams para7_3 = new android.widget.TableRow.LayoutParams(80, 70);			//photo
 					android.widget.TableRow.LayoutParams para7_4 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear7 = new LinearLayout(context);
@@ -1120,6 +1131,28 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						}
 					});
 					linear7.addView(image7_1, para7_3);
+//					if (refphotoId != ""  && refphotoId != null) {
+//						final String path = Environment.getExternalStorageDirectory() + Config.refphotoPath
+//								+ File.separator
+//								+ currentTask
+//								+ File.separator;
+//						final ArrayList<String> mPhotos = FileOperation.getAlbumByPath(path, "jpg", "png");
+//						NumImageButton image7_3 = new NumImageButton(context);
+//						image7_3.setBackgroundResource(R.drawable.shiyitu);
+//						image7_3.setOnClickListener(new OnClickListener() {
+//							@Override
+//							public void onClick(View v) {
+//								if (mPhotos.size() > 0) {
+//									for (int j = 0; j < mPhotos.size(); j++) {
+//										if (mPhotos.get(j).contains(refphotoId)) {
+//
+//										}
+//									}
+//								}
+//							}
+//						});
+//						linear7.addView(image7_3, para7_5);
+//					}
 					ImageView image7_2 = new ImageView(context);
 					image7_2.setBackgroundResource(R.drawable.blacktiao);
 					linear7.addView(image7_2, para7_4);
@@ -1183,11 +1216,17 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 							}
 						}
 					});
-					final String absPath = Environment.getExternalStorageDirectory()
-							+ Config.opphotoPath + "/"
-							+ taskId8 + "/" + opId8 + ".jpg";
-		    		Bitmap bitmap = BitmapFactory.decodeFile(absPath);
+					mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+					if (mPhotos.size() > 0) {
+						for (int i1 = 0; i1 < mPhotos.size(); i1++) {
+							if (mPhotos.get(i1).contains(refphotoId)) {
+								refPath = mPhotos.get(i1);
+							}
+						}
+					}
+		    		Bitmap bitmap = BitmapFactory.decodeFile(refPath);
 					final ImageView image8 = new ImageButton(context);
+					image8.setBackgroundResource(R.drawable.shiyitu);
 					if(bitmap != null)
 
 								Glide
@@ -1200,7 +1239,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						image8.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								BitmapDialogActivity.actionStart(context, userId8, taskId8, opId8);
+								BitmapDialogActivity.actionStart(context, refphotoId, taskId8, opId8);
 						}
 					});
 					linear8.addView(image8, para8_2);
@@ -1312,16 +1351,22 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final String sketbitmap = opId9;
 					final String userId9 = OrientApplication.getApplication().loginUser.getUserid();
 		    		final String taskId9 = cell.getTaskid();
-					final String absPath9 = Environment.getExternalStorageDirectory()
-							+ Config.opphotoPath + "/"
-							+ taskId9 + "/" + sketbitmap + ".jpg";
-		    		Bitmap bitmap9 = BitmapFactory.decodeFile(absPath9);
+					mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+					if (mPhotos.size() > 0) {
+						for (int i1 = 0; i1 < mPhotos.size(); i1++) {
+							if (mPhotos.get(i1).contains(refphotoId)) {
+								refPath = mPhotos.get(i1);
+							}
+						}
+					}
+		    		Bitmap bitmap9 = BitmapFactory.decodeFile(refPath);
 					final ImageView image9 = new ImageButton(context);
+					image9.setBackgroundResource(R.drawable.shiyitu);
 					if(bitmap9 != null)
 
 								Glide
 					    	    .with(getApplicationContext())
-					    	    .load(absPath9)
+					    	    .load(absPath)
 					    	    .override(80, 80)
 					    	    .fitCenter()
 					    	    .into(image9);
@@ -1329,7 +1374,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						image9.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								BitmapDialogActivity.actionStart(context, userId9, taskId9, sketbitmap);
+								BitmapDialogActivity.actionStart(context, refphotoId, taskId9, sketbitmap);
 						}
 					});
 					linear9.addView(image9, para9_3);
@@ -1445,15 +1490,21 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    		final String taskId10 = cell.getTaskid();
 		    		final String rowNum10 = cell.getHorizontalorder();
 		    		final String cellId10 = cell.getCellid();
-					final String absPath10 = Environment.getExternalStorageDirectory()
-							+ Config.opphotoPath + "/"
-							+ taskId10 + "/" + sketbitmap10 + ".jpg";
-		    		Bitmap bitmap10 = BitmapFactory.decodeFile(absPath10);
+					mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+					if (mPhotos.size() > 0) {
+						for (int i1 = 0; i1 < mPhotos.size(); i1++) {
+							if (mPhotos.get(i1).contains(refphotoId)) {
+								refPath = mPhotos.get(i1);
+							}
+						}
+					}
+		    		Bitmap bitmap10 = BitmapFactory.decodeFile(refPath);
 					final ImageView image10 = new ImageButton(context);
+					image10.setBackgroundResource(R.drawable.shiyitu);
 					if(bitmap10 != null)
 								Glide
 					    	    .with(getApplicationContext())
-					    	    .load(absPath10)
+					    	    .load(absPath)
 					    	    .override(80, 80)
 					    	    .fitCenter()
 					    	    .into(image10);
@@ -1461,7 +1512,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						image10.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								BitmapDialogActivity.actionStart(context, userId10, taskId10, sketbitmap10);
+								BitmapDialogActivity.actionStart(context, refphotoId, taskId10, sketbitmap10);
 						}
 					});
 					linear10.addView(image10, para10_3);
@@ -1565,17 +1616,22 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					final String userId11 = OrientApplication.getApplication().loginUser.getUserid();
 		    		final String taskId11 = cell.getTaskid();
 		    		final String opId11 = operation11.getSketchmap();
-					final String absPath11 = Environment.getExternalStorageDirectory()
-							+ Config.opphotoPath + "/"
-							+ taskId11 + "/" + opId11 + ".jpg";
-		    		Bitmap bitmap11 = BitmapFactory.decodeFile(absPath11);
-
+					mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+					if (mPhotos.size() > 0) {
+						for (int i1 = 0; i1 < mPhotos.size(); i1++) {
+							if (mPhotos.get(i1).contains(refphotoId)) {
+								refPath = mPhotos.get(i1);
+							}
+						}
+					}
+		    		Bitmap bitmap11 = BitmapFactory.decodeFile(refPath);
 					final ImageView image11 = new ImageButton(context);
+					image11.setBackgroundResource(R.drawable.shiyitu);
 					if(bitmap11 != null)
 
 								Glide
 					    	    .with(context)
-					    	    .load(absPath11)
+					    	    .load(absPath)
 					    	    .override(80, 80)
 					    	    .fitCenter()
 					    	    .into(image11);
@@ -1583,7 +1639,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						image11.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								BitmapDialogActivity.actionStart(context, userId11, taskId11, opId11);
+								BitmapDialogActivity.actionStart(context, refphotoId, taskId11, opId11);
 						}
 					});
 					linear11.addView(image11, para11_2);
@@ -1645,16 +1701,22 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    		final String taskId12 = cell.getTaskid();
 		    		final String rowNum12 = cell.getHorizontalorder();
 		    		final String cellId12 = cell.getCellid();
-					final String absPath12 = Environment.getExternalStorageDirectory()
-							+ Config.opphotoPath + "/"
-							+ taskId12 + "/" + sketbitmap12 + ".jpg";
-		    		Bitmap bitmap12 = BitmapFactory.decodeFile(absPath12);
+					mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+					if (mPhotos.size() > 0) {
+						for (int i1 = 0; i1 < mPhotos.size(); i1++) {
+							if (mPhotos.get(i1).contains(refphotoId)) {
+								refPath = mPhotos.get(i1);
+							}
+						}
+					}
+		    		Bitmap bitmap12 = BitmapFactory.decodeFile(refPath);
 					final ImageView image12 = new ImageButton(context);
+					image12.setBackgroundResource(R.drawable.shiyitu);
 					if(bitmap12 != null)
 
 								Glide
 					    	    .with(context)
-					    	    .load(absPath12)
+					    	    .load(absPath)
 					    	    .override(80, 80)
 					    	    .fitCenter()
 					    	    .into(image12);
@@ -1662,7 +1724,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						image12.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								BitmapDialogActivity.actionStart(context, userId12, taskId12, sketbitmap12);
+								BitmapDialogActivity.actionStart(context, refphotoId, taskId12, sketbitmap12);
 						}
 					});
 					linear12.addView(image12, para12_2);
@@ -1759,16 +1821,22 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		    		final String taskId13 = cell.getTaskid();
 		    		final String rowNum13 = cell.getHorizontalorder();
 		    		final String cellId13 = cell.getCellid();
-					final String absPath13 = Environment.getExternalStorageDirectory()
-							+ Config.opphotoPath + "/"
-							+ taskId13 + "/" + sketbitmap13 + ".jpg";
-		    		Bitmap bitmap13 = BitmapFactory.decodeFile(absPath13);
+					mPhotos = FileOperation.getAlbumByPath(absPath, "jpg", "png");
+					if (mPhotos.size() > 0) {
+						for (int i1 = 0; i1 < mPhotos.size(); i1++) {
+							if (mPhotos.get(i1).contains(refphotoId)) {
+								refPath = mPhotos.get(i1);
+							}
+						}
+					}
+		    		Bitmap bitmap13 = BitmapFactory.decodeFile(refPath);
 					final ImageView image13 = new ImageButton(context);
+					image13.setBackgroundResource(R.drawable.shiyitu);
 					if(bitmap13 != null)
 
 								Glide
 					    	    .with(context)
-					    	    .load(absPath13)
+					    	    .load(absPath)
 					    	    .override(80, 80)
 					    	    .fitCenter()
 					    	    .into(image13);
@@ -1776,7 +1844,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 						image13.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								BitmapDialogActivity.actionStart(context, userId13, taskId13, sketbitmap13);
+								BitmapDialogActivity.actionStart(context, refphotoId, taskId13, sketbitmap13);
 						}
 					});
 					linear13.addView(image13, para13_2);
@@ -1810,6 +1878,72 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					image13_2.setBackgroundResource(R.drawable.blacktiao);
 					linear13.addView(image13_2, para13_4);
 					tablerow.addView(linear13, para13);
+					break;
+				case "SIGN":
+					android.widget.TableRow.LayoutParams para14 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para14_1 = new android.widget.TableRow.LayoutParams(avewdith - 1, android.widget.TableRow.LayoutParams.MATCH_PARENT - 30);
+					android.widget.TableRow.LayoutParams para14_2 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					android.widget.TableRow.LayoutParams para14_3 = new android.widget.TableRow.LayoutParams(80, 70);
+					android.widget.TableRow.LayoutParams para14_4 = new android.widget.TableRow.LayoutParams(avewdith - 81, android.widget.TableRow.LayoutParams.MATCH_PARENT);
+					LinearLayout linear14 = new LinearLayout(context);
+					para14_3.gravity = Gravity.CENTER_VERTICAL;
+					linear14.setOrientation(LinearLayout.HORIZONTAL);
+					linear14.setLayoutParams(para14);
+					final Operation operation14 = DataSupport.where("cellid=? and taskid=?", cell.getCellid(), task_id + "").find(Operation.class).get(0);
+					final String str14 = CommonTools.null2String(operation14.getOpvalue());
+					final ImageButton signButton = new ImageButton(context);
+					final ImageView signImage = new ImageView(context);
+					final String markup = cell.getMarkup();
+					final List<Signature> signatureList = DataSupport.where("signid=?", cell.getCellid()).find(Signature.class);
+					final Signature signnature = new Signature();
+					if (signatureList.size() > 0) {
+//						signnature = signatureList.get(0);
+						String _path = CommonTools.null2String(signatureList.get(0).getBitmappath());
+						Bitmap SignBitmap = BitmapUtil.getLoacalBitmap(_path);
+						if (SignBitmap != null) {
+							signImage.setImageBitmap(SignBitmap);
+						}
+					}
+//					signImage.setBackgroundResource(R.color.sign_bg);
+					signButton.setBackgroundResource(R.drawable.hangqianshu);
+					signButton.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(final View v) {
+							WritePadDialog writeTabletDialog = new WritePadDialog(context, new DialogListener() {
+								@Override
+								public void refreshActivity(Object object,
+															Signature sign) {
+
+									mSignBitmap = (Bitmap) object;
+									signPath = createFile(String.valueOf(cell.getCellid()), String.valueOf(task_id));
+									Bitmap bmp = getBitmapByOpt(signPath);
+									if (bmp != null) {
+										String time = DateUtil.getCurrentDate();
+										sign.setIsFinish("is");
+										sign.setBitmappath(signPath);
+										sign.setTaskid(String.valueOf(task_id));
+										sign.setSignTime(time);
+										sign.setSignid(cell.getCellid());
+										sign.setId(Integer.parseInt(cell.getCellid().substring(8, 14)));
+										sign.setSignType(1);
+										sign.save();
+//										setLocation(sign);
+										signImage.setImageBitmap(bmp);
+									}
+									v.setEnabled(false);
+								}
+							}, signnature);
+							writeTabletDialog.show();
+						}
+					});
+					if (!markup.equals("") && markup.equals("sign")) {
+						linear14.addView(signImage, para14_4);
+						linear14.addView(signButton, para14_3);
+					}
+					ImageView image14 = new ImageView(context);
+					image14.setBackgroundResource(R.drawable.blacktiao);
+					linear14.addView(image14, para14_2);
+					tablerow.addView(linear14, para14);
 					break;
 				default:
 
@@ -2236,6 +2370,17 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		if (requirevalCellList.size() > 0) {
 			prefixCode = requirevalCellList.get(0).getTextvalue();
 		}
+
+		//实测值中是否为纯数字
+		String pattern4 = "^^(0|[1-9]\\d*)$|^(0|[1-9]\\d*)\\.(\\d+)$";
+		Pattern r4 = Pattern.compile(pattern4);
+		Matcher m4 = r4.matcher(actualvalNum);
+		System.out.println(m4.matches());
+		if (!m4.matches()){
+//			Toast.makeText(context, "实测值" + actualvalNum + "非纯数字，无法判读！", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
 		//要求值中有无≥/≤/＞/＜等的情况
 		String pattern = "^(\\≥|\\＞|\\≤|\\＜)(\\-|\\+)?([\\d]+)(\\.[\\d]+)?$";
 		Pattern r = Pattern.compile(pattern);
@@ -2262,6 +2407,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 		//包含≥/≤/＞/＜等的情况
 		if (m.matches()) {
+			if (!m4.matches()){
+				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+				judgeResult(false, complianceCellList.get(0), operation2);
+				return;
+			}
 			//要求值
 			String requirevalNum = prefixCode.substring(1, prefixCode.length());
 			String symbol = prefixCode.substring(0,1);
@@ -2298,6 +2448,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		}
 		//5(+1, -1)、 5[+1, 0]；
 		else if (m2.matches()) {
+			if (!m4.matches()){
+				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+				judgeResult(false, complianceCellList.get(0), operation2);
+				return;
+			}
 			if (!actualvalNum.equals("") && !prefixCode.equals("")) {
 				String leftS = prefixCode.indexOf("(") >= 0 ? "1" : "0";// 判断有没有左小括号
 				String rightS = prefixCode.indexOf(")") >= 0 ? "1" : "0";// 判断有没有右小括号
@@ -2365,6 +2520,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		}
 		//0~2
 		else if (prefixCode.contains("~")) {
+			if (!m4.matches()){
+				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+				judgeResult(false, complianceCellList.get(0), operation2);
+				return;
+			}
 			if (!actualvalNum.equals("") && !prefixCode.equals("")) {
 				String min = prefixCode.substring(0,prefixCode.indexOf("~"));
 				String max = prefixCode.substring(prefixCode.indexOf("~")+1,prefixCode.length());
@@ -2379,6 +2539,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		}
 		//5±0.2
 		else if (prefixCode.contains("±")) {
+			if (!m4.matches()){
+				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+				judgeResult(false, complianceCellList.get(0), operation2);
+				return;
+			}
 			if (!actualvalNum.equals("") && !prefixCode.equals("")) {
 				String mid = prefixCode.substring(0,prefixCode.indexOf("±"));
 				String mm = prefixCode.substring(prefixCode.indexOf("±")+1,prefixCode.length());
@@ -2396,6 +2561,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		//上下偏差情况
 		else {
 			if (m3.matches()) {
+				if (!m4.matches()){
+					Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+					judgeResult(false, complianceCellList.get(0), operation2);
+					return;
+				}
 				//要求值
 				String require = requirevalCellList.get(0).getTextvalue();
 				if (!actualvalNum.equals("") && !require.equals("")) {
@@ -2418,11 +2588,11 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 
 	private void judgeResult(boolean judge, Cell cell, Operation operation) {
 		if (judge) {
-			cell.setOpvalue("符合");
-			operation.setOpvalue("符合");
+			cell.setOpvalue(Config.fuhe);
+			operation.setOpvalue(Config.fuhe);
 		} else {
-			cell.setOpvalue("不符合");
-			operation.setOpvalue("不符合");
+			cell.setOpvalue(Config.bufuhe);
+			operation.setOpvalue(Config.bufuhe);
 		}
 		cell.update(cell.getId());
 		operation.update(operation.getId());
@@ -2493,9 +2663,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		ByteArrayOutputStream baos = null;
 		String _path = null;
 		try {
-			String signphotoPath = Environment.getDataDirectory().getPath()
-					+ Config.packagePath + Config.signphotoPath + "/" + taskId
-					+ "/";
+			String signphotoPath = Environment.getExternalStorageDirectory()+ Config.hangsignphotoPath + "/" + taskId + "/" ;
 			_path = signphotoPath + cellId + ".jpg";
 			File path = new File(signphotoPath);
 			if (!path.exists()) {// 目录存在返回false

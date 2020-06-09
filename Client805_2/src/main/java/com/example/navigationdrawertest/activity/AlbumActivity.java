@@ -396,7 +396,7 @@ public class AlbumActivity extends FragmentActivity {
     public void selectItem(final int position) {
         Fragment fragment = null;
         OrientApplication.getApplication().setCommander(false);
-        fragment = new AlbumFragment(path, videoInfos);
+        fragment = new AlbumFragment(path, videoInfos,mCheck);
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();

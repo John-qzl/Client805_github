@@ -52,9 +52,11 @@ public class FragmentPhoto extends Fragment {
     private ProgressDialog prodlg;
     private LinearLayout mNoPhoto;
     private String path;
+    private String checkType;
 
-    public FragmentPhoto(String path){
+    public FragmentPhoto(String path, String checkType){
         this.path = path;
+        this.checkType = checkType;
     }
 
     private Handler mHandler = new Handler() {
@@ -114,43 +116,45 @@ public class FragmentPhoto extends Fragment {
                 startActivity(intent);
             }
         });
-        adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
-                new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("确定删除?")
-                        .setContentText("是否确定删除本张照片？")
-                        .setCancelText("否")
-                        .setConfirmText("是，删除！")
-                        .showCancelButton(true)
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.dismiss();
-                            }
-                        })
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                prodlg = ProgressDialog.show(context, "删除", "正在删除照片");
-                                prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        FileOperation.deleteFile(mPhotos.get(position));
-                                        mPhotos.remove(position);
-                                        Message message = new Message();
-                                        message.what = 1;
-                                        mHandler.sendMessage(message);
-                                    }
-                                }).start();
-                                sDialog.dismiss();
-                            }
-                        })
-                        .show();
-                return true;
-            }
-        });
+        if (checkType.equals("checkType")) {
+            adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("确定删除?")
+                            .setContentText("是否确定删除本张照片？")
+                            .setCancelText("否")
+                            .setConfirmText("是，删除！")
+                            .showCancelButton(true)
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    prodlg = ProgressDialog.show(context, "删除", "正在删除照片");
+                                    prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            FileOperation.deleteFile(mPhotos.get(position));
+                                            mPhotos.remove(position);
+                                            Message message = new Message();
+                                            message.what = 1;
+                                            mHandler.sendMessage(message);
+                                        }
+                                    }).start();
+                                    sDialog.dismiss();
+                                }
+                            })
+                            .show();
+                    return true;
+                }
+            });
+        }
     }
 
     /**
