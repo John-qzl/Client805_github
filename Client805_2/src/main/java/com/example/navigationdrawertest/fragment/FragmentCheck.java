@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.nodes.Document;
@@ -880,8 +882,8 @@ public class FragmentCheck extends Fragment {
 	 */
 	public void warnAddInfo(final List<Task> taskList) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-		dialog.setIcon(R.drawable.logo_title).setTitle("新增通用表单");
-		dialog.setMessage("是否要添加通用的表单模板？");
+		dialog.setIcon(R.drawable.logo_title).setTitle("是否添加PAD通用表单？");
+		dialog.setMessage("说明：PAD通用表单为固定格式，3行5列，表单格式不可修改，可用于采集临时数据。");
 		dialog.setCancelable(false);
 		dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
 			@Override
@@ -902,10 +904,12 @@ public class FragmentCheck extends Fragment {
 	public void addNormalTask(final Task task) {
 		LayoutInflater factory = LayoutInflater.from(getActivity());//提示框
 		final View view = factory.inflate(R.layout.editbox_layout, null);//这里必须是final的
-		final EditText edit=(EditText)view.findViewById(R.id.editText);//获得输入框对象
+		final EditText et_tablename = (EditText) view.findViewById(R.id.editText);//获得输入框对象
+//		final EditText et_hangNum = (EditText) view.findViewById(R.id.et_hangNum);//获得输入框对象
+//		final EditText dt_lieNum = (EditText) view.findViewById(R.id.dt_lieNum);//获得输入框对象
 		final String[] taskName = {""};
 		new AlertDialog.Builder(getActivity())
-				.setTitle("请输入表单名称！")//提示框标题
+				.setTitle("请输入表单名称")//提示框标题
 				.setView(view)
 				.setPositiveButton("确定",//提示框的两个按钮
 						new android.content.DialogInterface.OnClickListener() {
@@ -913,14 +917,48 @@ public class FragmentCheck extends Fragment {
 							public void onClick(DialogInterface dialog,
 												int which) {
 								Message message = new Message();
+								SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+								Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+								String timeString = formatter.format(curDate);
+								et_tablename.setText("PAD通用表单" + timeString);
+								String tableName = String.valueOf(et_tablename.getText());
+//								String hangNum = String.valueOf(et_hangNum.getText());
+//								String lieNum = String.valueOf(dt_lieNum.getText());
+								if (tableName.equals("")) {
+									Toast.makeText(getActivity(), "填写信息不能为空", Toast.LENGTH_LONG);
+									return;
+								}
+//								if (isNumber(hangNum) && isNumber(lieNum)) {
+//
+//								}
 								prodlg = ProgressDialog.show(context, "警告", "正在新增，请稍侯...");
-								taskName[0] = String.valueOf(edit.getText());
+								taskName[0] = String.valueOf(et_tablename.getText());
 								addTask(taskName[0], task);
 								message.what = 1;
 								mHandler.sendMessage(message);
 							}
 						})
 				.setNegativeButton("取消", null).create().show();
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 判读String是否为纯数字
+	 * @author qiaozhili
+	 * @date 2020/6/9 17:53
+	 */
+	public boolean isNumber(String str) {
+		String pattern4 = "^^(0|[1-9]\\d*)$|^(0|[1-9]\\d*)\\.(\\d+)$";
+		Pattern r4 = Pattern.compile(pattern4);
+		Matcher m4 = r4.matcher(str);
+		System.out.println(m4.matches());
+		if (m4.matches()) {
+//			Toast.makeText(context, "实测值" + actualvalNum + "非纯数字，无法判读！", Toast.LENGTH_SHORT).show();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -938,7 +976,7 @@ public class FragmentCheck extends Fragment {
 		long timeL = 0;
 		String taskIdNew = "";
 		String currentSecond = getTime(timeString);
-		String normalTaskId = "10000123456789";
+		String normalTaskId = Config.normalTaskId;
 		long taskIdL = Long.parseLong(normalTaskId);
 		if (task.getTaskid().length() > currentSecond.length()) {
 			int size = task.getTaskid().length() - currentSecond.length();

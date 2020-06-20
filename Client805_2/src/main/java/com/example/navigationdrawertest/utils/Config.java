@@ -36,6 +36,17 @@ public class Config{
 	public static String mmcPath = "/mmccopy";					//操作项拍照文件夹
 	public static String rootPath = "/805/files";					//操作项拍照文件夹
 	public static String apkPath = "/805/files/apk";					//操作项拍照文件夹
+	public static String normalTaskId = "10000123456789";//通用TaskID
+	public static String HTMLHEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"<html>\n" +
+			"\t<table width=\"100%\" class=\"layui-table\">\n" +
+			"\t\t<tbody>";//HTML头信息
+	public static String HTMLTR = "10000123456789";//HTML行信息tr
+	public static String firstRow = "class=\"firstRow\" style=\"background:rgb(160,182,204)\"";//HTML行信息tr
+	public static String HTMLTD= "10000123456789";//HTML单元格td信息
+	public static String HTMLEND = "</tbody>\n" +
+			"\t</table>\n" +
+			"</html>";//HTML尾信息
 
 	public String getIpAndPort(Context context)
 	{

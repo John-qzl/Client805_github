@@ -311,8 +311,8 @@ public class SyncWorkThread extends Thread {
 //					+ File.separator + "mmc" + File.separator + mmc.getMmc_Id()
 //					+ "." + mmc.getType();
 			String filePath = Setting.FILE_SECRET_START;
-			String path = Setting.FILE_SECRET_START + File.separator + mmc.getMmc_Name()
-					+ "." + mmc.getType();
+			String path = Setting.FILE_SECRET_START + File.separator + mmc.getMmc_Name();
+//					+ "." + mmc.getType();
 //			String secret_end = Setting.FILE_SECRET_END + File.separator + mmc.getMmc_Id()
 //					+ "." + mmc.getType();
 			Header header = response.getAllHeaders()[1];
@@ -325,9 +325,9 @@ public class SyncWorkThread extends Thread {
 			}
 			HttpEntity entity = response.getEntity();
 			if(entity != null){
-//				InputStream is = entity.getContent();
-				ByteArrayInputStream is = new ByteArrayInputStream(
-						EntityUtils.toByteArray(response.getEntity()));
+				InputStream is = entity.getContent();
+//				byte[] byteData = EntityUtils.toByteArray(entity);
+//				ByteArrayInputStream is = new ByteArrayInputStream(byteData);
 				File file = new File(path);// 新建一个file文件
 				FileOutputStream fos = new FileOutputStream(file); // 对应文件建立输出流
 				byte[] buffer = new byte[8*1024]; // 新建缓存 用来存储 从网络读取数据 再写入文件
@@ -344,13 +344,9 @@ public class SyncWorkThread extends Thread {
 				}
 				fos.flush();// 将缓存中的写入file
 				fos.close();
-				
 				//解密文件过程
 //				FileEncryption.decrypt(path, secret_end);
-				
 			}
-			
-			
 //			ByteArrayInputStream is = new ByteArrayInputStream(
 //					EntityUtils.toByteArray(response.getEntity()));
 //

@@ -55,7 +55,6 @@
                     android:background="@drawable/edit_background"
                     android:hint="请输入用户名"
                     android:textColorHint="@color/hint"
-                    android:layout_marginStart="30dp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/size12"/>
 
