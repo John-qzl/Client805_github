@@ -61,9 +61,7 @@ public class ConverXML {
 		    Element conditionsElement = doc.createElement(Scene.TAG_Conditions);		//Condition标签
 		    taskElement.appendChild(conditionsElement);
 			//确定签署项要素：人员--表格
-//			List<Signature> signList = DataSupport.where("userid = ? and taskid = ?", 
-//					task.getUserid(), task.getTaskid()).find(Signature.class);
-			List<Scene> conditionList = DataSupport.where("mTTId = ? and taskid = ?", 
+			List<Scene> conditionList = DataSupport.where("mTTId = ? and taskid = ?",
 					task.getPostinstanceid(), task.getTaskid()).find(Scene.class);
 			for(int i=0; i<conditionList.size(); i++){
 				Scene condition = conditionList.get(i);
@@ -76,9 +74,7 @@ public class ConverXML {
 			Element signsElement = doc.createElement(Signature.TAG_Signs);		//Signs标签
 			taskElement.appendChild(signsElement);
 			//确定签署项要素：人员--表格
-//			List<Signature> signList = DataSupport.where("userid = ? and taskid = ?", 
-//					task.getUserid(), task.getTaskid()).find(Signature.class);
-			List<Signature> signList = DataSupport.where("mTTId = ? and taskid = ?", 
+			List<Signature> signList = DataSupport.where("mTTId = ? and taskid = ?",
 					task.getPostinstanceid(), task.getTaskid()).find(Signature.class);
 			for(int i=0; i<signList.size(); i++){
 				Signature sign = signList.get(i);
@@ -108,9 +104,7 @@ public class ConverXML {
 				row.setRowElement(rowElement, row);
 				rowsElement.appendChild(rowElement);
 				//确定一行Cell集合的要素:人员--表格--行号
-//				List<Cell> cellLists = DataSupport.where("userid = ? and taskid = ? and horizontalorder = ?", 
-//						task.getUserid(), task.getTaskid(), row.getRowId()).find(Cell.class);
-				List<Cell> cellLists = DataSupport.where("mTTID = ? and taskid = ? and horizontalorder = ?", 
+				List<Cell> cellLists = DataSupport.where("mTTID = ? and taskid = ? and horizontalorder = ?",
 						task.getPostinstanceid(), task.getTaskid(), row.getRowId()).find(Cell.class);
 				for(int j=0; j<cellLists.size(); j++){
 					Cell cell = cellLists.get(j);
@@ -118,9 +112,7 @@ public class ConverXML {
 					cell.setCellElement(cellElement, cell);
 					rowElement.appendChild(cellElement);
 					//确定一个Cell下所有Operation的要素：人员--表格--CellId
-//					List<Operation> opLists = DataSupport.where("userid=? and taskid = ? and cellid = ?", 
-//							task.getUserid(), task.getTaskid(), cell.getCellid()).find(Operation.class);
-					List<Operation> opLists = DataSupport.where("mTTID=? and taskid = ? and cellid = ?", 
+					List<Operation> opLists = DataSupport.where("mTTID=? and taskid = ? and cellid = ?",
 							task.getPostinstanceid(), task.getTaskid(), cell.getCellid()).find(Operation.class);
 					for(int m=0; m<opLists.size(); m++){
 						 Operation operator = opLists.get(m);
@@ -130,7 +122,7 @@ public class ConverXML {
 					}
 				}
 			}
-			
+
 		    DOMSource source = new DOMSource(doc);
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             OutputStreamWriter write = new OutputStreamWriter(outStream);

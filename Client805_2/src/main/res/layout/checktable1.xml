@@ -283,22 +283,53 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="@dimen/size12"
-                            android:textColor="@color/hint"
-                            android:text="照片数量："/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/check_total_photoNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:textSize="20dp"
-                            android:textColor="@color/black1"
-                            android:text="0"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="@dimen/size12"
+                                android:textColor="@color/hint"
+                                android:text="照片数量："/>
+
+                            <TextView
+                                android:id="@+id/check_total_photoNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:textSize="20dp"
+                                android:textColor="@color/black1"
+                                android:text="0"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="@dimen/size12"
+                                android:textColor="@color/hint"
+                                android:text="短视频数量："/>
+
+                            <TextView
+                                android:id="@+id/check_total_videoNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:textSize="20dp"
+                                android:textColor="@color/black1"
+                                android:text="0"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

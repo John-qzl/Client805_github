@@ -110,16 +110,18 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 	private SignAdapter1 signadapter = null;
 
 	private int picturenumbers = 0;
+	private int totalPhNumber = 0;
+	public static int videonumbers = 0;
+	public static int totalVideoNum = 0;
 	private ImageView mClose;
 	private LinearLayout mBack;
-	private TextView mTablename, mTotalPhNum;
 
+	private TextView mTablename, mTotalPhNum, mTotalVideoNum;
 	private LinearLayout mLinSign;
 	private RelativeLayout mBottom;
 	private Button mProview, mNext;
 	private int rowsnum;
 	private int pagetype;
-	private int totalPhNumber = 0;
 
 	private Bitmap mSignBitmap;
 	private String signPath;
@@ -172,6 +174,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 		titleHorScr.setScrollView(myScrollView);
 		myScrollView.setScrollView(titleHorScr);
 		mTotalPhNum.setText("" + String.valueOf(totalPhNumber));
+		mTotalVideoNum.setText("" + String.valueOf(totalVideoNum));
 	}
 	
 	private void initUI(){
@@ -182,6 +185,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 		mLinSign = (LinearLayout) findViewById(R.id.lin_signname);
 		mTablename = (TextView) findViewById(R.id.table_name);
 		mTotalPhNum = (TextView) findViewById(R.id.tv_totalPhNum);
+		mTotalVideoNum = (TextView) findViewById(R.id.total_videoNum);
 		mClose = (ImageView) findViewById(R.id.sign_close);
 		mClose.setOnClickListener(new OnClickListener() {
 			@Override
@@ -569,11 +573,14 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 									+ CommonTools.null2String(operation4.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+							getVideos(path1);
 						}
 					}
-					image4_1.setNum(picturenumbers);
+					image4_1.setNum(picturenumbers + videonumbers);
 					totalPhNumber = totalPhNumber + picturenumbers;
+					totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+					videonumbers = 0;
 
 					image4_1.setBackgroundResource(R.drawable.takephoto);
 					final String userId4 = OrientApplication.getApplication().loginUser.getUserid();
@@ -632,11 +639,14 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 									+ CommonTools.null2String(operation5.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+							getVideos(path1);
 						}
 					}
-					image5.setNum(picturenumbers);
+					image5.setNum(picturenumbers + videonumbers);
 					totalPhNumber = totalPhNumber + picturenumbers;
+					totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+					videonumbers = 0;
 
 					image5.setBackgroundResource(R.drawable.takephoto);
 					image5.setOnClickListener(new OnClickListener() {
@@ -892,11 +902,14 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 									+ CommonTools.null2String(operation.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+							getVideos(path1);
 						}
 					}
-					image7_1.setNum(picturenumbers);
+					image7_1.setNum(picturenumbers + videonumbers);
 					totalPhNumber = totalPhNumber + picturenumbers;
+					totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+					videonumbers = 0;
 
 					image7_1.setBackgroundResource(R.drawable.takephoto);
 					image7_1.setOnClickListener(new OnClickListener() {
@@ -1287,11 +1300,14 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 									+ CommonTools.null2String(operation.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+							getVideos(path1);
 						}
 					}
-					image10_1.setNum(picturenumbers);
+					image10_1.setNum(picturenumbers + videonumbers);
 					totalPhNumber = totalPhNumber + picturenumbers;
+					totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+					videonumbers = 0;
 					image10_1.setBackgroundResource(R.drawable.takephoto);
 					image10_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -1323,7 +1339,7 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					break;
 				case "STRINGBITMAP":
 					android.widget.TableRow.LayoutParams para11 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para11_1 = new android.widget.TableRow.LayoutParams(avewdith-81, 60);			//checkbox
+					android.widget.TableRow.LayoutParams para11_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);			//checkbox
 					android.widget.TableRow.LayoutParams para11_2 = new android.widget.TableRow.LayoutParams(80, 80);				//bitmap
 					android.widget.TableRow.LayoutParams para11_3 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear11 = new LinearLayout(context);
@@ -1490,11 +1506,14 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 									+ CommonTools.null2String(operation12_2.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+							getVideos(path1);
 						}
 					}
-					image12_1.setNum(picturenumbers);
+					image12_1.setNum(picturenumbers + videonumbers);
 					totalPhNumber = totalPhNumber + picturenumbers;
+					totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+					videonumbers = 0;
 					image12_1.setBackgroundResource(R.drawable.takephoto);
 					image12_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -1608,11 +1627,14 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 									+ CommonTools.null2String(operation13_1.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+							getVideos(path1);
 						}
 					}
-					image13_1.setNum(picturenumbers);
+					image13_1.setNum(picturenumbers + videonumbers);
 					totalPhNumber = totalPhNumber + picturenumbers;
+					totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+					videonumbers = 0;
 					image13_1.setBackgroundResource(R.drawable.takephoto);
 					image13_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -1798,10 +1820,28 @@ public class SignActivity1 extends BaseActivity implements ObservableScrollView.
 					String dirPath = files[j].toString().toLowerCase();
 					System.out.println(dirPath);
 					getPictures(dirPath + "/");
-				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")
-						|| name.endsWith(".mp4") || name.endsWith(".3gp") || name.contains(".avi") || name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP")) {
+				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")) {
 					System.out.println("FileName===" + files[j].getName());
 					picturenumbers++;
+				}
+			}
+		}
+	}
+
+	public void getVideos(String string) {
+		// TODO Auto-generated method stub
+		File file = new File(string);
+		File[] files = file.listFiles();
+		if (files != null) {
+			for (int j = 0; j < files.length; j++) {
+				String name = files[j].getName();
+				if (files[j].isDirectory()) {
+					String dirPath = files[j].toString().toLowerCase();
+					System.out.println(dirPath);
+					getVideos(dirPath + "/");
+				} else if (files[j].isFile() & name.endsWith(".mp4") || name.endsWith(".3gp") || name.contains(".avi") || name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP")) {
+					System.out.println("FileName===" + files[j].getName());
+					videonumbers++;
 				}
 			}
 		}

@@ -1,5 +1,7 @@
 package com.example.navigationdrawertest.fragment;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +13,10 @@ import java.util.regex.Pattern;
 import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.nodes.Document;
 import org.litepal.crud.DataSupport;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,11 +25,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,6 +52,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.navigationdrawertest.CustomUI.CellTypeEnum1;
 import com.example.navigationdrawertest.MainActivity;
 import com.example.navigationdrawertest.R;
 import com.example.navigationdrawertest.SweetAlert.SweetAlertDialog;
@@ -74,6 +84,9 @@ import com.example.navigationdrawertest.utils.Config;
 import com.example.navigationdrawertest.utils.FileOperation;
 import com.example.navigationdrawertest.utils.HtmlHelper;
 import com.example.navigationdrawertest.utils.NodeButtonEnum;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
 
 import de.greenrobot.event.EventBus;
 
@@ -883,7 +896,7 @@ public class FragmentCheck extends Fragment {
 	public void warnAddInfo(final List<Task> taskList) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
 		dialog.setIcon(R.drawable.logo_title).setTitle("是否添加PAD通用表单？");
-		dialog.setMessage("说明：PAD通用表单为固定格式，3行5列，表单格式不可修改，可用于采集临时数据。");
+		dialog.setMessage("说明：PAD通用表单为固定格式，4行5列，表单格式不可修改，可用于采集临时数据。");
 		dialog.setCancelable(false);
 		dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
 			@Override
@@ -903,13 +916,26 @@ public class FragmentCheck extends Fragment {
 
 	public void addNormalTask(final Task task) {
 		LayoutInflater factory = LayoutInflater.from(getActivity());//提示框
-		final View view = factory.inflate(R.layout.editbox_layout, null);//这里必须是final的
-		final EditText et_tablename = (EditText) view.findViewById(R.id.editText);//获得输入框对象
-//		final EditText et_hangNum = (EditText) view.findViewById(R.id.et_hangNum);//获得输入框对象
-//		final EditText dt_lieNum = (EditText) view.findViewById(R.id.dt_lieNum);//获得输入框对象
+		final View view = factory.inflate(R.layout.normaltabletitle, null);//这里必须是final的
+		final EditText et_tablename = (EditText) view.findViewById(R.id.et_tablename);
+		final EditText et_linename1 = (EditText) view.findViewById(R.id.et_linename1);
+		final EditText et_linename2 = (EditText) view.findViewById(R.id.et_linename2);
+		final EditText et_linename3 = (EditText) view.findViewById(R.id.et_linename3);
+		final EditText et_linename4 = (EditText) view.findViewById(R.id.et_linename4);
+		final EditText et_linename5 = (EditText) view.findViewById(R.id.et_linename5);
+		et_linename1.setHint("列1");
+		et_linename2.setHint("列2");
+		et_linename3.setHint("列3");
+		et_linename4.setHint("列4");
+		et_linename5.setHint("列5");
 		final String[] taskName = {""};
+		final String[] titleName = {"", "", "", "", ""};
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+		String timeString = formatter.format(curDate);
+		et_tablename.setText("PAD通用表单" + timeString);
 		new AlertDialog.Builder(getActivity())
-				.setTitle("请输入表单名称")//提示框标题
+				.setTitle("请输入表名及表头名称")//提示框标题
 				.setView(view)
 				.setPositiveButton("确定",//提示框的两个按钮
 						new android.content.DialogInterface.OnClickListener() {
@@ -917,25 +943,36 @@ public class FragmentCheck extends Fragment {
 							public void onClick(DialogInterface dialog,
 												int which) {
 								Message message = new Message();
-								SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-								Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-								String timeString = formatter.format(curDate);
-								et_tablename.setText("PAD通用表单" + timeString);
 								String tableName = String.valueOf(et_tablename.getText());
-//								String hangNum = String.valueOf(et_hangNum.getText());
-//								String lieNum = String.valueOf(dt_lieNum.getText());
+								String linename1 = String.valueOf(et_linename1.getText());
+								String linename2 = String.valueOf(et_linename2.getText());
+								String linename3 = String.valueOf(et_linename3.getText());
+								String linename4 = String.valueOf(et_linename4.getText());
+								String linename5 = String.valueOf(et_linename5.getText());
+								if (linename1.equals("")) {linename1 = String.valueOf(et_linename1.getHint());}
+								if (linename2.equals("")) {linename2 = String.valueOf(et_linename2.getHint());}
+								if (linename3.equals("")) {linename3 = String.valueOf(et_linename3.getHint());}
+								if (linename4.equals("")) {linename4 = String.valueOf(et_linename4.getHint());}
+								if (linename5.equals("")) {linename5 = String.valueOf(et_linename5.getHint());}
 								if (tableName.equals("")) {
-									Toast.makeText(getActivity(), "填写信息不能为空", Toast.LENGTH_LONG);
+									Toast.makeText(getActivity(), "表名不能为空", Toast.LENGTH_LONG);
 									return;
 								}
-//								if (isNumber(hangNum) && isNumber(lieNum)) {
-//
-//								}
-								prodlg = ProgressDialog.show(context, "警告", "正在新增，请稍侯...");
-								taskName[0] = String.valueOf(et_tablename.getText());
-								addTask(taskName[0], task);
-								message.what = 1;
-								mHandler.sendMessage(message);
+								if (!linename1.equals("") && !linename2.equals("") && !linename3.equals("") && !linename4.equals("") && !linename5.equals("")) {
+									titleName[0] = linename1;
+									titleName[1] = linename2;
+									titleName[2] = linename3;
+									titleName[3] = linename4;
+									titleName[4] = linename5;
+									prodlg = ProgressDialog.show(context, "提示", "正在添加，请稍侯...");
+									taskName[0] = String.valueOf(et_tablename.getText());
+									addTask(taskName[0], task, titleName);
+									message.what = 1;
+									mHandler.sendMessage(message);
+								} else {
+									Toast.makeText(getActivity(), "表头不能为空", Toast.LENGTH_LONG);
+									return;
+								}
 							}
 						})
 				.setNegativeButton("取消", null).create().show();
@@ -968,20 +1005,24 @@ public class FragmentCheck extends Fragment {
 	 * @param
 	 * @return
 	 */
-	public void addTask(String newTaskName, Task task) {
+	public void addTask(String newTaskName, Task task, String[] titleName) {
+		//组装HTML
+		StringBuffer html =  new StringBuffer();
+		html.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+		.append("<html>" + "<table width=\"100%\" class=\"layui-table\">" + "<tbody>" + "<tr class=\"firstRow\" style=\"background:rgb(160,182,204)\">");
+		for (int i = 0; i < titleName.length; i++) {
+			html.append("<td valign=\"middle\">")
+					.append(titleName[i])
+					.append("</td>");
+		}
+		html.append("</tr>");
+
+
 		Task taskNew = new Task();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-		String timeString = formatter.format(curDate);
-		long timeL = 0;
 		String taskIdNew = "";
-		String currentSecond = getTime(timeString);
 		String normalTaskId = Config.normalTaskId;
 		long taskIdL = Long.parseLong(normalTaskId);
-		if (task.getTaskid().length() > currentSecond.length()) {
-			int size = task.getTaskid().length() - currentSecond.length();
-			timeL = (long) (Long.parseLong(currentSecond) * Math.pow(10,size));
-		}
+		long timeL = getCurTimeString(normalTaskId);
 		if (!task.getTaskid().equals("")) {
 			String taskIdN = String.valueOf(taskIdL + timeL);
 			taskNew.setTaskid(taskIdN);
@@ -1018,15 +1059,198 @@ public class FragmentCheck extends Fragment {
 		taskNew.setBroTaskId(task.getTaskid());
 		taskNew.save();
 		if (!taskIdNew.equals("")) {
-			copyCondition(task, taskIdNew, timeL);
-			copySignature(task, taskIdNew, timeL);
-			copyRows(task, taskIdNew, timeL);
-			copyCells(task, taskIdNew, timeL);
+			addSignature(task, taskIdNew);
+			addRows(task, taskIdNew);
+			addCells(task, taskIdNew, html, titleName);
 //			copyHtml(task, task.getPostname(), taskIdNew, timeL);
 		} else {
 			Toast.makeText(getActivity(), "数据有误，请检查数据", Toast.LENGTH_LONG);
 		}
+//		boolean bWriteOK = FileOperation.writeTaskHtml(task, html.toString()); // 写入html把原来的覆盖
 
 	}
-	
+
+	/**
+	 * @Description: 添加通用表单签署信息
+	 * @author qiaozhili
+	 * @date 2020/6/28 11:04
+	 * @param
+	 * @return
+	 */
+
+	public void addSignature(Task task, String taskIdN) {
+		long timeL = getCurTimeString(task.getTaskid());
+		Signature signstureNew = new Signature();
+		long signIdL = Long.parseLong(task.getTaskid());
+		String signIdN = String.valueOf(signIdL + timeL);
+		signstureNew.setSignid(signIdN);
+		signstureNew.setTaskid(taskIdN);
+		signstureNew.setTimeL(timeL);
+		signstureNew.setSignname("操作人员");
+		signstureNew.setSignorder("1");
+		signstureNew.setmTTId(task.getPostinstanceid());
+//			signstureNew.setTime(signature.getTime());
+//		signstureNew.setRemark(signature.getRemark());
+//		signstureNew.setSignvalue(signature.getSignvalue());
+//			signstureNew.setSignTime(signature.getSignTime());
+//			signstureNew.setIsFinish(signature.getIsFinish());
+//		signstureNew.setBitmappath(signature.getBitmappath());
+		signstureNew.save();
+	}
+
+	/**
+	 * @Description: 添加通用表单rows信息
+	 * @author qiaozhili
+	 * @date 2020/6/28 11:05
+	 * @param
+	 * @return
+	 */
+	public void addRows(Task task, String taskIdN) {
+		long timeL = getCurTimeString(task.getTaskid());
+		Rows rowsNew = new Rows();
+		rowsNew.setTaskid(taskIdN);
+		rowsNew.setTimeL(timeL);
+		rowsNew.setRowsid("1");
+		rowsNew.setRowsnumber("1");
+		rowsNew.save();
+	}
+
+	/**
+	 * @Description: 添加通用表单Cells信息
+	 * @author qiaozhili
+	 * @date 2020/6/28 11:05
+	 * @param
+	 * @return
+	 */
+	public void addCells(Task task, String taskIdNew, StringBuffer html, String[] titleName) {
+//		Document htmlDoc = HtmlHelper.getHtmlDoc(task);
+		String fileAbsPath = Environment.getDataDirectory().getPath() + Config.packagePath
+				+ Config.htmlPath+ "/"+ task.getPostname()+"/" + taskIdNew;
+		long timeL = getCurTimeString(task.getTaskid());
+		for (int  j= 0; j < 3; j++) {
+			html.append("<tr>")
+					.append("<td valign=\"middle\">")
+					.append(j + 1)
+					.append("</td>");
+			long id1 = timeL + j * 100;
+			for (int i = 0; i < titleName.length; i++) {
+				Cell cellNew = new Cell();
+
+				String cellIdNew = "";
+				long cellIdL = Long.parseLong(task.getTaskid());
+				long idL = cellIdL + id1;
+				String cellIdN = String.valueOf(idL + i);
+				cellIdNew = cellIdN;
+				html.append("<td valign=\"middle\" class=\"selectTdClass\" input=\"1\" photo=\"1\">")
+						.append("<input type=\"text\" class=\"dpInputText\" style=\"width: 60px;\" photo=\"是\" title=\"1,")
+						.append(titleName[i])
+						.append("列1\" id=\"")
+						.append(cellIdNew)
+						.append("\"/>")
+						.append("<input class=\"dpInputBtn\" type=\"button\" disabled=\"true\" value=\"附件\" onclick=\"addAndShowPhoto(this)\" style=\"width: 45px; height: 24px;\"/>")
+						.append("</td>");
+//				cellNew.setCellidold(taskIdN);
+//				cellNew.setCellid(cellIdN);
+				cellNew.setCellid(cellIdNew);
+				cellNew.setTaskid(taskIdNew);
+				cellNew.setTimeL(timeL);
+				cellNew.setRowname(titleName[i]);
+				cellNew.setHorizontalorder(String.valueOf(j + 1));
+				cellNew.setVerticalorder(String.valueOf(i + 1));
+				if (i == 0) {
+					cellNew.setType("FALSE");
+				} else {
+					cellNew.setType("TRUE");
+//					addOperetion(task, taskIdNew, cellIdNew);
+				}
+//				cellNew.setTextvalue(cell.getTextvalue());
+				cellNew.setColumnid(cellIdNew);
+//				cellNew.setTablesize(cell.getTablesize());
+				cellNew.setRowsid("1");
+				cellNew.setmTTID(task.getPostinstanceid());
+//				cellNew.setIshook(cell.getIshook());
+				cellNew.setOpvalue("");
+				cellNew.setCelltype(CellTypeEnum1.STRINGPHOTO);
+				cellNew.save();
+				addOperetion(task, taskIdNew, cellIdNew);
+				if (i != 0) {
+				}
+			}
+			html.append("</tr>");
+		}
+		html.append("\t\t</tbody>\n" + "\t</table>\n" + "</html>");
+
+		boolean bWriteOK = HtmlHelper.writeTaskHtml(fileAbsPath, html.toString());
+		if (bWriteOK) {
+			Toast.makeText(getActivity(), taskIdNew + ":HTML复制成功", Toast.LENGTH_LONG);
+		} else {
+			Toast.makeText(getActivity(), taskIdNew + ":HTML复制失败", Toast.LENGTH_LONG);
+		}
+
+	}
+
+	/**
+	 * @param
+	 * @return
+	 * @Description: 获取当前时间字符串
+	 * @author qiaozhili
+	 * @date 2020/6/28 11:08
+	 */
+	public static long getCurTimeString(String id) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+		String timeString = formatter.format(curDate);
+
+		String timeStamp = null;
+		Date d;
+		try{
+			d = formatter.parse(timeString);
+			long l = d.getTime();
+			timeStamp = String.valueOf(l);
+		} catch(ParseException e){
+			e.printStackTrace();
+		}
+
+		long timeL = Long.parseLong(timeStamp);
+//		if (id.length() > timeStamp.length()) {
+//			int size = id.length() - timeStamp.length();
+//			timeL = (long) (Long.parseLong(timeStamp) * Math.pow(10,size));
+//		}
+		return timeL;
+	}
+
+	/**
+	 * @Description: 添加通用表单Operation
+	 * @author qiaozhili
+	 * @date 2020/6/28 15:02
+	 * @param
+	 * @return
+	 */
+	public void addOperetion(Task task, String taskIdNew, String cellIdN) {
+		long timeL = getCurTimeString(task.getTaskid());
+		Operation operationNew = new Operation();
+		operationNew.setTaskid(taskIdNew);
+//		operationNew.setCellidold(cellIdOld);
+		operationNew.setTimeL(timeL);
+		operationNew.setCellid(cellIdN);
+		operationNew.setOperationid(cellIdN);
+		operationNew.setRealcellid(cellIdN);
+		operationNew.setType("2");
+		operationNew.setOpvalue("");
+//		operationNew.setRemark(operation.getRemark());
+//		operationNew.setIsfinished(operation.getIsfinished());
+		operationNew.setTextvalue("");
+//		operationNew.setmTTID(operation.getmTTID());
+		operationNew.setOperationtype("128");
+		operationNew.setIldd("FALSE");
+		operationNew.setIildd("FALSE");
+		operationNew.setTighten("FALSE");
+		operationNew.setErr("FALSE");
+		operationNew.setLastaction("FALSE");
+		operationNew.setIsmedia("TRUE");
+//		operationNew.setSketchmap(operation.getSketchmap());
+//		operationNew.setTime(operation.getTime());
+		operationNew.save();
+	}
+
 }

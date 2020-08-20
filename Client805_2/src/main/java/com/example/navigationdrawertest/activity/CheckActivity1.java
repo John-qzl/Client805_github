@@ -121,8 +121,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 	private ConditionAdapter1 conditionadapter;
 	public static int picturenumbers = 0;
 	public static int totalPhotoNum = 0;
+	public static int videonumbers = 0;
+	public static int totalVideoNum = 0;
 	private LinearLayout mBack;
-	private TextView mTablename, mTotalPhotoNum;
+	private TextView mTablename, mTotalPhotoNum, mTotalVideoNum;
 
 	private LinearLayout mSumit;
 	private RelativeLayout mBottom;
@@ -148,6 +150,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		task_id = Long.valueOf(taskid);
 		context.startActivity(intent);
 		totalPhotoNum = 0;
+        totalVideoNum = 0;
 	}
 
 	private Handler mHandler = new Handler() {
@@ -190,6 +193,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		windowWidth = dm.widthPixels;// 获取屏幕分辨率宽度
 		windowHeight = dm.heightPixels;
 		mTotalPhotoNum.setText(String.valueOf(totalPhotoNum));
+		mTotalVideoNum.setText(String.valueOf(totalVideoNum));
 		if (totalPhotoNum > 0) {
 			currentTask.setIsChecking(1);
 			currentTask.update(currentTask.getId());
@@ -339,6 +343,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 			}
 		});
 		mTotalPhotoNum = (TextView) findViewById(R.id.check_total_photoNum);
+		mTotalVideoNum = (TextView) findViewById(R.id.check_total_videoNum);
 		mWanzhengxing = (LinearLayout) findViewById(R.id.lin_check_wanzheng);
 		mWanzhengxing.setOnClickListener(new OnClickListener() {
 			@Override
@@ -767,11 +772,14 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 									+ CommonTools.null2String(operation4.getOperationid())
 									+ File.separator;
 							getPictures(path1);
-						}
+                            getVideos(path1);
+                        }
 					}
-					image4_1.setNum(picturenumbers);
-					totalPhotoNum = totalPhotoNum + picturenumbers;
+                    image4_1.setNum(picturenumbers + videonumbers);
+                    totalPhotoNum = totalPhotoNum + picturenumbers;
+                    totalVideoNum = totalVideoNum + videonumbers;
 					picturenumbers = 0;
+                    videonumbers = 0;
 					image4_1.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -819,14 +827,21 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 									+ CommonTools.null2String(operation5.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+                            getVideos(path1);
 						}
 					}
 
 					NumImageButton image5 = new NumImageButton(context);
 					image5.setBackgroundResource(R.drawable.takephoto);
-					image5.setNum(picturenumbers);
-					totalPhotoNum = totalPhotoNum + picturenumbers;
-					picturenumbers = 0;
+					image5.setNum(picturenumbers + videonumbers);
+                    totalPhotoNum = totalPhotoNum + picturenumbers;
+                    totalVideoNum = totalVideoNum + videonumbers;
+                    picturenumbers = 0;
+                    videonumbers = 0;
+					if ((picturenumbers + videonumbers) > 0) {
+						currentTask.setIsChecking(1);
+						currentTask.update(currentTask.getId());
+					}
 					image5.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -1106,13 +1121,20 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 									+ CommonTools.null2String(operation.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+                            getVideos(path1);
 						}
 					}
 					NumImageButton image7_1 = new NumImageButton(context);
 					image7_1.setBackgroundResource(R.drawable.takephoto);
-					image7_1.setNum(picturenumbers);
-					totalPhotoNum = totalPhotoNum + picturenumbers;
-					picturenumbers = 0;
+					image7_1.setNum(picturenumbers + videonumbers);
+                    totalPhotoNum = totalPhotoNum + picturenumbers;
+                    totalVideoNum = totalVideoNum + videonumbers;
+                    picturenumbers = 0;
+                    videonumbers = 0;
+					if ((picturenumbers + videonumbers) > 0) {
+						currentTask.setIsChecking(1);
+						currentTask.update(currentTask.getId());
+					}
 					image7_1.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -1339,6 +1361,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation92.getRealcellid());
 		    	        	HtmlData data = new HtmlData(cell, operation92.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					String opId9 = "";
@@ -1476,6 +1500,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation10_2.getRealcellid());
 		    	            HtmlData data = new HtmlData(cell, operation10_2.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					String opId10 = "";
@@ -1538,11 +1564,14 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 									+ CommonTools.null2String(operation.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+                            getVideos(path1);
 						}
 					}
-					image10_1.setNum(picturenumbers);
-					totalPhotoNum = totalPhotoNum + picturenumbers;
-					picturenumbers = 0;
+					image10_1.setNum(picturenumbers + videonumbers);
+                    totalPhotoNum = totalPhotoNum + picturenumbers;
+                    totalVideoNum = totalVideoNum + videonumbers;
+                    picturenumbers = 0;
+                    videonumbers = 0;
 					image10_1.setBackgroundResource(R.drawable.takephoto);
 					image10_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -1569,7 +1598,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					break;
 				case "STRINGBITMAP":
 					android.widget.TableRow.LayoutParams para11 = new android.widget.TableRow.LayoutParams(avewdith, android.widget.TableRow.LayoutParams.MATCH_PARENT);
-					android.widget.TableRow.LayoutParams para11_1 = new android.widget.TableRow.LayoutParams(avewdith-81, 60);			//checkbox
+					android.widget.TableRow.LayoutParams para11_1 = new android.widget.TableRow.LayoutParams(avewdith-81, android.widget.TableRow.LayoutParams.MATCH_PARENT);			//checkbox
 					android.widget.TableRow.LayoutParams para11_2 = new android.widget.TableRow.LayoutParams(80, 80);				//bitmap
 					android.widget.TableRow.LayoutParams para11_3 = new android.widget.TableRow.LayoutParams(1, android.widget.TableRow.LayoutParams.MATCH_PARENT);
 					LinearLayout linear11 = new LinearLayout(context);
@@ -1610,6 +1639,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation11.getRealcellid());
 		    	            HtmlData data = new HtmlData(cell, operation11.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					linear11.addView(edit11, para11_1);
@@ -1693,6 +1724,8 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 //		    	        	HtmlHelper.changeTextValue(htmlDoc, cell, operation12_2.getRealcellid());
 		    	            HtmlData data = new HtmlData(cell, operation12_2.getRealcellid());
 		    	            htmlList_text.add(data);
+							currentTask.setIsChecking(1);
+							currentTask.update(currentTask.getId());
 						}
 					});
 					String opId12 = operation12_2.getSketchmap();
@@ -1740,11 +1773,14 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 									+ CommonTools.null2String(operation12_2.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+                            getVideos(path1);
 						}
 					}
-					image12_1.setNum(picturenumbers);
-					totalPhotoNum = totalPhotoNum + picturenumbers;
-					picturenumbers = 0;
+					image12_1.setNum(picturenumbers + videonumbers);
+                    totalPhotoNum = totalPhotoNum + picturenumbers;
+                    totalVideoNum = totalVideoNum + videonumbers;
+                    picturenumbers = 0;
+                    videonumbers = 0;
 					image12_1.setBackgroundResource(R.drawable.takephoto);
 					image12_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -1860,11 +1896,14 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 									+ CommonTools.null2String(operation13_1.getOperationid())
 									+ File.separator;
 							getPictures(path1);
+                            getVideos(path1);
 						}
 					}
-					image13_1.setNum(picturenumbers);
-					totalPhotoNum = totalPhotoNum + picturenumbers;
-					picturenumbers = 0;
+					image13_1.setNum(picturenumbers + videonumbers);
+                    totalPhotoNum = totalPhotoNum + picturenumbers;
+                    totalVideoNum = totalVideoNum + videonumbers;
+                    picturenumbers = 0;
+                    videonumbers = 0;
 					image13_1.setBackgroundResource(R.drawable.takephoto);
 					image13_1.setOnClickListener(new OnClickListener() {
 						@Override
@@ -2126,14 +2165,32 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 					String dirPath = files[j].toString().toLowerCase();
 					System.out.println(dirPath);
 					getPictures(dirPath + "/");
-				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")
-						|| name.endsWith(".mp4") || name.endsWith(".3gp") || name.contains(".avi") || name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP")) {
+				} else if (files[j].isFile() & name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".bmp") || name.endsWith(".gif") || name.endsWith(".jpeg")) {
 					System.out.println("FileName===" + files[j].getName());
 					picturenumbers++;
 				}
 			}
 		}
 	}
+
+    public void getVideos(String string) {
+        // TODO Auto-generated method stub
+        File file = new File(string);
+        File[] files = file.listFiles();
+        if (files != null) {
+            for (int j = 0; j < files.length; j++) {
+                String name = files[j].getName();
+                if (files[j].isDirectory()) {
+                    String dirPath = files[j].toString().toLowerCase();
+                    System.out.println(dirPath);
+                    getVideos(dirPath + "/");
+                } else if (files[j].isFile() & name.endsWith(".mp4") || name.endsWith(".3gp") || name.contains(".avi") || name.equals(".mp4") || name.contains(".AVI") || name.contains(".3GP")) {
+                    System.out.println("FileName===" + files[j].getName());
+                    videonumbers++;
+                }
+            }
+        }
+    }
 
 	@Subscribe
 	public void onEventMainThread(LocationEvent locationEvent) {
@@ -2148,6 +2205,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		EventBus.getDefault().unregister(this);
 		OrientApplication.getApplication().setPanduFlag(0);
 		totalPhotoNum = 0;
+		totalVideoNum = 0;
 	}
 
 	private void quickCollectPopu(final Cell cell, final Operation operation, final EditText editText) {

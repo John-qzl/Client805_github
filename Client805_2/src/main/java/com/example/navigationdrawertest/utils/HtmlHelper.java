@@ -43,21 +43,11 @@ public class HtmlHelper
 	
 	//改变文本框内容
 	public static void changeTextValue(Document doc, Cell cell, String html){
-//		String htmlId = cell.getCellid();
 		String htmlId = html;
 		Element content = doc.getElementById(htmlId);	
-//		String baseuri = content.baseUri();
-//		Tag inputValue = Tag.valueOf("input");
-//		Element valueEl = new Element(inputValue,baseuri);
 		String valueText = cell.getOpvalue();
-//		Attribute value= new Attribute("value",valueText);
-//		valueEl.attributes().put(value);
-//		content.attributes().put("value",valueText);
 		content.attr("value", valueText);
-//		content.replaceWith(valueEl);
-		
-//		Task task = DataSupport.where("userid = ? and taskid = ? and rwid = ?", cell.getUserid(), cell.getTaskid()
-//				,OrientApplication.getApplication().rw.getRwid()).find(Task.class).get(0);
+
 		Task task = DataSupport.where("postinstanceid = ? and taskid = ? and rwid = ?", cell.getmTTID(), cell.getTaskid()
 				,OrientApplication.getApplication().rw.getRwid()).find(Task.class).get(0);
 		
