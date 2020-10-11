@@ -51,6 +51,7 @@ public class Task extends DataSupport{
 
 	private Map<String, String> rownummap;
 	private int IsBrother;		//是否为复制的表单，1为复制
+	private int IsAdd;		//是否为新增的pad通用表单，1为新增
 	private String broTaskId;			//复制于哪张表的ID
 	private int isChecking;     //是否检查中状态  0 未开始    1 进行中   2 回退的表单
 	private int backFlag;    //回退标识  1 回退
@@ -85,6 +86,14 @@ public class Task extends DataSupport{
 
 	public void setIsBrother(int isBrother) {
 		IsBrother = isBrother;
+	}
+
+	public int getIsAdd() {
+		return IsAdd;
+	}
+
+	public void setIsAdd(int isAdd) {
+		IsAdd = isAdd;
 	}
 
 	public Map<String, String> getRownummap() {

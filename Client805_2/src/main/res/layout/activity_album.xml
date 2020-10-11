@@ -39,47 +39,77 @@
                     android:textSize="@dimen/size16"
                     android:visibility="visible" />
 
-                <Button
-                    android:id="@+id/bt_takepic"
-                    android:layout_width="45dp"
-                    android:layout_height="29dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_toLeftOf="@+id/bt_add_video"
-                    android:background="@drawable/action_btn"
-                    android:text="拍照"
-                    android:textColor="@color/White"
-                    android:textSize="@dimen/size14"
-                    android:visibility="visible" />
-
-                <Button
-                    android:id="@+id/bt_add_video"
+                <LinearLayout
+                    android:id="@+id/lin_takepic"
                     android:layout_width="wrap_content"
-                    android:layout_height="29dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:layout_toLeftOf="@+id/bt_add_photo"
-                    android:background="@drawable/action_btn"
-                    android:text="添加短视频"
-                    android:textColor="@color/White"
-                    android:textSize="@dimen/size14"/>
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/lin_add_video"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="15dp">
 
-                <Button
-                    android:id="@+id/bt_add_photo"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/pz"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拍照"
+                        android:textSize="@dimen/size14"
+                        android:textColor="@color/White" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_add_video"
                     android:layout_width="wrap_content"
-                    android:layout_height="29dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/lin_add_photo"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sp"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加短视频"
+                        android:textSize="@dimen/size14"
+                        android:textColor="@color/White" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_add_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:background="@drawable/action_btn"
-                    android:text="添加图片"
-                    android:textColor="@color/White"
-                    android:textSize="@dimen/size14"
-                    android:visibility="visible" />
+                    android:orientation="horizontal"
+                    android:layout_marginRight="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/xc"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="添加图片"
+                        android:textSize="@dimen/size14"
+                        android:textColor="@color/White" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 
