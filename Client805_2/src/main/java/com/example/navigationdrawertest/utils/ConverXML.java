@@ -1,7 +1,13 @@
 package com.example.navigationdrawertest.utils;
 
+import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,11 +132,20 @@ public class ConverXML {
 		    DOMSource source = new DOMSource(doc);
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             OutputStreamWriter write = new OutputStreamWriter(outStream);
-            Result result = new StreamResult(write);
-            TransformerFactory tFactory = TransformerFactory.newInstance();
-            Transformer transformer = tFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.transform(source, result);
+//            Result result = new StreamResult(write);
+//            TransformerFactory tFactory = TransformerFactory.newInstance();
+//            Transformer transformer = tFactory.newTransformer();
+//            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+//            transformer.transform(source, result);
+
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			//获取到Transformer
+			Transformer transformer1 = transformerFactory.newTransformer();
+			//设置输出格式
+			transformer1.setOutputProperty("encoding","UTF-8");
+			//将文件写出
+			transformer1.transform(new DOMSource(doc),new StreamResult(write));
+
             return outStream.toString();
 		}catch (Exception e) {
 			e.printStackTrace();

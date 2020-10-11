@@ -2434,10 +2434,10 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		Pattern r4 = Pattern.compile(pattern4);
 		Matcher m4 = r4.matcher(actualvalNum);
 		System.out.println(m4.matches());
-		if (!m4.matches()){
-//			Toast.makeText(context, "实测值" + actualvalNum + "非纯数字，无法判读！", Toast.LENGTH_SHORT).show();
-			return;
-		}
+//		if (!m4.matches()){
+////			Toast.makeText(context, "实测值" + actualvalNum + "非纯数字，无法判读！", Toast.LENGTH_SHORT).show();
+//			return;
+//		}
 
 		//要求值中有无≥/≤/＞/＜等的情况
 		String pattern = "^(\\≥|\\＞|\\≤|\\＜)(\\-|\\+)?([\\d]+)(\\.[\\d]+)?$";
@@ -2466,7 +2466,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		//包含≥/≤/＞/＜等的情况
 		if (m.matches()) {
 			if (!m4.matches()){
-				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
 				judgeResult(false, complianceCellList.get(0), operation2);
 				return;
 			}
@@ -2507,7 +2507,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		//5(+1, -1)、 5[+1, 0]；
 		else if (m2.matches()) {
 			if (!m4.matches()){
-				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
 				judgeResult(false, complianceCellList.get(0), operation2);
 				return;
 			}
@@ -2579,7 +2579,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		//0~2
 		else if (prefixCode.contains("~")) {
 			if (!m4.matches()){
-				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
 				judgeResult(false, complianceCellList.get(0), operation2);
 				return;
 			}
@@ -2598,7 +2598,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		//5±0.2
 		else if (prefixCode.contains("±")) {
 			if (!m4.matches()){
-				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
 				judgeResult(false, complianceCellList.get(0), operation2);
 				return;
 			}
@@ -2620,7 +2620,7 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		else {
 			if (m3.matches()) {
 				if (!m4.matches()){
-					Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
+//					Toast.makeText(context, "实测值：“" + actualvalNum + "”格式错误！", Toast.LENGTH_SHORT).show();
 					judgeResult(false, complianceCellList.get(0), operation2);
 					return;
 				}

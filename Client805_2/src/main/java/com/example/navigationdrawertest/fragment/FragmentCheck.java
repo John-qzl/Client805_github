@@ -1023,6 +1023,7 @@ public class FragmentCheck extends Fragment {
 		String normalTaskId = Config.normalTaskId;
 		long taskIdL = Long.parseLong(normalTaskId);
 		long timeL = getCurTimeString(normalTaskId);
+		long PathIdL = Long.parseLong(task.getPathId());
 		if (!task.getTaskid().equals("")) {
 			String taskIdN = String.valueOf(taskIdL + timeL);
 			taskNew.setTaskid(taskIdN);
@@ -1030,7 +1031,13 @@ public class FragmentCheck extends Fragment {
 		} else {
 			taskNew.setTaskid("");
 		}
-		taskNew.setPathId(task.getPathId());
+		if (!task.getPathId().equals("")) {
+			String pathIdN = String.valueOf(PathIdL + timeL);
+			taskNew.setPathId(pathIdN);
+		} else {
+			taskNew.setPathId("");
+		}
+//		taskNew.setPathId(task.getPathId());
 		taskNew.setPath(task.getPath());
 		taskNew.setTaskname(newTaskName);
 		taskNew.setRemark(task.getRemark());
@@ -1055,7 +1062,7 @@ public class FragmentCheck extends Fragment {
 		taskNew.setSigns(task.getSigns());
 		taskNew.setCells(task.getCells());
 		taskNew.setRownummap(task.getRownummap());
-		taskNew.setIsBrother(1);
+		taskNew.setIsAdd(1);
 		taskNew.setBroTaskId(task.getTaskid());
 		taskNew.save();
 		if (!taskIdNew.equals("")) {
@@ -1163,7 +1170,7 @@ public class FragmentCheck extends Fragment {
 					cellNew.setType("TRUE");
 //					addOperetion(task, taskIdNew, cellIdNew);
 				}
-//				cellNew.setTextvalue(cell.getTextvalue());
+				cellNew.setTextvalue("");
 				cellNew.setColumnid(cellIdNew);
 //				cellNew.setTablesize(cell.getTablesize());
 				cellNew.setRowsid("1");

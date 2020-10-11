@@ -1761,6 +1761,7 @@ public class SyncWorkThread extends Thread {
 						taskxml));
 				nameValuePairs.add(new BasicNameValuePair("htmlContent", html));
 				nameValuePairs.add(new BasicNameValuePair("broTaskId", task.getBroTaskId()));
+				nameValuePairs.add(new BasicNameValuePair("IsAdd", String.valueOf(task.getIsAdd())));
 				postmethod.setEntity(new UrlEncodedFormEntity(nameValuePairs,
 						"utf-8"));
 				Log.i("setEntity", task.getTaskname() + "OK");
@@ -1899,6 +1900,7 @@ public class SyncWorkThread extends Thread {
 			nameValuePairs.add(new BasicNameValuePair("broPathId", broPathId));
 			nameValuePairs.add(new BasicNameValuePair("broTaskId", broTaskId));
 			nameValuePairs.add(new BasicNameValuePair("taskId", task.getTaskid()));
+			nameValuePairs.add(new BasicNameValuePair("taskId", String.valueOf(task.getIsAdd())));
 			postmethod.setEntity(new UrlEncodedFormEntity(nameValuePairs, "utf-8"));
 			postmethod.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			HttpResponse response;

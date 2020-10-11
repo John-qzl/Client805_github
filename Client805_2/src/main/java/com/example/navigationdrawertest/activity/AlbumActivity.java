@@ -91,7 +91,7 @@ public class AlbumActivity extends FragmentActivity {
     private final static int MAXIMGNUMBER = 100;
 //    private PictureListAdapter adapter;
 //    private RecyclerView mRecyclerView;
-    private Button mAddPhoto, mAddVideo, mTakePic;
+    private LinearLayout mAddPhoto, mAddVideo, mTakePic;
     private ImageView mBack;
     private String mCheck = "";
     private ArrayList<Media> mediaList;
@@ -162,9 +162,9 @@ public class AlbumActivity extends FragmentActivity {
                 finish();
             }
         });
-        mAddPhoto = (Button) findViewById(R.id.bt_add_photo);
-        mAddVideo = (Button) findViewById(R.id.bt_add_video);
-        mTakePic = (Button) findViewById(R.id.bt_takepic);
+        mAddPhoto = (LinearLayout) findViewById(R.id.lin_add_photo);
+        mAddVideo = (LinearLayout) findViewById(R.id.lin_add_video);
+        mTakePic = (LinearLayout) findViewById(R.id.lin_takepic);
         if (mCheck.equals("check")) {
             mAddPhoto.setVisibility(View.VISIBLE);
             mTakePic.setVisibility(View.VISIBLE);
