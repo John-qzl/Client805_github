@@ -205,8 +205,7 @@ public class DocActivity extends BaseActivity{
 						@Override
 						public void run() {
 							try {
-								String secret_start = Setting.FILE_SECRET_START + File.separator + mmc.getMmc_Name()
-										+ "." + mmc.getType();
+								String secret_start = Setting.FILE_SECRET_START + File.separator + mmc.getMmc_Name();
 								FileOperation.createDir(Setting.FILE_SECRET_END);
 								String secret_end = Setting.FILE_SECRET_END + File.separator + mmc.getMmc_Name()
 										+ "." + mmc.getType();

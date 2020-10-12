@@ -5,6 +5,8 @@ import java.io.File;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 
 public class ThridToolUtils {
 	
@@ -113,7 +115,8 @@ public class ThridToolUtils {
 	    { ".css", "text/css" },  
 	    { ".cur", "application/octet-stream" },  
 	    { ".doc", "application/msword" },  
-	    { ".dcm", "x-lml/x-evm" },  
+	    { ".docx", "application/msword" },
+	    { ".dcm", "x-lml/x-evm" },
 	    { ".dcr", "application/x-director" },  
 	    { ".dcx", "image/x-dcx" },  
 	    { ".dhtml", "text/html" },  
@@ -475,8 +478,9 @@ public class ThridToolUtils {
 	    { ".xlc", "application/vnd.ms-excel" },  
 	    { ".xll", "application/x-excel" },  
 	    { ".xlm", "application/vnd.ms-excel" },  
-	    { ".xls", "application/vnd.ms-excel" },  
-	    { ".xlt", "application/vnd.ms-excel" },  
+	    { ".xls", "application/vnd.ms-excel" },
+	    { ".xlsx", "application/vnd.ms-excel" },
+	    { ".xlt", "application/vnd.ms-excel" },
 	    { ".xlw", "application/vnd.ms-excel" },  
 	    { ".xm", "audio/x-mod" },  
 	    { ".xml", "text/xml" },  

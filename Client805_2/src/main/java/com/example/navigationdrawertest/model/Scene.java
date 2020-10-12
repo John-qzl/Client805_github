@@ -66,12 +66,6 @@ public class Scene extends DataSupport{
 	public void setTask(Task task) {
 		this.task = task;
 	}
-//	public String getSceneorder() {
-//		return sceneorder;
-//	}
-//	public void setSceneorder(String sceneorder) {
-//		this.sceneorder = sceneorder;
-//	}
 	
 	public String getScenevalue() {
 		return scenevalue;
@@ -91,12 +85,6 @@ public class Scene extends DataSupport{
 	public void setTaskid(String taskid) {
 		this.taskid = taskid;
 	}
-//	public String getUserid() {
-//		return userid;
-//	}
-//	public void setUserid(String userid) {
-//		this.userid = userid;
-//	}
 	
 	
 	public Element setConditionNode(Element conditionElement, Scene condition)
