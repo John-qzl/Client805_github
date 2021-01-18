@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/fragmentupload_txt_tree_width"
@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:text="1" />
-        
+
         <TextView
             android:id="@+id/fragmentupload_txt_tree_name"
             android:layout_width="wrap_content"
@@ -29,40 +29,131 @@
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@+id/fragmentupload_img_tree_left"
             android:text="TextView"
-            android:textSize="@dimen/content" />
+            android:textColor="@color/login_seting"
+            android:textSize="@dimen/size14" />
+        <!--<Button-->
+        <!--android:id="@+id/fragmentupload_back_button"-->
+        <!--android:layout_width="85dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_alignParentLeft="false"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toLeftOf="@+id/fragmentupload_look_button"-->
+        <!--android:background="@drawable/status_back_shape"-->
+        <!--android:focusable="false"-->
+        <!--android:text="回退"-->
+        <!--android:textColor="@color/White"-->
+        <!--android:visibility="gone"/>-->
 
-       <Button  
-            android:id="@+id/fragmentupload_look_deletebutton"  
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+        <!--<Button  -->
+        <!--android:id="@+id/fragmentupload_look_deletebutton"  -->
+        <!--android:layout_width="85dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentLeft="false"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="@drawable/delete_new"-->
+        <!--android:focusable="false" />-->
+        <!---->
+        <!--<Button  -->
+        <!--android:id="@+id/fragmentupload_look_button"  -->
+        <!--android:layout_width="85dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:layout_toLeftOf="@+id/fragmentupload_look_deletebutton"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="@drawable/chakan_new"-->
+        <!--android:focusable="false"/>-->
+
+        <LinearLayout
+            android:id="@+id/upload_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/upload_shanchu"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/huitui" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="回退"
+                android:textColor="@color/huitui"
+                android:textSize="@dimen/size14" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/upload_shanchu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/upload_read"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/shanchu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="删除"
+                android:textColor="@color/shanchu"
+                android:textSize="@dimen/size14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/upload_read"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="false"
-            android:layout_centerVertical="true"
-            android:background="@drawable/delete_new"
-            android:focusable="false" />
-        
-        <Button  
-            android:id="@+id/fragmentupload_look_button"  
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/fragmentupload_look_deletebutton"
-            android:layout_centerVertical="true"
-            android:background="@drawable/chakan_new"
-            android:focusable="false"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/read" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="查看"
+                android:textColor="@color/read"
+                android:textSize="@dimen/size14" />
+
+        </LinearLayout>
+
 
         <!-- android:layout_toLeftOf="@+id/fragmentupload_look_deletebutton" -->
-        
+
         <ImageView
             android:id="@+id/fragmentupload_img_tree_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="44dp"
             android:layout_toRightOf="@+id/fragmentupload_txt_tree_width"
-            android:src="@drawable/icon_plusminus_add_black" />
+            android:src="@drawable/tree_z" />
 
     </RelativeLayout>
 

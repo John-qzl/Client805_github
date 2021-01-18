@@ -365,7 +365,8 @@ public class FragmentCheck extends Fragment {
 			ViewHolder holder;
 			int layer = nodeList.get(position).getLayer();
 			Long pathId = nodeList.get(position).getId();
-			final List<Task> taskList = DataSupport.where("pathId = ? and location=?", String.valueOf(pathId), "1").find(Task.class);
+//			final List<Task> taskList = DataSupport.where("pathId = ? and location=?", String.valueOf(pathId), "1").find(Task.class);
+			final List<Task> taskList = DataSupport.where("pathId = ?", String.valueOf(pathId)).find(Task.class);
 			if (convertView == null) {
 				LayoutInflater inflater = LayoutInflater.from(context);
 				holder = new ViewHolder();
@@ -632,7 +633,7 @@ public class FragmentCheck extends Fragment {
 		taskNew.setTaskname(task.getTaskname());
 		taskNew.setRemark(task.getRemark());
 		taskNew.setVersion(task.getVersion());
-		taskNew.setLocation(task.getLocation());
+		taskNew.setLocation(1);
 		taskNew.setTaskpic(task.getTaskpic());
 		taskNew.setTablesize(task.getTablesize());
 		taskNew.setRwid(task.getRwid());

@@ -1,450 +1,370 @@
 [
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/focus_focus_failed.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/focus_focus_failed.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_sw_camera_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_sw_camera_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_qrcode_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_qrcode_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_focused.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_focused.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/video_detail_player_start.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/video_detail_player_start.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\title_function_bg.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\title_function_bg.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_my_center_pressed.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_my_center_pressed.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_password.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_password.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_photos.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_photos.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_sw_camera_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_sw_camera_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_cab_done_holo_dark.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_cab_done_holo_dark.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\video_player_bg.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\video_player_bg.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_back02_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/icon_back02_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher1.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_launcher1.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/photoalbum.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/photoalbum.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_compose_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_compose_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_home.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_home.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_camera_all.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_camera_all.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_pages.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_pages.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\iconfont_tuichu.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\iconfont_tuichu.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_exit.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_exit.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_qrcode_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_qrcode_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/focus_focused.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/focus_focused.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\video_pause_bg.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\video_pause_bg.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_delete.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_delete.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_auto_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_auto_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/video_detail_player_pause.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/video_detail_player_pause.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\shiyitu1.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\shiyitu1.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_clear_search_api_disabled_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_clear_search_api_disabled_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\checkbox_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\checkbox_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_camera_all.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_camera_all.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_switcher_menu_indicator.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_switcher_menu_indicator.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/checkbox_pressed.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/checkbox_pressed.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_torch_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_torch_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/video_detail_player_top_bg.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/video_detail_player_top_bg.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\arrow.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\arrow.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_clear_disabled.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_clear_disabled.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_keyboard_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_keyboard_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher1.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_launcher1.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_stop_red_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_stop_red_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_torch_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_torch_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_back_to_camera_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_back_to_camera_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/shiyitu.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/shiyitu.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_communities.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_communities.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\progressbar_thumb_record_mix.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\progressbar_thumb_record_mix.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_stub.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_stub.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\checkbox_pressed.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\checkbox_pressed.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_clear_search_api_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_clear_search_api_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\iconfont_duomeitizhuanqu.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\iconfont_duomeitizhuanqu.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_voice_search_api_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_voice_search_api_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\thumb_guide_tips_new.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\thumb_guide_tips_new.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_search.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_search.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_off_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_off_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/gg_ic_video_play_on.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/gg_ic_video_play_on.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\video_detail_player_start.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\video_detail_player_start.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/photonormal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/photonormal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\photoalbum.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\photoalbum.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_my_center_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_my_center_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\photoread.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\photoread.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_switch_camera.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_switch_camera.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_action_search.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_action_search.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/progressbar_thumb_record_mix.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/progressbar_thumb_record_mix.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_setting_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_setting_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_share_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_menu_share_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_setting_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_setting_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_ab_back_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_ab_back_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_rec.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\icon_rec.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/iconfont_tongbutongbuzhong.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/iconfont_tongbutongbuzhong.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_actionbarbk.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_actionbarbk.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/photouse.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/photouse.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\photonormal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\photonormal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_on_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_on_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_photos.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_photos.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_keyboard_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_keyboard_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\drawer_shadow.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\drawer_shadow.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_go.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_go.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\delete_data1.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\delete_data1.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_go_search_api_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_go_search_api_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_stub.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_stub.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_drawer.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_drawer.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_action_refresh.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_action_refresh.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_sw_camera_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_sw_camera_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_shutter_video.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_shutter_video.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/focus_focusing.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/focus_focusing.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_pages.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_pages.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_receiver_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_receiver_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_delete.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_delete.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_back2.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/icon_back2.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_my_center_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_my_center_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_compose_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_compose_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_stop_red.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_stop_red.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_back2_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/icon_back2_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_auto_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_auto_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/albumset_selected.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/albumset_selected.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_home.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_home.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_torch_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_torch_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\gg_ic_video_play_on.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\gg_ic_video_play_on.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/iconfont_fanhui.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/iconfont_fanhui.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_on_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_on_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_refresh.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_action_refresh.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_shutter_video_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_shutter_video_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_share_holo_dark.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_menu_share_holo_dark.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_back02.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\icon_back02.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_back_to_camera_pressed.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_back_to_camera_pressed.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\photouse.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\photouse.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_commit_search_api_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_commit_search_api_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_back2.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\icon_back2.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_stop_red_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_stop_red_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_action_share.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_action_share.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/video_player_bg.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/video_player_bg.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_whats_hot.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_whats_hot.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/checkbox_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/checkbox_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\albumset_preselected.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\albumset_preselected.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_error.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_error.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nophoto.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\nophoto.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_search.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_action_search.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\have_new_effect_flag.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\have_new_effect_flag.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_whats_hot.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_whats_hot.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\setting1.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\setting1.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_username.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_username.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_exit.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_exit.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_back02.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/icon_back02.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_login.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_login.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/nophoto.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/nophoto.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_back02_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\icon_back02_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_moreoverflow_normal_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_menu_moreoverflow_normal_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_bk.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_bk.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_camera_all_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_camera_all_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_back_to_camera_pressed.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_back_to_camera_pressed.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/albumset_preselected.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/albumset_preselected.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_error.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_error.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_communities.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_communities.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_people.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_people.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_exitapplication.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_exitapplication.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_torch_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_torch_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_action_share.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_action_share.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_empty.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_empty.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_voice_search.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_voice_search.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\iconfont_shezhi.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\iconfont_shezhi.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_shutter_video_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_shutter_video_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\icon_back2_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\icon_back2_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_commit_search_api_holo_dark.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_commit_search_api_holo_dark.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\focus_focusing.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\focus_focusing.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_auto_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_auto_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_switch_video.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_switch_video.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_setting_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_setting_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\btn_camera_all_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\btn_camera_all_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/iconfont_tuichu.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/iconfont_tuichu.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_my_center_pressed.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_my_center_pressed.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/bg3.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/bg3.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_off_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_off_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_people.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_people.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\video_detail_player_top_bg.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\video_detail_player_top_bg.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_empty.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_empty.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\iconfont_tongbutongbuzhong.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\iconfont_tongbutongbuzhong.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/have_new_effect_flag.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/have_new_effect_flag.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_drawer.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_drawer.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_switcher_menu_indicator.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_switcher_menu_indicator.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\gg_ic_video_play.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\gg_ic_video_play.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_focused.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_focused.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_receiver_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_receiver_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/iconfont_duomeitizhuanqu.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/iconfont_duomeitizhuanqu.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\video_detail_player_pause.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\video_detail_player_pause.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_clear_normal.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_clear_normal.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_exitapplication.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_exitapplication.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_auto_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_auto_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\iconfont_fanhui.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\iconfont_fanhui.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_password.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_password.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\focus_focus_failed.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\focus_focus_failed.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_switch_video.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_switch_video.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\albumset_selected.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\albumset_selected.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_shutter_video.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_shutter_video.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_normal.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_normal.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_search_api_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_search_api_holo_light.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_camera_top_bar_flash_on_click.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_camera_top_bar_flash_on_click.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/mm_title_btn_pressed.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/mm_title_btn_pressed.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_username.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_username.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/title_function_bg.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/title_function_bg.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\mm_title_btn_pressed.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\mm_title_btn_pressed.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/drawer_shadow.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/drawer_shadow.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_switch_camera.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\ic_switch_camera.png"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/gg_ic_video_play.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/gg_ic_video_play.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_login.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_login.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_back_to_camera_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_back_to_camera_normal.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_off_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_off_normal.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_ab_back_holo_dark.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_ab_back_holo_dark.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_on_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_on_normal.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/arrow.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/arrow.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_actionbarbk.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_actionbarbk.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_sw_camera_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_sw_camera_click.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_setting_normal.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_setting_normal.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/thumb_guide_tips_new.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/thumb_guide_tips_new.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_cab_done_holo_light.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_cab_done_holo_light.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_rec.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/icon_rec.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_bk.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_bk.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_stop_red.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/btn_stop_red.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/video_pause_bg.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/video_pause_bg.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/iconfont_shezhi.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/iconfont_shezhi.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/photoread.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/photoread.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/bg4.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/bg4.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_moreoverflow_normal_holo_dark.png",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/drawable-hdpi/abc_ic_menu_moreoverflow_normal_holo_dark.png"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_camera_top_bar_flash_off_click.png",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/drawable-hdpi/ic_camera_top_bar_flash_off_click.png"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\focus_focused.png",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\drawable-hdpi\\focus_focused.png"
     }
 ]

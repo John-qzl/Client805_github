@@ -26,7 +26,7 @@
             android:layout_toRightOf="@+id/logo"
             android:text="表名"
             android:textColor="@color/White"
-            android:textSize="@dimen/titleI"/>
+            android:textSize="@dimen/size14"/>
 
         <ImageView
             android:id="@+id/sign_close"
@@ -36,16 +36,42 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:src="@drawable/close"
-            android:textColor="@color/White"/>
+            android:textColor="@color/White"
+            android:visibility="gone"/>
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="70dp"
-            android:layout_height="25dp"
+        <!--<ImageView-->
+            <!--android:id="@+id/back"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/back_new"-->
+            <!--android:layout_marginRight="15dp"/>-->
+
+        <LinearLayout
+            android:id="@+id/lin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/back_new"
-            android:layout_marginRight="15dp"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginRight="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_fanhui"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -118,11 +144,71 @@
                                 android:stretchColumns="*" >
                             </TableLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/table_line"/>
+
                         </LinearLayout>
 
                     </FrameLayout>
 
                 </com.example.navigationdrawertest.CustomUI.SyncHorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="@dimen/size12"
+                            android:textColor="@color/hint"
+                            android:text="照片数量："/>
+
+                        <TextView
+                            android:id="@+id/tv_totalPhNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="20dp"
+                            android:textColor="@color/black1"
+                            android:text="0"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="@dimen/size12"
+                            android:textColor="@color/hint"
+                            android:text="短视频数量："/>
+
+                        <TextView
+                            android:id="@+id/total_videoNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="20dp"
+                            android:textColor="@color/black1"
+                            android:text="0"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <com.example.navigationdrawertest.CustomUI.NoScrollListview
                     android:id="@+id/sign_mylistview_1"
@@ -131,7 +217,8 @@
                     android:background="@drawable/list_default_round"
                     android:cacheColorHint="#00000000"
                     android:gravity="center"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:layout_marginTop="8dp"/>
 
                 <LinearLayout
                     android:id="@+id/lin_signname"
@@ -153,7 +240,8 @@
                     android:id="@+id/sign_bottom"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/sign_proview"

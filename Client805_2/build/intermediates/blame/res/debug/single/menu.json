@@ -1,26 +1,26 @@
 [
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/menu/loginmenu.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/menu/loginmenu.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\menu\\photo.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\menu\\photo.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/menu/docmenu.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/menu/docmenu.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\menu\\docmenu.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\menu\\docmenu.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/menu/readactivity.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/menu/readactivity.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\menu\\uncheckmenu.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\menu\\uncheckmenu.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/menu/main.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/menu/main.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\menu\\readactivity.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\menu\\readactivity.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/menu/uncheckmenu.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/menu/uncheckmenu.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\menu\\main.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/menu/photo.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/menu/photo.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\menu\\loginmenu.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\menu\\loginmenu.xml"
     }
 ]

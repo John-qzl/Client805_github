@@ -1,82 +1,66 @@
 [
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/tempview_show.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/tempview_show.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\push_right_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\push_right_in.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/modal_out.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/modal_out.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\scale_out.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\scale_out.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/anim/abc_fade_in.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\push_left_out.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\push_left_out.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/success_mask_layout.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/success_mask_layout.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\error_x_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\error_x_in.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/anim/abc_slide_in_bottom.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\push_right_out.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\push_right_out.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/anim/abc_slide_out_top.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\error_frame_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\error_frame_in.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/anim/abc_slide_in_top.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\modal_out.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\modal_out.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/anim/abc_slide_out_bottom.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\focusview_show.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\focusview_show.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/scale_in.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/scale_in.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\face_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\face_in.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/push_left_in.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/push_left_in.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\scale_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\scale_in.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/error_frame_in.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/error_frame_in.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\tempview_show.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\tempview_show.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/modal_in.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/modal_in.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\success_bow_roate.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\success_bow_roate.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/scale_out.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/scale_out.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\face_out.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\face_out.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/focusview_show.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/focusview_show.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\modal_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\modal_in.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/push_right_in.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/push_right_in.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\success_mask_layout.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\success_mask_layout.xml"
     },
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/push_left_out.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/push_left_out.xml"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/success_bow_roate.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/success_bow_roate.xml"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/error_x_in.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/error_x_in.xml"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/push_right_out.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/anim/push_right_out.xml"
-    },
-    {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
-        "source": "/Users/john/.android/build-cache/45d5e6e5d832f52e282ffdf88ca38f14e8332f3c/output/res/anim/abc_fade_out.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\anim\\push_left_in.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\anim\\push_left_in.xml"
     }
 ]

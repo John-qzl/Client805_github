@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.navigationdrawertest.R;
@@ -116,25 +117,25 @@ public class FragmentPhoto extends Fragment {
                 startActivity(intent);
             }
         });
-        if (checkType.equals("checkType")) {
-            adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
-                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("确定删除?")
-                            .setContentText("是否确定删除本张照片？")
-                            .setCancelText("否")
-                            .setConfirmText("是，删除！")
-                            .showCancelButton(true)
-                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    sDialog.dismiss();
-                                }
-                            })
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
+        adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
+                new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("确定删除?")
+                        .setContentText("是否确定删除本张照片？")
+                        .setCancelText("否")
+                        .setConfirmText("是，删除！")
+                        .showCancelButton(true)
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                            }
+                        })
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                if (checkType.equals("checkType")) {
                                     prodlg = ProgressDialog.show(context, "删除", "正在删除照片");
                                     prodlg.setIcon(getResources().getDrawable(R.drawable.logo_title));
                                     new Thread(new Runnable() {
@@ -147,14 +148,17 @@ public class FragmentPhoto extends Fragment {
                                             mHandler.sendMessage(message);
                                         }
                                     }).start();
-                                    sDialog.dismiss();
+                                } else {
+                                    Toast.makeText(context, "仅待检查状态下表单可删除照片！", Toast.LENGTH_SHORT).show();
                                 }
-                            })
-                            .show();
-                    return true;
-                }
-            });
-        }
+                                sDialog.dismiss();
+                            }
+                        })
+                        .show();
+                return true;
+            }
+        });
+
     }
 
     /**

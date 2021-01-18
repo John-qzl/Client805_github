@@ -29,41 +29,67 @@
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@+id/img_tree_left"
             android:text="TextView"
-            android:textSize="@dimen/content" />
-        
-        <Button  
-            android:id="@+id/check_button"  
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/read_button"
-            android:layout_alignParentLeft="false"
-            android:layout_centerVertical="true"
-            android:background="@drawable/jiancha_new"
-            android:focusable="false" />
-        
-        <Button  
-            android:id="@+id/read_button"  
-            android:layout_width="85dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_alignParentLeft="false"
+            android:textSize="@dimen/size14"
+            android:textColor="@color/login_seting"/>
+
+        <LinearLayout
+            android:id="@+id/check_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_toLeftOf="@+id/read_line">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="检查"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/toolBarbg"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/read_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/chakan_new"
-            android:focusable="false"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看"
+                android:textSize="@dimen/size14"
+                android:textColor="@color/read"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
             
         <!-- android:layout_toLeftOf="@+id/delete_button" -->
         
         <ImageView
             android:id="@+id/img_tree_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="44dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/txt_tree_width"
-            android:src="@drawable/icon_plusminus_add_black" />
+            android:src="@drawable/tree_z" />
 
     </RelativeLayout>
 

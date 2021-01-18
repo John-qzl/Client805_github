@@ -16,9 +16,11 @@ import org.jsoup.nodes.Document;
 import org.litepal.crud.DataSupport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -210,17 +212,59 @@ public class CheckActivity1 extends BaseActivity implements ObservableScrollView
 		checkSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
-                    boolean isChecked) {
-                if(isChecked) {  	//任务完成
-                	currentTask.setEndTime(DateUtil.getCurrentDate());
-                	currentTask.setLocation(2);
-					currentTask.setBackFlag(0);
-                	currentTask.save();
-                }else {					//任务没有完成
-                	currentTask.setEndTime("");
-                	currentTask.setLocation(1);
-                	currentTask.save();
-                }
+										 final boolean isChecked) {
+				if (isChecked) {
+					List<Cell> actualvalCellList = DataSupport.where("taskid=? and markup=?", task_id+"", Config.actualval).find(Cell.class);
+					String actualvalNum = "";
+					int isWanzheng = 0;
+					if (actualvalCellList.size() > 0) {
+						for (Cell cell : actualvalCellList) {
+							actualvalNum = cell.getOpvalue();
+							if (actualvalNum.equals("")) {
+								isWanzheng = isWanzheng + 1;
+							}
+						}
+					}
+
+					if (isWanzheng != 0) {
+						AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+						dialog.setIcon(R.drawable.logo_title).setTitle("提示");
+						dialog.setMessage("表单有未填写的实测值，请注意完善");
+						dialog.setCancelable(false);
+						dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+								if (isChecked) {    //任务完成
+									currentTask.setEndTime(DateUtil.getCurrentDate());
+									currentTask.setLocation(2);
+									currentTask.setBackFlag(0);
+									currentTask.save();
+								}
+							}
+						});
+						dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+								checkSwitch.setChecked(false);
+							}
+						});
+						dialog.show();
+					} else {
+						if(isChecked) {  	//任务完成
+							currentTask.setEndTime(DateUtil.getCurrentDate());
+							currentTask.setLocation(2);
+							currentTask.setBackFlag(0);
+							currentTask.save();
+						}
+					}
+				}else {					//任务没有完成
+					currentTask.setEndTime("");
+					currentTask.setLocation(1);
+					currentTask.save();
+				}
+
             }
         });
 		loadConditionAdapter(task_id, OrientApplication.getApplication().loginUser.getUserid());

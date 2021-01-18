@@ -1,6 +1,10 @@
 [
     {
-        "merged": "/Users/john/Downloads/Client805_22/Client805_2/build/intermediates/res/merged/debug/xml/config.xml",
-        "source": "/Users/john/Downloads/Client805_22/Client805_2/src/main/res/xml/config.xml"
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\xml\\config.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\xml\\config.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\build\\intermediates\\res\\merged\\debug\\xml\\file_paths.xml",
+        "source": "D:\\AndroidStudioProjects\\Client805_github\\Client805_2\\src\\main\\res\\xml\\file_paths.xml"
     }
 ]
